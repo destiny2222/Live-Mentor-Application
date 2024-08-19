@@ -80,7 +80,6 @@
           <div class="col-xl-12">
             <div class="main-title mb30-lg">
               <h2 class="title">Explore Courses</h2>
-              <!-- <p class="paragraph">Most viewed and all-time top-selling services</p> -->
             </div>
           </div>
         </div>
