@@ -4,89 +4,203 @@
     <div class="dashboard__content hover-bgc-color">
         <div class="row">
             <div class="col-xl-12">
-                {{-- --}}
                 <div id="psWidget" class="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
                     <div class="bdrb1 pb15 mb25">
-                        <h5 class="list-title">Basic Information</h5>
+                        <h5 class="list-title">Tutor Registration Form</h5>
                     </div>
                     <div class="col-xl-12">
                         <form class="form-style1" method="POST" action="{{ route('tutor.store') }}" enctype="multipart/form-data">
                             @csrf
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="mb20">
-                                    <label class="heading-color ff-heading fw500 mb10">Service Title</label>
-                                    <input type="text" class="form-control" name="title" placeholder="i will">
+
+                            <!-- Step 1: Basic Information -->
+                            <div class="step step-1 active">
+                                <h5 class="step-title">Basic Information</h5>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <input type="file" name="resume" class="" id="">
                                     </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="mb20">
-                                        <div class="form-style1">
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Service Title</label>
+                                            <input type="text" class="form-control" name="title" placeholder="I will" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Service Category</label>
-                                            <div class="bootselect-multiselect">
-                                                <select name="category_id[]" class="selectpicker" multiple>
-                                                    {{-- <option >Select</option> --}}
-                                                    @foreach ($category as $categories)
-                                                        <option value="{{ $categories->id }}">{{ $categories->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                            <select name="category_id[]" class="selectpicker" multiple required>
+                                                @foreach ($category as $categories)
+                                                    <option value="{{ $categories->id }}">{{ $categories->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="mb20">
-                                        <label class="heading-color ff-heading fw500 mb10">Price</label>
-                                        <input type="text" class="form-control" name="price" placeholder="">
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Price</label>
+                                            <input type="text" class="form-control" name="price" placeholder="" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 text-center">
+                                        <button type="button" class="ud-btn btn-thm w-25 next-step">Next</button>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="mb20">
-                                        <div class="form-style1">
+                            </div>
+
+                            <!-- Step 2: Service Details -->
+                            <div class="step step-2">
+                                <h5 class="step-title">Service Details</h5>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">English Level</label>
-                                            <div class="bootselect-multiselect">
-                                                <select class="selectpicker" name="language">
-                                                    <option>Select</option>
-                                                    <option>Fluent</option>
-                                                    <option>Mid Level</option>
-                                                    <option>Conversational</option>
-                                                    <option>Other</option>
-                                                </select>
-                                            </div>
+                                            <select class="selectpicker" name="language" required>
+                                                <option>Select</option>
+                                                <option>Fluent</option>
+                                                <option>Mid Level</option>
+                                                <option>Conversational</option>
+                                                <option>Other</option>
+                                            </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="mb20">
-                                        <div class="form-style1">
-                                            <label class="heading-color ff-heading fw500 mb10">Skills</label>
-                                            <div class="bootselect-multiselect">
-                                                <select class="selectpicker" name="skill[]" multiple>
-                                                    <option>Figma</option>
-                                                    <option>Adobe XD</option>
-                                                    <option>CSS</option>
-                                                    <option>HTML</option>
-                                                    <option>Bootstrap</option>
-                                                </select>
-                                            </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Service Detail</label>
+                                            <textarea class="form-control" name="description" rows="6" placeholder="Description"></textarea>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-6 col-xl-3">
-                                    <label for="">Upload resume/cv</label>
-                                    {{-- <img src="{{ asset('images/gallery/g-1.png') }}" alt="" id="resume"> --}}
-                                    <input  type="file"  name="resume" id="resume" >
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="mb10">
-                                        <label class="heading-color ff-heading fw500 mb10">Services Detail</label>
-                                        <textarea cols="30" rows="6" name="description" placeholder="Description"></textarea>
+                                    <div class="col-sm-12 text-center">
+                                        <button type="button" class="ud-btn btn-thm w-25 prev-step">Previous</button>
+                                        <button type="button" class="ud-btn btn-thm w-25 next-step">Next</button>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="text-center">
-                                        <button class="ud-btn btn-thm w-100" type="submit">Save<i
-                                                class="fal fa-arrow-right-long"></i></button>
+                            </div>
+
+                            <!-- Step 3: Education Details -->
+                            <div class="step step-3">
+                                <h5 class="step-title">Education Details</h5>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">School</label>
+                                            <input type="text" class="form-control" name="education[school][]" placeholder="School Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Degree</label>
+                                            <input type="text" class="form-control" name="education[degree][]" placeholder="Degree">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Field of Study</label>
+                                            <input type="text" class="form-control" name="education[field_of_study][]" placeholder="Field of Study">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Start Date</label>
+                                            <input type="date" class="form-control" name="education[start_date][]">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">End Date</label>
+                                            <input type="date" class="form-control" name="education[end_date][]">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Description</label>
+                                            <textarea class="form-control" name="education[description][]" rows="4" placeholder="Description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 text-center">
+                                        <button type="button" class="ud-btn btn-thm w-25 prev-step">Previous</button>
+                                        <button type="button" class="ud-btn btn-thm w-25 next-step">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Award Details -->
+                            <div class="step step-4">
+                                <h5 class="step-title">Award Details</h5>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Award Title</label>
+                                            <input type="text" class="form-control" name="awards[title][]" placeholder="Award Title">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Company/Organization</label>
+                                            <input type="text" class="form-control" name="awards[company][]" placeholder="Company/Organization">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Date</label>
+                                            <input type="date" class="form-control" name="awards[date][]">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">End Date</label>
+                                            <input type="date" class="form-control" name="awards[date_end][]">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Description</label>
+                                            <textarea class="form-control" name="awards[description][]" rows="4" placeholder="Description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 text-center">
+                                        <button type="button" class="ud-btn btn-thm w-25 prev-step">Previous</button>
+                                        <button type="button" class="ud-btn btn-thm w-25 next-step">Next</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 5: Experience Details -->
+                            <div class="step step-5">
+                                <h5 class="step-title">Experience Details</h5>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Title</label>
+                                            <input type="text" class="form-control" name="experience[title][]" placeholder="Job Title">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Company</label>
+                                            <input type="text" class="form-control" name="experience[company][]" placeholder="Company Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Start Date</label>
+                                            <input type="date" class="form-control" name="experience[start_date][]">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">End Date</label>
+                                            <input type="date" class="form-control" name="experience[end_date][]">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
+                                            <label class="heading-color ff-heading fw500 mb10">Description</label>
+                                            <textarea class="form-control" name="experience[description][]" rows="4" placeholder="Description"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 text-center">
+                                        <button type="button" class="ud-btn btn-thm w-25 prev-step">Previous</button>
+                                        <button type="submit" class="ud-btn btn-thm w-25">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -97,12 +211,39 @@
         </div>
     </div>
 </div>
-<!-- /. hide ps-widget when form is submitted -->
+
 <script>
-    $(document).ready(function () {
-        $('form').submit(function () {
-            $('#psWidget').hide();
+    document.addEventListener('DOMContentLoaded', function () {
+        const steps = document.querySelectorAll('.step');
+        const nextButtons = document.querySelectorAll('.next-step');
+        const prevButtons = document.querySelectorAll('.prev-step');
+        let currentStep = 0;
+
+        function showStep(stepIndex) {
+            steps.forEach((step, index) => {
+                step.style.display = index === stepIndex ? 'block' : 'none';
+            });
+        }
+
+        nextButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (currentStep < steps.length - 1) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            });
         });
+
+        prevButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    currentStep--;
+                    showStep(currentStep);
+                }
+            });
+        });
+
+        showStep(currentStep);
     });
 </script>
 @endsection

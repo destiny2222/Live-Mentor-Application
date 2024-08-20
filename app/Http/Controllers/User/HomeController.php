@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Mail\TutorMailRequest;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Education;
 use App\Models\Proposal;
 use App\Models\Review;
+use App\Models\Experience;
 use App\Models\syllabus;
 use App\Models\Tutor;
 use App\Models\User;
+use App\Models\Award;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,7 +75,43 @@ class HomeController extends Controller
             $tutor->categories()->attach($categories);
 
 
-    
+            // Save education records
+        foreach ($request->input('education', []) as $educationData) {
+            $education = new Education;
+            $education->user_id = Auth::user()->id;
+            $education->tutor_id = $tutor->id;
+            $education->school = $educationData['school'];
+            $education->degree = $educationData['degree'];
+            $education->field_of_study = $educationData['field_of_study'];
+            $education->start_date = $educationData['start_date'];
+            $education->end_date = $educationData['end_date'];
+            $education->description = $educationData['description'];
+            $education->save();
+        }
+
+        // Save award records
+        foreach ($request->input('award', []) as $awardData) {
+            $award = new Award;
+            $award->user_id = Auth::user()->id;
+            $award->title = $awardData['title'];
+            $award->company = $awardData['company'];
+            $award->date = $awardData['date'];
+            $award->date_end = $awardData['date_end'];
+            $award->description = $awardData['description'];
+            $award->save();
+        }
+
+        // Save experience records
+        foreach ($request->input('experience', []) as $experienceData) {
+            $experience = new Experience;
+            $experience->user_id = Auth::user()->id;
+            $experience->title = $experienceData['title'];
+            $experience->company = $experienceData['company'];
+            $experience->start_date = $experienceData['start_date'];
+            $experience->end_date = $experienceData['end_date'];
+            $experience->description = $experienceData['description'];
+            $experience->save();
+        }
             return redirect(route('syllabus.index'))->with('success', 'Save Successfully');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -80,6 +119,9 @@ class HomeController extends Controller
         }
     }
     
+
+
+
 
 
 
@@ -205,6 +247,9 @@ class HomeController extends Controller
             return back()->with('error', $exception->getMessage());
         }
     }
+
+
+    // public 
 
     public function listTutor()
     {
@@ -364,6 +409,6 @@ class HomeController extends Controller
     }
     
 
-    
+
 
 }

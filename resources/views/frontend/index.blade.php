@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <div class="row d-none d-lg-flex wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+        <div class="row  d-lg-flex wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
             @foreach ($categories as $category)
             <div class="col-sm-6 col-lg-4 col-xl-3">
                 <a href="{{ route('category.courses', $category->slug) }}">
