@@ -244,16 +244,18 @@
                         <h5 class="title mb-1">{{ $tutor->user->name }}</h5>
                         <p class="mb-0">{{ $tutor->title }}</p>
                         <div class="review">
-                            <i class="fas fa-star fz10 review-color pr10"></i>
-                            {{-- <span class="dark-color fw500">{{ number_format($tutor->averageRating(), 1) }}</span>
-                            ({{ $tutor->reviewCount() }} reviews) --}}
                             <p>
-                                {{-- <span class="dark-color fw500">{{ $tutor->rating }}</span> ({{ $tutor->review_count }} reviews) --}}
+                                <span class="dark-color fw500">{{ number_format($tutor->averageRating(), 1) }}</span>
+                                ({{ $tutor->reviewCount() }} reviews)
                             </p>
                         </div>
                         <div class="skill-tags d-flex align-items-center justify-content-center mb5">
+                            @php $count = 0; @endphp
                             @foreach ($tutor->skill as $skills)
-                                <span class="tag ms-2">{{ $skills }}</span>
+                                @if ($count < 3)
+                                    <span class="tag ms-2">{{ $skills }}</span>
+                                    @php $count++; @endphp
+                                @endif
                             @endforeach
                         </div>
                         <div class="d-grid mt15">

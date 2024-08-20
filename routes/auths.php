@@ -11,7 +11,7 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 
 Route::prefix('dashboard')->group(function (){
-    Route::middleware('authentication.user')->group(function (){
+    Route::middleware(['authentication.user','verified'])->group(function (){
         Route::get('/', [HomeController::class, 'index'])->name('dashboard');
         Route::get('/tutor/upload', [HomeController::class, 'tutor'])->name('tutor.create');
         Route::post('/tutor/store', [HomeController::class, 'storeTutor'])->name('tutor.store');
@@ -23,13 +23,21 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/preference/store', [HomeController::class, 'savePreference'])->name('preference.store');
         Route::get('/preference/tutor', [HomeController::class, 'listTutor'])->name('preference.listTutor');
         Route::get('/tutor/{id}/profile', [HomeController::class, 'tutorProfile'])->name('tutor.profile');
+
+        // send tutor request
+        Route::post('/tutor/request', [HomeController::class, 'sendTutorRequest'])->name('tutor.request');
+        Route::get('/tutor/request', [HomeController::class, 'tutorRequest'])->name('tutor.request');
+        // Route::get('/tutor/request/{id}/accept', [HomeController::class, 'acceptTutorRequest'])->name('tutor.request.accept');
+        // Route::get('/tutor/request/{id}/reject', [HomeController::class, 'rejectTutorRequest'])->name('tutor.request.reject');
+        // Route::get('/tutor/request/{id}/cancel', [HomeController::class, 'cancelTutorRequest'])->name('tutor.request.cancel');
         
         Route::get('/upload', function(){
             return view('upload');
         });
 
     });
-});    
+});
+    
 
 
 

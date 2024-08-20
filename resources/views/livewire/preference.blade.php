@@ -104,6 +104,12 @@
             </div>
             <div class="col-lg-12">
                 <div class="mb25">
+                    <h6 class="mb15">End Time *</h6>
+                    <input type="time" wire:model="end_time" id="" placeholder="" class="form-control" required>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="mb25">
                     <h6 class="mb15">Avaliable Days *</h6>
                     <div class="form-check d-flex align-items-center">
                         <input class="form-check-input" type="checkbox" wire:model="day"  value="Monday" id="monday">

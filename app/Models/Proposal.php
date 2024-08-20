@@ -20,6 +20,7 @@ class Proposal extends Model
         'day',
         'user_id',
         'course_id',
+        'end_time',
         'additional_information',
     ];
 

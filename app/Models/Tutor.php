@@ -22,6 +22,23 @@ class Tutor extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+
+    public function averageRating()
+    {
+        return $this->reviews()->avg('rating');
+    }
+    
+    public function reviewCount()
+    {
+        return $this->reviews()->count();
+    }
+    
+
     protected $casts = [
         'category_id' => 'array',
         'skill' => 'array',

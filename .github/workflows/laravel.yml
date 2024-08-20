@@ -43,7 +43,7 @@ jobs:
           composer install --ignore-platform-reqs
           php artisan storage:link
           php artisan key:generate
-          php artisan cache:clear
           php artisan migrate --force
+          php artisan cache:clear
           php artisan optimize:clear
           php artisan config:cache

@@ -79,9 +79,6 @@ class HomeController extends Controller
     }
     
 
-    public function tutorDetails(){
-           
-    }
 
 
     public function syllabus(Request $request){
@@ -226,14 +223,16 @@ class HomeController extends Controller
     public function  sendTutorRequest(Request $request){
         // if exists proposal update it
         $proposal = Proposal::where('user_id', Auth::user()->id)->latest()->first();
-        $tutor = User::where('id', $request->id)->first();
+        $tutor = User::where('email', $request->id)->first();
+
         if ($proposal) {
             $proposal->update([ 
                 'user_id' => Auth::user()->id,
                 'tutor_id' => $tutor->id,
             ]);
-            Mail::to($tutor->email)->send(new TutorMailRequest($proposal));
-        }   
+        } 
+          
+        Mail::to($tutor)->send(new TutorMailRequest($proposal));
     }
 
 

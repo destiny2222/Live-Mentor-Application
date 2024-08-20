@@ -11,6 +11,7 @@ class Preference extends Component
     public $prefer; 
     public $language;
     public $time;
+    public $end_time;
     public $day = [];
     public $tutor_id;
     public $form_message; 
@@ -27,6 +28,7 @@ class Preference extends Component
                 'prefer' => $this->prefer,
                 'language' => $this->language,
                 'time' => $this->time,
+                'end_time' => $this->end_time,
                 'day' => $this->day, 
                 'tutor_id' => $this->tutor_id,
                 'user_id' => Auth::user()->id,
@@ -40,6 +42,7 @@ class Preference extends Component
                 'prefer' => $this->prefer,
                 'language' => $this->language,
                 'time' => $this->time,
+                'end_time' => $this->end_time,
                 'day' => $this->day, 
                 'tutor_id' => $this->tutor_id,
                 'user_id' => Auth::user()->id,

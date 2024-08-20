@@ -27,8 +27,8 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="main-title">
-              <h2>Need something done?</h2>
-              <p class="text">Most viewed and all-time top-selling services</p>
+              <h2>Kickstart Your New Career <br> From Anywhere.?</h2>
+              <p class="text">JOIN TO CHANGE YOUR LIFE</p>
             </div>
           </div>
         </div>
@@ -37,8 +37,8 @@
             <div class="iconbox-style1 border-less p-0">
               <div class="icon before-none"><span class="flaticon-cv"></span></div>
               <div class="details">
-                <h4 class="title mt10 mb-3">Post a job</h4>
-                <p class="text">It’s free and easy to post a job. Simply fill <br class="d-none d-xxl-block"> in a title, description.</p>
+                <h4 class="title mt10 mb-3">Trusted By Millions</h4>
+                <p class="text">All our courses will be available to you  <br class="d-none d-xxl-block"> anytime to watch offline.</p>
               </div>
             </div>
           </div>
