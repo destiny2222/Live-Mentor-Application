@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class FrontController extends Controller
 {
     public function index(){
-        $course = Course::orderBy('id', 'asc')->paginate(6);
+        $course = Course::orderBy('id', 'asc')->get()->take(6);
         return view('frontend.index', compact('course'));
     }
 

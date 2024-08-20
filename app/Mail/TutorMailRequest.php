@@ -13,12 +13,13 @@ class TutorMailRequest extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $proposal;
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($proposal)
     {
-        //
+        $this->proposal = $proposal;
     }
 
     /**

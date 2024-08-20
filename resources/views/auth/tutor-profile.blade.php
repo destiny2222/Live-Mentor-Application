@@ -137,235 +137,95 @@
                                 malesuada fames ac ante ipsum <br class="d-none d-lg-block"> primis in faucibus.</p>
                         </div>
                     </div>
-                    <hr class="opacity-100 mb60">
-                    <h4 class="mb30">Featured Services</h4>
-                    <div class="row mb35">
-                        <div class="col-sm-6 col-xl-4">
-                            <div class="listing-style1">
-                                <div class="list-thumb">
-                                    <img class="w-100" src="images/listings/g-1.jpg" alt="">
-                                    <a href="#" class="listing-fav fz12"><span class="far fa-heart"></span></a>
-                                </div>
-                                <div class="list-content">
-                                    <p class="list-text body-color fz14 mb-1">Web & App Design</p>
-                                    <h6 class="list-title"><a href="page-services-single.html">I will design modern websites in
-                                            figma or adobe xd</a></h6>
-                                    <div class="review-meta d-flex align-items-center">
-                                        <i class="fas fa-star fz10 review-color me-2"></i>
-                                        <p class="mb-0 body-color fz14"><span class="dark-color me-2">4.82</span>94 reviews</p>
-                                    </div>
-                                    <hr class="my-2">
-                                    <div class="list-meta mt15">
-                                        <div class="budget">
-                                            <p class="mb-0 body-color">Starting at<span class="fz17 fw500 dark-color ms-1">$983</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-4">
-                            <div class="listing-style1">
-                                <div class="list-thumb">
-                                    <div class="listing-thumbIn-slider position-relative navi_pagi_bottom_center slider-1-grid owl-carousel owl-theme">
-                                        <div class="item">
-                                            <img class="w-100" src="images/listings/g-2.jpg" alt="">
-                                            <a href="#" class="listing-fav fz12"><span class="far fa-heart"></span></a>
-                                        </div>
-                                        <div class="item">
-                                            <img class="w-100" src="images/listings/g-3.jpg" alt="">
-                                            <a href="#" class="listing-fav fz12"><span class="far fa-heart"></span></a>
-                                        </div>
-                                        <div class="item">
-                                            <img class="w-100" src="images/listings/g-4.jpg" alt="">
-                                            <a href="#" class="listing-fav fz12"><span class="far fa-heart"></span></a>
-                                        </div>
-                                        <div class="item">
-                                            <img class="w-100" src="images/listings/g-5.jpg" alt="">
-                                            <a href="#" class="listing-fav fz12"><span class="far fa-heart"></span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-content">
-                                    <p class="list-text body-color fz14 mb-1">Art & Illustration</p>
-                                    <h6 class="list-title"><a href="page-services-single.html">I will create modern flat design
-                                            illustration</a></h6>
-                                    <div class="review-meta d-flex align-items-center">
-                                        <i class="fas fa-star fz10 review-color me-2"></i>
-                                        <p class="mb-0 body-color fz14"><span class="dark-color me-2">4.82</span>94 reviews</p>
-                                    </div>
-                                    <hr class="my-2">
-                                    <div class="list-meta mt15">
-                                        <div class="budget">
-                                            <p class="mb-0 body-color">Starting at<span class="fz17 fw500 dark-color ms-1">$983</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-4">
-                            <div class="listing-style1">
-                                <div class="list-thumb">
-                                    <img class="w-100" src="images/listings/g-3.jpg" alt="">
-                                    <a href="#" class="listing-fav fz12"><span class="far fa-heart"></span></a>
-                                </div>
-                                <div class="list-content">
-                                    <p class="list-text body-color fz14 mb-1">Design & Creative</p>
-                                    <h6 class="list-title line-clamp2"><a href="page-services-single.html">I will build a fully
-                                            responsive design in HTML,CSS, bootstrap, and javascript</a></h6>
-                                    <div class="review-meta d-flex align-items-center">
-                                        <i class="fas fa-star fz10 review-color me-2"></i>
-                                        <p class="mb-0 body-color fz14"><span class="dark-color me-2">4.82</span>94 reviews</p>
-                                    </div>
-                                    <hr class="my-2">
-                                    <div class="list-meta mt15">
-                                        <div class="budget">
-                                            <p class="mb-0 body-color">Starting at<span class="fz17 fw500 dark-color ms-1">$983</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <hr class="opacity-100 mb60">
                     <div class="product_single_content mb60">
                         <div class="mbp_pagination_comments">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="total_review mb30">
-                                        <h4>80 Reviews</h4>
+                                        <h4>{{ $tutor->reviewCount() }} Reviews</h4>
                                     </div>
                                     <div class="d-md-flex align-items-center mb30">
                                         <div class="total-review-box d-flex align-items-center text-center mb30-sm">
                                             <div class="wrapper mx-auto">
-                                                <div class="t-review mb15">4.96</div>
+                                                <div class="t-review mb15">{{ number_format($tutor->averageRating(), 2) }}</div>
                                                 <h5>Exceptional</h5>
-                                                <p class="text mb-0">3,014 reviews</p>
+                                                <p class="text mb-0">{{ $tutor->reviewCount() }} reviews</p>
                                             </div>
                                         </div>
                                         <div class="wrapper ml60 ml0-sm">
-                                            <div class="review-list d-flex align-items-center mb10">
-                                                <div class="list-number">5 Star</div>
-                                                <div class="progress">
-                                                    <div class="progress-bar" style="width: 90%;" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                            @php
+                                                $ratingDistribution = [
+                                                    5 => $tutor->reviews()->where('rating', 5)->count(),
+                                                    4 => $tutor->reviews()->where('rating', 4)->count(),
+                                                    3 => $tutor->reviews()->where('rating', 3)->count(),
+                                                    2 => $tutor->reviews()->where('rating', 2)->count(),
+                                                    1 => $tutor->reviews()->where('rating', 1)->count(),
+                                                ];
+                                                $totalReviews = $tutor->reviewCount();
+                                            @endphp
+                                            @foreach ($ratingDistribution as $star => $count)
+                                                <div class="review-list d-flex align-items-center mb10">
+                                                    <div class="list-number">{{ $star }} Star</div>
+                                                    <div class="progress">
+                                                        <div class="progress-bar" style="width: {{ $totalReviews > 0 ? ($count / $totalReviews) * 100 : 0 }}%;" role="progressbar"></div>
+                                                    </div>
+                                                    <div class="value text-end">{{ $count }}</div>
                                                 </div>
-                                                <div class="value text-end">58</div>
-                                            </div>
-                                            <div class="review-list d-flex align-items-center mb10">
-                                                <div class="list-number">4 Star</div>
-                                                <div class="progress">
-                                                    <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <div class="value text-end">20</div>
-                                            </div>
-                                            <div class="review-list d-flex align-items-center mb10">
-                                                <div class="list-number">3 Star</div>
-                                                <div class="progress">
-                                                    <div class="progress-bar w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <div class="value text-end">15</div>
-                                            </div>
-                                            <div class="review-list d-flex align-items-center mb10">
-                                                <div class="list-number">2 Star</div>
-                                                <div class="progress">
-                                                    <div class="progress-bar" style="width: 30%;" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <div class="value text-end">2</div>
-                                            </div>
-                                            <div class="review-list d-flex align-items-center mb10">
-                                                <div class="list-number">1 Star</div>
-                                                <div class="progress">
-                                                    <div class="progress-bar" style="width: 20%;" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <div class="value text-end">1</div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="mbp_first position-relative d-flex align-items-center justify-content-start mb30-sm">
-                                        <img src="images/blog/comments-2.png" class="mr-3" alt="comments-2.png">
-                                        <div class="ml20">
-                                            <h6 class="mt-0 mb-0">Bessie Cooper</h6>
-                                            <div><span class="fz14">12 March 2022</span></div>
+                                @foreach ($tutor->reviews as $review)
+                                    <div class="col-md-12">
+                                        <div class="mbp_first position-relative d-flex align-items-center justify-content-start mb30-sm">
+                                            <img src="{{ asset('images/blog/comments-2.png') }}" class="mr-3" alt="comments-2.png">
+                                            <div class="ml20">
+                                                <h6 class="mt-0 mb-0">{{ $tutor->user->name }}</h6>
+                                                <div><span class="fz14">{{ $tutor->created_at->format('d M Y') }}</span></div>
+                                            </div>
                                         </div>
+                                        <p class="text mt20 mb20">{{ $tutor->comment }}</p>
                                     </div>
-                                    <p class="text mt20 mb20">There are many variations of passages of Lorem Ipsum available, but
-                                        the majority have suffered alteration in some form, by injected humour, or randomised words
-                                        which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum,
-                                        you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                                    <div class="review_cansel_btns d-flex">
-                                        <a href="#"><i class="fas fa-thumbs-up"></i>Helpful</a>
-                                        <a href="#"><i class="fas fa-thumbs-down"></i>Not helpful</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="mbp_first position-relative d-flex align-items-center justify-content-start mt30 mb30-sm">
-                                        <img src="images/blog/comments-2.png" class="mr-3" alt="comments-2.png">
-                                        <div class="ml20">
-                                            <h6 class="mt-0 mb-0">Darrell Steward</h6>
-                                            <div><span class="fz14">12 March 2022</span></div>
-                                        </div>
-                                    </div>
-                                    <p class="text mt20 mb20">There are many variations of passages of Lorem Ipsum available, but
-                                        the majority have suffered alteration in some form, by injected humour, or randomised words
-                                        which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum,
-                                        you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                                    <div class="review_cansel_btns d-flex pb30">
-                                        <a href="#"><i class="fas fa-thumbs-up"></i>Helpful</a>
-                                        <a href="#"><i class="fas fa-thumbs-down"></i>Not helpful</a>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="position-relative bdrb1 pb50">
-                                        <a href="page-service-single.html" class="ud-btn btn-light-thm">See More<i class="fal fa-arrow-right-long"></i></a>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
+                    
                     <div class="bsp_reveiw_wrt">
                         <h6 class="fz17">Add a Review</h6>
                         <p class="text">Your email address will not be published. Required fields are marked *</p>
-                        <h6>Your rating of this product</h6>
-                        <div class="d-flex">
-                            <i class="fas fa-star review-color"></i>
-                            <i class="far fa-star review-color ms-2"></i>
-                            <i class="far fa-star review-color ms-2"></i>
-                            <i class="far fa-star review-color ms-2"></i>
-                            <i class="far fa-star review-color ms-2"></i>
-                        </div>
-                        <form class="comments_form mt30 mb30-md">
+                        <h6>Your rating of this tutor</h6>
+                        <form class="comments_form mt30 mb30-md" action="{{ route('review.store') }}" method="POST">
+                            @csrf
+                            <div class="d-flex">
+                                <input type="hidden" name="rating" id="rating" value="5">
+                                <i class="fas fa-star review-color" data-value="1"></i>
+                                <i class="far fa-star review-color ms-2" data-value="2"></i>
+                                <i class="far fa-star review-color ms-2" data-value="3"></i>
+                                <i class="far fa-star review-color ms-2" data-value="4"></i>
+                                <i class="far fa-star review-color ms-2" data-value="5"></i>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="mb-4">
                                         <label class="fw500 fz16 ff-heading dark-color mb-2">Comment</label>
-                                        <textarea class="pt15" rows="6" placeholder="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."></textarea>
+                                        <textarea name="comment" class="pt15" rows="6" placeholder="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb20">
-                                        <label class="fw500 ff-heading dark-color mb-2">Name</label>
-                                        <input type="text" class="form-control" placeholder="Ali Tufan">
+                                        <input type="text" name="name" value="{{ Auth::user()->name ?? '' }}" hidden class="form-control" placeholder="Ali Tufan">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb20">
-                                        <label class="fw500 ff-heading dark-color mb-2">Email</label>
-                                        <input type="email" class="form-control" placeholder="creativelayers088">
+                                        <input type="email" name="email" value="{{ Auth::user()->email ?? '' }}" hidden class="form-control" placeholder="creativelayers088">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="checkbox-style1 d-block d-sm-flex align-items-center justify-content-between mb20">
-                                        <label class="custom_checkbox fz15 ff-heading">Save my name, email, and website in this
-                                            browser for the next time I comment.
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    <a href="#" class="ud-btn btn-thm">Send<i class="fal fa-arrow-right-long"></i></a>
+                                    <button type="submit" class="ud-btn btn-thm">Send<i class="fal fa-arrow-right-long"></i></button>
                                 </div>
                             </div>
                         </form>
@@ -393,10 +253,10 @@
                             </a>
                         </div>
                         <div class="d-grid">
-                            <a href="{{ route('tutor.request') }}" onclick="document.getElementBy('#request-form').submit()" class="ud-btn btn-thm">Send a Request <i class="fal fa-arrow-right-long"></i></a>
-                            <form action="{{ route('tutor.request') }}" method="post" id="request-form">
+                            <a href="{{ route('tutor.request') }}" onclick="event.preventDefault(); document.getElementById('request-form-{{ $tutor->id }}').submit();" class="ud-btn btn-thm">Send a Request <i class="fal fa-arrow-right-long"></i></a>
+                            <form action="{{ route('tutor.request') }}" method="post" id="request-form-{{ $tutor->id }}">
                                 @csrf
-                                <input type="text" value="{{ $tutor->user->id }}" name="2">
+                                <input type="text" value="{{ $tutor->user->id }}" name="id" hidden>
                             </form>
                         </div>
                     </div>
@@ -413,4 +273,42 @@
         </div>
     </div>
 </section>
+<script>
+    document.querySelectorAll('.fa-star').forEach(star => {
+        star.addEventListener('click', function() {
+            const selectedValue = document.getElementById('rating').value;
+            const currentValue = this.getAttribute('data-value');
+
+            if (selectedValue === currentValue) {
+                // If the clicked star is already selected, deselect it
+                document.getElementById('rating').value = 0;
+                resetStars();
+            } else {
+                // Set the new value and update the star icons
+                document.getElementById('rating').value = currentValue;
+                updateStars(currentValue);
+            }
+        });
+    });
+
+    function updateStars(value) {
+        document.querySelectorAll('.fa-star').forEach(star => {
+            if (star.getAttribute('data-value') <= value) {
+                star.classList.add('fas');
+                star.classList.remove('far');
+            } else {
+                star.classList.add('far');
+                star.classList.remove('fas');
+            }
+        });
+    }
+
+    function resetStars() {
+        document.querySelectorAll('.fa-star').forEach(star => {
+            star.classList.add('far');
+            star.classList.remove('fas');
+        });
+    }
+
+</script>
 @endsection

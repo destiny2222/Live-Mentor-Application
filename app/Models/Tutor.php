@@ -10,7 +10,7 @@ class Tutor extends Model
 {
     use HasFactory;
 
-    public $fillable = [ 'category_id', 'language', 'description', 'price','image_public_id',  'status','skill','title' ,'user_id'];
+    public $fillable = [ 'category_id', 'language', 'description', 'price','image_public_id','experience',  'status','skill','title' ,'user_id'];
 
     public function user()
     {

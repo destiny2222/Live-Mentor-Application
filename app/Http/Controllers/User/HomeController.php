@@ -204,15 +204,19 @@ class HomeController extends Controller
         }
     }
 
-    public function listTutor(){
+    public function listTutor()
+    {
         $proposal = Proposal::where('user_id', Auth::user()->id)->latest()->first();
-        $course = Course::where('id', $proposal->course_id)->first();
-        $category = Category::where('id', $course->category_id)->first();
+
+        $course = Course::find($proposal->course_id);
+        // dd($course);
+        $category = Category::find($course->category_id);
+        // dd($category->tutors);
         // Find a tutor associated with this category
         $tutors = $category->tutors;
+
         return view('auth.tutor', compact('tutors'));
     }
-
 
     public function tutorProfile($id){
         $user = User::findOrFail($id);
@@ -223,7 +227,7 @@ class HomeController extends Controller
     public function  sendTutorRequest(Request $request){
         // if exists proposal update it
         $proposal = Proposal::where('user_id', Auth::user()->id)->latest()->first();
-        $tutor = User::where('email', $request->id)->first();
+        $tutor = User::where('id', $request->id)->first();
 
         if ($proposal) {
             $proposal->update([ 
@@ -231,7 +235,8 @@ class HomeController extends Controller
                 'tutor_id' => $tutor->id,
             ]);
         } 
-        Mail::to($tutor)->send(new TutorMailRequest($proposal));
+        Mail::to($tutor->email)->send(new TutorMailRequest($proposal));
+        return back()->with('success', 'Request sent successfully!');
     }
 
 
@@ -244,9 +249,11 @@ class HomeController extends Controller
 
         $review = new Review;
         $review->tutor_id = $tutor_id;
-        $review->user_id = Auth::id();
+        $review->user_id = Auth::user()->id;
         $review->rating = $request->input('rating');
         $review->comment = $request->input('comment');
+        $review->name = $request->input('name');
+        $review->email = $request->input('email');
         $review->save();
 
         return back()->with('success', 'Thank you for your review!');
