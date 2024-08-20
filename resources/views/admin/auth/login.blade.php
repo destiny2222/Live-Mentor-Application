@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xtora - Admin Login</title>
+    <title>Admin Login</title>
 
     <link rel="shortcut icon" type="image/png" href="assets/images/general/favicon-1.png">
     <link href="../css2-1?family=Maven+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">

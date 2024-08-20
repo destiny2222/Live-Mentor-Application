@@ -1,10 +1,13 @@
 <?php
 
 
+use App\Http\Controllers\User\CourseController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\ProfileController;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
 
 
 
@@ -29,7 +32,18 @@ Route::prefix('dashboard')->group(function (){
         // Route::get('/tutor/request/{id}/accept', [HomeController::class, 'acceptTutorRequest'])->name('tutor.request.accept');
         // Route::get('/tutor/request/{id}/reject', [HomeController::class, 'rejectTutorRequest'])->name('tutor.request.reject');
         // Route::get('/tutor/request/{id}/cancel', [HomeController::class, 'cancelTutorRequest'])->name('tutor.request.cancel');
+
+        // edit profile
+        Route::get('/profile', [HomeController::class, 'profile'])->name('profile.index');
+        Route::put('/profile/{id}/update', [HomeController::class, 'updateProfile'])->name('profile.update');
+        Route::post('/profile/update/password', [HomeController::class, 'changePassword'])->name('profile.update.password');
+        Route::delete('/user/delete', [HomeController::class, 'destroyUser'])->name('user.destroy');
+
+        //course
         
+
+
+
         Route::get('/upload', function(){
             return view('upload');
         });

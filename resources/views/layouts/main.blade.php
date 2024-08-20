@@ -56,7 +56,7 @@
                 <li class="visible_list"> <a class="list-item" href="/"><span class="title">Home</span></a></li>
                 <li class="visible_list"> <a class="list-item" href="#"><span class="title">About Us</span></a></li>
                 <li class="visible_list"> <a class="list-item" href="#"><span class="title">Service</span></a></li>
-                <li class="visible_list"> <a class="list-item" href="#"><span class="title">Course</span></a></li>
+                <li class="visible_list"> <a class="list-item" href="/course"><span class="title">Course</span></a></li>
                 <li> <a class="list-item pe-0" href="#">Contact</a></li>
               </ul>
             </div>
@@ -90,11 +90,13 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fal fa-xmark"></i></button>
           </div>
           <div class="modal-body">
-            <div class="popup-search-field search_area">
-              <input type="text" class="form-control border-0" placeholder="What service are you looking for today?">
-              <label><span class="far fa-magnifying-glass"></span></label>
-              <button class="ud-btn btn-thm" type="submit">Search</button>
-            </div>
+            <form action="{{ route('search') }}" method="GET">
+             <div class="popup-search-field search_area">
+                <input type="text" name="search" class="form-control border-0" placeholder="What service are you looking for today?">
+                <label><span class="far fa-magnifying-glass"></span></label>
+                <button class="ud-btn btn-thm" type="submit">Search</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -125,7 +127,7 @@
         <li> <a  href="/"><span>Home</span></a></li>
         <li> <a  href="#"><span>About Us</span></a></li>
         <li> <a  href="#"><span>Service</span></a></li>
-        <li> <a  href="#"><span>Course</span></a></li>
+        <li> <a  href="/course"><span>Course</span></a></li>
         <li> <a href="#">Contact</a></li>
         <!-- Only for Mobile View -->
       </ul>

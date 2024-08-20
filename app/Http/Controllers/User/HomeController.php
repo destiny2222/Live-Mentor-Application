@@ -14,8 +14,10 @@ use App\Models\User;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
 {
@@ -259,5 +261,109 @@ class HomeController extends Controller
         return back()->with('success', 'Thank you for your review!');
     }
 
+
+    public function profile(){
+        $profile = Auth::user();
+        return view('auth.profile', compact('profile'));
+    }
+
+
+
+    public function updateProfile(Request $request, $id)
+    {
+        
+
+        // Validate the request
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            // Other validation rules...
+        ]);
+
+        try{
+            
+            
+            // dd($request->all());
+            if($request->hasFile('image')) {
+                $image_file = time().'.'.$request->image->extension();
+                $request->image->move(public_path('profile'),$image_file);
+            }
+            
+            // Update other profile fields
+            $profile = User::findOrFail($id);
+            $profile->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'city' => $request->city,
+                'gender'=>$request->gender,
+                'country'=>$request->country,
+                'role'=>$profile->role,
+                'image' => $image_file ?? $profile->image,
+                // Other profile fields...
+            ]);
+
+            $profile->save();
+            return redirect()->back()->with('success', 'Profile updated successfully.');
+        }catch(\Exception $e){
+            Log::error($e->getMessage());
+            return back()->with('error', 'Something went wrong. Please try again later.');
+        }
+    }
+
+
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ]);
+
+        try {
+            $user = User::find(Auth::user()->id);
+
+            // Check if the current password matches
+            if (Hash::check($request->current_password, $user->password)) {
+                // check of confirm password is same as new password
+                if ($request->new_password == $request->confirm_password) {
+                    $user->password = Hash::make($request->new_password);
+                    $user->save();
+                    return back()->with('success', 'Password changed successfully!');
+                }else{
+                    return back()->with('error', 'New password and confirm password do not match.');
+                }
+                
+            } else {
+                return back()->with('error', 'Current password is incorrect.');
+            }
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return back()->with('error', 'Something went wrong, please try again later.');
+        }
+    }
+
+
+    public function destroyUser(Request $request)
+    {
+        $request->validateWithBag('userDeletion', [
+            'password' => ['required', 'current-password'],
+        ]);
     
+        $user = $request->user();
+    
+        Auth::logout();
+    
+        $user->delete();
+    
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+    
+        return Redirect::to('/');
+    }
+    
+
+    
+
 }

@@ -27,7 +27,7 @@
         @endif
         <p class="fz15 fw400 ff-heading pl30 mt30">Account</p>
         <div class="sidebar_list_item ">
-        <a href="#" class="items-center"><i class="flaticon-photo mr15"></i>My Profile</a>
+        <a href="{{ route('profile.index') }}" class="items-center"><i class="flaticon-photo mr15"></i>My Profile</a>
         </div>
         <div class="sidebar_list_item ">
         <a href="{{  route('logout') }}" id="form-logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="items-center"><i class="flaticon-logout mr15"></i>Logout</a>
