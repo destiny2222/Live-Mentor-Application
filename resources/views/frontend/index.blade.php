@@ -10,7 +10,7 @@
               <h1 class="title animate-up-1 mb25">Find a mentor to suit  <br class="d-none d-xl-block">your needs</h1>
               <p class="text animate-up-2">work with us to get a mentor for your personalize area of<br class="d-none d-lg-block"> interest to become a pro</p>
               <div class="d-sm-flex align-items-center mt30 animate-up-3">
-                <a href="#" class="ud-btn btn-thm4 me-3 bdrs120 btn-1">Get Started</a>
+                <a href="{{ route('register') }}" class="ud-btn btn-thm4 me-3 bdrs120 btn-1">Get Started</a>
                 <a href="#" class="ud-btn btn-white bdr1 bdrs120 btn-2">Find Mentor</a>
               </div>
             </div>
