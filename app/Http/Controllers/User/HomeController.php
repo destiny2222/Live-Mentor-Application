@@ -231,7 +231,6 @@ class HomeController extends Controller
                 'tutor_id' => $tutor->id,
             ]);
         } 
-          
         Mail::to($tutor)->send(new TutorMailRequest($proposal));
     }
 
