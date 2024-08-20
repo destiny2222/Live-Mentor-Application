@@ -11,7 +11,7 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 
 Route::prefix('dashboard')->group(function (){
-    Route::middleware(['authentication.user','verified'])->group(function (){
+    Route::middleware(['auth','verified'])->group(function (){
         Route::get('/', [HomeController::class, 'index'])->name('dashboard');
         Route::get('/tutor/upload', [HomeController::class, 'tutor'])->name('tutor.create');
         Route::post('/tutor/store', [HomeController::class, 'storeTutor'])->name('tutor.store');

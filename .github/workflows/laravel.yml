@@ -44,6 +44,5 @@ jobs:
           php artisan storage:link
           php artisan key:generate
           php artisan migrate --force
-          php artisan cache:clear
           php artisan optimize:clear
           php artisan config:cache
