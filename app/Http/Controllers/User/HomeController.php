@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\RequestAccepted;
 use App\Mail\TutorMailRequest;
 use App\Models\Award;
 use App\Models\Awards;
@@ -27,13 +28,18 @@ class HomeController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        $courses = Course::orderBy('id', 'asc')->get();
-        $enrollCourse = Proposal::where('user_id', $user->id)->whereIn('course_id', $courses->pluck('id'))->get();
-        $enrolledCourses = Course::whereIn('id', $enrollCourse->pluck('course_id'))->paginate(6);
-    
+        $proposals = Proposal::where('user_id', $user->id)->where('status', '3')->get();
+        $enrolledCourses = [];
+        foreach ($proposals as $pro) {
+            $course = Course::find($pro->course_id);
+            if ($course) {
+                $enrolledCourses[] = $course;
+            }
+        }
         // dd($enrolledCourses);
         return view('auth.dashboard', compact('enrolledCourses', 'user'));
     }
+    
     
 
     public function tutor() {
@@ -269,6 +275,8 @@ class HomeController extends Controller
         return view('auth.tutor-profile', compact('tutor', 'user', 'educations', 'certifications', 'experiences'));
     }
 
+
+
     public function sendTutorRequest(Request $request) {
         // Get the latest proposal for the authenticated user
         $proposal = Proposal::where('user_id', Auth::user()->id)->latest()->first();
@@ -281,11 +289,13 @@ class HomeController extends Controller
         if ($proposal) {
             $proposal->update([
                 'tutor_id' => $tutor->id,
+                'status'=> 3,
             ]);
         } else {
             $proposal = Proposal::create([
                 'user_id' => Auth::user()->id,
                 'tutor_id' => $tutor->id,
+                'status'=> 3,
             ]);
         }
     
@@ -423,27 +433,75 @@ class HomeController extends Controller
 
 
     public function EnrollCourse() {
-        $user = Auth::user();
-        $proposals = Proposal::where('user_id', $user->id)->paginate(6);
-        $enrolledCourses = [];
-    
-        foreach ($proposals as $pro) {
-            $course = Course::find($pro->course_id);
-            if ($course) {
-                $enrolledCourses[] = $course;
+       try{
+            $user = Auth::user();
+            $proposals = Proposal::where('user_id', $user->id)->where('status',  3)->get();
+            $enrolledCourses = [];
+        
+            foreach ($proposals as $pro) {
+                $course = Course::find($pro->course_id);
+                if ($course) {
+                    $enrolledCourses[] = $course;
+                }
             }
-        }
-    
-        return view('auth.course', compact('enrolledCourses', 'user', 'proposals'));
+            return view('auth.course', compact('enrolledCourses', 'user', 'proposals'));
+       }catch(\Exception $exception){
+          Log::error($exception->getMessage());
+          return back()->with('error', 'Oops something went wrong');
+       }
     }
     
 
     public function getTutorProposal(){
-        $user = Auth::user();
-        $proposal = Proposal::where('tutor_id', $user->id)->get();                                                                                                                                    
-        dd($proposal);
-        return view('auth.pro'. compact('proposal'));
+        try{
+            $user = Auth::user();
+            $proposal = Proposal::where('tutor_id', $user->id)->get();                                                                                                                                    
+            // dd($proposal);
+            return view('auth.pro', compact('proposal'));
+        }catch(\Exception $e){
+            Log::error($e->getMessage());
+            return back()->with('error', 'Something went wrong, please try again later.');
+        }
     }
+
+
+    public function acceptRequest($id)
+    {
+        try{
+            $proposal = Proposal::find($id);
+            if (!$proposal || $proposal->tutor_id != Auth::user()->tutor->id) {
+                return back()->with('error', 'Request not found or you are not authorized to accept this request.');
+            }
+            $proposal->update([
+                'status' => 1,
+            ]);
+            // Mail::to($proposal->user->email)->send(new RequestAccepted($proposal));
+            return back()->with('success', 'Request accepted successfully!');
+        }catch(\Exception $e){
+            Log::error($e->getMessage());
+            return back()->with('error', 'Something went wrong, please try again later.');
+        }
+    }
+
+    public function cancelRequest($id)
+    {
+        try{
+            $proposal = Proposal::find($id);
+            if (!$proposal || $proposal->tutor_id != Auth::user()->tutor->id) {
+                return back()->with('error', 'Request not found or you are not authorized to cancel this request.');
+            }
+            $proposal->update([
+                'status' => 2,
+            ]);
+            return back()->with('success', 'Request cancelled successfully!');
+        }catch(\Exception $exception){
+            Log::error($exception->getMessage());
+            return back()->with('error', 'Something went wrong, please try again later.');
+        }
+    }
+
+
+
 
 
 }

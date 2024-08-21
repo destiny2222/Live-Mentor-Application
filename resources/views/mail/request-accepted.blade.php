@@ -181,15 +181,8 @@
                 <tr>
                     <td class="layout">
                         <div>
-                            @if($proposal->tutor && $proposal->tutor->user)
-                                <h2>Hello, {{ Session::get('tutorName') }}</h2>
-                                <p>Someone has requested to be your tutor on. Please click the link below to view the request.</p>
-                                {{-- <a href="{{ url('tutor-request-accept/'.$proposal->tutor->id) }}">View Request</a> --}}
-                                {{-- <a href="{{ url('tutor-request-reject/'.$proposal->tutor->id) }}">Reject</a> --}}
-                            @else
-                                <h2>Hello, {{ Session::get('tutorName') }}</h2>
-                                <p>Someone has requested to be your tutor on . Please click the link below to view the request.</p>
-                            @endif
+                            <h2>Hello, {{ $proposal->user->name }}</h2>
+                            <p>Someone has requested to be your tutor on . Please click the link below to view the request.</p>
                         </div>
                     </td>
                 </tr>

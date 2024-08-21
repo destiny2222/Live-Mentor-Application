@@ -8,8 +8,8 @@
             <div class="col-xl-7">
                 <div class="home14-hero-content wow fadeInRight">
                     <h1 class="title animate-up-1 mb25" style="text-tramsform:uppercase;">A Unified Front For <br class="d-none d-xl-block"> Mentor and Scholars</h1>
-                    <p class="text animate-up-2" style="text-tramsform:uppercase;">Join The Centor Community: Learn, Lead And Thrive<br class="d-none d-lg-block"> 
-                        In Your Carrer Path</p>
+                    <p class="text animate-up-2" style="text-tramsform:uppercase;">Join The Mentor Community: Learn, Lead And Thrive<br class="d-none d-lg-block"> 
+                        In Your Career Path</p>
                     <div class="d-sm-flex align-items-center mt30 animate-up-3">
                         <a href="{{ route('register') }}" class="ud-btn btn-thm4 me-3 bdrs120 btn-1">Get Started</a>
                     </div>

@@ -90,12 +90,7 @@
                               </p>
                               <hr class="my-2">
                               <div class="list-meta d-flex justify-content-between align-items-center mt15">
-                                <a class="d-flex" href="{{ route('course.details', $course->slug) }}">
-                                  <span class="fz14" style="text-transform: uppercase">make payment</span>
-                                </a>
-                                <div class="budget">
-                                  <p class="mb-0 body-color">Price <span class="fz17 fw500 dark-color ms-1">${{ $course->price }}</span></p>
-                                </div>
+                                   
                               </div>
                             </div>
                           </div>
@@ -110,7 +105,7 @@
                 </div>
               </div>
               <div class="mbp_pagination text-center">
-                {{ $enrolledCourses->links() }}
+                
               </div>
             </div>
           </div>

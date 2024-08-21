@@ -1,6 +1,88 @@
 @extends('layouts.master')
 @section('content')
+<style>
+    /* General button styles */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 
+/* Outline button styles */
+
+.btn-outline-warning {
+    color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-outline-warning:hover {
+    color: #fff;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+
+.btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-info {
+    color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-outline-info:hover {
+    color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+/* Small button styles */
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+/* Margin end (right) */
+.me-2 {
+    margin-right: 0.5rem;
+}
+
+/* Text primary color */
+.text-primary {
+    color: #007bff !important;
+}
+
+</style>
 <div class="dashboard__main pl0-md">
     <div class="dashboard__content hover-bgc-color">
         <div class="row pb40">
@@ -24,50 +106,43 @@
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-item1" role="tabpanel" aria-labelledby="nav-item1-tab">
                                 <div class="row">
-                                    @forelse ($enrolledCourses as $course)
-                                    <div class="col-sm-6 col-xl-4">
-                                        <div class="listing-style1">
-                                            <div class="list-thumb">
-                                                <img class="w-100" src="{{ asset('upload/courses/'.$course->image) }}" alt="">
-                                                <a href="" class="tag-del" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Delete Item" aria-label="Delete Item">
-                                                    <span class="flaticon-delete"></span>
-                                                </a>
-                                            </div>
-                                            <div class="list-content">
-                                                <p class="list-text body-color fz14 mb-1">{{ $course->category->name }}</p>
-                                                <h5 class="list-title">
-                                                    <a href="{{ route('course.details', $course->slug) }}">
-                                                        {{ $course->title }}
-                                                    </a>
-                                                </h5>
-                                                <p>
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat voluptatum deleniti, iste expedita ducimus architecto nobis.
-                                                </p>
-                                                <hr class="my-2">
-                                                <div class="list-meta d-flex justify-content-between align-items-center mt15">
-                                                    <a class="d-flex" href="{{ route('course.details', $course->slug) }}">
-                                                        <span class="fz14" style="text-transform: uppercase">make payment</span>
-                                                    </a>
+                                    <div class="col-md-12 col-xxl-12">
+                                      <div class="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
+                                        <div class="d-flex justify-content-between bdrb1 pb15 mb20">
+                                          <h5 class="title">Most Viewed Services</h5>
+                                          <a class="text-decoration-underline text-thm6" href="#">View All</a>
+                                        </div>
+                                        <div class="dashboard-img-service">
+                                            @foreach ($proposal as $proposals)
+                                                <div class="listing-style1 list-style d-block d-xl-flex align-items-center border-0 mb10">
+                                                <div class="list-thumb flex-shrink-0 bdrs4">
+                                                    <img class="w-100" src="{{ asset('profile/'.$proposals->user->image) }}" alt="">
+                                                </div>
+                                                <div class="list-content flex-grow-1 pt10 pb10 pl15 pl0-lg">
+                                                    <h6 class="list-title mb-2"><a href="#">{{ $proposals->user->name }}</a></h6>
+                                                    <div class="list-meta d-flex justify-content-between align-items-center">
+                                                    <div class="review-meta d-flex align-items-center">
+                                                        <button class="btn btn-outline-primary btn-sm me-2" type="button">Accept</button>
+                                                        <button class="btn btn-outline-danger btn-sm me-2" type="button">Reject</button>
+                                                        <button class="btn btn-outline-warning btn-sm me-2" type="button">View Proposal</button>
+                                                    </div>
                                                     <div class="budget">
-                                                        <p class="mb-0 body-color">Price <span class="fz17 fw500 dark-color ms-1">${{ $course->price }}</span></p>
+                                                        <p class="mb-0 body-color">Starting at<span class="fz17 fw500 dark-color ms-1">$983</span></p>
+                                                    </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                </div>
+                                                <hr class="opacity-100 mt-0">
+                                            @endforeach
                                         </div>
+                                      </div>
                                     </div>
-                                    @empty
-                                    <div class="col-sm-12 col-xl-12">
-                                        <div class="listing-style1">
-                                            Empty Proposal
-                                        </div>
-                                    </div>
-                                    @endforelse
-                                </div>
+                                  </div>
                             </div>
                         </div>
                     </div>
                     <div class="mbp_pagination text-center">
-                        {{ $proposals->links() }}
+                        
                     </div>
                 </div>
             </div>
