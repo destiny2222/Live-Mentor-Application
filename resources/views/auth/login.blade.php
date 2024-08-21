@@ -47,7 +47,6 @@
           <div class="col-lg-6 m-auto wow fadeInUp" data-wow-delay="300ms">
             <div class="main-title text-center">
               <h2 class="title">Log In</h2>
-              <p class="paragraph">Give your visitor a smooth online experience with a solid UX design</p>
             </div>
           </div>
         </div>

@@ -46,7 +46,6 @@
           <div class="col-lg-6 m-auto wow fadeInUp" data-wow-delay="300ms">
             <div class="main-title text-center">
               <h2 class="title">Register</h2>
-              <p class="paragraph">Give your visitor a smooth online experience with a solid UX design</p>
             </div>
           </div>
         </div>
@@ -72,7 +71,7 @@
                       <select name="role" id="" class="form-control">
                           <option value="" selected>select</option>
                           <option value="user">Student</option>
-                          <option value="tutor">Teacher</option>
+                          <option value="tutor">Mentor</option>
                       </select>
                     </div>
                     <div class="mb15">
@@ -110,5 +109,6 @@
 <script src="/js/wow.min.js"></script>
 <!-- Custom script for all pages -->
 <script src="/js/script.js"></script>
+@include('partials.message')
 </body>
 </html>
