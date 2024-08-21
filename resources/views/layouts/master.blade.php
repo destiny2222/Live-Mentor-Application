@@ -217,9 +217,9 @@
       <div class="header bdrb1">
         <div class="menu_and_widgets">
           <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
-            <a class="mobile_logo" href="#"><img src="images/header-logo3.svg" alt=""></a>
+            <a class="mobile_logo" href="#">MENTOR</a>
             <div class="right-side text-end">
-              <a class="" href="/login">join</a>
+              {{-- <a class="" href="/login">Join</a> --}}
               {{-- <a class="menubar ml30" href="#menu"><img src="images/mobile-dark-nav-icon.svg" alt=""></a> --}}
             </div>
           </div>

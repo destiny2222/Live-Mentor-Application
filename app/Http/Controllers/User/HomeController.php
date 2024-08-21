@@ -30,15 +30,21 @@ class HomeController extends Controller
         $user = Auth::user();
         $proposals = Proposal::where('user_id', $user->id)->where('status', '3')->get();
         $enrolledCourses = [];
+    
         foreach ($proposals as $pro) {
             $course = Course::find($pro->course_id);
             if ($course) {
-                $enrolledCourses[] = $course;
+                // Add the course and its corresponding proposal to the array
+                $enrolledCourses[] = [
+                    'course' => $course,
+                    'proposal' => $pro
+                ];
             }
         }
-        // dd($enrolledCourses);
+    
         return view('auth.dashboard', compact('enrolledCourses', 'user'));
     }
+    
     
     
 
