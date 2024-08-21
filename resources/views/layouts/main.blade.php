@@ -72,7 +72,7 @@
                 </form>
                 @else
                 <a class="login-info mr15-xl mr10 ud-btn btn-dark add-joining bdrs12 dark-color bg-transparent" href="/login">Sign in</a>
-                <a class="ud-btn btn-dark add-joining bdrs12 text-white" href="/register">Join</a>
+                <a class="ud-btn btn-dark add-joining bdrs12 text-white" href="/register">Join Now</a>
               @endauth
             </div>
           </div>
