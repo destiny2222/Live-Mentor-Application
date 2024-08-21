@@ -110,5 +110,6 @@
 <script src="/js/wow.min.js"></script>
 <!-- Custom script for all pages -->
 <script src="/js/script.js"></script>
+@include('partials.message')
 </body>
 </html>
