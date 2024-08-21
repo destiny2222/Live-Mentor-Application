@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Http\Request;
-use Intervention\Image\ImageManager;
+use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class CourseController extends Controller
 {
@@ -69,6 +70,19 @@ class CourseController extends Controller
         }
 
         // dd($request->all());
+
+        $course->update([ 
+            'title' => $request->input('title'),
+            'slug' => Str::slug($request->title),
+            'description' =>$request->description,
+            'duration' => $request->duration,
+            'status' => $request->status,
+            'author' => $request->author,
+            'level' => $request->level,
+            'price' => $request->price,
+            'category_id'=> $request->category_id,
+            // 'image' => $course->image,
+        ]);
 
         $course->save();
 
