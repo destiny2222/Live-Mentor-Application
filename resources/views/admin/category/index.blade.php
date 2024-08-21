@@ -42,7 +42,11 @@
                                 <td>{{ $categories->name }}</td>
                                 <td>
                                     <a href="{{ route('admin.category.edit', $categories->id) }}" class="btn btn-primary btn-sm">Edit</a> &nbsp;
-                                    <a href="{{ route('admin.category.delete', $categories->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                                    <a href="{{ route('admin.category.delete', $categories->id) }}" onclick="event.preventDefault(); document.getElementById('delete-{{ $categories->id }}').submit();" class="btn btn-danger btn-sm">Delete</a>
+                                    <form action="{{ route('admin.category.delete', $categories->id) }}" id="delete-{{ $categories->id }}" method="post" style="display:none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

@@ -102,13 +102,13 @@
                         <hr class="my-2">
                         <div class="list-meta d-flex justify-content-between align-items-center mt15">
                           @if ($proposal->status == '3')
-                            <span class="badge badge-success">Approved</span>
                             <span class="pending-style style1">In Progress</span>
                           @elseif($proposal->status == '2')
                             <span class="pending-style style2">Completed</span>
+                          @elseif($proposal->status == '1')
+                            <span class="pending-style style2">Approved</span>
                           @else
                             <span class="pending-style style3">Cancel</span>
-                            {{-- <span>Proposal status is not approved</span> --}}
                           @endif
                         </div>
                       </div>
