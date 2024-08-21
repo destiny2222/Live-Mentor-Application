@@ -90,7 +90,10 @@
                               </p>
                               <hr class="my-2">
                               <div class="list-meta d-flex justify-content-between align-items-center mt15">
-                                   
+                                   @if ($proposal->status == '3')
+                                   cjxncncnnxn
+                                       
+                                   @endif
                               </div>
                             </div>
                           </div>
