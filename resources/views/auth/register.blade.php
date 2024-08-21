@@ -76,7 +76,7 @@
                     </div>
                     <div class="mb15">
                       <label class="form-label fw500 dark-color">Password</label>
-                      <input type="password" name="password" class="form-control" placeholder="*******">
+                      <input type="password" name="password" class="form-control @er" placeholder="*******">
                     </div>
                     <div class="mb15">
                       <label for="" class="form-label fw500 dark-color">Confirm Password</label>
