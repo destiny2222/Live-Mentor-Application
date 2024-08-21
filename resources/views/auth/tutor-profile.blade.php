@@ -22,7 +22,7 @@
                     <div class="breadcumb-list">
                         <a href="#">Home</a>
                         <a href="#">Services</a>
-                        <a href="#">Design & Creative</a>
+                        <a href="#">Tutor Profile</a>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                                 <h5 class="title mb-1">{{ $tutor->user->name }}</h5>
                                 <p class="mb-0">{{ $tutor->title }}</p>
                                 <p class="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm"><i class="fas fa-star vam fz10 review-color me-2"></i> {{ number_format($tutor->averageRating(), 1) }} reviews</p>
-                                <p class="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i class="flaticon-place vam fz20 me-2"></i> London, UK</p>
+                                <p class="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i class="flaticon-place vam fz20 me-2"></i> {{ $tutor->user->conutry }}</p>
                                 <p class="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i class="flaticon-30-days vam fz20 me-2"></i> Member since {{ $tutor->user->created_at->format("F j, Y") }}</p>
                             </div>
                         </div>
@@ -82,61 +82,42 @@
                     <hr class="opacity-100 mb60 mt60">
                     <h4 class="mb30">Education</h4>
                     <div class="educational-quality">
+                        @foreach ($educations as $education) 
                         <div class="m-circle text-thm">M</div>
-                        <div class="wrapper mb40">
-                            <span class="tag">2012 - 2014</span>
-                            <h5 class="mt15">Bachlors in Fine Arts</h5>
-                            <h6 class="text-thm">Modern College</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et
-                                malesuada fames ac ante ipsum primis in faucibus.</p>
-                        </div>
-                        <div class="m-circle before-none text-thm">M</div>
-                        <div class="wrapper mb60">
-                            <span class="tag">2008 - 2012</span>
-                            <h5 class="mt15">Computer Science</h5>
-                            <h6 class="text-thm">Harvartd University</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et
-                                malesuada fames ac ante ipsum primis in faucibus.</p>
-                        </div>
+                            <div class="wrapper mb40">
+                                <span class="tag">{{  $education->start_date }} - {{ $education->end_date }}</span>
+                                <h5 class="mt15">{{ $education->degree }}</h5>
+                                <h6 class="text-thm">{{ $education->school }}</h6>
+                                <p>{{ $education->description }}</p>
+                            </div>
+                        @endforeach
                     </div>
                     <hr class="opacity-100 mb60">
                     <h4 class="mb30">Work & Experience</h4>
-                    <div class="educational-quality">
-                        <div class="m-circle text-thm">M</div>
-                        <div class="wrapper mb40">
-                            <span class="tag">2012 - 2014</span>
-                            <h5 class="mt15">UX Designer</h5>
-                            <h6 class="text-thm">Dropbox</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et
-                                malesuada fames ac ante ipsum primis in faucibus.</p>
-                        </div>
-                        <div class="m-circle before-none text-thm">M</div>
-                        <div class="wrapper mb60">
-                            <span class="tag">2008 - 2012</span>
-                            <h5 class="mt15">Art Director</h5>
-                            <h6 class="text-thm">amazon</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et
-                                malesuada fames ac ante ipsum primis in faucibus.</p>
-                        </div>
-                    </div>
+                    @foreach($experiences as $experience)
+                     <div class="educational-quality">
+                         <div class="m-circle text-thm">M</div>
+                         <div class="wrapper mb40">
+                             <span class="tag">{{ $experience->start_date }} - {{ $experience->end_date }}</span>
+                             <h5 class="mt15">{{ $experience->company }}</h5>
+                             <h6 class="text-thm">{{ $experience->company }}</h6>
+                             <p>{{ $experience->description }}</p>
+                         </div>
+                     </div>
+                    @endforeach
+
                     <hr class="opacity-100 mb60">
                     <h4 class="mb30">Awards adn Certificates</h4>
+                    @foreach($certifications as $certification)
                     <div class="educational-quality ps-0">
                         <div class="wrapper mb40">
-                            <span class="tag">2012 - 2014</span>
-                            <h5 class="mt15">UI UX Design</h5>
-                            <h6 class="text-thm">Udemy</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et
-                                malesuada fames ac ante ipsum <br class="d-none d-lg-block"> primis in faucibus.</p>
-                        </div>
-                        <div class="wrapper mb60">
-                            <span class="tag">2008 - 2012</span>
-                            <h5 class="mt15">App Design</h5>
-                            <h6 class="text-thm">Google</h6>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et
-                                malesuada fames ac ante ipsum <br class="d-none d-lg-block"> primis in faucibus.</p>
+                            <span class="tag">{{ $certification->date }} - {{ $certification->date_end }}</span>
+                            <h5 class="mt15">{{ $certification->title }}</h5>
+                            <h6 class="text-thm">{{ $certification->company }}</h6>
+                            <p>{{ $certification->description }}</p>
                         </div>
                     </div>
+                    @endforeach
                     
                     <hr class="opacity-100 mb60">
                     <div class="product_single_content mb60">
@@ -197,7 +178,7 @@
                         <h6 class="fz17">Add a Review</h6>
                         <p class="text">Your email address will not be published. Required fields are marked *</p>
                         <h6>Your rating of this tutor</h6>
-                        <form class="comments_form mt30 mb30-md" action="{{ route('review.store') }}" method="POST">
+                        <form class="comments_form mt30 mb30-md" action="{{ route('review.store', $tutor->id) }}" method="POST">
                             @csrf
                             <div class="d-flex">
                                 <input type="hidden" name="rating" id="rating" value="5">
@@ -237,13 +218,13 @@
                     <div class="price-widget pt25 widget-mt-minus bdrs8">
                         <div class="category-list mt20">
                             <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
-                                <span class="text"><i class="flaticon-place text-thm2 pe-2 vam"></i>Location</span> <span class="">London, UK</span>
+                                <span class="text"><i class="flaticon-place text-thm2 pe-2 vam"></i>Location</span> <span class="">{{ $tutor->user->conutry }}</span>
                             </a>
                             <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                                 <span class="text"><i class="flaticon-30-days text-thm2 pe-2 vam"></i>Member since</span> <span class="">{{ $tutor->user->created_at->format('F j') }}</span>
                             </a>
                             <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
-                                <span class="text"><i class="flaticon-mars text-thm2 pe-2 vam"></i>Gender</span> <span class="">Male</span>
+                                <span class="text"><i class="flaticon-mars text-thm2 pe-2 vam"></i>Gender</span> <span class="">{{ $tutor->user->gender }}</span>
                             </a>
                             <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                                 <span class="text"><i class="flaticon-translator text-thm2 pe-2 vam"></i>Languages</span> <span class="">English</span>
@@ -257,6 +238,7 @@
                             <form action="{{ route('tutor.request') }}" method="post" id="request-form-{{ $tutor->id }}">
                                 @csrf
                                 <input type="text" value="{{ $tutor->user->id }}" name="id" hidden>
+                                <input type="text" name="tutor_name" value="{{ $tutor->user->name }}" hidden>
                             </form>
                         </div>
                     </div>

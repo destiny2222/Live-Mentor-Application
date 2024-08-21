@@ -66,7 +66,7 @@
           <div class="col-6 col-lg-auto">
             <div class="text-center text-lg-end header_right_widgets">
               <ul class="dashboard_dd_menu_list d-flex align-items-center justify-content-center justify-content-sm-end mb-0 p-0">
-                <li class="d-none d-sm-block">
+                {{-- <li class="d-none d-sm-block">
                   <a class="text-center mr5 text-thm2 dropdown-toggle fz20" type="button" data-bs-toggle="dropdown" href="#"><span class="flaticon-notification"></span></a>
                   <div class="dropdown-menu">
                     <div class="dboard_notific_dd px30 pt10 pb15">
@@ -175,7 +175,7 @@
                       </div>
                     </div>
                   </div>
-                </li>
+                </li> --}}
                 <li class="user_setting">
                   <div class="dropdown">
                     <a class="btn" href="#" data-bs-toggle="dropdown">

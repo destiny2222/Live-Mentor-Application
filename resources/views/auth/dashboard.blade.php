@@ -102,9 +102,7 @@
                         </div>
                       @empty
                       <div class="col-sm-12 col-xl-12">
-                        <div class="listing-style1">
-                          Empty  Course 
-                        </div>
+                        <p> Empty  Course <a href="{{ route('course.index') }}" class="btn btn-primary text-white" target="_blank" rel="noopener noreferrer">Add Course</a></p>
                       </div>
                       @endforelse
                     </div>
@@ -112,23 +110,7 @@
                 </div>
               </div>
               <div class="mbp_pagination text-center">
-                <ul class="page_navigation">
-                  <li class="page-item">
-                    <a class="page-link" href="#"> <span class="fas fa-angle-left"></span></a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">4</a></li>
-                  <li class="page-item"><a class="page-link" href="#">5</a></li>
-                  <li class="page-item"><a class="page-link" href="#">...</a></li>
-                  <li class="page-item"><a class="page-link" href="#">20</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#"><span class="fas fa-angle-right"></span></a>
-                  </li>
-                </ul>
+                {{ $enrolledCourses->links() }}
               </div>
             </div>
           </div>

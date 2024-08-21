@@ -4,16 +4,17 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Mail\TutorMailRequest;
+use App\Models\Award;
+use App\Models\Awards;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Education;
+use App\Models\Experience;
 use App\Models\Proposal;
 use App\Models\Review;
-use App\Models\Experience;
 use App\Models\syllabus;
 use App\Models\Tutor;
 use App\Models\User;
-use App\Models\Award;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $courses = Course::orderBy('id', 'asc')->get();
         $enrollCourse = Proposal::where('user_id', $user->id)->whereIn('course_id', $courses->pluck('id'))->get();
-        $enrolledCourses = Course::whereIn('id', $enrollCourse->pluck('course_id'))->get();
+        $enrolledCourses = Course::whereIn('id', $enrollCourse->pluck('course_id'))->paginate(6);
     
         // dd($enrolledCourses);
         return view('auth.dashboard', compact('enrolledCourses', 'user'));
@@ -76,46 +77,40 @@ class HomeController extends Controller
 
 
             // Save education records
-        foreach ($request->input('education', []) as $educationData) {
             $education = new Education;
+            $education->school = $request->input('school');
+            $education->degree = $request->input('degree');
+            $education->field_of_study = $request->input('field_of_study');
+            $education->start_date = $request->input('start_date');
+            $education->end_date = $request->input('end_date');
+            $education->description = $request->input('description');
             $education->user_id = Auth::user()->id;
-            $education->tutor_id = $tutor->id;
-            $education->school = $educationData['school'];
-            $education->degree = $educationData['degree'];
-            $education->field_of_study = $educationData['field_of_study'];
-            $education->start_date = $educationData['start_date'];
-            $education->end_date = $educationData['end_date'];
-            $education->description = $educationData['description'];
             $education->save();
-        }
 
-        // Save award records
-        foreach ($request->input('award', []) as $awardData) {
-            $award = new Award;
+            // Save award records
+            $award = new Awards;
             $award->user_id = Auth::user()->id;
-            $award->title = $awardData['title'];
-            $award->company = $awardData['company'];
-            $award->date = $awardData['date'];
-            $award->date_end = $awardData['date_end'];
-            $award->description = $awardData['description'];
+            $award->title = $request->title;
+            $award->company = $request->company;
+            $award->date = $request->date;
+            $award->date_end = $request->date_end;
+            $award->description = $request->description;
             $award->save();
-        }
 
-        // Save experience records
-        foreach ($request->input('experience', []) as $experienceData) {
+            // Save experience records
             $experience = new Experience;
             $experience->user_id = Auth::user()->id;
-            $experience->title = $experienceData['title'];
-            $experience->company = $experienceData['company'];
-            $experience->start_date = $experienceData['start_date'];
-            $experience->end_date = $experienceData['end_date'];
-            $experience->description = $experienceData['description'];
+            $experience->title = $request->title;
+            $experience->company = $request->company;
+            $experience->start_date = $request->start_date;
+            $experience->end_date = $request->end_date;
+            $experience->description = $request->description;
             $experience->save();
-        }
+            
             return redirect(route('syllabus.index'))->with('success', 'Save Successfully');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('error', $exception->getMessage());
+            return back()->with('error', 'Oops something went wrong!');
         }
     }
     
@@ -268,23 +263,40 @@ class HomeController extends Controller
     public function tutorProfile($id){
         $user = User::findOrFail($id);
         $tutor = Tutor::where('user_id', $user->id)->firstOrFail();
-        return view('auth.tutor-profile', compact('tutor', 'user'));
+        $educations = Education::where('user_id', $tutor->user->id)->get();
+        $experiences = Experience::where('user_id',  $tutor->user->id)->get();
+        $certifications = Awards::where('user_id',  $tutor->user->id)->get();
+        return view('auth.tutor-profile', compact('tutor', 'user', 'educations', 'certifications', 'experiences'));
     }
 
-    public function  sendTutorRequest(Request $request){
-        // if exists proposal update it
+    public function sendTutorRequest(Request $request) {
+        // Get the latest proposal for the authenticated user
         $proposal = Proposal::where('user_id', Auth::user()->id)->latest()->first();
-        $tutor = User::where('id', $request->id)->first();
-
+        $tutor = User::find($request->id);
+    
+        if (!$tutor) {
+            return back()->with('error', 'Tutor not found.');
+        }
+    
         if ($proposal) {
-            $proposal->update([ 
+            $proposal->update([
+                'tutor_id' => $tutor->id,
+            ]);
+        } else {
+            $proposal = Proposal::create([
                 'user_id' => Auth::user()->id,
                 'tutor_id' => $tutor->id,
             ]);
-        } 
+        }
+    
+        // Eager load relationships
+        Session(['tutorName'=> $request->tutor_name]);
+    
         Mail::to($tutor->email)->send(new TutorMailRequest($proposal));
+    
         return back()->with('success', 'Request sent successfully!');
     }
+    
 
 
     public function storeReview(Request $request, $tutor_id)
@@ -409,6 +421,29 @@ class HomeController extends Controller
     }
     
 
+
+    public function EnrollCourse() {
+        $user = Auth::user();
+        $proposals = Proposal::where('user_id', $user->id)->paginate(6);
+        $enrolledCourses = [];
+    
+        foreach ($proposals as $pro) {
+            $course = Course::find($pro->course_id);
+            if ($course) {
+                $enrolledCourses[] = $course;
+            }
+        }
+    
+        return view('auth.course', compact('enrolledCourses', 'user', 'proposals'));
+    }
+    
+
+    public function getTutorProposal(){
+        $user = Auth::user();
+        $proposal = Proposal::where('tutor_id', $user->id)->get();                                                                                                                                    
+        dd($proposal);
+        return view('auth.pro'. compact('proposal'));
+    }
 
 
 }

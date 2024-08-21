@@ -16,8 +16,9 @@
                             <div class="step step-1 active">
                                 <h5 class="step-title">Basic Information</h5>
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <input type="file" name="resume" class="" id="">
+                                    <div class="col-sm-12 py-4">
+                                        <label for="resume">Resume</label>
+                                        <input type="file" name="resume" class="" required id="resume">
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
@@ -83,37 +84,37 @@
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">School</label>
-                                            <input type="text" class="form-control" name="education[school][]" placeholder="School Name">
+                                            <input type="text" class="form-control" name="school" placeholder="School Name">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Degree</label>
-                                            <input type="text" class="form-control" name="education[degree][]" placeholder="Degree">
+                                            <input type="text" class="form-control" name="degree" placeholder="Degree">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Field of Study</label>
-                                            <input type="text" class="form-control" name="education[field_of_study][]" placeholder="Field of Study">
+                                            <input type="text" class="form-control" name="field_of_study" placeholder="Field of Study">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Start Date</label>
-                                            <input type="date" class="form-control" name="education[start_date][]">
+                                            <input type="date" class="form-control" name="start_date">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">End Date</label>
-                                            <input type="date" class="form-control" name="education[end_date][]">
+                                            <input type="date" class="form-control" name="end_date">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Description</label>
-                                            <textarea class="form-control" name="education[description][]" rows="4" placeholder="Description"></textarea>
+                                            <textarea class="form-control" name="description" rows="4" placeholder="Description"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 text-center">
@@ -125,36 +126,36 @@
 
                             <!-- Step 4: Award Details -->
                             <div class="step step-4">
-                                <h5 class="step-title">Award Details</h5>
+                                <h5 class="step-title">Certification Details</h5>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Award Title</label>
-                                            <input type="text" class="form-control" name="awards[title][]" placeholder="Award Title">
+                                            <input type="text" class="form-control" name="title" placeholder="Award Title">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Company/Organization</label>
-                                            <input type="text" class="form-control" name="awards[company][]" placeholder="Company/Organization">
+                                            <input type="text" class="form-control" name="company" placeholder="Company/Organization">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Date</label>
-                                            <input type="date" class="form-control" name="awards[date][]">
+                                            <input type="date" class="form-control" name="date">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">End Date</label>
-                                            <input type="date" class="form-control" name="awards[date_end][]">
+                                            <input type="date" class="form-control" name="date_end">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Description</label>
-                                            <textarea class="form-control" name="awards[description][]" rows="4" placeholder="Description"></textarea>
+                                            <textarea class="form-control" name="description" rows="4" placeholder="Description"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 text-center">
@@ -171,31 +172,31 @@
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Title</label>
-                                            <input type="text" class="form-control" name="experience[title][]" placeholder="Job Title">
+                                            <input type="text" class="form-control" name="title" placeholder="Job Title">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Company</label>
-                                            <input type="text" class="form-control" name="experience[company][]" placeholder="Company Name">
+                                            <input type="text" class="form-control" name="company" placeholder="Company Name">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Start Date</label>
-                                            <input type="date" class="form-control" name="experience[start_date][]">
+                                            <input type="date" class="form-control" name="start_date">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">End Date</label>
-                                            <input type="date" class="form-control" name="experience[end_date][]">
+                                            <input type="date" class="form-control" name="end_date">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Description</label>
-                                            <textarea class="form-control" name="experience[description][]" rows="4" placeholder="Description"></textarea>
+                                            <textarea class="form-control" name="description" rows="4" placeholder="Description"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 text-center">

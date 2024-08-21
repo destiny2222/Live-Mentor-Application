@@ -36,8 +36,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 
-     public function tutor(){
-        return $this->hasOne(Tutor::class);
+     public function proposals()
+     {
+         return $this->hasMany(Proposal::class);
+     }
+ 
+     public function tutor()
+     {
+         return $this->hasOne(Tutor::class);
      }
 
     public function checkTutorStatus(){

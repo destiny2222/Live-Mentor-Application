@@ -55,7 +55,7 @@
                                 </span>
                             </a>
 
-                            <a href="{{ route('admin.home') }}" class="logo logo-light">
+                            <a href="{{ route('admin.home') }}" class="logo logo-light ">
                                 <span class="logo-sm">
                                     <img src="" alt="" height="24">
                                 </span>

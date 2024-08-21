@@ -26,9 +26,13 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/preference/store', [HomeController::class, 'savePreference'])->name('preference.store');
         Route::get('/preference/tutor', [HomeController::class, 'listTutor'])->name('preference.listTutor');
         Route::get('/tutor/{id}/profile', [HomeController::class, 'tutorProfile'])->name('tutor.profile');
-        Route::post('/review', [HomeController::class, 'storeReview'])->name('review.store');
+        Route::post('/tutors/{tutor_id}/reviews', [HomeController::class, 'storeReview'])->name('review.store');
         // send tutor request
         Route::post('/tutor/request', [HomeController::class, 'sendTutorRequest'])->name('tutor.request');
+        Route::get('/tutor/proposal', [HomeController::class, 'getTutorProposal'])->name('tutor.proposal');
+        Route::get('/tutor/request/{id}/cancel', [HomeController::class, 'cancelTutorRequest'])->name('tutor.request.cancel');
+        Route::get('/tutor/request/{id}/accept', [HomeController::class, 'acceptTutorRequest'])->name('tutor.request.accept');
+        Route::get('/tutor/request/{id}/reject', [HomeController::class, 'rejectTutorRequest'])->name('tutor.request.reject');
         // Route::get('/tutor/request/{id}/accept', [HomeController::class, 'acceptTutorRequest'])->name('tutor.request.accept');
         // Route::get('/tutor/request/{id}/reject', [HomeController::class, 'rejectTutorRequest'])->name('tutor.request.reject');
         // Route::get('/tutor/request/{id}/cancel', [HomeController::class, 'cancelTutorRequest'])->name('tutor.request.cancel');
@@ -40,6 +44,7 @@ Route::prefix('dashboard')->group(function (){
         Route::delete('/user/delete', [HomeController::class, 'destroyUser'])->name('user.destroy');
 
         //course
+        Route::get('/course', [HomeController::class, 'EnrollCourse'])->name('enroll-course');
         
 
 

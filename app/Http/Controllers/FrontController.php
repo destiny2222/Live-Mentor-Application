@@ -67,11 +67,7 @@ public function CategoryCourses($slug) {
         return view('frontend.course-details', compact('course','recentCourse'));
     }
 
-    public function search(Request $request){
-        $search = $request->input('search');
-        $results = Course::where('name', 'like', "%$search%")->get();
-        return view('products.index', ['results' => $results]);
-    }
+    
 
 
     // public function tutor(){

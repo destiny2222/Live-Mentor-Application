@@ -22,6 +22,7 @@ class Proposal extends Model
         'course_id',
         'end_time',
         'additional_information',
+        'tutor_id'
     ];
 
     protected $casts = [ 
@@ -32,6 +33,14 @@ class Proposal extends Model
 
     public function course(){
         return $this->belongsTo(Course::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function tutor(){
+        return $this->belongsTo(Tutor::class);
     }
 
 }

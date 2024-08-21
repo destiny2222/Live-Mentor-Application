@@ -17,6 +17,8 @@ class Tutor extends Model
         return $this->belongsTo(User::class);
     }
 
+
+
     public function categories()
     {
         return $this->belongsToMany(Category::class);
@@ -37,7 +39,15 @@ class Tutor extends Model
     {
         return $this->reviews()->count();
     }
+
+    public function proposal(){
+        return $this->hasMany(Proposal::class);
+    }
     
+
+    public function educations(){
+        return $this->hasMany(Education::class);
+    }
 
     protected $casts = [
         'category_id' => 'array',
