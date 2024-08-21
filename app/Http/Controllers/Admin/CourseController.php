@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -44,8 +45,23 @@ class CourseController extends Controller
             $img->toJpeg(80)->save(public_path('upload/courses/' . $filename));
             $request->merge(['image' => $filename]);
         }
-        Course::create($request->all());
-        return redirect()->route('admin.course.index')->with('success', 'Course created successfully');
+        try{
+            Course::create([
+                'title' => $request->input('title'),
+                'slug' => Str::slug($request->title),
+                'description' =>$request->description,
+                'duration' => $request->duration,
+                'status' => $request->status,
+                'author' => $request->author,
+                'level' => $request->level,
+                'price' => $request->price,
+                'category_id'=> $request->category_id,
+            ]);
+            return redirect()->route('admin.course.index')->with('success', 'Course created successfully');
+        }catch(\Exception $exception){
+            Log::error($exception->getMessage());
+            return back()->with('error', 'Oops something went worry');
+        }
 
     }
 
