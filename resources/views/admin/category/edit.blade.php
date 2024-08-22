@@ -39,6 +39,10 @@
                                         <input class="form-control" name='image' type="text" value="{{  $category->image }}" id="example-search-input">
                                     </div>
                                     <div class="mb-3">
+                                        <label for="example-color-input" class="form-label">Color picker</label>
+                                        <input type="color" class="form-control form-control-color mw-100" id="example-color-input" name="color" value="{{ $category->color ?? '#5156be' }}" title="Choose your color">
+                                    </div>                                    
+                                    <div class="mb-3">
                                         <input type="submit" value="Save Changes" class="btn btn-primary">
                                     </div>
                                 </div>

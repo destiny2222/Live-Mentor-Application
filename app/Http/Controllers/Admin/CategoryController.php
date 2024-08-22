@@ -34,6 +34,7 @@ class CategoryController extends Controller
             $category->name = $request->name;
             $category->slug = Str::slug($request->name);
             $category->image = $request->image;
+            $category->color = $request->color;
             $category->save();
             return redirect()->route('admin.category.index')->with('success','Category created successfully');
         }catch(\Exception $e){
@@ -54,6 +55,7 @@ class CategoryController extends Controller
             $category->name = $request->name;
             $category->slug = Str::slug($request->name);
             $category->image = $request->image;
+            $category->color = $request->color;
             $category->save();
             return redirect()->route('admin.category.index')->with('success','Category updated successfully');
         }catch(\Exception $e){

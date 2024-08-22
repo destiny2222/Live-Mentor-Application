@@ -39,12 +39,11 @@
             @foreach ($categories as $category)
             <div class="col-sm-6 col-lg-4 col-xl-3">
                 <a href="{{ route('category.courses', $category->slug) }}">
-                    <div class="iconbox-style1 bdr1">
+                    <div class="iconbox-style1 bdr1" style="background:{{ $category->color }};">
                         <div class="icon"><span class="{{ $category->image }}"></span></div>
                         <div class="details mt20">
-                            <p class="mb-0">{{ $category->name }}</p>
-                            <h4 class="title">{{ $category->title }}</h4>
-                            <p class="text mb5">{{ isset($counts[$category->id]) ? $counts[$category->id] : 0 }} Courses</p>
+                            <p class="mb-0 text-white">{{ $category->name }}</p>
+                            <p class="text mb5 text-white">{{ isset($counts[$category->id]) ? $counts[$category->id] : 0 }} Courses</p>
                         </div>
                     </div>
                 </a>

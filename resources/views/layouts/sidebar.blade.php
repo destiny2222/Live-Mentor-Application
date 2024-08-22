@@ -12,7 +12,7 @@
               </a>
             </div>
             <div class="sidebar_list_item">
-             <a href="#" class="items-center {{ Request::routeIs('dashboard') ? '-is-active' : '' }}"><i class="flaticon-file mr15"></i>Payment History</a>
+             <a href="#" class="items-center"><i class="flaticon-file mr15"></i>Payment History</a>
             </div>
         @else
             <div class="sidebar_list_item">
