@@ -41,8 +41,11 @@ jobs:
           ls -al
           cd livementor.gritinai.com
           composer install --ignore-platform-reqs
+          composer update 
           php artisan storage:link
           php artisan key:generate
           php artisan migrate --force
+          composer dump-autoload
           php artisan optimize:clear
           php artisan config:cache
+          

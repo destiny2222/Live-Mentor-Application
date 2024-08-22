@@ -48,7 +48,7 @@
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="logos">
                                     <a class="header-logo logo1" href="/">
-                                        <img src="/images/header-logo-dar.svg" alt="Header Logo">
+                                        <img src="/logo.png" width="100" alt="Header Logo">
                                     </a>
                                 </div>
                                 <!-- Responsive Menu Structure-->

@@ -9,17 +9,17 @@ use Jubaer\Zoom\Facades\Zoom;
 class MettingController extends Controller
 {
     public function createMeeting(Request $request){
-        $meetings = Zoom::createMeeting([
-            "agenda" => 'your agenda',
-            "topic" => 'your topic',
+        $meeting = Zoom::createMeeting([
+            "agenda" => 'Mentor',
+            "topic" => 'web development',
             "type" => 2, // 1 => instant, 2 => scheduled, 3 => recurring with no fixed time, 8 => recurring with fixed time
             "duration" => 60, // in minutes
             "timezone" => 'Asia/Dhaka', // set your timezone
-            "password" => 'set your password',
-            "start_time" => 'set your start time', // set your start time
-            "template_id" => 'set your template id', // set your template id  Ex: "Dv4YdINdTk+Z5RToadh5ug==" from https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingtemplates
+            "password" => '123456',
+            "start_time" => '2022-08-25T10:00:00', // set your start time
+            "template_id" => 'Dv4YdINdTk+Z5RToadh5ug==', // set your template id  Ex: "Dv4YdINdTk+Z5RToadh5ug==" from https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings
             "pre_schedule" => false,  // set true if you want to create a pre-scheduled meeting
-            "schedule_for" => 'set your schedule for profile email ', // set your schedule for
+            "schedule_for" => 'text@gmail.com', // set your schedule for
             "settings" => [
                 'join_before_host' => false, // if you want to join before host set true otherwise set false
                 'host_video' => false, // if you want to start video when host join set true otherwise set false
@@ -32,10 +32,14 @@ class MettingController extends Controller
             ],
 
         ]);
-
-        $meeting = Zoom::getMeeting($meetings);
-
         return $meeting;
+    }
+
+    public function getMeeting($meetingId)
+    {
+        $meetings = Zoom::getMeeting($meetingId);
+
+        return $meetings;
 
     }
 }

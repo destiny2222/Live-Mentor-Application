@@ -51,16 +51,16 @@
                                     <img src="" alt="" height="24">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="" alt="" height="24"> <span class="logo-txt"></span>
+                                    <img src="/logo.png" alt="" height="24"> <span class="logo-txt"></span>
                                 </span>
                             </a>
 
                             <a href="{{ route('admin.home') }}" class="logo logo-light ">
                                 <span class="logo-sm">
-                                    <img src="" alt="" height="24">
+                                    <img src="/logo.png" alt="" height="24">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="" alt="" height="24"> <span class="logo-txt"></span>
+                                    <img src="/logo.png" alt="" height="24"> <span class="logo-txt"></span>
                                 </span>
                             </a>
                         </div>

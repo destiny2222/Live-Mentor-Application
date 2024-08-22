@@ -49,7 +49,7 @@
           <div class="col-6 col-lg-auto">
             <div class="text-center text-lg-start d-flex align-items-center">
               <div class="dashboard_header_logo position-relative me-2 me-xl-5">
-                <a href="/" class="logo"><img src="" alt=""></a>
+                <a href="/" class="logo"><img src="/logo.png" alt=""></a>
               </div>
               <div class="fz20 ml90">
                 <a href="#" class="dashboard_sidebar_toggle_icon vam"><img src="images/dashboard-navicon.svg" alt=""></a>

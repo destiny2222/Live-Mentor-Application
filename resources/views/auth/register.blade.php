@@ -89,7 +89,8 @@
                                         <select name="role" id="" class="form-control @error('role') is-invalid @enderror">
                                             <option value="" selected>select</option>
                                             <option value="user">Student</option>
-                                            <option value="tutor">Mentor</option>
+                                            <option value="tutor">Tutor</option>
+                                            <option value="mentor">Mentor</option>
                                         </select>
                                         @error('role')
                                         <span class="invalid-feedback" role="alert">
