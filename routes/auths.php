@@ -3,10 +3,13 @@
 
 use App\Http\Controllers\User\CourseController;
 use App\Http\Controllers\User\HomeController;
-use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\MettingController;
+use App\Http\Controllers\User\PaymentController;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -30,12 +33,11 @@ Route::prefix('dashboard')->group(function (){
         // send tutor request
         Route::post('/tutor/request', [HomeController::class, 'sendTutorRequest'])->name('tutor.request');
         Route::get('/tutor/proposal', [HomeController::class, 'getTutorProposal'])->name('tutor.proposal');
-        Route::get('/tutor/request/{id}/cancel', [HomeController::class, 'cancelTutorRequest'])->name('tutor.request.cancel');
-        Route::get('/tutor/request/{id}/accept', [HomeController::class, 'acceptTutorRequest'])->name('tutor.request.accept');
-        Route::get('/tutor/request/{id}/reject', [HomeController::class, 'rejectTutorRequest'])->name('tutor.request.reject');
-        // Route::get('/tutor/request/{id}/accept', [HomeController::class, 'acceptTutorRequest'])->name('tutor.request.accept');
+
+        // tutor request
+        Route::post('/tutor/request/cancel', [HomeController::class, 'cancelTutorRequest'])->name('tutor.request.cancel');
+        Route::post('/tutor/request/accept', [HomeController::class, 'acceptRequest'])->name('tutor.request.accept');
         // Route::get('/tutor/request/{id}/reject', [HomeController::class, 'rejectTutorRequest'])->name('tutor.request.reject');
-        // Route::get('/tutor/request/{id}/cancel', [HomeController::class, 'cancelTutorRequest'])->name('tutor.request.cancel');
 
         // edit profile
         Route::get('/profile', [HomeController::class, 'profile'])->name('profile.index');
@@ -45,9 +47,14 @@ Route::prefix('dashboard')->group(function (){
 
         //course
         Route::get('/course', [HomeController::class, 'EnrollCourse'])->name('enroll-course');
+
+        // payment
+        Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
         
+        // Create Meeting
+        // Route::post('/create/meeting',[MettingController::class, 'createMeeting'])->name('createMeeting');
 
-
+         
 
         Route::get('/upload', function(){
             return view('upload');

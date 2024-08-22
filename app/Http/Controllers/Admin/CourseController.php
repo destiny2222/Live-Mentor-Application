@@ -74,7 +74,6 @@ class CourseController extends Controller
 
     public function update(Request $request, $id){
         $course = Course::find($id);
-        
         if($request->hasFile('image')){
             $image = $request->file('image');
             $manager = new ImageManager(new Driver());

@@ -9,8 +9,9 @@ use App\Models\Award;
 use App\Models\Awards;
 use App\Models\Category;
 use App\Models\Course;
-use App\Models\Education;
+use App\Models\Education; 
 use App\Models\Experience;
+use App\Models\Payment;
 use App\Models\Proposal;
 use App\Models\Review;
 use App\Models\syllabus;
@@ -439,23 +440,32 @@ class HomeController extends Controller
 
 
     public function EnrollCourse() {
-       try{
+        try {
             $user = Auth::user();
-            $proposals = Proposal::where('user_id', $user->id)->where('status',  3)->get();
+            
+            // Paginate proposals with a status of 3
+            $proposals = Proposal::where('user_id', $user->id)->where('status', 3)->paginate(10); 
             $enrolledCourses = [];
         
             foreach ($proposals as $pro) {
                 $course = Course::find($pro->course_id);
-                if ($course) {
+                
+                // Check if the user has already made a payment for this course
+                $payment = Payment::where('user_id', $user->id)->where('course_id', $pro->course_id)->where('payment_status', 1)->first();
+                                  
+                if ($course && !$payment) {
                     $enrolledCourses[] = $course;
                 }
             }
+            
             return view('auth.course', compact('enrolledCourses', 'user', 'proposals'));
-       }catch(\Exception $exception){
-          Log::error($exception->getMessage());
-          return back()->with('error', 'Oops something went wrong');
-       }
+        } catch(\Exception $exception) {
+            Log::error($exception->getMessage());
+            return back()->with('error', 'Oops something went wrong');
+        }
     }
+    
+    
     
 
     public function getTutorProposal(){
@@ -471,13 +481,16 @@ class HomeController extends Controller
     }
 
 
-    public function acceptRequest($id)
+    public function acceptRequest(Request $request)
     {
         try{
-            $proposal = Proposal::find($id);
-            if (!$proposal || $proposal->tutor_id != Auth::user()->tutor->id) {
+            $proposal = Proposal::find($request->id);
+
+            // dd($proposal->tutor_id);
+            if ($proposal->tutor_id != Auth::user()->tutor->user_id) {
                 return back()->with('error', 'Request not found or you are not authorized to accept this request.');
             }
+            
             $proposal->update([
                 'status' => 1,
             ]);
@@ -489,11 +502,11 @@ class HomeController extends Controller
         }
     }
 
-    public function cancelRequest($id)
+    public function cancelTutorRequest(Request $request)
     {
         try{
-            $proposal = Proposal::find($id);
-            if (!$proposal || $proposal->tutor_id != Auth::user()->tutor->id) {
+            $proposal = Proposal::find($request->id);
+            if (!$proposal || $proposal->tutor_id != Auth::user()->tutor->user_id) {
                 return back()->with('error', 'Request not found or you are not authorized to cancel this request.');
             }
             $proposal->update([

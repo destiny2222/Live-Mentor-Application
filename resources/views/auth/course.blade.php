@@ -46,9 +46,25 @@
                               </p>
                               <hr class="my-2">
                               <div class="list-meta d-flex justify-content-between align-items-center mt15">
-                                <a class="d-flex" href="{{ route('course.details', $course->slug) }}">
-                                  <span class="fz14" style="text-transform: uppercase">make payment</span>
-                                </a>
+                                @if ($course->status  == '1')
+                                  <a class="d-flex " href="{{ route('pay') }}" onclick="event.preventDefault(); document.getElementById('pay-form-{{ $course->id }}').submit();">
+                                    <span class="fz14 pending-style style1" style="text-transform: uppercase">make payment</span>
+                                  </a>
+                                  <form action="{{ route('pay') }}" method="POST" id="pay-form-{{ $course->id }}">
+                                    @csrf
+                                    <input type="hidden" name="email" value="{{ $user->email }}">
+                                    <input type="hidden" name="name" value="{{ $user->name }}">
+                                    <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> 
+                                    <input type="hidden" name="id" value="{{ $user->id }}">
+                                    <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                    <input type="hidden" name="price" value="{{ $course->price }}">
+                                  </form>
+                                @elseif ($course->status == '2')
+                                  <span class="pending-style style3">Reject</span>  
+                                @else
+                                  <span class="pending-style style2">Pending</span>
+                                @endif
+                                
                                 <div class="budget">
                                   <p class="mb-0 body-color">Price <span class="fz17 fw500 dark-color ms-1">${{ $course->price }}</span></p>
                                 </div>

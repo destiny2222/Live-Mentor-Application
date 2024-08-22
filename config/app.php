@@ -106,6 +106,12 @@ return [
         ),
     ],
 
+
+    // 'aliases' => [
+    //     'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
+    // 'Zoom' => Jubaer\Zoom\Facades\Zoom::class,
+    // ]
+
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver

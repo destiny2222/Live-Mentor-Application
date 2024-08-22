@@ -10,7 +10,7 @@
                     <div class="breadcumb-list">
                         <a href="#">Home</a>
                         <a href="#">Services</a>
-                        <a href="#">Design & Creative</a>
+                        <a href="#">Courses</a>
                     </div>
                 </div>
             </div>
@@ -126,8 +126,7 @@
         <div class="row wow fadeInUp">
             <div class="col-lg-12">
                 <div class="main-title mb35">
-                    <h2>People Who Viewed This Service Also Viewed </h2>
-                    <p class="text">Give your visitor a smooth online experience with a solid UX design</p>
+                    <h2>Recent Course</h2>
                 </div>
             </div>
         </div>
@@ -137,14 +136,14 @@
                 <div class="listing-style1">
                     <div class="list-thumb">
                         <img class="w-100" src="{{ asset('upload/courses/'.$recent->image) }}" alt="">
-                        <a href="#" class="listing-fav fz12"><span class="far fa-heart"></span></a>
+                        <!-- <a href="#" class="listing-fav fz12"><span class="far fa-heart"></span></a> -->
                     </div>
                     <div class="list-content">
                         <p class="list-text body-color fz14 mb-1">{{ \Str::limit($recent->title, 30) }}</p>
-                        <h5 class="list-title"><a href="{{ route('course.details',$recent->id )}}">{{ \Str::limit($recent->description, 100) }}</a></h5>
+                        <h5 class="list-title"><a href="{{ route('course.details',$recent->slug )}}">{{ \Str::limit($recent->description, 100) }}</a></h5>
                         <hr class="my-2">
                         <div class="list-meta d-flex justify-content-between align-items-center mt15">
-                            <a href="{{ route('course.details',$recent->id )}}">
+                            <a href="{{ route('course.details',$recent->slug )}}">
                                 <span class="fz14">View course</span>
                             </a>
                             <div class="budget">
