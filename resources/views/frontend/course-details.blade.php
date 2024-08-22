@@ -86,21 +86,17 @@
                                     <div class="tab-pane fade show active" id="nav-item2p" role="tabpanel" aria-labelledby="nav-item2p-tab">
                                         <div class="price-content">
                                             <div class="price">&#x20A6;{{ number_format($course->price, 2) }}</div>
-                                            <div class="h5 mb-2">High-converting Landing Pages</div>
-                                            <p class="text fz14">I will redesign your current landing page or create one for you (upto 4
-                                                sections)</p>
+                                            <div class="h5 mb-2">{{ $course->title }}</div>
+                                            <p class="text fz14">
+                                                {{ $course->description }}
+                                            </p>
                                             <hr class="opacity-100 mb20">
                                             <ul class="p-0 mb15 d-sm-flex align-items-center">
-                                                <li class="fz14 fw500 dark-color"><i class="flaticon-sandclock fz20 text-thm2 me-2 vam"></i>3
-                                                    Days Delivery</li>
-                                                <li class="fz14 fw500 dark-color ml20 ml0-xs"><i class="flaticon-recycle fz20 text-thm2 me-2 vam"></i>2 Revisions</li>
+                                                <li class="fz14 fw500 dark-color"><i class="flaticon-sandclock fz20 text-thm2 me-2 vam"></i>
+                                                    {{ $course->duration }} Weeks
+                                                </li>
+                                                
                                             </ul>
-                                            <div class="list-style1">
-                                                <ul class="">
-                                                    <li class="mb15"><i class="far fa-check text-thm3 bgc-thm3-light"></i>2 Page / Screen</li>
-                                                    <li><i class="far fa-check text-thm3 bgc-thm3-light"></i>Source file</li>
-                                                </ul>
-                                            </div>
                                             <div class="d-grid">
                                                 <a href="{{ route('proposal.store') }}" onclick="event.preventDefault(); document.getElementById('proposal-btn{{ $course->id }}').submit();" class="ud-btn btn-thm">Enroll Now<i class="fal fa-arrow-right-long"></i></a>
                                                 <form action="{{ route('proposal.store') }}" id="proposal-btn{{ $course->id }}" style="display: none" method="post">

@@ -27,6 +27,8 @@
        <!-- DataTables CSS -->
         <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
         <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <!-- DataTables Responsive CSS -->
+        <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
         
 
@@ -328,6 +330,10 @@
 
         <!-- apexcharts -->
         <script src="/assets/libs/apexcharts/apexcharts.min.js"></script>
+        <!-- DataTables Responsive JS -->
+        <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap4.min.js"></script>
+
 
         <!-- Plugins js-->
         <script src="/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
@@ -340,6 +346,7 @@
             $(document).ready(function() {
                 $('#datatable-buttons').DataTable({
                     dom: 'Bfrtip',
+                    responsive: true,
                     buttons: [
                         'copy', 'csv', 'excel', 'pdf', 'print'
                     ]
