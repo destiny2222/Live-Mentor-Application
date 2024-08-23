@@ -274,12 +274,17 @@ class HomeController extends Controller
     }
 
     public function tutorProfile($id){
-        $user = User::findOrFail($id);
-        $tutor = Tutor::where('user_id', $user->id)->firstOrFail();
-        $educations = Education::where('user_id', $tutor->user->id)->get();
-        $experiences = Experience::where('user_id',  $tutor->user->id)->get();
-        $certifications = Awards::where('user_id',  $tutor->user->id)->get();
-        return view('auth.tutor-profile', compact('tutor', 'user', 'educations', 'certifications', 'experiences'));
+        try{
+            $user = User::findOrFail($id);
+            $tutor = Tutor::where('user_id', $user->id)->firstOrFail();
+            $educations = Education::where('user_id', $tutor->user->id)->get();
+            $experiences = Experience::where('user_id',  $tutor->user->id)->get();
+            $certifications = Awards::where('user_id',  $tutor->user->id)->get();
+            return view('auth.tutor-profile', compact('tutor', 'user', 'educations', 'certifications', 'experiences'));
+        }catch(\Exception $exception) {
+            log::error($exception->getMessage());
+            return redirect()->back()->with('error', 'Tutor not found');
+        }
     }
 
 
