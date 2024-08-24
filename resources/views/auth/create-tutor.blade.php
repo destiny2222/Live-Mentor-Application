@@ -38,6 +38,12 @@
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="mb20">
+                                            <label for="skills" class="heading-color ff-heading fw500 mb10">Skill</label>
+                                            <input type="text" class="form-control" id="skills" name="skills" multiple size="50" placeholder="enter your skills" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="mb20">
                                             <label class="heading-color ff-heading fw500 mb10">Price</label>
                                             <input type="text" class="form-control" name="price" placeholder="" required>
                                         </div>

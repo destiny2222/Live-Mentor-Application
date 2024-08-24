@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.2",
         "cloudinary-labs/cloudinary-laravel": "^2.2",
+        "doctrine/dbal": "^4.1",
         "guzzlehttp/guzzle": "^7.9",
         "intervention/image": "^3.7",
         "jubaer/zoom-laravel": "^1.3",

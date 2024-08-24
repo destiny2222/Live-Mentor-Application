@@ -1,4 +1,5 @@
-<div>
+<div >
+    
     <form class="form2" id="coupon_form" wire:submit.prevent="save" name="contact_form" method="post">
         @csrf
         <div class="row py-5">
@@ -10,7 +11,7 @@
                         <label class="form-check-label ps-3" for="flexRadioDefault4">Human mentor</label>
                     </div>
                     <div class="form-check d-flex align-items-center">
-                        <input class="form-check-input" type="radio" wire:model="prefer" value="ai" id="flexRadioDefault4">
+                        <input class="form-check-input" type="radio" onclick="AI()" wire:model="prefer" value="ai" id="flexRadioDefault4">
                         <label class="form-check-label ps-3" for="flexRadioDefault4">AI Mentor</label>
                     </div>
                 </div>
@@ -141,7 +142,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-12">
                 <div class="mb25">
                     <h4 class="mb15" class="mb15">Additional information</h4>
@@ -150,9 +150,28 @@
                 </div>
             </div>
         </div>
-        <div class="d-grid default-box-shadow2">
-            <button class="ud-btn btn-thm">Save preferences<i class="fal fa-arrow-right-long"></i></button>
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="d-grid default-box-shadow2">
+                    <button class="ud-btn btn-thm" wire:click="$set('save_find', true)" type="submit">Save And Find Tutor<i class="fal fa-arrow-right-long"></i></button>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="d-grid default-box-shadow2">
+                    <button class="ud-btn btn-thm" wire:click="$set('save_request', true)" type="submit">Save And Send Request to Tutor<i class="fal fa-arrow-right-long"></i></button>
+                </div>
+            </div>
         </div>
+        
     </form>
 </div>
+@push('scripts')
+<script>
+    function AI(){
+        alert("UNAVAILABLE! Please choose another prefer?") 
+    }
+</script>
+@include('partials.notify')
+@endpush
+
 

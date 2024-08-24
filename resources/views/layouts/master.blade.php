@@ -57,8 +57,10 @@
               <a class="login-info d-block d-xl-none ml40 vam" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><span class="flaticon-loupe"></span></a>
               <div class="ml40 d-none d-xl-block">
                 <div class="search_area dashboard-style">
-                  <input type="text" class="form-control border-0" placeholder="What service are you looking for today?">
-                  <label><span class="flaticon-loupe"></span></label>
+                  <form action="{{ route('search') }}" method="get" id="Searchform">
+                    <input type="text" name="search" class="form-control border-0" placeholder="What service are you looking for today?">
+                    <label id="searchButton"><span  class="flaticon-loupe"></span></label>
+                  </form>
                 </div>
               </div>
             </div>
@@ -260,6 +262,14 @@
       .catch( error => {
           console.error( error );
       } );
+</script>
+<script>
+    let SumbitButton = document.querySelector('#searchButton');
+    let Form = document.querySelector('#Searchform');
+    Form.addEventListener('submit', function(e){
+        e.preventDefault();
+        this.submit();
+    });
 </script>
 </body>
 </html>

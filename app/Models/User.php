@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Tutor;
+use App\Models\Proposal;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -25,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'city',
         'country',
         'image',
+        'last_seen',
         'password',
     ];
 
@@ -34,7 +38,12 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<int, string>
      */
 
+     public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
+    }
 
+    
 
      public function proposals()
      {

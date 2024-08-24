@@ -2,8 +2,9 @@
 
 use App\Http\Middleware\AdminLog;
 use App\Http\Middleware\AdminLogged;
-use App\Http\Middleware\UserAuthentication;
 use Illuminate\Foundation\Application;
+use App\Http\Middleware\LastActivityUser;
+use App\Http\Middleware\UserAuthentication;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -21,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin.logged_in'=> AdminLog::class,
             'admin.logged_out'=> AdminLogged::class,
             'authentication.user'=>UserAuthentication::class,
+            'last.activity.user' => LastActivityUser::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

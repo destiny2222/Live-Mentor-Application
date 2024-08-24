@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('dashboard')->group(function (){
-    Route::middleware(['auth','verified'])->group(function (){
+    Route::middleware(['auth','verified','last.activity.user'])->group(function (){
         Route::get('/', [HomeController::class, 'index'])->name('dashboard');
         Route::get('/tutor/upload', [HomeController::class, 'tutor'])->name('tutor.create');
         Route::post('/tutor/store', [HomeController::class, 'storeTutor'])->name('tutor.store');
@@ -31,7 +31,7 @@ Route::prefix('dashboard')->group(function (){
         Route::get('/tutor/{id}/profile', [HomeController::class, 'tutorProfile'])->name('tutor.profile');
         Route::post('/tutors/{tutor_id}/reviews', [HomeController::class, 'storeReview'])->name('review.store');
         // send tutor request
-        Route::post('/tutor/request', [HomeController::class, 'sendTutorRequest'])->name('tutor.request');
+        Route::post('/tutor/request', [HomeController::class, 'sendTutorRequest'])->name('tutor.request.index');
         Route::get('/tutor/proposal', [HomeController::class, 'getTutorProposal'])->name('tutor.proposal');
 
         // tutor request

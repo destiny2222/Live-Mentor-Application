@@ -65,6 +65,12 @@ class HomeController extends Controller
                 'title' => ['required', 'string'],
                 'resume' => ['required', 'file'], 
             ]);
+
+            // check if the user is a tutor
+            if ($request->user()->tutor) {
+                return redirect()->back()->with('error', 'You are already a tutor');
+            }
+            
     
             $uploadedFileUrl = $request->file('resume')->storeOnCloudinary('tutor/resume');
             $url = $uploadedFileUrl->getSecurePath();
@@ -120,7 +126,7 @@ class HomeController extends Controller
             $experience->description = $request->description;
             $experience->save();
             
-            return redirect(route('syllabus.index'))->with('success', 'Save Successfully');
+            return redirect(route('syllabus.index'))->with('success', 'Tutor profile created successfully');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('error', 'Oops something went wrong!');
@@ -156,9 +162,6 @@ class HomeController extends Controller
               return back()->with('error', 'This category already exists for the tutor.');
             }
 
-            // dd($request->all());
-
-
             $syllabus = new syllabus;
             $syllabus->tutor_id = $tutor->id;
             $syllabus->category_id = $request->category_id;
@@ -172,10 +175,17 @@ class HomeController extends Controller
     }
 
     public function proposal(){
-        $proposal = Proposal::where('user_id', Auth::user()->id)->latest()->first();    
-        return view('auth.proposal', compact('proposal'));
+        try {
+            // Get the latest proposal for the authenticated user
+            $proposal = Proposal::where('user_id', Auth::user()->id)->latest()->first();    
+            return view('auth.proposal', compact('proposal'));
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return back()->with('error', $exception->getMessage());
+        }
     }
     
+
 
     public function proposalStore(Request $request){
         try {
@@ -202,11 +212,6 @@ class HomeController extends Controller
                 $proposal->price = $course->price;
                 $proposal->save();
             }
-
-            return redirect(route('proposal.index'))->with('success', 'Proposal saved successfully');
-
-            
-
             return redirect(route('proposal.index'))->with('success', 'Proposal saved successfully');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
@@ -215,7 +220,6 @@ class HomeController extends Controller
     }
 
     public function savePreference(Request $request){
-
         try{
 
             
@@ -261,15 +265,16 @@ class HomeController extends Controller
 
     public function listTutor()
     {
-        $proposal = Proposal::where('user_id', Auth::user()->id)->latest()->first();
-
-        $course = Course::find($proposal->course_id);
-        // dd($course);
-        $category = Category::find($course->category_id);
-        // dd($category->tutors);
-        // Find a tutor associated with this category
-        $tutors = $category->tutors;
-
+        try{
+            $proposal = Proposal::where('user_id', Auth::user()->id)->latest()->first();
+            $course = Course::find($proposal->course_id);
+            $category = Category::find($course->category_id);
+            // Find a tutor associated with this category
+            $tutors = $category->tutors;
+        }catch(\Exception $exception){
+            Log::error($exception->getMessage());
+            return back()->with('error', 'Oops something went wrong');
+        }
         return view('auth.tutor', compact('tutors'));
     }
 
@@ -473,7 +478,7 @@ class HomeController extends Controller
     
     
 
-    public function getTutorProposal(){
+    public function  getTutorProposal(){
         try{
             $user = Auth::user();
             $proposal = Proposal::where('tutor_id', $user->id)->get();                                                                                                                                    

@@ -8,8 +8,8 @@
             <div class="col-xl-7">
                 <div class="home14-hero-content wow fadeInRight">
                     <h1 class="title animate-up-1 mb25" style="text-tramsform:uppercase;">A Unified Front For <br class="d-none d-xl-block"> Mentor and Scholars</h1>
-                    <p class="text animate-up-2" style="text-tramsform:uppercase;">Join The Mentor Community: Learn, Lead And Thrive<br class="d-none d-lg-block"> 
-                        In Your Career Path</p>
+                    <p class="text animate-up-2">Join the Mentor Community: Learn, Lead and thrive<br class="d-none d-lg-block"> 
+                        in your career path</p>
                     <div class="d-sm-flex align-items-center mt30 animate-up-3">
                         <a href="{{ route('register') }}" class="ud-btn btn-thm4 me-3 bdrs120 btn-1">Get Started</a>
                     </div>
@@ -25,7 +25,7 @@
         <div class="row align-items-center wow fadeInUp" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms; animation-name: fadeInUp;">
             <div class="col-lg-9">
                 <div class="main-title2">
-                    <h2 class="title">An Extensive Range Of Courses</h2>
+                    <h2 class="title">Explore our Extensive range Of Courses</h2>
                     <p class="paragraph">JOIN TO CHANGE YOUR LIFE</p>
                 </div>
             </div>
@@ -105,9 +105,9 @@
             </div>
             <div class="col-md-6 col-xl-4 offset-xl-2">
                 <div class="cta-style3 wow fadeInLeft">
-                    <h2 class="cta-title">Empower the next generation on {{ config('app.name') }}</h2>
-                    <p class="cta-text">Start Mentoring Now. </p>
-                    <a href="#" class="ud-btn btn-thm bdrs12 mr20">View Mentor <i class="fal fa-arrow-right-long"></i></a>
+                    <h2 class="cta-title">Empower the next generation on Mentor</h2>
+                    <!-- <p class="cta-text">Start Mentoring Now. </p> -->
+                    {{-- <a href="#" class="ud-btn btn-thm bdrs12 mr20">View Mentor <i class="fal fa-arrow-right-long"></i></a> --}}
                     <a href="{{ route('register') }}" class="ud-btn btn-thm-border bdrs12">Get Started <i class="fal fa-arrow-right-long"></i></a>
                 </div>
             </div>

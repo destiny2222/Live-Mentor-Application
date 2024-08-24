@@ -33,7 +33,7 @@
     <link href="images/apple-touch-icon-72x72.png" sizes="72x72" rel="apple-touch-icon">
     <link href="images/apple-touch-icon-114x114.png" sizes="114x114" rel="apple-touch-icon">
     <link href="images/apple-touch-icon-180x180.png" sizes="180x180" rel="apple-touch-icon"> --}}
-
+    
 </head>
 <body>
     <div class="wrapper ovh">
@@ -265,5 +265,6 @@
     <!-- Custom script for all pages -->
     <script src="/js/script.js"></script>
     @include('partials.message')
+    @yield('scripts')
 </body>
 </html>

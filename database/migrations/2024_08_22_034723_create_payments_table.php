@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // '', '','','payment_date','payment_method','payment_status'
+        
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('course_id')->constrained('courses')->onDelete('CASCADE')->onUpdate('CASCADE');

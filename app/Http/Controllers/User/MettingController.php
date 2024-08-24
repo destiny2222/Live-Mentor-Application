@@ -12,27 +12,30 @@ class MettingController extends Controller
         $meeting = Zoom::createMeeting([
             "agenda" => 'Mentor',
             "topic" => 'web development',
-            "type" => 2, // 1 => instant, 2 => scheduled, 3 => recurring with no fixed time, 8 => recurring with fixed time
-            "duration" => 60, // in minutes
-            "timezone" => 'Asia/Dhaka', // set your timezone
+            "type" => 2, 
+            "duration" => 60, 
+            "timezone" => 'Asia/Dhaka', 
             "password" => '123456',
-            "start_time" => '2022-08-25T10:00:00', // set your start time
-            "template_id" => 'Dv4YdINdTk+Z5RToadh5ug==', // set your template id  Ex: "Dv4YdINdTk+Z5RToadh5ug==" from https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings
-            "pre_schedule" => false,  // set true if you want to create a pre-scheduled meeting
-            "schedule_for" => 'text@gmail.com', // set your schedule for
+            "start_time" => '2022-08-25T10:00:00', 
+            "template_id" => 'Dv4YdINdTk+Z5RToadh5ug==', 
+            "pre_schedule" => false,  
+            // "schedule_for" => 'text@gmail.com', 
             "settings" => [
-                'join_before_host' => false, // if you want to join before host set true otherwise set false
-                'host_video' => false, // if you want to start video when host join set true otherwise set false
-                'participant_video' => false, // if you want to start video when participants join set true otherwise set false
-                'mute_upon_entry' => false, // if you want to mute participants when they join the meeting set true otherwise set false
-                'waiting_room' => false, // if you want to use waiting room for participants set true otherwise set false
-                'audio' => 'both', // values are 'both', 'telephony', 'voip'. default is both.
-                'auto_recording' => 'none', // values are 'none', 'local', 'cloud'. default is none.
-                'approval_type' => 0, // 0 => Automatically Approve, 1 => Manually Approve, 2 => No Registration Required
+                'join_before_host' => false, 
+                'host_video' => false, 
+                'participant_video' => false, 
+                'mute_upon_entry' => false, 
+                'waiting_room' => false, 
+                'audio' => 'both', 
+                'auto_recording' => 'none', 
+                'approval_type' => 0, 
             ],
 
         ]);
-        return $meeting;
+       // Access meeting details
+        // $meetingId = Zoom::getMeeting($meeting);
+        // $joinUrl = $meeting['join_url'];
+        dd($meeting);
     }
 
     public function getMeeting($meetingId)

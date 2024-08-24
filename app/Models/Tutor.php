@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+
 
 class Tutor extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     public $fillable = [ 'category_id', 'language', 'description', 'price','image_public_id','experience',  'status','skill','title' ,'user_id'];
 

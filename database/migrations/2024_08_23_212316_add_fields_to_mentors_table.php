@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-    
-        Schema::create('eexperiences', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->nullable();
-            $table->string('company')->nullable();
-            $table->date('end_date')->nullable();
-            $table->date('start_date')->nullable();
-            $table->longText('description')->nullable();
+        Schema::table('mentors', function (Blueprint $table) {
+            $table->longText('about')->nullable();
+            $table->string('Skills')->nullable();
+            $table->string('year_experience')->nullable();
+            $table->string('experience')->nullable();
+            $table->string('education')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->timestamps();
         });
     }
 
@@ -29,6 +26,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('eexperiences');
+        Schema::table('mentors', function (Blueprint $table) {
+            //
+        });
     }
 };
