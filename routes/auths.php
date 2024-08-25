@@ -31,7 +31,7 @@ Route::prefix('dashboard')->group(function (){
         Route::get('/tutor/{id}/profile', [HomeController::class, 'tutorProfile'])->name('tutor.profile');
         Route::post('/tutors/{tutor_id}/reviews', [HomeController::class, 'storeReview'])->name('review.store');
         // send tutor request
-        Route::post('/tutor/request', [HomeController::class, 'sendTutorRequest'])->name('tutor.request.index');
+        Route::post('/tutor/request', [HomeController::class, 'sendTutorRequest'])->name('tutor.request');
         Route::get('/tutor/proposal', [HomeController::class, 'getTutorProposal'])->name('tutor.proposal');
 
         // tutor request

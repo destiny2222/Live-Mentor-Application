@@ -11,8 +11,8 @@
                         <label class="form-check-label ps-3" for="flexRadioDefault4">Human mentor</label>
                     </div>
                     <div class="form-check d-flex align-items-center">
-                        <input class="form-check-input" type="radio" onclick="AI()" wire:model="prefer" value="ai" id="flexRadioDefault4">
-                        <label class="form-check-label ps-3" for="flexRadioDefault4">AI Mentor</label>
+                        <input class="form-check-input" type="radio" onclick="AI()" wire:model="prefer" value="ai" id="flexRadioDefault5">
+                        <label class="form-check-label ps-3" for="flexRadioDefault5">AI Mentor</label>
                     </div>
                 </div>
             </div>
@@ -166,12 +166,13 @@
     </form>
 </div>
 @push('scripts')
+
+@endpush
+
 <script>
     function AI(){
         alert("UNAVAILABLE! Please choose another prefer?") 
     }
 </script>
-@include('partials.notify')
-@endpush
 
 
