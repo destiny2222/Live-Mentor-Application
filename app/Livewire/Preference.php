@@ -65,51 +65,7 @@ class Preference extends Component
             $saveFind = $this->save_find;
             $SaveRequest = $this->save_request;
         
-            if (isset($saveFind)) {
-                return redirect(route('preference.listTutor'))->with('success', 'Your preference has been saved!');
-            } elseif (isset($SaveRequest)) {
-                $proposal = Proposal::where('user_id', Auth::user()->id)->latest()->first();
-                if (!$proposal) {
-                    return back()->with('error', 'No proposal found for the current user.');
-                }
-        
-                $course = Course::find($proposal->course_id);
-                if (!$course) {
-                    return back()->with('error', 'No course found for the given proposal.');
-                }
-                
-                $category = Category::find($course->category_id);
-                if(!$category) {
-                    return back()->with('error', 'No category found for the given course.');
-                }
-        
-                $tutors = $category->tutors; 
-                if ($tutors->isEmpty()) {
-                    return back()->with('error', 'No tutor found for the given proposal.');
-                }
-                
-                $user = User::find(Auth::user()->id);
-                if (!$user) {
-                    return back()->with('error', 'No user found for the given proposal.');
-                }
-                
-                foreach ($tutors as $tutor) {
-                    // update the proposal
-                    $proposal->update([
-                        'tutor_id' => $tutor->user->id, 
-                        'status'=> 3, 
-                        // 'course_id'=> $proposal->course_id,
-                    ]);
-                    // send notification to the tutor's user
-                    if ($tutor->user) {
-                        $tutor->user->notify(new RequestNotification($user, $course));
-                    }
-                }
-                $this->dispatchBrowserEvent('notice_message', ['message' => 'Your request was successfully']);
-                return back()->with('success', 'Your request has been sent!');
-            } else {
-                return back()->with('error', 'Something went wrong!');
-            } 
+            
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('error', 'An error occurred: ');

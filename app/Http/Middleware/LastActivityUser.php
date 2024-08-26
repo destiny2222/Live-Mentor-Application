@@ -31,6 +31,8 @@ class LastActivityUser
             User::where('id', Auth::user()->id)->update([
                 'last_seen' => now()
             ]);
+        }else{
+            Log::info('No user logged in');
         }
         return $next($request);
     }
