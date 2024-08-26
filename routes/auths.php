@@ -47,6 +47,12 @@ Route::prefix('dashboard')->group(function (){
 
         //course
         Route::get('/course', [HomeController::class, 'EnrollCourse'])->name('enroll-course');
+        Route::get('/course/classes', [HomeController::class, 'Classes'])->name('course.class');
+        Route::get('/course/{id}/classes', [HomeController::class, 'showProposal'])->name('show.proposal');
+        
+
+        // history
+        Route::get('/history', [HomeController::class, 'History'])->name('show.history');
 
         // payment
         Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');

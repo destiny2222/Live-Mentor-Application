@@ -184,7 +184,7 @@
                             @if($proposal->tutor && $proposal->tutor->user)
                                 <h2>Hello, {{ Session::get('tutorName') }}</h2>
                                 <p>Someone has requested to be your tutor on. Please click the link below to view the request.</p>
-                                {{-- <a href="{{ url('tutor-request-accept/'.$proposal->tutor->id) }}">View Request</a> --}}
+                                {{-- <p>Click <a href="{{ route('proposal.show', $proposal->id) }}">here</a> to view the proposal.</p>? --}}
                                 {{-- <a href="{{ url('tutor-request-reject/'.$proposal->tutor->id) }}">Reject</a> --}}
                             @else
                                 <h2>Hello, {{ Session::get('tutorName') }}</h2>

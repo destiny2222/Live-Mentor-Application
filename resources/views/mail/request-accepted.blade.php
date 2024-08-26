@@ -182,10 +182,12 @@
                     <td class="layout">
                         <div>
                             <h2>Hello, {{ $proposal->user->name }}</h2>
-                            <p>Someone has requested to be your tutor on . Please click the link below to view the request.</p>
+                            <p>Your request has been accepted by {{ $userTutor->name }}</p>
+                            <p>Make payment and start your journal <a href="{{ route('show.proposal',$proposal->id) }}">Click here</a> to view the proposal.</p>
                         </div>
                     </td>
                 </tr>
+                
                 
                 <tr>    
                     <td class="layout">

@@ -12,14 +12,11 @@ class Tutor extends Model
 {
     use HasFactory, Notifiable;
 
-    public $fillable = [ 'category_id', 'language', 'description', 'price','image_public_id','experience',  'status','skill','title' ,'user_id'];
+    public $fillable = [ 'category_id', 'language', 'description', 'price','image_public_id', 'experience',  'status','skill','title' ,'user_id'];
 
-    public function user()
-    {
+    public function user(){
         return $this->belongsTo(User::class);
     }
-
-
 
     public function categories()
     {
@@ -56,11 +53,5 @@ class Tutor extends Model
         'skill' => 'array',
     ];
 
-    // protected function data(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn ($value) => json_decode($value, true),
-    //         set: fn ($value) => json_encode($value),
-    //     );
-    // } 
+  
 }

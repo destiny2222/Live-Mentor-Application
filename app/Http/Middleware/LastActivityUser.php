@@ -28,12 +28,9 @@ class LastActivityUser
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-            Log::info('User is authenticated');
             User::where('id', Auth::user()->id)->update([
                 'last_seen' => now()
             ]);
-        } else {
-            Log::info('User is not authenticated');
         }
         return $next($request);
     }

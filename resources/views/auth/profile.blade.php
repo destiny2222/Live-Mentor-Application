@@ -354,6 +354,190 @@
                     </form>
                 </div>
             </div>
+            @if ($profile->role == 'tutor')
+            <div class="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
+                <div class="row">
+                  <div class="col-lg-9">
+                    <div class="bdrb1 pb15">
+                      <h5 class="list-title">Payout Methods</h5>
+                    </div>
+                    <div class="widget-wrapper mt35">
+                      <h6 class="list-title mb10">Select default payout method</h6>
+                      <div class="bootselect-multiselect">
+                        <div class="dropdown bootstrap-select"><select class="selectpicker">
+                          <option>Paypal</option>
+                          <option data-tokens="BankTransfer">Bank Transfer</option>
+                          <option data-tokens="Chicago">Payoneer</option>
+                        </select><button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-bs-toggle="dropdown" role="combobox" aria-owns="bs-select-1" aria-haspopup="listbox" aria-expanded="false" title="Paypal"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">Paypal</div></div> </div></button><div class="dropdown-menu "><div class="inner show" role="listbox" id="bs-select-1" tabindex="-1"><ul class="dropdown-menu inner show" role="presentation"></ul></div></div></div>
+                      </div>
+                    </div>
+                    <h5 class="mb15">Payout Details</h5>
+                    <div class="navpill-style1 payout-style">
+                      <ul class="nav nav-pills align-items-center justify-content-center mb30" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link fw500 dark-color" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Paypal</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link active fw500 dark-color" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Bank Transfer</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link fw500 dark-color" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Payoneer</button>
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                          <form class="form-style1">
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank Name</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank Account Number</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank Account Holder Name</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank Routing Number</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank IBAN</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Swift Code</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="text-start">
+                                  <a class="ud-btn btn-thm" href="page-contact.html">Save Detail<i class="fal fa-arrow-right-long"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                          <form class="form-style1">
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank Name</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank Account Number</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank Account Holder Name</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank Routing Number</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank IBAN</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Swift Code</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="text-start">
+                                  <a class="ud-btn btn-thm" href="page-contact.html">Save Detail<i class="fal fa-arrow-right-long"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                          <form class="form-style1">
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank Name</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank Account Number</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank Account Holder Name</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank Routing Number</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Bank IBAN</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="mb20">
+                                  <label class="heading-color ff-heading fw500 mb-1">Swift Code</label>
+                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="text-start">
+                                  <a class="ud-btn btn-thm" href="page-contact.html">Save Detail<i class="fal fa-arrow-right-long"></i></a>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            @endif
             <div class="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
                 <div class="bdrb1 pb15 mb25">
                     <h5 class="list-title">Change password</h5>

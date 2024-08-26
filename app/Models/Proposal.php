@@ -22,6 +22,7 @@ class Proposal extends Model
         'course_id',
         'end_time',
         'additional_information',
+        'payment_status',
         'tutor_id'
     ];
 
@@ -35,12 +36,16 @@ class Proposal extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function tutor(){
+    // If the proposal belongs to a tutor, you may also have
+    public function tutor()
+    {
         return $this->belongsTo(Tutor::class);
     }
+    
 
 }

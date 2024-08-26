@@ -454,7 +454,7 @@ class HomeController extends Controller
             $user = Auth::user();
             
             // Paginate proposals with a status of 3
-            $proposals = Proposal::where('user_id', $user->id)->where('status', 3)->paginate(10); 
+            $proposals = Proposal::where('user_id', $user->id)->where('status', '3')->paginate(10); 
             $enrolledCourses = [];
         
             foreach ($proposals as $pro) {
@@ -496,15 +496,16 @@ class HomeController extends Controller
         try{
             $proposal = Proposal::find($request->id);
 
-            // dd($proposal->tutor_id);
             if ($proposal->tutor_id != Auth::user()->tutor->user_id) {
                 return back()->with('error', 'Request not found or you are not authorized to accept this request.');
             }
-            
+
             $proposal->update([
                 'status' => 1,
             ]);
-            // Mail::to($proposal->user->email)->send(new RequestAccepted($proposal));
+            // Send email notification to the user
+            $userTutor = User::where('id', $proposal->tutor_id)->first();
+            Mail::to($proposal->user->email)->send(new RequestAccepted($proposal, $userTutor));
             return back()->with('success', 'Request accepted successfully!');
         }catch(\Exception $e){
             Log::error($e->getMessage());
@@ -529,6 +530,31 @@ class HomeController extends Controller
         }
     }
 
+
+    public function paymentHistory($id)
+    {
+        try{
+            $history = Proposal::find($id);
+            if (!$history) {
+                return back()->with('error', 'Record not found.');
+            }
+            return view('auth.history', compact('history'));
+        }catch(\Exception $e){
+            Log::error($e->getMessage());
+            return back()->with('error', 'Something went wrong, please try again later.');
+        }
+    }
+
+    public function History(){
+        $history = Proposal::where('status', '1')->get();
+        // dd($history);
+        return view('auth.history', compact('history'));
+    }
+
+    public function Classes(){
+        $proposalDetails = Proposal::where('status', '1')->get();
+        return view('auth.show-proposal', compact('proposalDetails'));
+    }
 
 
 

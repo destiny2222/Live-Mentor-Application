@@ -14,12 +14,14 @@ class RequestAccepted extends Mailable
     use Queueable, SerializesModels;
 
     public $proposal;
+    public $userTutor;
     /**
      * Create a new message instance.
      */
-    public function __construct($proposal)
+    public function __construct($proposal, $userTutor)
     {
         $this->proposal = $proposal;
+        $this->userTutor = $userTutor;
     }
 
     /**

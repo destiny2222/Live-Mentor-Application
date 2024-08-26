@@ -125,9 +125,11 @@
                                                                 <a class="btn btn-outline-primary btn-sm me-2" href="{{ route('tutor.request.accept') }}" onclick="event.preventDefault(); document.getElementById('accept-{{ $proposals->id }}').submit();">Accept</a>
                                                                 <a class="btn btn-outline-danger btn-sm me-2" href="{{ route('tutor.request.cancel', $proposals->id) }}" onclick="event.preventDefault(); document.getElementById('reject-{{ $proposals->id }}').submit();" type="button">Reject</a>
                                                                 <a class="btn btn-outline-warning btn-sm me-2" href="#" type="button">View Proposal</a>
-                                                                <form action="{{ route('tutor.request.accept', $proposals->id) }}" id="accept-{{ $proposals->id }}" method="POST">
+                                                                
+                                                                <form clas="d-non" action="{{ route('tutor.request.accept', $proposals->id) }}" id="accept-{{ $proposals->id }}" method="POST">
                                                                     @csrf
                                                                     <input type="hidden" name="id" value="{{ $proposals->id }}">
+                                                                    {{-- <input type="text" name="tutor_name" value="{{ $proposals->tutor_id }}"> --}}
                                                                 </form>
                                                                 <form action="{{ route('tutor.request.cancel', $proposals->id) }}" id="reject-{{ $proposals->id }}" method="POST">
                                                                     @csrf

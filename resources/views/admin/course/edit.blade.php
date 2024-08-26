@@ -46,6 +46,10 @@
                                         <input class="form-control" type="text" name="price" value="{{ $course->price }}" id="example-email-input">
                                     </div>
                                     <div class="mb-3">
+                                        <label for="example-email" class="form-label">Duration</label>
+                                        <input class="form-control" type="text" name="duration" value="{{ $course->duration }}" id="example-email">
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="description" class="form-label">Description</label>
                                         <textarea name="description" id="description" cols="30" class="form-control" rows="10">{{ $course->description }}</textarea>
                                     </div>
