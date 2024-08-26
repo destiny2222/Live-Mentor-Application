@@ -56,6 +56,7 @@ Route::prefix('dashboard')->group(function (){
 
         // payment
         Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
+        Route::get('/payment/course/callback', [PaymentController::class, 'handleGatewayCallback'])->name('callback.payment');
         
         // Create Meeting
         // Route::post('/create/meeting',[MettingController::class, 'createMeeting'])->name('createMeeting');
@@ -68,18 +69,4 @@ Route::prefix('dashboard')->group(function (){
 
     });
 });
-    
-
-
-
-
-Route::post('/upload/store', function(Request $request){
-    $cloudinaryImage = $request->file('file')->storeOnCloudinary('products');
-    $url = $cloudinaryImage->getSecurePath();
-    $public_id = $cloudinaryImage->getPublicId();
-    // $uploadedFileUrl = Cloudinary::upload($request->file('file')->getRealPath())->getSecurePath();
-    // dd($uploadedFileUrl);
-    // dd($url);
-    dd($public_id);
-})->name('upload.store');
 

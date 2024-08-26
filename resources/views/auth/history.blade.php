@@ -60,7 +60,11 @@
                                     <input type="hidden" name="price" value="{{ $historys->price }}">
                                 </form>
                             @elseif ($historys->status == '2')
-                              <span class="pending-style style1">Pending</span></td>                                
+                              <span class="pending-style style3">Cancel</span></td>  
+                            @elseif ($historys->status == '4')
+                              <span class="pending-style style2">Completed</span>
+                            @else
+                             <span class="pending-style style1">Pending</span>
                             @endif
                           <td class="vam">
                             {{ $historys->created_at->format('m:d:y') }}
