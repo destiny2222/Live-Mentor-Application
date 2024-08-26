@@ -5,9 +5,9 @@
     </li>
     <li class="{{ Request::routeIs('dashboard') ? 'active' : '' }}"><a href="{{ route('dashboard') }}"><i class="flaticon-home mr10"></i>Dashboard</a></li>
     @if (Auth::user()->role == 'user')
-    <li><a href="#"><i class="flaticon-chat mr10"></i>My Course</a></li>
-    <li><a href="#"><i class="flaticon-review-1 mr10"></i>Reviews</a></li>
-    <li><a href="#"><i class="flaticon-receipt mr10"></i>Payment History</a></li>
+    <li><a href="{{ route('enroll-course') }}" {{ Request::routeIs('enroll-course') ? 'active' : '' }}><i class="flaticon-chat mr10"></i>My Course</a></li>
+    <li><a href="{{ route('course.class') }}" {{ Request::routeIs('course.class') ? 'active' : '' }}><i class="flaticon-review-1 mr10"></i>Classes</a></li>
+    <li><a href="{{ route('show.history') }}" {{ Request::routeIs('show.history') ? 'active' : '' }}><i class="flaticon-receipt mr10"></i>Payment History</a></li>
     @else
     <li class="{{ Request::routeIs('tutor.proposal') ? 'active' : '' }}"><a href="{{ route('tutor.proposal') }}"><i class="flaticon-document mr10"></i>My Proposals</a></li>
     <li><a href="page-dashboard-save.html"><i class="flaticon-like mr10"></i>Classes</a></li>
