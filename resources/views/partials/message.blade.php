@@ -25,4 +25,11 @@
     @if(Session::has('status'))
         toastr.success("{{ Session::get('status') }}");
     @endif
+
+    // Validation error messages popup notification
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            toastr.error("{{ $error }}");
+        @endforeach
+    @endif
 </script>

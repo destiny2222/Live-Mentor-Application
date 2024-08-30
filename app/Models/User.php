@@ -43,6 +43,21 @@ class User extends Authenticatable implements MustVerifyEmail
         return Cache::has('user-is-online-' . $this->id);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+
+    public function averageRating()
+    {
+        return $this->reviews()->avg('rating');
+    }
+    
+    public function reviewCount()
+    {
+        return $this->reviews()->count();
+    }
     
 
      public function proposals()
@@ -54,6 +69,21 @@ class User extends Authenticatable implements MustVerifyEmail
      {
          return $this->hasOne(Tutor::class);
      }
+     public function mentor()
+     {
+        return $this->hasOne(Mentor::class);
+     }
+
+     public function experiences()
+     {
+         return $this->hasMany(Experience::class);
+     }
+
+     // calculating the total number of experiences
+     public function getExperiencesCountAttribute()
+     {
+        return $this->experiences()->count();
+     }
 
     public function checkTutorStatus(){
         if($this->role == 'tutor'){
@@ -61,13 +91,31 @@ class User extends Authenticatable implements MustVerifyEmail
             return true;
         }
     }
-public function checkTutorActiveStatus()
-{
-    if($this->role == 'tutor'){
-        if ($this->tutor) return $this->tutor->status === 0;
-        return false;
+    public function checkMentorStatus(){
+        if($this->role == 'mentor'){
+            if ($this->mentor    && $this->mentor->status == null) return false;
+            return true;
+        }
     }
-}
+
+
+    public function checkMentorActiveStatus()
+    {
+        if($this->role == 'mentor'){
+            if ($this->mentor) return $this->mentor->status === 0;
+            return false;
+        }
+    }
+
+
+    public function checkTutorActiveStatus()
+    {
+        if($this->role == 'tutor'){
+            if ($this->tutor) return $this->tutor->status === 0;
+            return false;
+        }
+    }
+
 
     protected $hidden = [
         'password',

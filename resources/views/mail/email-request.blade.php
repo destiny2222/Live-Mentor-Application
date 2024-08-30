@@ -150,6 +150,17 @@
         <div class="wrapper-inner">
             <table>
                 <tr>
+                    <td>
+                        <table width="100%">
+                            <tr>
+                                <td style="text-align:left; padding-top: 10px; padding-bottom:25px;">
+                                    <a href="#"><img src="https://livementor.gritinai.com/logo.png" width="180" alt="Logo"></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
                     <td class="layout">
                         <div>
                             <h2>Hello</h2>

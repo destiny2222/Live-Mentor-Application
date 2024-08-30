@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Course;
 use App\Models\User;
+use App\Models\Course;
+use App\Models\Category;
+use App\Models\Education;
+use App\Models\Experience;
+use App\Models\MentorApplication;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -39,12 +42,6 @@ public function CategoryCourses($slug) {
 }
 
 
-
-
-
-
-
-
     public function about(){
         return view('frontend.about');
     }
@@ -68,6 +65,18 @@ public function CategoryCourses($slug) {
     }
 
     
+    public function mentor(){
+        $users  = User::where('role', 'mentor')->orderBy('id', 'asc')->paginate(16);
+        return view('frontend.mentor', compact('users'));
+    }
+
+    public function showMentor($id){
+        $users = User::findOrFail($id);
+        $educations = Education::where('user_id', $users->id)->get();
+        $experiences = Experience::where('user_id', $users->id)->get();
+        $Usersession = MentorApplication::where('user_id', $users->id)->get();
+        return view('frontend.showmentor', compact('users','educations', 'experiences', 'Usersession'));
+    }
 
 
     // public function tutor(){

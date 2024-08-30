@@ -1,13 +1,14 @@
 <?php
 
 
-use App\Http\Controllers\User\CourseController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\CourseController;
+use App\Http\Controllers\User\MentorController;
 use App\Http\Controllers\User\MettingController;
 use App\Http\Controllers\User\PaymentController;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 
 
@@ -35,6 +36,7 @@ Route::prefix('dashboard')->group(function (){
         Route::get('/tutor/proposal', [HomeController::class, 'getTutorProposal'])->name('tutor.proposal');
 
         // tutor request
+        Route::get('/proposal/{id}/details', [HomeController::class, 'viewProposal'])->name('proposal.details');
         Route::post('/tutor/request/cancel', [HomeController::class, 'cancelTutorRequest'])->name('tutor.request.cancel');
         Route::post('/tutor/request/accept', [HomeController::class, 'acceptRequest'])->name('tutor.request.accept');
         // Route::get('/tutor/request/{id}/reject', [HomeController::class, 'rejectTutorRequest'])->name('tutor.request.reject');
@@ -61,11 +63,19 @@ Route::prefix('dashboard')->group(function (){
         // Create Meeting
         // Route::post('/create/meeting',[MettingController::class, 'createMeeting'])->name('createMeeting');
 
-         
+        //mentor
+        Route::get('/mentor',[MentorController::class, 'index'])->name('user.mentor.index');
+        Route::get('/mentor/create', [MentorController::class, 'create'])->name('mentor.create');
+        Route::post('/mentor/store', [MentorController::class, 'store'])->name('mentor.store');
+        Route::get('/mentor/session', [MentorController::class, 'SessionPage'])->name('mentor.session');
+        Route::post('/mentor/session/store', [MentorController::class, 'storeSession'])->name('mentor.session.store');
+        
+        // Route::get('/mentor/{id}/edit', [MentorController::class, 'edit'])->name('mentor.edit');
+        // Route::put('/mentor/{id}/update', [MentorController::class, 'update'])->name('mentor.update');
 
-        Route::get('/upload', function(){
-            return view('upload');
-        });
+        // Session
+        Route::post('/session/store', [MentorController::class, 'processSession'])->name('process.session.store');
+        Route::post('/session/request/accept', [MentorController::class, 'acceptBooking'])->name('accept.booking');
 
     });
 });

@@ -1,61 +1,9 @@
 @charset "UTF-8";
 /*
-Project/Template Name:  Freeio - Freelance Marketplace HTML Template
-Template Url: 
-Author: CreativeLayers
-Author Url: https://themeforest.net/user/creativelayers/portfolio
-Version: 1.0.0
-Description: Freeio - Freelance Marketplace HTML Template
-Tag:  bidding, fiverr, freelance marketplace, freelancers, freelancing, gigs, hiring, job board, job portal, job posting, jobs marketplace, peopleperhour, proposals, sell services, upwork
-*/
-/* == Table Of Content  == */
-/* Variables */
-/* Mixins */
-/* Typography Styles */
-/* Header Styles */
-/* All Type Of Footer Styles */
-/* All styles about breadcumb */
-/* Dashboard Style Code Here */
-/* Messages Styles */
-/* Listings Styles */
-/* About Pages Design Content Styles  */
-/* Hero Styles All Type Of */
-/* ALl Blogs Styles Here  */
-/* Brands */
-/* Commons Styles of Template */
-/* Contact Styles */
-/* All CTA Styles Here */
-/* Error Pages Styles */
-/* Iconbox Styles */
-/* All Type Of Forms Styles */
-/* Gallery Styles */
-/* Packages And Pricing Tables */
-/* Testimonials Styles */
-/* Team Styles */
-/* Different Styles Of Animations */
-/* Different Accordion Styles*/
-/* Different Styles of Alart */
-/* blockquote Styles*/
-/* All kind Of btns Styles */
-/* Funfact Styles */
-/* Menu Style */
-/* Nav & Tabs Styles */
-/* Paginations Styles */
-/* ProgressBar Styles */
-/* Social Styles */
-/* Sliders Styles */
-/* Sidebar Styles */
-/* Table Styles */
-/* Essential utility classes */
-/*=================================
-   Bootstrap Sass
-==================================*/
-/*=================================
-   Theme Based
-==================================*/
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;display=swap");
 /* Mixins */
 /* Variables */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;display=swap");
 :root {
   --title-font-family: "DM Sans", sans-serif;
   --body-font-family: "DM Sans", sans-serif;
@@ -12428,3 +12376,46 @@ hr {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+.proposal_img{
+  border-radius:50px;
+  width:70px;
+  height:70px;
+}
+
+
+.custom_checkbox{
+  cursor: pointer;
+  background-color: #fff;
+  border: 2px solid #f1f1f1;
+  border-radius: 4px;
+}
+
+
+.custom_checkbox:hover {
+  border: 2px solid #5BBB7B;
+
+}
+
+.custom_checkbox.active {
+  border: 2px solid #5BBB7B;
+}
+
+.badge-secondary-soft {
+  background-color: rgba(106, 116, 123, .1);
+  color: #6a747b;
+}
+
+
+.booking-table{
+  width:100%;
+  border:2px solid #6a747b;
+  border-collapse: collapse;
+}
+
+.booking-table th, td{
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}

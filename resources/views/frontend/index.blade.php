@@ -124,9 +124,9 @@
         <div class="row justify-content-between">
             <div class="col-md-6 col-lg-7 col-xl-5 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
                 <div class="cta-style3">
-                    <h2 class="cta-title">Find the right Mentor .</h2>
+                    <h2 class="cta-title">Find the right Mentor</h2>
                     <p class="cta-text">Engage with reliable and consistent mentor.</p>
-                    <a href="{{ route('register') }}" class="ud-btn btn-thm2">Get Started <i class="fal fa-arrow-right-long"></i></a>
+                    <a href="{{ route('mentor.index') }}" class="ud-btn btn-thm2">Get Started <i class="fal fa-arrow-right-long"></i></a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-5 col-xl-5 position-relative wow zoomIn" style="visibility: visible; animation-name: zoomIn;">

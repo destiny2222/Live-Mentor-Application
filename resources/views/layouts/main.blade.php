@@ -141,26 +141,6 @@
             <!-- Our Footer -->
             <section class="footer-style1 pt25 pb-0">
                 <div class="container">
-                    <div class="row bb-white-light pb10 mb60">
-                        <div class="col-md-7">
-                            <div class="d-block text-center text-md-start justify-content-center justify-content-md-start d-md-flex align-items-center mb-3 mb-md-0">
-                                <a class="fz17 fw500 text-white mr15-md mr30" href="#">Terms of Service</a>
-                                <a class="fz17 fw500 text-white mr15-md mr30" href="#">Privacy Policy</a>
-                                <a class="fz17 fw500 text-white" href="#">Site Map</a>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="social-widget text-center text-md-end">
-                                <div class="social-style1">
-                                    <a class="text-white me-2 fw500 fz17" href="#">Follow us</a>
-                                    <a href="#"><i class="fab fa-facebook-f list-inline-item"></i></a>
-                                    <a href="#"><i class="fab fa-twitter list-inline-item"></i></a>
-                                    <a href="#"><i class="fab fa-instagram list-inline-item"></i></a>
-                                    <a href="#"><i class="fab fa-linkedin-in list-inline-item"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-sm-6 col-lg-3">
                             <div class="link-style1 mb-4 mb-sm-5">
@@ -265,6 +245,6 @@
     <!-- Custom script for all pages -->
     <script src="/js/script.js"></script>
     @include('partials.message')
-    @yield('scripts')
+    @stack('scripts')
 </body>
 </html>

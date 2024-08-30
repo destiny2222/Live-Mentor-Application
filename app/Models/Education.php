@@ -29,4 +29,13 @@ class Education extends Model
     {
         return $this->belongsTo(Tutor::class);
     }
+
+    protected $casts = [
+        'school' => 'array',
+        'degree' => 'array',
+        'field_of_study' => 'array',
+        'start_date' => 'date',
+        'end_date' => 'date',
+        'description' => 'array',
+    ];
 }

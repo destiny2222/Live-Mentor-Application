@@ -271,7 +271,7 @@
         this.submit();
     });
 </script>
-@yield('scripts')
+@stack('scripts')
 @include('partials.notify')
 </body>
 </html>

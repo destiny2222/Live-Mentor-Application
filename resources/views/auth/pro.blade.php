@@ -100,7 +100,7 @@
                     <div class="navtab-style1">
                         <nav>
                             <div class="nav nav-tabs mb30" id="nav-tab2" role="tablist">
-                                <button class="nav-link active fw500 ps-0" id="nav-item1-tab" data-bs-toggle="tab" data-bs-target="#nav-item1" type="button" role="tab" aria-controls="nav-item1" aria-selected="true">Courses</button>
+                                <button class="nav-link active fw500 ps-0" id="nav-item1-tab" data-bs-toggle="tab" data-bs-target="#nav-item1" type="button" role="tab" aria-controls="nav-item1" aria-selected="true">Enroll Courses</button>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
@@ -108,10 +108,6 @@
                                 <div class="row">
                                     <div class="col-md-12 col-xxl-12">
                                         <div class="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
-                                            <div class="d-flex justify-content-between bdrb1 pb15 mb20">
-                                                <h5 class="title">Most Viewed Services</h5>
-                                                <a class="text-decoration-underline text-thm6" href="#">View All</a>
-                                            </div>
                                             <div class="dashboard-img-service">
                                                 @foreach ($proposal as $proposals)
                                                 <div class="listing-style1 list-style d-block d-xl-flex align-items-center border-0 mb10">
@@ -119,25 +115,16 @@
                                                         <img class="w-100" src="{{ asset('profile/'.$proposals->user->image) }}" alt="">
                                                     </div>
                                                     <div class="list-content flex-grow-1 pt10 pb10 pl15 pl0-lg">
-                                                        <h6 class="list-title mb-2"><a href="#">{{ $proposals->user->name }}</a></h6>
+                                                        <h6 class="list-title mb-2"><a href="{{ route('proposal.details',$proposals->id) }}">{{ $proposals->user->name }}</a></h6>
+                                                        <p>
+                                                            {{ $proposals->additional_information }}
+                                                        </p>
                                                         <div class="list-meta d-flex justify-content-between align-items-center">
                                                             <div class="review-meta d-flex align-items-center">
-                                                                <a class="btn btn-outline-primary btn-sm me-2" href="{{ route('tutor.request.accept') }}" onclick="event.preventDefault(); document.getElementById('accept-{{ $proposals->id }}').submit();">Accept</a>
-                                                                <a class="btn btn-outline-danger btn-sm me-2" href="{{ route('tutor.request.cancel', $proposals->id) }}" onclick="event.preventDefault(); document.getElementById('reject-{{ $proposals->id }}').submit();" type="button">Reject</a>
-                                                                <a class="btn btn-outline-warning btn-sm me-2" href="#" type="button">View Proposal</a>
-                                                                
-                                                                <form clas="d-non" action="{{ route('tutor.request.accept', $proposals->id) }}" id="accept-{{ $proposals->id }}" method="POST">
-                                                                    @csrf
-                                                                    <input type="hidden" name="id" value="{{ $proposals->id }}">
-                                                                    {{-- <input type="text" name="tutor_name" value="{{ $proposals->tutor_id }}"> --}}
-                                                                </form>
-                                                                <form action="{{ route('tutor.request.cancel', $proposals->id) }}" id="reject-{{ $proposals->id }}" method="POST">
-                                                                    @csrf
-                                                                    <input type="hidden" name="id" value="{{ $proposals->id }}">
-                                                                </form>
+                                                                <a class="btn btn-outline-warning btn-sm me-2" href="{{ route('proposal.details',$proposals->id) }}" type="button">View Proposal</a>
                                                             </div>
                                                             <div class="budget">
-                                                                <p class="mb-0 body-color">Starting at<span class="fz17 fw500 dark-color ms-1">$983</span></p>
+                                                                <p class="mb-0 body-color">Price <span class="fz17 fw500 dark-color ms-1">&#8358;{{ $proposals->price }}</span></p>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Verification</title>
+    <title></title>
     <style>
         * {
             font-family: sans-serif;
@@ -165,19 +165,17 @@
     <div class="container">
         <div class="wrapper-inner">
             <table>
-                {{-- <tr>
+                <tr>
                     <td>
                         <table width="100%">
                             <tr>
-                                <td style="text-align:center; padding-top: 10px; padding-bottom:25px;">
-                                    <h2>
-                                        EvokeEdge LLC
-                                    </h2>
+                                <td style="text-align:left; padding-top: 10px; padding-bottom:25px;">
+                                    <a href="#"><img src="https://livementor.gritinai.com/logo.png" width="180" alt="Logo"></a>
                                 </td>
                             </tr>
                         </table>
                     </td>
-                </tr> --}}
+                </tr>
                 <tr>
                     <td class="layout">
                         <div>

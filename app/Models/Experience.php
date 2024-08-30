@@ -28,4 +28,16 @@ class Experience extends Model
     public function tutor(){
         return $this->belongsTo(Tutor::class);
     }
+    public function mentor(){
+        return $this->belongsTo(Tutor::class);
+    }
+
+    protected $casts = [
+        'title' => 'array',
+        'degree' => 'array',
+        'company' => 'array',
+        'start_date' => 'date',
+        'end_date' => 'date',
+        'description' => 'array',
+    ];
 }

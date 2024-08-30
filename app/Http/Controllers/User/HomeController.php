@@ -12,8 +12,10 @@ use App\Models\Payment;
 use App\Models\Category;
 use App\Models\Proposal;
 use App\Models\syllabus;
+// use App\Livewire\Syllabus;
 use App\Models\Education; 
 use App\Models\Experience;
+use App\Models\BookSession;
 use Illuminate\Http\Request;
 use App\Mail\RequestAccepted;
 use App\Mail\TutorMailRequest;
@@ -32,6 +34,8 @@ class HomeController extends Controller
         try{
             $user = Auth::user();
             $proposals = Proposal::where('user_id', $user->id)->where('status', '3')->get();
+            $countEnroll = Proposal::where('user_id', $user->id)->where('status', '4')->count();
+            $PendingCountEnroll = Proposal::where('user_id', $user->id)->where('status', '3')->count();
             $enrolledCourses = [];
         
             foreach ($proposals as $pro) {
@@ -40,12 +44,12 @@ class HomeController extends Controller
                     // Add the course and its corresponding proposal to the array
                     $enrolledCourses[] = [
                         'course' => $course,
-                        'proposal' => $pro
+                        'proposal' => $pro,
                     ];
                 }
             }
         
-            return view('auth.dashboard', compact('enrolledCourses', 'user'));
+            return view('auth.dashboard', compact('enrolledCourses', 'user', 'PendingCountEnroll', 'countEnroll'));
         }catch(\Exception $e){
             Log::error($e->getMessage());
             return Redirect::back()->with('error', 'Something went wrong, please try again later.');
@@ -228,7 +232,7 @@ class HomeController extends Controller
                 $proposal->price = $course->price;
                 $proposal->save();
             }
-            return redirect(route('proposal.index'))->with('success', 'Proposal saved successfully');
+            return redirect(route('proposal.index'));
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('error', $exception->getMessage());
@@ -248,6 +252,7 @@ class HomeController extends Controller
                     'prefer' => $request->prefer,
                     'language' => $request->language,
                     'time' => $request->time,
+                    'end_time' => $request->end_time,
                     'day' => $days,
                     'tutor_id' => $request->tutor_id,
                     'user_id'=>Auth::user()->id,
@@ -259,6 +264,7 @@ class HomeController extends Controller
                     'prefer' => $request->prefer,
                     'language' => $request->language,
                     'time' => $request->time,
+                    'end_time' => $request->end_time,
                     'day' => $days,
                     'tutor_id' => $request->tutor_id,
                     'user_id' => Auth::user()->id,
@@ -315,6 +321,12 @@ class HomeController extends Controller
             return back()->with('error', $exception->getMessage());
         }
     }
+
+    // if ($request->input('action') == "update") {
+    //     // update here
+    // } else if ($request->input('action') == "delete") {
+    //     // delete here
+    // }
 
 
     // public 
@@ -553,6 +565,20 @@ class HomeController extends Controller
         }
     }
 
+    public function viewProposal($id){
+        try{
+            $proposal = Proposal::find($id);
+            $user = User::where('id', Auth::user()->id)->first();
+            dd($user);
+            return view('auth.viewProposal', compact('proposal'));
+        }catch(\Exception $e){
+            Log::error($e->getMessage());
+            return back()->with('error', 'Something went wrong, please try again later.');
+        }
+    }
+
+
+
 
     public function acceptRequest(Request $request)
     {
@@ -609,16 +635,52 @@ class HomeController extends Controller
     }
 
     public function History(){
-        try{
-            $history = Proposal::where('status', '1')->get();
-            // dd($history);
-            return view('auth.history', compact('history'));
-        }catch(\Exception $e){
+        try {
+            $history = Proposal::where('user_id', Auth::user()->id)->where('status', '1')->get();
+            $sessionHistory = BookSession::where('user_id', Auth::user()->id)->where('status', '1')->get();
+            // dd($sessionHistory);
+
+            $transactions = [];
+
+            // Loop through the Proposal history
+            foreach ($history as $proposal) {
+                $transaction = [
+                    'id' => $proposal->id, 
+                    'date' => $proposal->created_at->format('Y:m:d H:i:s'),
+                    'type' => 'proposal',
+                    'amount' => $proposal->price, 
+                    'status' => $proposal->status,
+                    'course_title' => $proposal->course->title ?? 'N/A', 
+                ];
+                $transactions[] = $transaction;
+            }
+
+            // Loop through the BookSession history
+            foreach ($sessionHistory as $session) {
+                $transaction = [
+                    'id' => $session->id, 
+                    'date' => $session->created_at->format('Y:m:d H:i:s'),
+                    'type' => 'session',
+                    'amount' => $session->book_session_price, 
+                    'status' => $session->status,
+                    'session_title' => $session->book_session ?? 'N/A', 
+                ];
+                $transactions[] = $transaction;
+            }
+
+            // Sort transactions by date
+            usort($transactions, function ($a, $b) {
+                return $a['date'] <=> $b['date'];
+            });
+
+            // Pass the transactions to the view
+            return view('auth.history', compact('transactions'));
+        } catch (\Exception $e) {
             Log::error($e->getMessage());
             return back()->with('error', 'Something went wrong, please try again later.');
         }
-       
     }
+    
 
     public function Classes(){
         try{

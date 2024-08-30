@@ -160,7 +160,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div class="wrapper-inner">
@@ -179,19 +178,12 @@
                 <tr>
                     <td class="layout">
                         <div>
-                            @if($proposal->tutor && $proposal->tutor->user)
-                                <h2>Hello, {{ Session::get('tutorName') }}</h2>
-                                <p>Someone has requested to be your tutor on. Please click the link below to view the request.</p>
-                                {{-- <p>Click <a href="{{ route('proposal.show', $proposal->id) }}">here</a> to view the proposal.</p>? --}}
-                                {{-- <a href="{{ url('tutor-request-reject/'.$proposal->tutor->id) }}">Reject</a> --}}
-                            @else
-                                <h2>Hello, {{ Session::get('tutorName') }}</h2>
-                                <p>Someone has requested to be your tutor on . Please click the link below to view the request.</p>
-                            @endif
+                            <h2>Hello, {{ $session->user->name }}</h2>
+                            <p>Your request has been accepted by {{ $userMentor->name }}</p>
+                            <p>Make payment and start your journal <a href="{{ route('show.history') }}">Click here</a> <br> to view the session.</p>
                         </div>
                     </td>
                 </tr>
-                
                 <tr>    
                     <td class="layout">
                        <div>
@@ -205,7 +197,7 @@
                             <tr>
                                 <td class="layout">
                                     <div style="padding-bottom:7px;">
-                                        <p style="text-align:center;">© {{ date('Y') }} {{ config('app.name') }}.   All Rights Reserved </p>
+                                        <p style="text-align:left;">© {{ date('Y') }} {{ config('app.name') }}.   All Rights Reserved </p>
                                     </div>
                                 </td>
                             </tr>

@@ -13,15 +13,10 @@
             </div>
         </div>
         <div class="row align-items-center justify-content-between pb40">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <div class="dashboard_title_area">
-                <h2>Payouts</h2>
+                <h2>History</h2>
                 <p class="text">Lorem ipsum dolor sit amet, consectetur.</p>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="text-lg-end">
-                <a href="page-freelancer-v1.html" class="ud-btn btn-dark default-box-shadow2">Create Payout<i class="fal fa-arrow-right-long"></i></a>
               </div>
             </div>
         </div>
@@ -33,44 +28,54 @@
                     <thead class="t-head">
                       <tr>
                         <th scope="col">S/N</th>
-                        <th scope="col">Course Title</th>
+                        <th scope="col">Title</th>
                         <th scope="col">Amount</th>
+                        <th scope="col">Type</th>
                         <th scope="col">Payment Status</th>
                         <th scope="col">Date</th>
                       </tr>
                     </thead>
                     <tbody class="t-body">
-                      @foreach ($history as $historys)
+                      @foreach ($transactions as $transaction)
                         <tr>
-                          <td scope="row">{{ $loop->index + 1 }}</td>
-                          <td class="vam">{{ $historys->course->title }}</td>
-                          <td class="vam">{{ number_format($historys->course->price, 2) }}</td>
-                          <td class="vam">
-                            @if ($historys->status == '1')
-                                <a href="{{ route('pay') }}" onclick="event.preventDefault(); document.getElementById('payemnt-form-{{ $historys->id  }}').submit();" class="pending-style style2">
-                                    Make Payment
-                                </a>
-                                <form class="d-none" action="{{ route('pay') }}" method="POST" id="payemnt-form-{{ $historys->id }}">
-                                    @csrf
-                                    <input type="hidden" name="email" value="{{ Auth::user()->email }}">
-                                    <input type="hidden" name="name" value="{{ Auth::user()->name }}">
-                                    <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> 
-                                    <input type="hidden" name="id" value="{{ Auth::user()->id }}">
-                                    <input type="hidden" name="course_id" value="{{ $historys->id }}">
-                                    <input type="hidden" name="price" value="{{ $historys->price }}">
-                                </form>
-                            @elseif ($historys->status == '2')
-                              <span class="pending-style style3">Cancel</span></td>  
-                            @elseif ($historys->status == '4')
-                              <span class="pending-style style2">Completed</span>
-                            @else
-                             <span class="pending-style style1">Pending</span>
+                            <td scope="row">{{ $loop->index + 1 }}</td>
+
+                            @if ($transaction['type'] === 'proposal')
+                                <td class="vam">{{ $transaction['course_title'] ?? 'N/A' }}</td>
+                                <td class="vam">{{ number_format($transaction['amount'], 2) }}</td>
+                            @elseif ($transaction['type'] === 'session')
+                                <td class="vam">{{ $transaction['session_title'] ?? 'N/A' }}</td>
+                                <td class="vam">{{ number_format($transaction['amount'], 2) }}</td>
                             @endif
-                          <td class="vam">
-                            {{ $historys->created_at->format('m:d:y') }}
-                          </td>
+                                
+                            <td class="vam">{{ $transaction['type'] }}</td>
+                            <td class="vam">
+                                @if ($transaction['status'] == '1')
+                                    <a href="{{ route('pay') }}" onclick="event.preventDefault(); document.getElementById('payemnt-form-{{ $loop->index }}').submit();" class="pending-style style2">
+                                        Make Payment
+                                    </a>
+                                    <form class="d-none" action="{{ route('pay') }}" method="POST" id="payemnt-form-{{ $loop->index }}">
+                                        @csrf
+                                        <input type="hidden" name="email" value="{{ Auth::user()->email }}">
+                                        <input type="hidden" name="name" value="{{ Auth::user()->name }}">
+                                        <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}">
+                                        <input type="hidden" name="id" value="{{ $transaction['id'] }}">
+                                        <input type="hidden" name="type" value="{{ $transaction['type'] }}">
+                                        <input type="hidden" name="price" value="{{ $transaction['amount'] }}">
+                                    </form>
+                                @elseif ($transaction['status'] == '2')
+                                    <span class="pending-style style3">Cancel</span>
+                                @elseif ($transaction['status'] == '4')
+                                    <span class="pending-style style2">Completed</span>
+                                @else
+                                    <span class="pending-style style1">Pending</span>
+                                @endif
+                            </td>
+                            <td class="vam">
+                                {{ \Carbon\Carbon::parse($transaction['date'])->format('m:d:y') }}
+                            </td>
                         </tr>
-                      @endforeach
+                    @endforeach                  
                       
                     </tbody>
                   </table>

@@ -55,7 +55,7 @@
             <div class="col-md-6 col-lg-4 col-xl-3">
                 <div class="freelancer-style1 text-center bdr1 hover-box-shadow">
                     <div class="thumb  mb25 mx-auto position-relative rounded-circle">
-                        <img class="rounded-circle mx-auto" width="150" src="{{ asset('profile/'.$tutor->user->image) }}" alt="" />
+                        <img class="rounded-circle mx-auto" width="100" src="{{ asset('profile/'.$tutor->user->image) }}" alt="" />
                         @if ($tutor->user->last_seen >= now()->subMinutes(5))
                           <span class="online"></span>
                         @else
