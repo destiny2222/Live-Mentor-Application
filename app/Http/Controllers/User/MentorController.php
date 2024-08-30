@@ -97,7 +97,7 @@ class MentorController extends Controller
                 $education->save();
             }
     
-            return redirect(route('dashboard'))->with('Mentor profile updated successfully');
+            return redirect(route('dashboard'))->with('success', 'Mentor profile updated successfully');
             } else {
                 Mentor::create([
                     'about' => $request->about,
@@ -140,7 +140,7 @@ class MentorController extends Controller
                 $education->save();
             }
     
-            return redirect(route('dashboard'))->with('Mentor profile updated successfully');
+            return redirect(route('dashboard'))->with('success', 'Mentor profile updated successfully');
             }
 
             
@@ -183,15 +183,25 @@ class MentorController extends Controller
         
 
         try {
-            foreach($request->session as $sessionData){
+            if (is_array($request->session)) {
+                foreach ($request->session as $sessionData) {
+                    $session = new MentorApplication();
+                    $session->session_title = $sessionData['session_title'];
+                    $session->session_time = $sessionData['session_time'];
+                    $session->session_price = $sessionData['session_price'];
+                    $session->user_id = Auth::user()->id;
+                    $session->save();
+                }
+            } else {
+                // Handle the case where only one session's data is submitted
                 $session = new MentorApplication();
-                $session->session_title = $sessionData['session_title'];
-                $session->session_time = $sessionData['session_time'];
-                $session->session_price = $sessionData['session_price'];
+                $session->session_title = $request->session_title;
+                $session->session_time = $request->session_time;
+                $session->session_price = $request->session_price;
                 $session->user_id = Auth::user()->id;
                 $session->save();
             }
-            return back()->with('Session created successfully');
+            return back()->with('success','Session created successfully');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return back()->with('error', 'Something went wrong, please try again later');;

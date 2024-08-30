@@ -109,7 +109,7 @@
                          <div class="m-circle text-thm">M</div>
                          <div class="wrapper mb40">
                              <span class="tag">{{ $experience->start_date }} - {{ $experience->end_date }}</span>
-                             <h5 class="mt15">{{ $experience->company }}</h5>
+                             <h5 class="mt15">{{ $experience->title }}</h5>
                              <h6 class="text-thm">{{ $experience->company }}</h6>
                              <p>{{ $experience->description }}</p>
                          </div>
@@ -173,7 +173,7 @@
                             <input hidden type="text" name="minutes" id="session_time" placeholder="Session Time" readonly>
                             <input hidden type="text" name="book_session_price" id="session_price" placeholder="Session Price" readonly>
                             <input type="text" value="{{ $users->id }}" name="mentor_id" hidden>
-                            <input type="text" value="{{ Auth::user()->id }}" name="user_id" hidden>
+                            <input type="text" value="{{ Auth::user()->id ?? '' }}" name="user_id" hidden>
                             <div class="mt-3 session_details ">
                                 <div class="shedule_area">
                                     <div class="row mb-4">
