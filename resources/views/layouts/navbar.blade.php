@@ -7,7 +7,7 @@
     <li><a href="{{ route('show.history') }}" {{ Request::routeIs('show.history') ? 'active' : '' }}><i class="flaticon-receipt mr10"></i>Payment History</a></li>
     @elseif(Auth::user()->role == 'mentor')
     <li><a href="{{ route('user.mentor.index') }}" {{ Request::routeIs('user.mentor.index') ? 'active' : '' }}><i class="flaticon-chat mr10"></i>My Session</a></li>
-    <li><a href="{{ route('course.class') }}" {{ Request::routeIs('course.class') ? 'active' : '' }}><i class="flaticon-review-1 mr10"></i>Classes</a></li>
+    <li><a href="{{ route('mentor.classes') }}" {{ Request::routeIs('mentor.classes') ? 'active' : '' }}><i class="flaticon-review-1 mr10"></i>Classes</a></li>
     <li><a href="{{ route('show.history') }}" {{ Request::routeIs('show.history') ? 'active' : '' }}><i class="flaticon-receipt mr10"></i>Payment History</a></li>
     @else
     <li class="{{ Request::routeIs('tutor.proposal') ? 'active' : '' }}"><a href="{{ route('tutor.proposal') }}"><i class="flaticon-document mr10"></i>My Proposals</a></li>

@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="/css/dashbord_navitaion.css">
 <!-- Responsive stylesheet -->
 <link rel="stylesheet" href="/css/responsive.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <!-- Title -->
 <title>{{ config('app.name', 'Laravel')}}</title>
 <!-- Favicon -->
@@ -249,7 +250,7 @@
 <script src="/js/jquery.mmenu.all.js"></script> 
 <script src="/js/ace-responsive-menu.js"></script> 
 <script src="/js/chart.min.js"></script>
-<script src="/js/chart-custome.js"></script>
+
 <script src="/js/jquery-scrolltofixed-min.js"></script>
 <script src="/js/dashboard-script.js"></script>
 <!-- Custom script for all pages --> 

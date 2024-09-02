@@ -24,7 +24,7 @@
              </a>
            </div>
            <div class="sidebar_list_item">
-            <a href="{{ route('course.class') }}" class="items-center {{ Request::routeIs('course.class') ? '-is-active' : '' }}"><i class="flaticon-document mr15"></i>
+            <a href="{{ route('mentor.classes') }}" class="items-center {{ Request::routeIs('mentor.classes') ? '-is-active' : '' }}"><i class="flaticon-document mr15"></i>
                My Classes
              </a>
            </div>

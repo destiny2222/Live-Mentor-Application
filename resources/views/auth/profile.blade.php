@@ -12,9 +12,28 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-6">
                 <div class="dashboard_title_area">
                     <h2>My Profile</h2>
+                    {{-- @foreach($shareButtons->getRawLinks() as $platform => $link)
+                        <a href="{{ $link }}" target="_blank">{{ ucfirst($platform) }}</a>
+                    @endforeach --}}
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="share-buttons text-lg-end">
+                    <a href="{{ $shareButtons->getRawLinks()['facebook'] }}" target="_blank">
+                        <i class="fab fa-facebook" style="font-size: 20px;"></i>
+                    </a>
+                    <a href="{{ $shareButtons->getRawLinks()['twitter'] }}" target="_blank">
+                        <i class="fab fa-twitter" style="font-size: 20px;"></i>
+                    </a>
+                    <a href="{{ $shareButtons->getRawLinks()['linkedin'] }}" target="_blank">
+                        <i class="fab fa-linkedin" style="font-size: 20px;"></i>
+                    </a>
+                    <a href="{{ $shareButtons->getRawLinks()['whatsapp'] }}" target="_blank">
+                        <i class="fab fa-whatsapp" style="font-size: 20px;"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -39,7 +58,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <script>
                             document.getElementById('file').addEventListener('change', function(event) {
                                 const [file] = event.target.files;
@@ -48,7 +67,8 @@
                                     profileImage.src = URL.createObjectURL(file);
                                 }
                             });
-                        </script>                        
+
+                        </script>
                         <div class="col-lg-12">
                             <div class="form-style1">
                                 <div class="row">
@@ -354,187 +374,44 @@
                     </form>
                 </div>
             </div>
-            @if ($profile->role == 'tutor')
+            @if ($profile->role == 'tutor' || $profile->role == 'mentor')
             <div class="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
                 <div class="row">
-                  <div class="col-lg-9">
-                    <div class="bdrb1 pb15">
-                      <h5 class="list-title">Payout Methods</h5>
-                    </div>
-                    <div class="widget-wrapper mt35">
-                      <h6 class="list-title mb10">Select default payout method</h6>
-                      <div class="bootselect-multiselect">
-                        <div class="dropdown bootstrap-select"><select class="selectpicker">
-                          <option>Paypal</option>
-                          <option data-tokens="BankTransfer">Bank Transfer</option>
-                          <option data-tokens="Chicago">Payoneer</option>
-                        </select><button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-bs-toggle="dropdown" role="combobox" aria-owns="bs-select-1" aria-haspopup="listbox" aria-expanded="false" title="Paypal"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">Paypal</div></div> </div></button><div class="dropdown-menu "><div class="inner show" role="listbox" id="bs-select-1" tabindex="-1"><ul class="dropdown-menu inner show" role="presentation"></ul></div></div></div>
-                      </div>
-                    </div>
-                    <h5 class="mb15">Payout Details</h5>
-                    <div class="navpill-style1 payout-style">
-                      <ul class="nav nav-pills align-items-center justify-content-center mb30" id="pills-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                          <button class="nav-link fw500 dark-color" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Paypal</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                          <button class="nav-link active fw500 dark-color" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Bank Transfer</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                          <button class="nav-link fw500 dark-color" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Payoneer</button>
-                        </li>
-                      </ul>
-                      <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                          <form class="form-style1">
+                    <div class="col-lg-9">
+                        <h5 class="mb15">Payout Details</h5>
+                        <div class="navpill-style1 payout-style">
+                          <form class="form-style1" action="{{ route('add.bank') }}" method="POST">
+                            @csrf
                             <div class="row">
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank Name</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                <div class="col-sm-6">
+                                    <div class="mb20">
+                                        <label class="heading-color ff-heading fw500 mb-1">Bank Name</label>
+                                        <input type="text" class="form-control" name="bank_name" value="{{ Auth::user()->bank->bank_name ?? ''  }}" placeholder="">
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank Account Number</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                <div class="col-sm-6">
+                                    <div class="mb20">
+                                        <label class="heading-color ff-heading fw500 mb-1">Bank Account Number</label>
+                                        <input type="text" class="form-control" name="bank_account_number" value="{{ Auth::user()->bank->bank_account_number ?? ''  }}" placeholder="">
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank Account Holder Name</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
+                                <div class="col-sm-6">
+                                    <div class="mb20">
+                                        <label class="heading-color ff-heading fw500 mb-1">Bank Account Holder Name</label>
+                                        <input type="text" class="form-control" name="bank_account_name" value="{{ Auth::user()->bank->bank_account_name ?? ''  }}" placeholder="">
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank Routing Number</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank IBAN</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Swift Code</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
                             </div>
                             <div class="row">
-                              <div class="col-md-12">
-                                <div class="text-start">
-                                  <a class="ud-btn btn-thm" href="page-contact.html">Save Detail<i class="fal fa-arrow-right-long"></i></a>
+                                <div class="col-md-12">
+                                    <div class="text-start">
+                                        <a class="ud-btn btn-thm" href="page-contact.html">Save Detail<i class="fal fa-arrow-right-long"></i></a>
+                                    </div>
                                 </div>
-                              </div>
                             </div>
-                          </form>
+                        </form>
                         </div>
-                        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                          <form class="form-style1">
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank Name</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank Account Number</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank Account Holder Name</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank Routing Number</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank IBAN</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Swift Code</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-md-12">
-                                <div class="text-start">
-                                  <a class="ud-btn btn-thm" href="page-contact.html">Save Detail<i class="fal fa-arrow-right-long"></i></a>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                          <form class="form-style1">
-                            <div class="row">
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank Name</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank Account Number</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank Account Holder Name</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank Routing Number</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Bank IBAN</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                              <div class="col-sm-6">
-                                <div class="mb20">
-                                  <label class="heading-color ff-heading fw500 mb-1">Swift Code</label>
-                                  <input type="text" class="form-control" placeholder="creativelayers088@gmail.com">
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-md-12">
-                                <div class="text-start">
-                                  <a class="ud-btn btn-thm" href="page-contact.html">Save Detail<i class="fal fa-arrow-right-long"></i></a>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
                     </div>
-                  </div>
                 </div>
             </div>
             @endif
@@ -586,7 +463,7 @@
                         <form action="{{ route('user.destroy') }}" method="POST" class="form-style1">
                             @csrf
                             @method('DELETE')
-                            
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <h6>Close account</h6>
@@ -602,7 +479,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>                        
+                        </form>
                     </div>
                 </div>
             </div>

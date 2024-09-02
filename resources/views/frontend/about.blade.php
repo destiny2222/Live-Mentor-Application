@@ -30,7 +30,7 @@
                 </div>
                 <div class="col-md-6 col-xl-5 offset-xl-1">
                     <div class="position-relative wow fadeInLeft" data-wow-delay="300ms">
-                        <h2 class="mb25">About {{ config('app.name') }}</h2>
+                        <h2 class="mb25">About </h2>
                         <p class="text mb25">
                           Welcome to MENTOR, an initiative of GritinAI to connect you with the best mentors and tutors in your field of interest. Whether you're a student looking for guidance or a professional seeking to enhance your skills, our platform is designed to help you find the perfect mentor or tutor who meets your unique needs.
                         </p>
@@ -132,7 +132,7 @@
                                         <div class="timer title mb15">{{ $countUser }}</div>
                                     </li>
                                 </ul>
-                                <p class="fz15 dark-color">Total number of usesr</p>
+                                <p class="fz15 dark-color">Total number of usesrs</p>
                             </div>
                         </div>
                         <div class="col-sm-6">

@@ -1,16 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Api\LoginController;
-use App\Http\Controllers\User\MentorController;
-use App\Http\Controllers\User\SearchController;
 use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\User\MeetingController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\User\MentorController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\SearchController;
 use App\Models\BookSession;
-use Jubaer\Zoom\Facades\Zoom;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Jubaer\Zoom\Facades\Zoom;
+
 
 
 
@@ -36,6 +38,10 @@ Route::get('/meeting', function(){
 });
 
 Route::get('/join-meeting/{meetingDetails}', [MeetingController::class, 'joinMeeting'])->name('zoom.join');
+
+
+// share profile
+Route::get('/share/profile', [ProfileController::class, 'show'])->name('profile.show');
 
 
 Route::post('/uploaded', function(Request $request){

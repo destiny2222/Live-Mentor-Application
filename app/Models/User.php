@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Tutor;
 use App\Models\Proposal;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Notifications\Notifiable;
+use App\Models\Tutor;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -27,6 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'gender',
         'city',
         'country',
+        'username',
         'image',
         'last_seen',
         'password',
@@ -46,6 +48,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function reviews()
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function bank()
+    {
+        return $this->hasOne(Bank::class);
     }
 
 
@@ -78,6 +85,21 @@ class User extends Authenticatable implements MustVerifyEmail
      {
          return $this->hasMany(Experience::class);
      }
+
+
+     public static function generateUniqueUsername($name)
+    {
+        $username = Str::slug($name);
+        $originalUsername = $username;
+        $counter = 1;
+
+        while (self::where('username', $username)->exists()) {
+            $username = $originalUsername . '-' . $counter;
+            $counter++;
+        }
+
+        return $username;
+    }
 
      // calculating the total number of experiences
      public function getExperiencesCountAttribute()

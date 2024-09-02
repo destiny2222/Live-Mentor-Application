@@ -5,4 +5,5 @@ return [
     App\Providers\FortifyServiceProvider::class,
     Unicodeveloper\Paystack\PaystackServiceProvider::class,
     Jubaer\Zoom\ZoomServiceProvider::class,
+    Jorenvh\Share\Providers\ShareServiceProvider::class,
 ];

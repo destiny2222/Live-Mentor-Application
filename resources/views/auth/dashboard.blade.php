@@ -299,4 +299,63 @@
         </div>
     </footer>
 </div>
+<script src="/js/chart-custome.js"></script>
 @endsection
+@push('scripts')
+   <script>
+// LineChart Style 2
+var ctx = document.getElementById('myChartweave').getContext('2d');
+    var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line', // also try bar or other graph types
+
+    // The data for our dataset
+    data: {
+        labels: ["Jan", "Feb", "Marc", "April", "May", "June", "July", "Agust", "Sept", "Oct", "Nov", "Dec"],
+        // Information about the dataset
+    datasets: [{
+            label: "Dataset",
+            backgroundColor: 'rgba(251, 247, 237, 0.9)',
+            borderColor: '#5BBB7B',
+            data: [148, 140, 210, 120, 160, 140, 190, 170, 135, 210, 180, 249],
+        }]
+    },
+
+    // Configuration options
+    options: {
+    layout: {
+      padding: 10,
+    },
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: false,
+            text: 'Precipitation in Toronto'
+        },
+        scales: {
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    // labelString: 'Precipitation in mm'
+                },
+                ticks: {
+                    min: 0,
+                    max: 300,
+                    // forces step size to be 5 units
+                    stepSize: 50
+                }
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    // labelString: 'Month of the Year'
+                }
+            }]
+        }
+    }
+});
+
+
+    </script>
+@endpush

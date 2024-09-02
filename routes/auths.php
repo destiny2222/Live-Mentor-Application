@@ -1,14 +1,16 @@
 <?php
 
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\BankController;
 use App\Http\Controllers\User\CourseController;
+use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\MentorController;
 use App\Http\Controllers\User\MettingController;
 use App\Http\Controllers\User\PaymentController;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -76,6 +78,19 @@ Route::prefix('dashboard')->group(function (){
         // Session
         Route::post('/session/store', [MentorController::class, 'processSession'])->name('process.session.store');
         Route::post('/session/request/accept', [MentorController::class, 'acceptBooking'])->name('accept.booking');
+        Route::post('/session/request/reject', [MentorController::class, 'rejectBooking'])->name('reject.booking');
+        Route::delete('/session/{id}/delete', [MentorController::class, 'deleteSession'])->name('delete.booking');
+
+        // Classes
+        Route::get('/mentor/classes', [MentorController::class, 'myClass'])->name('mentor.classes');
+        Route::post('/classes/store', [MentorController::class, 'storeClasses'])->name('store.classes');
+
+        // Add Bank
+        Route::post('/add-bank',[BankController::class, 'addBank'])->name('add.bank');
+
+        // // Meeting
+        // Route::get('/meeting', [MentorController::class, 'meeting'])->name('meeting');
+        // Route::post('/meeting/store', [MentorController::class, 'storeMeeting'])->name('store.meeting');
 
     });
 });

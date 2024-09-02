@@ -7,15 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class MeetingDetailsMail extends Notification
+class MentorRejected extends Notification
 {
     use Queueable;
 
-    public $meetingDetails;
+    public $session;
+    public  $User;
 
-    public function __construct($meetingDetails)
+    /**
+     * Create a new notification instance.
+     */
+    public function __construct($session, $User)
     {
-        $this->meetingDetails = $meetingDetails;
+       $this->session = $session;
+       $this->User = $User;
     }
 
     /**
@@ -34,18 +39,11 @@ class MeetingDetailsMail extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('You have a meeting scheduled.')
-            ->action('Join Meeting', url('/join-meeting/'.$this->meetingDetails['data']['id']))
-            ->line('Meeting Password: '.$this->meetingDetails['data']['password'])
-            ->markdown('mail.meeting-details', [
-                'topic' => $this->meetingDetails['data']['topic'],
-                'start_time' => $this->meetingDetails['data']['start_time'],
-                'join_url' => $this->meetingDetails['data']['join_url'],
-                'password' => $this->meetingDetails['data']['password'],
-            ])
-            ->line('Thank you for using our application!');
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->markdown('mail.mentor-rejected', ['session' => $this->session, 'user' => $this->User])
+                    ->line('Thank you for using our application!');
     }
-    
 
     /**
      * Get the array representation of the notification.

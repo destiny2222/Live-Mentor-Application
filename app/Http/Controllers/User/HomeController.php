@@ -2,31 +2,32 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\User;
-use App\Models\Award;
-use App\Models\Tutor;
-use App\Models\Awards;
-use App\Models\Course;
-use App\Models\Review;
-use App\Models\Payment;
-use App\Models\Category;
-use App\Models\Proposal;
-use App\Models\syllabus;
-// use App\Livewire\Syllabus;
-use App\Models\Education; 
-use App\Models\Experience;
-use App\Models\BookSession;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Mail\RequestAccepted;
 use App\Mail\TutorMailRequest;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\Award;
+use App\Models\Awards;
+use App\Models\BookSession;
+use App\Models\Category;
+use App\Models\Course;
+use App\Models\Education; 
+use App\Models\Experience;
+// use App\Livewire\Syllabus;
+use App\Models\Payment;
+use App\Models\Proposal;
+use App\Models\Review;
+use App\Models\syllabus;
+use App\Models\Tutor;
+use App\Models\User;
 use App\Notifications\RequestNotification;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
+use Share;
 
 class HomeController extends Controller
 {
@@ -421,10 +422,24 @@ class HomeController extends Controller
     }
 
 
+    
     public function profile(){
         $profile = Auth::user();
-        return view('auth.profile', compact('profile'));
+        if (!$profile) {
+            return redirect()->route('login');
+        }
+        $baseUrl = route('profile.show');
+        $queryParams = http_build_query(['username' => $profile->username]);
+        $url = "{$baseUrl}?{$queryParams}";
+        $shareButtons = Share::page($url, 'Share title')
+            ->facebook()
+            ->twitter()
+            ->linkedin()
+            ->whatsapp();
+            // dd($shareButtons);
+        return view('auth.profile', compact('profile', 'shareButtons'));
     }
+    
 
 
 

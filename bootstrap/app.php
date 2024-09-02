@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // $middleware->use([ ]);
         $middleware->alias([
+            'Share' => Jorenvh\Share\ShareFacade::class,
             'admin.logged_in'=> AdminLog::class,
             'admin.logged_out'=> AdminLogged::class,
             'authentication.user'=>UserAuthentication::class,

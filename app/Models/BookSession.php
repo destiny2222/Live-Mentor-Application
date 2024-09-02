@@ -20,7 +20,12 @@ class BookSession extends Model
         'book_session_payment_status',
         'user_id',
         'status',
+        'message',
         'mentor_id',
+        'zoom_meeting_id',
+        'zoom_meeting_password',
+        'zoom_meeting_start_time',
+        'zoom_meeting_url',
     ];
 
     public function user()

@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
-use App\Mail\MentorAccepted;
-use App\Models\BookSession;
+use App\Models\User;
+use App\Models\Mentor;
 use App\Models\Category;
 use App\Models\Education;
 use App\Models\Experience;
-use App\Models\Mentor;
-use App\Models\MentorApplication;
-use App\Notifications\MentorNotification;
-use App\Models\User;
-use Illuminate\Support\Facades\Notification;
+use App\Models\BookSession;
+use App\Mail\MentorAccepted;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\MentorApplication;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Notifications\MentorRejected;
+use App\Notifications\MentorNotification;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Notification;
 
 class MentorController extends Controller
 {
@@ -283,6 +284,48 @@ class MentorController extends Controller
             Log::error($e->getMessage());
             return back()->with('error', 'Something went wrong, please try again later.');
         }
+    }
+
+    public function rejectBooking(Request $request){
+        try{
+            $session = BookSession::find($request->id);
+            if ($session->mentor_id != Auth::user()->mentor->user_id) {
+                return back()->with('error', 'Request not found or you are not authorized to reject this request.');
+            }
+            $session->update([
+                'status' => 2,
+                'message'=>$request->input('message'),
+            ]);
+            // Send email notification to the user
+            $User = User::where('id', $session->user_id)->first();
+            $User->notify(new MentorRejected($session, $User));
+            return back()->with('success', 'Request rejected successfully!');
+        }catch(\Exception $e){
+            Log::error($e->getMessage());
+            return back()->with('error', 'Something went wrong, please try again later.');
+        }
+    }
+
+
+    public function deleteSession($id){
+        try{
+            $session = BookSession::find($id);
+            if ($session->mentor_id != Auth::user()->mentor->user_id) {
+                return back()->with('error', 'Request not found or you are not authorized to reject this request.');
+            }
+            $session->delete();
+            return back()->with('success', 'Session deleted successfully!');
+        }catch(\Exception $e){
+            Log::error($e->getMessage());
+            return back()->with('error', 'Something went wrong, please try again later.');
+
+        }
+    }
+
+
+    public function myClass(){
+        $sessions = BookSession::where('mentor_id', Auth::user()->mentor->user_id)->where('status', 1)->get();
+        return view('auth.mentor.myClass', compact('sessions'));
     }
 
 }
