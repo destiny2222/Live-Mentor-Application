@@ -54,8 +54,7 @@
                                 <!-- Responsive Menu Structure-->
                                 <ul id="respMenu" class="ace-responsive-menu m-auto" data-menu-style="horizontal">
                                     <li class="visible_list"> <a class="list-item" href="/"><span class="title">Home</span></a></li>
-                                    <li class="visible_list"> <a class="list-item" href="#"><span class="title">About Us</span></a></li>
-                                    <li class="visible_list"> <a class="list-item" href="#"><span class="title">Service</span></a></li>
+                                    <li class="visible_list"> <a class="list-item" href="/about"><span class="title">About Us</span></a></li>
                                     <li class="visible_list"> <a class="list-item" href="/course"><span class="title">Course</span></a></li>
                                     <li> <a class="list-item pe-0" href="#">Contact</a></li>
                                 </ul>
@@ -113,7 +112,7 @@
                         <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
                             <a class="mobile_logo" href="/"><img src="/logo.png" width="100" alt=""></a>
                             <div class="right-side text-end">
-                                <a class="#" href="#">Join Now</a>
+                                <a class="#" href="/login">Join Now</a>
                                 <a class="menubar ml30" href="#menu"><img src="/images/mobile-dark-nav-icon.svg" alt=""></a>
                             </div>
                         </div>
@@ -127,8 +126,7 @@
             <nav id="menu" class="">
                 <ul>
                     <li> <a href="/"><span>Home</span></a></li>
-                    <li> <a href="#"><span>About Us</span></a></li>
-                    <li> <a href="#"><span>Service</span></a></li>
+                    <li> <a href="/login"><span>About Us</span></a></li>
                     <li> <a href="/course"><span>Course</span></a></li>
                     <li> <a href="#">Contact</a></li>
                     <!-- Only for Mobile View -->

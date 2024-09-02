@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Session Booking</title>
+    <title>Email Notification</title>
     <style>
         * {
             font-family: sans-serif;
@@ -33,7 +33,7 @@
         .wrapper-inner {
             background-color: #fff;
             max-width: 670px;
-            Margin: 0 auto;
+            margin: 0 auto;
             padding: 15px;
             border-collapse: collapse;
             table-layout: fixed;
@@ -74,7 +74,7 @@
         .main-table-first {
             width: 100%;
             max-width: 610px;
-            Margin: 0 auto;
+            margin: 0 auto;
         }
 
         .two-column {
@@ -163,18 +163,19 @@
                 <tr>
                     <td class="layout">
                         <div>
-                            <h2>Hello {{ $user->name }}</h2>
-                            <p>You have a new booking  request.</p>
-                            <p><strong>User:</strong> {{ $booking->user->name }}</p>
-                            <p><strong>Session Title:</strong> {{ $booking->book_session }}</p>
+                            <h2>Hello,</h2>
+                            <p>You have a new meeting scheduled.</p>
+                            <p><strong>Topic:</strong> {{ $topic }}</p>
+                            <p><strong>Start Time:</strong> {{ $start_time }}</p>
+                            <p><strong>Meeting Password:</strong> {{ $password }}</p>
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td class="layout">
                         <div>
-                            <p>Click the button below to take action:</p>
-                            <a href="{{ $actionUrl }}" style="background-color: #6450EF; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Here</a>
+                            <p>Click the button below to join the meeting:</p>
+                            <a href="{{ $join_url }}" style="background-color: #6450EF; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Join Meeting</a>
                         </div>
                     </td>
                 </tr>
@@ -184,7 +185,7 @@
                             <tr>
                                 <td class="table-footer">
                                     <div style="padding-bottom: 7px;">
-                                        <p style="text-align: left;line-height:30px;">© {{ date('Y') }} {{ config('app.name') }}. All Rights Reserved</p>
+                                        <p style="text-align: left;">© {{ date('Y') }} {{ config('app.name') }}. All Rights Reserved</p>
                                     </div>
                                 </td>
                             </tr>

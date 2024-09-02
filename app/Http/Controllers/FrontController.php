@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Course;
 use App\Models\Category;
+use App\Models\Course;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\MentorApplication;
+use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -43,7 +44,10 @@ public function CategoryCourses($slug) {
 
 
     public function about(){
-        return view('frontend.about');
+        $countUser = User::count();
+        $countCourse = Course::count();
+        $countReview = Review::count();
+        return view('frontend.about', compact('countUser', 'countCourse', 'countReview'));
     }
 
     public function contact(){

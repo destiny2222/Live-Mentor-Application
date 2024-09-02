@@ -184,13 +184,6 @@
                         </div>
                     </td>
                 </tr>
-                <tr>    
-                    <td class="layout">
-                       <div>
-
-                       </div>
-                    </td>
-                </tr>
                 <tr>
                     <td>
                         <table width="100%" style="border-spacing: 0; padding-top:2rem;">
