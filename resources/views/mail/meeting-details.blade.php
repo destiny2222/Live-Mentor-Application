@@ -166,7 +166,7 @@
                             <h2>Hello,</h2>
                             <p>You have a new meeting scheduled.</p>
                             <p><strong>Topic:</strong> {{ $topic }}</p>
-                            <p><strong>Start Time:</strong> {{ $start_time }}</p>
+                            <p><strong>Start Time:</strong> {{ \Carbon\Carbon::parse($start_time)->toDayDateTimeString() }}</p>
                             <p><strong>Meeting Password:</strong> {{ $password }}</p>
                         </div>
                     </td>

@@ -126,7 +126,7 @@
             <nav id="menu" class="">
                 <ul>
                     <li> <a href="/"><span>Home</span></a></li>
-                    <li> <a href="/login"><span>About Us</span></a></li>
+                    <li> <a href="/about"><span>About Us</span></a></li>
                     <li> <a href="/course"><span>Course</span></a></li>
                     <li> <a href="#">Contact</a></li>
                     <!-- Only for Mobile View -->

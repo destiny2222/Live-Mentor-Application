@@ -36,7 +36,7 @@ class MeetingDetailsMail extends Notification
         return (new MailMessage)
             ->line('You have a new meeting scheduled.')
             ->action('Join Meeting', url('/join-meeting/'.$this->meetingDetails['data']['id']))
-            ->line('Meeting Password: '.$this->meetingDetails['password'])
+            ->line('Meeting Password: '.$this->meetingDetails['data']['password'])
             ->markdown('mail.meeting-details', [
                 'topic' => $this->meetingDetails['data']['topic'],
                 'start_time' => $this->meetingDetails['data']['start_time'],
