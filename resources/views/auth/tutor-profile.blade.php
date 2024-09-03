@@ -8,10 +8,20 @@
     gap: 1px; 
 }
 
-.tag-list {
-    /* flex: 1 1 100px;  */
-}
+.skill-link {
+        display: block;
+        margin-bottom: 5px; /* Add space between skills if needed */
+    }
 
+
+    .oni{
+        right: 20%;
+        top:17%;
+    }
+
+    .online.offline{
+        background-color: orange !important;
+    }
 </style>
 <!-- Breadcumb Sections -->
 <section class="breadcumb-section">
@@ -53,6 +63,11 @@
                         <div class="list-meta d-sm-flex align-items-center mt30">
                             <a class="position-relative freelancer-single-style" href="#">
                                 <img class="rounded-circle w-100 wa-sm mb15-sm" src="{{ asset('profile/'.$tutor->user->image) }}" alt="Freelancer Photo">
+                                @if ($tutor->user->last_seen >= now()->subMinutes(5))
+                                    <span class="online position-absolute oni"></span>
+                                @else
+                                    <span class="online offline position-absolute oni"></span>
+                                @endif
                             </a>
                             <div class="ml20 ml0-xs">
                                 <h5 class="title mb-1">{{ $tutor->user->name }}</h5>
@@ -85,7 +100,7 @@
                         @foreach ($educations as $education) 
                         <div class="m-circle text-thm">M</div>
                             <div class="wrapper mb40">
-                                <span class="tag">{{  $education->start_date }} - {{ $education->end_date }}</span>
+                                <span class="tag">{{  Carbon\Carbon::parse($education->start_date)->format('F j, Y') }} - {{ Carbon\Carbon::parse($education->end_date)->format('F j, Y') }}</span>
                                 <h5 class="mt15">{{ $education->degree }}</h5>
                                 <h6 class="text-thm">{{ $education->school }}</h6>
                                 <p>{{ $education->description }}</p>
@@ -98,7 +113,7 @@
                      <div class="educational-quality">
                          <div class="m-circle text-thm">M</div>
                          <div class="wrapper mb40">
-                             <span class="tag">{{ $experience->start_date }} - {{ $experience->end_date }}</span>
+                             <span class="tag">{{ Carbon\Carbon::parse($experience->start_date)->format('F j, Y') }} - {{ Carbon\Carbon::parse($experience->end_date)->format('F j, Y') }}</span>
                              <h5 class="mt15">{{ $experience->company }}</h5>
                              <h6 class="text-thm">{{ $experience->company }}</h6>
                              <p>{{ $experience->description }}</p>
@@ -111,7 +126,7 @@
                     @foreach($certifications as $certification)
                     <div class="educational-quality ps-0">
                         <div class="wrapper mb40">
-                            <span class="tag">{{ $certification->date }} - {{ $certification->date_end }}</span>
+                            <span class="tag">{{ Carbon\Carbon::parse($certification->date)->format('F j, Y') }} - {{ Carbon\Carbon::parse($certification->date_end)->format('F j, Y') }}</span>
                             <h5 class="mt15">{{ $certification->title }}</h5>
                             <h6 class="text-thm">{{ $certification->company }}</h6>
                             <p>{{ $certification->description }}</p>
@@ -242,11 +257,15 @@
                             </form>
                         </div>
                     </div>
-                    <div class="sidebar-widget skills-container mb30 pb20 bdrs8">
+                    <div class="sidebar-widget skills- mb30 pb20 bdrs8">
                         <h4 class="widget-title">My Skills</h4>
                         <div class="tag-list mt30">
+                            @php $count = 0; @endphp
                             @foreach ($tutor->skill as $skills)
-                             <a href="#">{{ $skills }}</a>
+                                @if ($count < 3)
+                                    <a href="javascript:void(0);" class="skill-link">{{ $skills }}</a>
+                                    @php $count++; @endphp
+                                @endif
                             @endforeach
                         </div>
                     </div>

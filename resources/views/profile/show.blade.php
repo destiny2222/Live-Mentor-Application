@@ -84,7 +84,7 @@
                         @foreach ($user->education as $education) 
                         <div class="m-circle text-thm">M</div>
                             <div class="wrapper mb40">
-                                <span class="tag">{{  $education->start_date }} - {{ $education->end_date }}</span>
+                                <span class="tag">{{  Carbon\Carbon::parse($education->start_date)->format('F j, Y') }} - {{ Carbon\Carbon::parse($education->end_date)->format('F j, Y') }}</span>
                                 <h5 class="mt15">{{ $education->degree }}</h5>
                                 <h6 class="text-thm">{{ $education->school }}</h6>
                                 <p>{{ $education->description }}</p>
@@ -97,7 +97,7 @@
                      <div class="educational-quality">
                          <div class="m-circle text-thm">M</div>
                          <div class="wrapper mb40">
-                             <span class="tag">{{ $experience->start_date }} - {{ $experience->end_date }}</span>
+                             <span class="tag">{{ Carbon\Carbon::parse($experience->start_date)->format('F j, Y') }} - {{ Carbon\Carbon::parse($experience->end_date)->format('F j, Y') }}</span>
                              <h5 class="mt15">{{ $experience->company }}</h5>
                              <h6 class="text-thm">{{ $experience->company }}</h6>
                              <p>{{ $experience->description }}</p>
@@ -110,7 +110,7 @@
                     @foreach($user->certification as $certification)
                     <div class="educational-quality ps-0">
                         <div class="wrapper mb40">
-                            <span class="tag">{{ $certification->date }} - {{ $certification->date_end }}</span>
+                            <span class="tag">{{ Carbon\Carbon::parse($certification->date)->format('F j, Y') }} - {{ Carbon\Carbon::parse($certification->date_end)->format('F j, Y') }}</span>
                             <h5 class="mt15">{{ $certification->title }}</h5>
                             <h6 class="text-thm">{{ $certification->company }}</h6>
                             <p>{{ $certification->description }}</p>
@@ -127,14 +127,14 @@
                             <span class="text"><i class="flaticon-place text-thm2 pe-2 vam"></i>Location</span> <span class="">{{ $user->conutry }}</span>
                         </a>
                         <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
-                            <span class="text"><i class="flaticon-30-days text-thm2 pe-2 vam"></i>Member since</span> <span class="">{{ $user->created_at->format('F j') }}</span>
+                            <span class="text"><i class="flaticon-30-days text-thm2 pe-2 vam"></i>Member since</span> <span class="">{{ $user->created_at->format('F j, Y') }}</span>
                         </a>
                         <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                             <span class="text"><i class="flaticon-mars text-thm2 pe-2 vam"></i>Gender</span> <span class="">{{ $user->gender }}</span>
                         </a>
-                        <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
-                            <span class="text"><i class="flaticon-translator text-thm2 pe-2 vam"></i>Languages</span> <span class="">English</span>
-                        </a>
+                        <!-- <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
+                            <span class="text"><i class="flaticon-translator text-thm2 pe-2 vam"></i>Languages</span> <span class="">{{ $user->language }}</span>
+                        </a> -->
                         <a class="d-flex align-items-center justify-content-between mb-3" href="#">
                             <span class="text"><i class="flaticon-sliders text-thm2 pe-2 vam"></i>English Level</span> <span class="">{{ $user->language }}</span>
                         </a>

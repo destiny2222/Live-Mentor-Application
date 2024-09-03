@@ -82,34 +82,22 @@
                 </div>
             </div>
             @else
-            <div class="col-sm-6 col-xxl-4">
+            <div class="col-12 col-sm-6 col-xxl-6">
                 <div class="d-flex align-items-center justify-content-between statistics_funfact">
                     <div class="details">
                         <div class="fz15">Enroll Course</div>
                         <div class="title">{{ $countEnroll }}</div>
-                        @if ($user->role == 'user')
-                        <div class="text fz14"><span class="text-thm">{{ $PendingCountEnroll }}</span> pending course</div>
-                        @endif
                     </div>
                     <div class="icon text-center"><i class="flaticon-contract"></i></div>
                 </div>
             </div>
-            <div class="col-sm-6 col-xxl-4">
+            <div class="col-12 col-sm-6 col-xxl-6">
                 <div class="d-flex align-items-center justify-content-between statistics_funfact">
                     <div class="details">
-                        <div class="fz15">Completed Courses</div>
-                        <div class="title">0</div>
+                        <div class="fz15">Pending Course</div>
+                        <div class="title">{{ $PendingCountEnroll }}</div>
                     </div>
                     <div class="icon text-center"><i class="flaticon-success"></i></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-xxl-4">
-                <div class="d-flex align-items-center justify-content-between statistics_funfact">
-                    <div class="details">
-                        <div class="fz15">Total Review</div>
-                        <div class="title">0</div>
-                    </div>
-                    <div class="icon text-center"><i class="flaticon-review-1"></i></div>
                 </div>
             </div>
             @endif

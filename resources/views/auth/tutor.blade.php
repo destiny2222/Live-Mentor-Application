@@ -1,6 +1,15 @@
 @extends('layouts.main')
 @section('title', 'Tutor')
 @section('content')
+<style>
+    .oni{
+        right: 36%;
+    }
+
+    .online.offline{
+        background-color: orange !important;
+    }
+</style>
 <section class="breadcumb-section">
     <div class="container">
         <div class="row">
@@ -57,9 +66,9 @@
                     <div class="thumb  mb25 mx-auto position-relative rounded-circle">
                         <img class="rounded-circle mx-auto" width="100" src="{{ asset('profile/'.$tutor->user->image) }}" alt="" />
                         @if ($tutor->user->last_seen >= now()->subMinutes(5))
-                          <span class="online"></span>
+                          <span class="online position-absolute oni"></span>
                         @else
-                            {{-- User is offline --}}
+                          <span class="online offline position-absolute oni"></span>
                         @endif
                        
                     </div>

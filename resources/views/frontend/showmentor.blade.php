@@ -11,7 +11,14 @@
 .tag-list {
     /* flex: 1 1 100px;  */
 }
+.oni{
+        right: 15%;
+        top:20%;
+    }
 
+    .online.offline{
+        background-color: orange !important;
+    }
 </style>
 <!-- Breadcumb Sections -->
 <section class="breadcumb-section">
@@ -53,6 +60,11 @@
                         <div class="list-meta d-sm-flex align-items-center mt30">
                             <a class="position-relative freelancer-single-style" href="#">
                                 <img class="rounded-circle w-100 wa-sm mb15-sm" src="{{ asset('profile/'.$users->image) }}" alt="Freelancer Photo">
+                                @if ($users->last_seen >= now()->subMinutes(5))
+                                    <span class="online position-absolute oni"></span>
+                                @else
+                                    <span class="online offline position-absolute oni"></span>
+                                @endif
                             </a>
                             <div class="ml20 ml0-xs">
                                 <h5 class="title mb-1">{{ $users->name }}</h5>
@@ -95,7 +107,7 @@
                         @foreach ($educations as $education) 
                         <div class="m-circle text-thm">M</div>
                             <div class="wrapper mb40">
-                                <span class="tag">{{  $education->start_date }} - {{ $education->end_date }}</span>
+                                <span class="tag">{{  Carbon\Carbon::parse($education->start_date)->format('F j, Y')}} - {{ Carbon\Carbon::parse($education->end_date)->format('F j, Y') }}</span>
                                 <h5 class="mt15">{{ $education->degree }}</h5>
                                 <h6 class="text-thm">{{ $education->school }}</h6>
                                 <p>{{ $education->description }}</p>
@@ -108,7 +120,7 @@
                      <div class="educational-quality">
                          <div class="m-circle text-thm">M</div>
                          <div class="wrapper mb40">
-                             <span class="tag">{{ $experience->start_date }} - {{ $experience->end_date }}</span>
+                             <span class="tag">{{ Carbon\Carbon::parse($experience->start_date)->format('F j, Y') }} - {{ Carbon\Carbon::parse($experience->end_date)->format('F j, Y') }}</span>
                              <h5 class="mt15">{{ $experience->title }}</h5>
                              <h6 class="text-thm">{{ $experience->company }}</h6>
                              <p>{{ $experience->description }}</p>
@@ -125,7 +137,7 @@
                                 <span class="text"><i class="flaticon-place text-thm2 pe-2 vam"></i>Location</span> <span class="">{{ $users->conutry }}</span>
                             </a>
                             <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
-                                <span class="text"><i class="flaticon-30-days text-thm2 pe-2 vam"></i>Member since</span> <span class="">{{ $users->created_at->format('F j') }}</span>
+                                <span class="text"><i class="flaticon-30-days text-thm2 pe-2 vam"></i>Member since</span> <span class="">{{ $users->created_at->format('F j, Y') }}</span>
                             </a>
                             <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                                 <span class="text"><i class="flaticon-mars text-thm2 pe-2 vam"></i>Gender</span> <span class="">{{ $users->gender }}</span>

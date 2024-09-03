@@ -101,7 +101,7 @@ class HomeController extends Controller
             $url = $uploadedFileUrl->getSecurePath();
             $public_id = $uploadedFileUrl->getPublicId();
     
-           $skills = $request->input('skill', []);
+           $skills = $request->input('skills', []);
             $categories = $request->input('category_id', []); 
 
             $tutor = new Tutor;
