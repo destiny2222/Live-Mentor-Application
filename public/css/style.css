@@ -11602,7 +11602,7 @@ input:focus-visible {
   color: var(--headings-color);
   font-family: var(--title-font-family);
   font-weight: 400;
-  /* padding: 30px; */
+  padding: 20px;
   vertical-align: middle;
 }
 .table-style3 .t-body tr:last-child {
