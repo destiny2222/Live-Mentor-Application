@@ -52,13 +52,13 @@ class PaymentController extends Controller
                 if ($paymentDetails['data']['metadata']['type'] === 'proposal') {
                     $proposal = Proposal::find($paymentDetails['data']['metadata']['order_id']);
                     $proposal->update(['status' => 4]);
-                    return redirect()->route('user.dashboard')->with(['success' => 'Payment was successful. You can now access the course', 'type' => 'success']);
+                    return redirect()->route('dashboard')->with(['success' => 'Payment was successful. You can now access the course', 'type' => 'success']);
                 } elseif ($paymentDetails['data']['metadata']['type'] === 'session') {
                     $session = BookSession::find($paymentDetails['data']['metadata']['order_id']);
                     $session->update(['book_session_payment_status' => 1]);
-                    return redirect()->route('user.dashboard')->with(['success' => 'Payment was successful. You can now access the course', 'type' => 'success']);
+                    return redirect()->route('dashboard')->with(['success' => 'Payment was successful. You can now access the course', 'type' => 'success']);
                 } else {
-                    return redirect()->route('user.dashboard')->with(['error' => 'Payment failed. Please try again.', 'type' => 'error']);
+                    return redirect()->route('dashboard')->with(['error' => 'Payment failed. Please try again.', 'type' => 'error']);
                 }
                 
                 $payment = new Payment;
@@ -70,7 +70,7 @@ class PaymentController extends Controller
                 $payment->payment_status = 'Paid';
                 $payment->save();
             } else {
-                return redirect()->route('user.dashboard')->with(['error' => 'Payment failed. Please try again.', 'type' => 'error']);
+                return redirect()->route('dashboard')->with(['error' => 'Payment failed. Please try again.', 'type' => 'error']);
             }
         } catch (\Exception $exception) {
             Log::error('Payment callback error: ' . $exception->getMessage());

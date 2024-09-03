@@ -13,15 +13,10 @@
             </div>
         </div>
         <div class="row align-items-center justify-content-between pb40">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <div class="dashboard_title_area">
-                <h2>Payouts</h2>
-                <p class="text">Lorem ipsum dolor sit amet, consectetur.</p>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="text-lg-end">
-                <a href="page-freelancer-v1.html" class="ud-btn btn-dark default-box-shadow2">Create Payout<i class="fal fa-arrow-right-long"></i></a>
+                <h2>Proposal</h2>
+                <!-- <p class="text">Lorem ipsum dolor sit amet, consectetur.</p> -->
               </div>
             </div>
         </div>
@@ -33,20 +28,26 @@
                     <thead class="t-head">
                       <tr>
                         <th scope="col">S/N</th>
-                        <th scope="col">Course Title</th>
-                        <th scope="col"></th>
-                        <th scope="col">Payment Status</th>
+                        <th>Topic</th>
+                        <th>Type</th>
+                        <th>Meeting Password</th>
+                        <th>Meeting Date</th>
+                        <th>Meeting Url</th>
                       </tr>
                     </thead>
                     <tbody class="t-body">
-                      {{-- @foreach ($proposalDetails as $item) --}}
+                      @foreach ($transactions as $transaction)
                         <tr>
-                          <th scope="row">$1.800</th>
-                          <td class="vam">April 9, 2023</td>
-                          <td class="vam">Paypal</td>
-                          <td class="vam"><span class="pending-style style1">Pending</span></td>
+                          <th scope="row">{{ $loop->index + 1 }}</th>
+                          <td class="vam">{{ $transaction['title'] }}</td>
+                          <td class="vam">{{ $transaction['type']   }}</td>
+                          <td class="vam">{{ $transaction['meeting_password']   }}</td>
+                          <td class="vam">{{ $transaction['meeting_date']   }}</td>
+                          <td class="vam">
+                            <a class="pending-style style2" href="{{ $transaction['meeting_url']   }}">Join Link</a>
+                          </td>
                         </tr>
-                      {{-- @endforeach --}}
+                      @endforeach
                     </tbody>
                   </table>
                   <div class="mbp_pagination text-center mt30">

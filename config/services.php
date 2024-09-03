@@ -39,10 +39,10 @@ return [
         'key' => env('TOKEN_KEY'),
     ],
 
-    // 'zoom'=>[
-    //     'ZOOM_CLIENT_ID'=>env('ZOOM_CLIENT_ID'),
-    //     'ZOOM_CLIENT_SECRET'=>env('ZOOM_CLIENT_SECRET'),
-    //     'ZOOM_ACCOUNT_ID'=>env('ZOOM_ACCOUNT_ID'),
-    // ]
+    'zoom'=>[
+        'ZOOM_CLIENT_ID'=>env('ZOOM_CLIENT_ID'),
+        'ZOOM_CLIENT_SECRET'=>env('ZOOM_CLIENT_SECRET'),
+        'ZOOM_ACCOUNT_ID'=>env('ZOOM_ACCOUNT_ID'),
+    ]
 
 ];

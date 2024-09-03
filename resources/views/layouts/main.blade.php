@@ -8,6 +8,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="" content="">
+    <meta name="og:image" content="https://livementor.gritinai.com/logo.png">
     <!-- css file -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/jquery-ui.min.css">

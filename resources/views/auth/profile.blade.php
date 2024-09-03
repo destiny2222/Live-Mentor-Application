@@ -21,20 +21,23 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="share-buttons text-lg-end">
-                    <a href="{{ $shareButtons->getRawLinks()['facebook'] }}" target="_blank">
-                        <i class="fab fa-facebook" style="font-size: 20px;"></i>
-                    </a>
-                    <a href="{{ $shareButtons->getRawLinks()['twitter'] }}" target="_blank">
-                        <i class="fab fa-twitter" style="font-size: 20px;"></i>
-                    </a>
-                    <a href="{{ $shareButtons->getRawLinks()['linkedin'] }}" target="_blank">
-                        <i class="fab fa-linkedin" style="font-size: 20px;"></i>
-                    </a>
-                    <a href="{{ $shareButtons->getRawLinks()['whatsapp'] }}" target="_blank">
-                        <i class="fab fa-whatsapp" style="font-size: 20px;"></i>
-                    </a>
-                </div>
+                @if($profile->role == 'tutor' ||  $profile->role == 'mentor')
+                    <span>Shared profile</span>
+                    <div class="share-buttons text-lg-end">
+                        <a href="{{ $shareButtons->getRawLinks()['facebook'] }}" target="_blank">
+                            <i class="fab fa-facebook" style="font-size: 20px;"></i>
+                        </a>
+                        <a href="{{ $shareButtons->getRawLinks()['twitter'] }}" target="_blank">
+                            <i class="fab fa-twitter" style="font-size: 20px;"></i>
+                        </a>
+                        <a href="{{ $shareButtons->getRawLinks()['linkedin'] }}" target="_blank">
+                            <i class="fab fa-linkedin" style="font-size: 20px;"></i>
+                        </a>
+                        <a href="{{ $shareButtons->getRawLinks()['whatsapp'] }}" target="_blank">
+                            <i class="fab fa-whatsapp" style="font-size: 20px;"></i>
+                        </a>
+                    </div>
+                @endif    
             </div>
         </div>
         <div class="row">

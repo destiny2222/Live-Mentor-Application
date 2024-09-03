@@ -37,6 +37,12 @@ class HomeController extends Controller
             $proposals = Proposal::where('user_id', $user->id)->where('status', '3')->get();
             $countEnroll = Proposal::where('user_id', $user->id)->where('status', '4')->count();
             $PendingCountEnroll = Proposal::where('user_id', $user->id)->where('status', '3')->count();
+            $SessionCount = BookSession::where('user_id', $user->id)->where('status', null)->count();
+            $SessionPendingCount = BookSession::where('user_id', $user->id)->where('status', '0')->count();
+            $SessionAcceptedCount = BookSession::where('user_id', $user->id)->where('status', '1')->count();
+            $SessionRejectedCount = BookSession::where('user_id', $user->id)->where('status', '2')->count();
+            $TotalReview = Review::where('user_id', $user->id)->count();
+            
             $enrolledCourses = [];
         
             foreach ($proposals as $pro) {
@@ -50,7 +56,10 @@ class HomeController extends Controller
                 }
             }
         
-            return view('auth.dashboard', compact('enrolledCourses', 'user', 'PendingCountEnroll', 'countEnroll'));
+            return view('auth.dashboard', compact(
+                'enrolledCourses','TotalReview',
+                'user',
+                'PendingCountEnroll', 'countEnroll', 'SessionPendingCount'));
         }catch(\Exception $e){
             Log::error($e->getMessage());
             return Redirect::back()->with('error', 'Something went wrong, please try again later.');
@@ -699,8 +708,46 @@ class HomeController extends Controller
 
     public function Classes(){
         try{
-            $proposalDetails = Proposal::where('status', '1')->get();
-            return view('auth.show-proposal', compact('proposalDetails'));
+            $proposalDetails = Proposal::where('user_id', Auth::user()->id)->where('status', '1')->get();
+            $sessions = BookSession::where('user_id', Auth::user()->id)->where('status', '1')->get();
+
+            $transactions = [];
+            foreach ($sessions as $session)
+            {
+                $transaction = [
+                    'date' => $session->created_at->format('d/m/Y'), 
+                    'meeting_date' => $session->zoom_meeting_start_time, 
+                    'meeting_url' => $session->zoom_meeting_url, 
+                    'type'=> 'Mentor Session',
+                    'meeting_password' => $session->zoom_meeting_password,
+                    'title' => $session->book_session ?? 'N/A', 
+                ];
+                $transactions[] = $transaction;
+            }
+
+            // Loop through the Proposal history
+            foreach ($proposalDetails as $proposal) {
+                $transaction = [
+                    'date' => $proposal->created_at->format('d/m/Y'), 
+                    'meeting_date' => $proposal->zoom_meeting_start_time, 
+                    'meeting_url' => $proposal->zoom_meeting_url,
+                    'type'=> 'Course',
+                    'meeting_password' => $proposal->zoom_meeting_password,
+                    'title' => $proposal->course->title ?? 'N/A', 
+                ];
+                $transactions[] = $transaction;
+            }
+
+            
+
+            // Sort transactions by date
+            usort($transactions, function ($a, $b) {
+                return $a['date'] <=> $b['date'];
+            });
+
+            // Pass the transactions to the view
+
+            return view('auth.show-proposal', compact('proposalDetails', 'transactions'));
         }catch(\Exception $e){
             Log::error($e->getMessage());
             return back()->with('error', 'Something went wrong, please try again later.');

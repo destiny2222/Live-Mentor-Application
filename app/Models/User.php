@@ -2,7 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Awards;
+use App\Models\Bank;
+use App\Models\Education;
+use App\Models\Experience;
+use App\Models\Mentor;
 use App\Models\Proposal;
+use App\Models\Review;
 use App\Models\Tutor;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,6 +34,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'gender',
         'city',
         'country',
+        'language',
         'username',
         'image',
         'last_seen',
@@ -84,6 +91,15 @@ class User extends Authenticatable implements MustVerifyEmail
      public function experiences()
      {
          return $this->hasMany(Experience::class);
+     }
+     public function education()
+     {
+         return $this->hasMany(Education::class);
+     }
+
+     public function certification()
+     {
+        return $this->hasMany(Awards::class);
      }
 
 
