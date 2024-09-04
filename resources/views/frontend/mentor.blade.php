@@ -19,8 +19,7 @@
             <div class="col-lg-12">
                 <div class="breadcumb-style1">
                     <div class="breadcumb-list">
-                        <a href="#">Home</a>
-                        <a href="#">Services</a>
+                        <a href="/">Home</a>
                         <a href="#">Mentor</a>
                     </div>
                 </div>
@@ -39,7 +38,6 @@
                 <div class="col-xl-7">
                     <div class="position-relative">
                         <h2>Mentor List</h2>
-                        <p class="text">All the Lorem Ipsum generators on the Internet tend to repeat.</p>
                         <div class="advance-search-tab at-home6 bgc-white bdrs12 p10 position-relative border-0">
                             <div class="row">
                                 <div class="col-md-9 col-lg-8 col-xl-9">

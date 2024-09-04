@@ -9,8 +9,7 @@
           <div class="col-lg-12">
             <div class="breadcumb-style1">
               <div class="breadcumb-list">
-                <a href="#">Home</a>
-                <a href="#">Services</a>
+                <a href="/">Home</a>
                 <a href="#">Course</a>
               </div>
             </div>

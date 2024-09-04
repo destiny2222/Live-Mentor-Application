@@ -2,16 +2,43 @@
 @section('title', 'About Us')
 @section('content')
 
-<div class="body_content">
+    <section class="breadcumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-lg-10">
+                    <div class="breadcumb-style1 mb10-xs">
+                        <div class="breadcumb-list">
+                            <a href="/">Home</a>
+                            <a href="#">About us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-lg-2">
+                    <div class="d-flex align-items-center justify-content-sm-end">
+                        <div class="share-save-widget d-flex align-items-center">
+                            <span class="icon flaticon-share dark-color fz12 mr10"></span>
+                            <div class="h6 mb-0">Share</div>
+                        </div>
+                        <div class="share-save-widget d-flex align-items-center ml15">
+                            <span class="icon flaticon-like dark-color fz12 mr10"></span>
+                            <div class="h6 mb-0">Save</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Breadcumb Sections -->
-    <section class="breadcumb-section mt40">
-        <div class="cta-about-v1 mx-auto maxw1700 pt120 pb120 bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg">
+    <section class="breadcumb-section pt-0">
+        <div class="cta-service-single cta-banner mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
+            <img class="left-top-img wow zoomIn" src="/images/vector-img/left-top.png" alt="">
+            <img class="right-bottom-img wow zoomIn" src="/images/vector-img/right-bottom.png" alt="">
+            <img class="service-v1-vector bounce-y d-none d-xl-block" src="/images/vector-img/vector-service-v1.png" alt="">
             <div class="container">
-                <div class="row">
-                    <div class="col-xl-5">
+                <div class="row wow fadeInUp">
+                    <div class="col-xl-7">
                         <div class="position-relative">
-                            <h2 class="text-white">About</h2>
-                            {{-- <p class="text-white mb30">Give your visitor a smooth online experience with a solid UX design</p> --}}
+                            <h2>About us</h2>
                         </div>
                     </div>
                 </div>
@@ -25,7 +52,7 @@
             <div class="row align-items-center">
                 <div class="col-md-6 col-xl-6">
                     <div class="about-img mb30-sm wow fadeInRight" data-wow-delay="300ms">
-                        <img class="w100" src="images/about/about-1.png" alt="">
+                        <img class="w100" src="images/about/about-1.jpg" alt="">
                     </div>
                 </div>
                 <div class="col-md-6 col-xl-5 offset-xl-1">
@@ -93,7 +120,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 col-xl-6 offset-xl-1 wow fadeInLeft" data-wow-delay="500ms">
-                        <div class="about-img"><img class="w100" src="images/about/about-6.jpg" alt=""></div>
+                        <div class="about-img"><img class="w100" src="images/about/about-5.jpg" alt=""></div>
                     </div>
                 </div>
             </div>

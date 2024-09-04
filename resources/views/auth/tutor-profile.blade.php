@@ -8,12 +8,10 @@
     gap: 1px; 
 }
 
-.skill-link {
+    .skill-link {
         display: block;
         margin-bottom: 5px; /* Add space between skills if needed */
     }
-
-
     .oni{
         right: 20%;
         top:17%;

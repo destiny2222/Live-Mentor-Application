@@ -65,6 +65,14 @@
                                             <label class="form-check-label ps-3" for="flexRadioDefault4">Human mentor</label>
                                         </div>
                                         <div class="form-check d-flex align-items-center">
+                                            <input class="form-check-input" type="radio"  name="prefer" value="group" id="flexRadioDefault5">
+                                            <label class="form-check-label ps-3" for="flexRadioDefault5">Group</label>
+                                        </div>
+                                        <div class="form-check d-flex align-items-center">
+                                            <input class="form-check-input" type="radio"  name="prefer" value="personal" id="flexRadioDefault5">
+                                            <label class="form-check-label ps-3" for="flexRadioDefault5">Personal</label>
+                                        </div>
+                                        <div class="form-check d-flex align-items-center">
                                             <input class="form-check-input" type="radio" onclick="AI()" name="prefer" value="ai" id="flexRadioDefault5">
                                             <label class="form-check-label ps-3" for="flexRadioDefault5">AI Mentor</label>
                                         </div>

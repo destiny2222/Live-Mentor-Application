@@ -21,7 +21,7 @@ use Jubaer\Zoom\Facades\Zoom;
 
 Route::get('/',[FrontController::class, 'index'])->name('index');
 Route::get('/about',[FrontController::class, 'about'])->name('about');
-// Route::get('/contact',[FrontController::class, 'contact'])->name('contact');
+Route::get('/contact',[FrontController::class, 'contact'])->name('contact');
 // Route::get('/service',[FrontController::class, 'service'])->name('service');
 
 // course route

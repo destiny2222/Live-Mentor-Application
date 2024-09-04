@@ -23,7 +23,11 @@ class Proposal extends Model
         'end_time',
         'additional_information',
         'payment_status',
-        'tutor_id'
+        'tutor_id',
+        'zoom_meeting_id',
+        'zoom_meeting_password',
+        'zoom_meeting_url',
+        'zoom_meeting_start_time',
     ];
 
     protected $casts = [ 

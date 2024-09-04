@@ -2,14 +2,16 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
-use App\Models\User;
-use App\Models\Course;
 use App\Models\Category;
+use App\Models\Course;
 use App\Models\Proposal;
-use Jubaer\Zoom\Facades\Zoom;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
+use Zoom;
 
 class CustomTask extends Command
 {
@@ -33,73 +35,70 @@ class CustomTask extends Command
     public function handle()
     {
         // Perform your custom task here
+        $random = Str::random(10);
         $users = User::orderBy('id', 'desc')->get();
+        
         foreach($users as $user){
-            $proposal = Proposal::where('user_id', $user->id)->where('status', '4')->get();
-            // foreach ($proposal as $proposals) {
-            //     // schedule a zoom meeting based on proposal time and each days
-            //     $MeetingTime = $proposals->time;
-            //     $MeetingDays = json_decode($proposals->date);
-    
-            //     // tutor email 
-            //     $course = Course::find($proposal->course_id);
-            //     if (!$course) {
-            //         return back()->with('error', 'No course found for the given proposal.');
-            //     }
-    
-            //     $category = Category::find($course->category_id);
-            //     if (!$category) {
-            //         return back()->with('error', 'No category found for the given course.');
-            //     }
-    
-                // $tutors = $category->tutors;
-                // if ($tutors->isEmpty()) {
-                //     return back()->with('error', 'No tutor found for the given proposal.');
-                // }
-                
-                // $UserTutor = User::where('id', $tutors->id)->first();
-                // info('Working'.  $category);
-    
-    
-                // Convert meeting days to Zoom's weekday format
-                // $recurrenceDays = [];
-                // foreach ($MeetingDays as $day) {
-                //     $recurrenceDays[] = Carbon::parse("next $day")->format('N'); // 1=Monday, 7=Sunday
-                // }
-    
-    
-                // You can use Zoom API or any other package to schedule a meeting
-                // $meeting = Zoom::create([ 
-                //     "agenda" => $proposals->title,
-                //     'topic' => $proposals->title,
-                //     'duration'   => 60,
-                //     'start_time' => Carbon::now()->format('Y-m-d') . 'T' . $MeetingTime,
-                //     "timezone" => 'Asia/Dhaka',
-                //     // 'start_time' => $MeetingDate . ' ' . $MeetingTime,
-                //     "password" => 'set your password', // set your password
-                //     "recurrence" => [
-                //         "type" => 1,
-                //         "repeat_interval" => 1,
-                //         "weekly_days" => implode(',', $recurrenceDays),
-                //         // "weekly_days" => $recurrenceDays,
-                //         "end_date_time" => count($MeetingDays),
-                //     ],
-                //     "template_id" => 'set your template id',
-                //     "pre_schedule" => true,
-                //     "schedule_for" =>$proposal->user->email,
-                //     "settings" => [
-                //         'join_before_host' => true, 
-                //         'host_video' => true,
-                //         'participant_video' => true,
-                //         'mute_upon_entry' => false, 
-                //         'waiting_room' => false,
-                //         'audio' => 'both', 
-                //         'auto_recording' => 'none', 
-                //         'approval_type' => 0, 
-                //     ],
-                // ]);
-            // }
+            $proposals = Proposal::where('user_id', $user->id)->where('prefer', 'group')->get();
+            foreach($proposals as $proposal){
+                foreach ($proposal->day as $day) {  // Loop through each day in the day array
+                    // Calculate the next occurrence of the specified day
+                    $startTime = Carbon::now()->next(Carbon::parse($day)->dayOfWeek)
+                        ->setTimeFromTimeString($proposal->time)
+                        ->setTimezone($proposal->timezone ?? 'UTC')
+                        ->format('Y-m-d\TH:i:s\Z');
+                    
+                    $response = Http::withHeaders([
+                        'Authorization' => 'Bearer ' .self::generateToken(),
+                        'Content-Type' => 'application/json',
+                    ])->post("https://api.zoom.us/v2/users/me/meetings", [
+                        'topic' => $proposal->title,
+                        'type'=> 2,
+                        'duration'   => 60,
+                        "timezone" => 'UTC',
+                        'start_time' => $startTime,
+                        "password" => $random, 
+                        "settings" => [
+                            'join_before_host' => true, 
+                            'host_video' => true,
+                            'participant_video' => true,
+                            'mute_upon_entry' => false, 
+                            'waiting_room' => false,
+                            'audio' => 'both', 
+                            'auto_recording' => 'none', 
+                            'approval_type' => 0, 
+                        ],
+                    ]);
+                    
+                    $data = $response->json();
+                    dd($data);
+
+                    // Save or process the response as needed
+                }
+            }
         }
-        info('Working'.  $proposal);
+        info('Working');
+    }
+    /**
+     * Generate a Zoom API access token.
+     *
+     * @return string
+     */
+    function generateToken(): string
+    {
+        try {
+            $base64String = base64_encode(config('services.zoom.ZOOM_CLIENT_ID') . ':' . config('services.zoom.ZOOM_CLIENT_SECRET'));
+            $accountId = config('services.zoom.ZOOM_ACCOUNT_ID');
+
+            $responseToken = Http::withHeaders([
+                "Content-Type" => "application/x-www-form-urlencoded",
+                "Authorization" => "Basic {$base64String}"
+            ])->post("https://zoom.us/oauth/token?grant_type=account_credentials&account_id={$accountId}");
+
+            return $responseToken->json()['access_token'];
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

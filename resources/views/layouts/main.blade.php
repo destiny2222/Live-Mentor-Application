@@ -57,7 +57,7 @@
                                     <li class="visible_list"> <a class="list-item" href="/"><span class="title">Home</span></a></li>
                                     <li class="visible_list"> <a class="list-item" href="/about"><span class="title">About Us</span></a></li>
                                     <li class="visible_list"> <a class="list-item" href="/course"><span class="title">Course</span></a></li>
-                                    <li> <a class="list-item pe-0" href="#">Contact</a></li>
+                                    <li> <a class="list-item pe-0" href="/contact">Contact</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                     <li> <a href="/"><span>Home</span></a></li>
                     <li> <a href="/about"><span>About Us</span></a></li>
                     <li> <a href="/course"><span>Course</span></a></li>
-                    <li> <a href="#">Contact</a></li>
+                    <li> <a href="/contact">Contact</a></li>
                     <!-- Only for Mobile View -->
                 </ul>
             </nav>

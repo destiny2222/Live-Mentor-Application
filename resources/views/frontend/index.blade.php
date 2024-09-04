@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <img class="home16-hero-fltimg d-none d-xl-block wow fadeInLeft" src="images/about/home16-hero-img-1.png" alt="">
+    <img class="home16-hero-fltimg d-none d-xl-block wow fadeInLeft" src="images/about/home16-hero-img-1.jpg" alt="">
 </section>
 
 <section class="pb40-md pb90 pt-80">
@@ -101,13 +101,13 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-6 col-xl-5">
-                <img class="home16-ctaimg-v1 w-100 d-none d-md-block wow fadeInRight" src="images/about/about-17.png" alt="">
+                <img class="home16-ctaimg-v1 w-100 d-none d-md-block wow fadeInRight" src="images/about/about-17.jpeg" alt="">
             </div>
             <div class="col-md-6 col-xl-4 offset-xl-2">
                 <div class="cta-style3 wow fadeInLeft">
                     <h2 class="cta-title">Empower the next generation on Mentor</h2>
-                    <!-- <p class="cta-text">Start Mentoring Now. </p> -->
-                    {{-- <a href="#" class="ud-btn btn-thm bdrs12 mr20">View Mentor <i class="fal fa-arrow-right-long"></i></a> --}}
+                    <p class="cta-text">focuses on guiding and inspiring young minds through mentorship. By sharing knowledge, skills, and experiences, mentors help mentees develop confidence, achieve goals, and navigate challenges. </p>
+                    
                     <a href="{{ route('register') }}" class="ud-btn btn-thm-border bdrs12">Get Started <i class="fal fa-arrow-right-long"></i></a>
                 </div>
             </div>
@@ -131,7 +131,7 @@
             </div>
             <div class="col-md-6 col-lg-5 col-xl-5 position-relative wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
                 <div class="cta-img">
-                    <img class="w-100" src="images/about/about-3.png" alt="">
+                    <img class="w-100" src="images/about/about-3.jpg" alt="">
                 </div>
             </div>
         </div>

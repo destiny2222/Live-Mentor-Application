@@ -27,8 +27,7 @@
             <div class="col-sm-8 col-lg-10">
                 <div class="breadcumb-style1 mb10-xs">
                     <div class="breadcumb-list">
-                        <a href="#">Home</a>
-                        <a href="#">Services</a>
+                        <a href="/">Home</a>
                         <a href="#">Mentor Profile</a>
                     </div>
                 </div>

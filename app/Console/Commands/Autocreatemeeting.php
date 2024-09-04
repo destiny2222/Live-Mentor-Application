@@ -2,15 +2,16 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
-use App\Models\User;
 use App\Models\BookSession;
-use Illuminate\Support\Str;
-use Jubaer\Zoom\Facades\Zoom;
+use App\Models\User;
+use App\Notifications\MeetingDetailsMail;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use App\Notifications\MeetingDetailsMail;
+use Illuminate\Support\Str;
+use Jubaer\Zoom\Facades\Zoom;
 
 class Autocreatemeeting extends Command
 {
@@ -32,7 +33,7 @@ class Autocreatemeeting extends Command
                     ->format('Y-m-d\TH:i:s\Z');
 
                 // Debugging: Log the sessionDateTime before creating the meeting
-                \Log::info('Session DateTime (before Zoom): ' . $sessionDateTime);
+                Log::info('Session DateTime (before Zoom): ' . $sessionDateTime);
 
                 try {
                     $meeting = Zoom::createMeeting([
@@ -42,7 +43,6 @@ class Autocreatemeeting extends Command
                         "timezone" => 'UTC', // Ensure the timezone is set to UTC
                         "password" => $random,
                         "start_time" => $sessionDateTime,
-                        "pre_schedule" => 3,
                         "settings" => [
                             'join_before_host' => true,
                             'host_video' => false,
@@ -59,15 +59,15 @@ class Autocreatemeeting extends Command
 
                     // Check if the meeting has ended
                     if ($meetingDetails['data']['status'] === 'waiting') {
-                        \Log::info('Meeting is waiting to start.');
+                        Log::info('Meeting is waiting to start.');
                     } elseif ($meetingDetails['data']['status'] === 'started') {
-                        \Log::info('Meeting is in progress.');
+                        Log::info('Meeting is in progress.');
                     } elseif ($meetingDetails['data']['status'] === 'ended') {
-                        \Log::info('Meeting has ended.');
+                        Log::info('Meeting has ended.');
 
                         // Fetch past meeting details if necessary
                         $pastMeetingDetails = Zoom::getPreviousMeetings($meeting['data']['id']);
-                        \Log::info('Past Meeting Details: ' . json_encode($pastMeetingDetails));
+                        Log::info('Past Meeting Details: ' . json_encode($pastMeetingDetails));
 
                         // Update your database or take any other necessary actions
                         $book->update([
