@@ -42,7 +42,7 @@
       <div class="container">
         <div class="row">
           @forelse ($courses as $course)
-            <div class="col-sm-6 col-xl-3">
+            <div class="col-sm-6 col-xl-3 mb-lg-0 mb-4">
               <div class="listing-style1">
                 <div class="list-thumb">
                   <img class="w-100" src="{{ asset('upload/courses/'.$course->image) }}" alt="">

@@ -49,32 +49,39 @@
                                                     <div>
                                                         <strong>Days:</strong> 
                                                         @foreach($proposal->day as $day)
-                                                            <span class="badge bg-primary">
-                                                                {{ $day }}
-                                                            </span>
+                                                            <span class="badge bg-primary">{{ $day }}</span>
                                                         @endforeach
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <h3 class="pt30">{{ $proposal->course->title }}</h3>
-                                            <p class="text mt20 mb20">
-                                                {{ $proposal->additional_information  }}
-                                            </p>
-                                            <p class="text mt20  mb20">
-                                                
-                                            </p>
-                                            <a href="{{ route('tutor.request.accept') }}" onclick="event.preventDefault(); document.getElementById('accept-{{ $proposal->id }}').submit();" class="ud-btn bgc-thm4 text-thm">Respond</a>
-                                            <a class="ud-btn bgc-thm4 text-thm" href="{{ route('tutor.request.cancel', $proposal->id) }}" onclick="event.preventDefault(); document.getElementById('reject-{{ $proposal->id }}').submit();" type="button">Reject</a>
-                                        </div>
-                                        <form clas="d-non" action="{{ route('tutor.request.accept', $proposal->id) }}" id="accept-{{ $proposal->id }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $proposal->id }}">
-                                            {{-- <input type="text" name="tutor_name" value="{{ $proposals->tutor_id }}"> --}}
-                                        </form>
-                                        <form action="{{ route('tutor.request.cancel', $proposal->id) }}" id="reject-{{ $proposal->id }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $proposal->id }}">
-                                        </form>
+                                                    <div>
+                                                        <strong>Prefer:</strong>
+                                                        <span class="badge bg-primary">{{ $proposal->prefer }}</span>
+                                                    </div>
+                                                    
+                                                    <h3 class="pt30">{{ $proposal->course->title }}</h3>
+                                                    <p class="text mt20 mb20">{{ $proposal->additional_information }}</p>
+                                                    
+                                                    <!-- Respond Button -->
+                                                    @if ($proposal->status != '2')
+                                                        <button class="ud-btn bgc-thm4 text-thm" onclick="event.preventDefault(); document.getElementById('accept-{{ $proposal->id }}').submit();">Respond</button>
+                                                    @else
+                                                        <button class="ud-btn bgc-thm4 text-thm" disabled>Respond</button>
+                                                    @endif
+                                                    
+                                                    <!-- Reject Button -->
+                                                    <button class="ud-btn bgc-thm4 text-thm" onclick="event.preventDefault(); document.getElementById('reject-{{ $proposal->id }}').submit();" type="button">Reject</button>
+                                                    
+                                                    <!-- Accept Form -->
+                                                    <form class="d-none" action="{{ route('tutor.request.accept', $proposal->id) }}" id="accept-{{ $proposal->id }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $proposal->id }}">
+                                                    </form>
+                                                    
+                                                    <!-- Reject Form -->
+                                                    <form class="d-none" action="{{ route('tutor.request.cancel', $proposal->id) }}" id="reject-{{ $proposal->id }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $proposal->id }}">
+                                                    </form>
+                                                    
                                     </div>
                                 </div>
                             </div>

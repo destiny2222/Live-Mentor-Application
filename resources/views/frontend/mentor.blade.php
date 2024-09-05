@@ -2,7 +2,7 @@
 @section('title', 'Mentor')
 <style>
     .oni{
-        right: 0%;
+        left: 0%;
         top:20%;
     }
 
@@ -35,7 +35,7 @@
         <img class="service-v1-vector bounce-y d-none d-lg-block" src="/images/vector-img/vector-service-v1.png" alt="">
         <div class="container">
             <div class="row wow fadeInUp">
-                <div class="col-xl-7">
+                <div class="col-xl-7 mb-lg-0 mb-4">
                     <div class="position-relative">
                         <h2>Mentor List</h2>
                         <div class="advance-search-tab at-home6 bgc-white bdrs12 p10 position-relative border-0">
@@ -69,7 +69,7 @@
     <div class="container">
         <div class="row">
             @foreach($users as $user)
-            <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="col-md-6 col-lg-4 col-xl-3 mb-lg-0 mb-4">
                 <div class="freelancer-style1 bdrs12 bdr1 hover-box-shadow">
                     <div class="d-flex align-items-center">
                         <div class="thumb w90 position-relative rounded-circle">

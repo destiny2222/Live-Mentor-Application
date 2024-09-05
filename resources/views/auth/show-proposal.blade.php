@@ -1,4 +1,11 @@
 @extends('layouts.master')
+<style>
+ @media (max-width: 767px) {
+  .pending-style {
+    font-size: 9px;
+  }
+}
+</style>
 @section('content')
 
 <div class="dashboard__main pl0-md">
@@ -41,10 +48,16 @@
                           <th scope="row">{{ $loop->index + 1 }}</th>
                           <td class="vam">{{ $transaction['title'] }}</td>
                           <td class="vam">{{ $transaction['type']   }}</td>
-                          <td class="vam">{{ $transaction['meeting_password']   }}</td>
-                          <td class="vam">{{ $transaction['meeting_date']   }}</td>
+                          <td class="vam">{{ $transaction['meeting_password'] ?? 'N/A'   }}</td>
+                          <td class="vam">{{ $transaction['meeting_date']  ?? 'N/A' }}</td>
                           <td class="vam">
-                            <a class="pending-style style2" href="{{ $transaction['meeting_url']   }}">Join Link</a>
+                            @if ($transaction['status'] == '4')
+                             <a class="pending-style style2" href="{{ $transaction['meeting_url']   }}">Join Link</a>   
+                            @elseif ($transaction['status'] == '2')
+                              <a class="pending-style style2" href="javascript:void(0)">Rejected</a>   
+                            @else
+                              <a class="pending-style style2" href="javascript:void(0)">Pending</a>
+                            @endif
                           </td>
                         </tr>
                       @endforeach

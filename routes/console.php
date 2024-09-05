@@ -16,6 +16,8 @@ use App\Notifications\MeetingDetailsMail;
   
 
 Schedule::command('custom:meeting')->everyMinute();
+Schedule::command('custom:custom-task')->everyMinute();
+Schedule::command('app:custom')->everyMinute();
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());

@@ -5,10 +5,10 @@
 <section class="hero-home16">
     <div class="container">
         <div class="row align-items-center justify-content-between">
-            <div class="col-xl-7">
+            <div class="col-md-12 col-xl-7">
                 <div class="home14-hero-content wow fadeInRight">
                     <h1 class="title animate-up-1 mb25" style="text-tramsform:uppercase;">A Unified Front For <br class="d-none d-xl-block"> Mentor and Scholars</h1>
-                    <p class="text animate-up-2">Join the Mentor Community: Learn, Lead and thrive<br class="d-none d-lg-block"> 
+                    <p class="text animate-up-2">Join the mentor community: learn, lead and thrive<br class="d-none d-lg-block"> 
                         in your career path</p>
                     <div class="d-sm-flex align-items-center mt30 animate-up-3">
                         <a href="{{ route('register') }}" class="ud-btn btn-thm4 me-3 bdrs120 btn-1">Get Started</a>
@@ -25,7 +25,7 @@
         <div class="row align-items-center wow fadeInUp" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms; animation-name: fadeInUp;">
             <div class="col-lg-9">
                 <div class="main-title2">
-                    <h2 class="title">Explore our Extensive range Of Courses</h2>
+                    <h2 class="title">Explore our extensive range Of courses</h2>
                     <p class="paragraph">JOIN TO CHANGE YOUR LIFE</p>
                 </div>
             </div>
@@ -37,7 +37,7 @@
         </div>
         <div class="row  d-lg-flex wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
             @foreach ($categories as $category)
-            <div class="col-sm-6 col-lg-4 col-xl-3">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
                 <a href="{{ route('category.courses', $category->slug) }}">
                     <div class="iconbox-style1 bdr1" style="background:{{ $category->color }};">
                         <div class="icon"><span class="{{ $category->image }}"></span></div>
@@ -58,10 +58,10 @@
     <div class="cta-banner3 mx-auto maxw1600 pt120 pt60-lg pb90 pb60-lg position-relative overflow-hidden">
       <div class="container">
         <div class="row">
-          <div class="col-xl-5 wow fadeInRight" style="visibility: visible; animation-name: fadeInRight;">
+          <div class="col-xl-5 mb-lg-0 mb-4 wow fadeInRight" style="visibility: visible; animation-name: fadeInRight;">
             <div class="mb30">
               <div class="main-title">
-                <h2 class="title">A whole world of  <br class="d-none d-xl-block"> talent at your fingertips</h2>
+                <h2 class="title d-xl-block">A whole world of  <br class="d-none "> talent at your fingertips</h2>
               </div>
             </div>
             <div class="why-chose-list">
@@ -100,10 +100,10 @@
 <section class="our-cta position-relative">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-6 col-xl-5">
-                <img class="home16-ctaimg-v1 w-100 d-none d-md-block wow fadeInRight" src="images/about/about-17.jpeg" alt="">
+            <div class="col-md-6 col-xl-5 mb-lg-0 mb-4">
+                <img class="home16-ctaimg-v1 w-100 wow fadeInRight" src="images/about/about-17.jpeg" alt="">
             </div>
-            <div class="col-md-6 col-xl-4 offset-xl-2">
+            <div class="col-md-6 col-xl-4 mb-lg-0 mb-4 offset-xl-2">
                 <div class="cta-style3 wow fadeInLeft">
                     <h2 class="cta-title">Empower the next generation on Mentor</h2>
                     <p class="cta-text">focuses on guiding and inspiring young minds through mentorship. By sharing knowledge, skills, and experiences, mentors help mentees develop confidence, achieve goals, and navigate challenges. </p>
@@ -122,14 +122,14 @@
 <section class="our-cta bgc-thm4 pt90 pb90 pt60-md pb60-md mt100 mt0-lg">
     <div class="container">
         <div class="row justify-content-between">
-            <div class="col-md-6 col-lg-7 col-xl-5 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+            <div class="col-md-6 col-lg-7 col-xl-5 mb-lg-0 mb-4 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
                 <div class="cta-style3">
                     <h2 class="cta-title">Find the right Mentor</h2>
                     <p class="cta-text">Engage with reliable and consistent mentor.</p>
                     <a href="{{ route('mentor.index') }}" class="ud-btn btn-thm2">Get Started <i class="fal fa-arrow-right-long"></i></a>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-5 col-xl-5 position-relative wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
+            <div class="col-md-6 col-lg-5 col-xl-5 mb-lg-0 mb-4 position-relative wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
                 <div class="cta-img">
                     <img class="w-100" src="images/about/about-3.jpg" alt="">
                 </div>

@@ -22,7 +22,7 @@
     <section class="pt-0">
         <div class="container">
             <div class="row wow fadeInUp" data-wow-delay="300ms">
-                <div class="col-lg-6">
+                <div class="col-lg-6 mb-lg-0 mb-4">
                     <div class="position-relative mt40">
                         <div class="main-title">
                             <h4 class="form-title mb25">Keep In Touch With Us.</h4>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 mb-lg-0 mb-4">
                     <div class="contact-page-form default-box-shadow1 bdrs8 bdr1 p50 mb30-md bgc-white">
                         <h4 class="form-title mb25">Tell us about yourself</h4>
                         <p class="text mb30">Whether you have questions or you would just like to say hello, contact us.</p>

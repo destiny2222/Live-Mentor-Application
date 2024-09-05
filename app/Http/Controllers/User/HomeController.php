@@ -41,7 +41,12 @@ class HomeController extends Controller
             $SessionPendingCount = BookSession::where('user_id', $user->id)->where('status', '0')->count();
             $SessionAcceptedCount = BookSession::where('user_id', $user->id)->where('status', '1')->count();
             $SessionRejectedCount = BookSession::where('user_id', $user->id)->where('status', '2')->count();
-            $TotalReview = Review::where('user_id', $user->id)->count();
+            
+
+            // fetch all totalReview send to tutor
+           $TotalReview  = Review::where('user_id', $user->id)->count();
+           // tutor
+           $proposal = Proposal::where('tutor_id', $user->id)->get(); 
             
             $enrolledCourses = [];
         
@@ -58,7 +63,7 @@ class HomeController extends Controller
         
             return view('auth.dashboard', compact(
                 'enrolledCourses','TotalReview',
-                'user',
+                'user','proposal',
                 'PendingCountEnroll', 'countEnroll', 'SessionPendingCount'));
         }catch(\Exception $e){
             Log::error($e->getMessage());
@@ -593,7 +598,7 @@ class HomeController extends Controller
         try{
             $proposal = Proposal::find($id);
             $user = User::where('id', Auth::user()->id)->first();
-            dd($user);
+            // dd($user);
             return view('auth.viewProposal', compact('proposal'));
         }catch(\Exception $e){
             Log::error($e->getMessage());
@@ -715,10 +720,13 @@ class HomeController extends Controller
             foreach ($sessions as $session)
             {
                 $transaction = [
+                    'id'=> $session->id,
                     'date' => $session->created_at->format('d/m/Y'), 
                     'meeting_date' => $session->zoom_meeting_start_time, 
                     'meeting_url' => $session->zoom_meeting_url, 
-                    'type'=> 'Mentor Session',
+                    'type'=> 'Session',
+                    'status'=> $session->status,
+                    'price'=> $session->book_session_price,
                     'meeting_password' => $session->zoom_meeting_password,
                     'title' => $session->book_session ?? 'N/A', 
                 ];
@@ -728,10 +736,13 @@ class HomeController extends Controller
             // Loop through the Proposal history
             foreach ($proposalDetails as $proposal) {
                 $transaction = [
+                    'id'=> $proposal->id,
                     'date' => $proposal->created_at->format('d/m/Y'), 
                     'meeting_date' => $proposal->zoom_meeting_start_time, 
                     'meeting_url' => $proposal->zoom_meeting_url,
                     'type'=> 'Course',
+                    'price'=> $proposal->price,
+                    'status'=> $proposal->status,
                     'meeting_password' => $proposal->zoom_meeting_password,
                     'title' => $proposal->course->title ?? 'N/A', 
                 ];

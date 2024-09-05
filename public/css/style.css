@@ -4982,12 +4982,12 @@ section {
 .iconbox-style1 .icon:before {
   background-color: #FBF7ED;
   border-radius: 50%;
-  bottom: -10px;
+  bottom: -16px;
   content: "";
-  height: 40px;
+  height: 60px;
   position: absolute;
-  right: -20px;
-  width: 40px;
+  right: -9px;
+  width: 60px;
   z-index: -1;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;

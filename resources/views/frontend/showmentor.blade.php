@@ -2,18 +2,31 @@
 @section('title', 'Tutor Profile')
 @section('content')
 <style>
-    .skills-container {
+.skills-container {
     display: flex;
     flex-wrap: wrap; 
     gap: 1px; 
-}
+ }
 
-.tag-list {
-    /* flex: 1 1 100px;  */
-}
-.oni{
-        right: 15%;
+   .oni{
+        left: 4%;
         top:20%;
+    }
+
+    .w-70{
+        width:70%;
+    }
+
+    @media (max-width: 768px) {
+        .w-70 {
+            width: 100%;
+        }
+        .oni{
+            right: 8%;
+        }
+        .freelancer-single-style .online {
+            top: -98px;
+        }
     }
 
     .online.offline{
@@ -54,18 +67,18 @@
         <img class="right-bottom-img wow zoomIn" src="images/vector-img/right-bottom.png" alt="">
         <div class="container">
             <div class="row wow fadeInUp">
-                <div class="col-xl-7">
+                <div class="col-xl-7 ">
                     <div class="position-relative">
                         <div class="list-meta d-sm-flex align-items-center mt30">
                             <a class="position-relative freelancer-single-style" href="#">
-                                <img class="rounded-circle w-100 wa-sm mb15-sm" src="{{ asset('profile/'.$users->image) }}" alt="Freelancer Photo">
+                                <img class="rounded-circle w-70 mb15-sm" src="{{ asset('profile/'.$users->image) }}" alt="Freelancer Photo">
                                 @if ($users->last_seen >= now()->subMinutes(5))
                                     <span class="online position-absolute oni"></span>
                                 @else
                                     <span class="online offline position-absolute oni"></span>
                                 @endif
                             </a>
-                            <div class="ml20 ml0-xs">
+                            <div class="">
                                 <h5 class="title mb-1">{{ $users->name }}</h5>
                                 <p class="mb-0">{{ $users->mentor->title }}</p>
                                 <p class="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm"><i class="fas fa-star vam fz10 review-color me-2"></i> {{ number_format($users->averageRating(), 1) }} reviews</p>

@@ -45,17 +45,17 @@ class PaymentController extends Controller
     public function handleGatewayCallback()
     {
         $paymentDetails = Paystack::getPaymentData();
-        dd($paymentDetails);
+        // dd($paymentDetails);
         
         try {
             if ($paymentDetails['status'] === true) {
-                if ($paymentDetails['data']['metadata']['type'] === 'proposal') {
+                if ($paymentDetails['data']['metadata']['type'] === 'Course') {
                     $proposal = Proposal::find($paymentDetails['data']['metadata']['order_id']);
                     $proposal->update(['status' => 4]);
                     return redirect()->route('dashboard')->with(['success' => 'Payment was successful. You can now access the course', 'type' => 'success']);
-                } elseif ($paymentDetails['data']['metadata']['type'] === 'session') {
+                } elseif ($paymentDetails['data']['metadata']['type'] === 'Session') {
                     $session = BookSession::find($paymentDetails['data']['metadata']['order_id']);
-                    $session->update(['book_session_payment_status' => 1]);
+                    $session->update(['status' => 4, 'book_session_payment_status'=> 1]);
                     return redirect()->route('dashboard')->with(['success' => 'Payment was successful. You can now access the course', 'type' => 'success']);
                 } else {
                     return redirect()->route('dashboard')->with(['error' => 'Payment failed. Please try again.', 'type' => 'error']);

@@ -138,50 +138,43 @@
         <div class="body_content ">
             @yield('content')
             <!-- Our Footer -->
-            <section class="footer-style1 pt25 pb-0">
-                <div class="container">
+            <section class="footer-style1  pt50 pb-0">
+                <div class="container ">
                     <div class="row">
-                        <div class="col-sm-6 col-lg-3">
+                        <div class="col-12 col-sm-6 col-lg-5">
                             <div class="link-style1 mb-4 mb-sm-5">
-                                <h5 class="text-white mb15">About</h5>
-                                <div class="link-list">
-                                    <a href="#">Careers</a>
-                                    <a href="#">Press & News</a>
-                                    <a href="#">Partnerships</a>
-                                    <a href="#">Privacy Policy</a>
-                                    <a href="#">Terms of Service</a>
-                                    <a href="#">Investor Relations</a>
+                                <img src="/logo.png" class="img-fluid" alt="">
+                                <p class="text " style="color: #fff">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in feugiat eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec auctor, nunc id aliquam tincidunt, nisl metus scelerisque libero, a lacinia odio ligula at erat.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-4">
+                            <h5 class="text-white mb15">Support</h5>
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="link-style1 mb-4 mb-sm-5">
+                                        <div class="link-list">
+                                            <ul class="ps-0"> 
+                                                <li><a class="text-white" href="/">Home</a></li>
+                                                <li><a class="text-white" href="/about">About us</a></li>
+                                                <li><a class="text-white" href="/course">Course</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="link-style1 mb-4 mb-sm-5">
+                                        <ul class="ps-0">
+                                            <li><a class="text-white" href="#">Help & Support</a></li>
+                                            <li><a class="text-white" href="/contact">Contact Us</a></li>
+                                            <li><a class="text-white" href="#">Terms of Service</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="link-style1 mb-4 mb-sm-5">
-                                <h5 class="text-white mb15">Categories</h5>
-                                <ul class="ps-0">
-                                    <li><a href="#">Graphics & Design</a></li>
-                                    <li><a href="#">Digital Marketing</a></li>
-                                    <li><a href="#">Writing & Translation</a></li>
-                                    <li><a href="#">Video & Animation</a></li>
-                                    <li><a href="#">Music & Audio</a></li>
-                                    <li><a href="#">Programming & Tech</a></li>
-                                    <li><a href="#">Data</a></li>
-                                    <li><a href="#">Business</a></li>
-                                    <li><a href="#">Lifestyle</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="link-style1 mb-4 mb-sm-5">
-                                <h5 class="text-white mb15">Support</h5>
-                                <ul class="ps-0">
-                                    <li><a href="#">Help & Support</a></li>
-                                    <li><a href="#">Trust & Safety</a></li>
-                                    <li><a href="#">Selling on Freeio</a></li>
-                                    <li><a href="#">Buying on Freeio</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-3">
+                        <div class="col-12 col-sm-6 col-lg-3">
                             <div class="footer-widget">
                                 <div class="footer-widget mb-4 mb-sm-5">
                                     <div class="mailchimp-widget">
@@ -190,22 +183,7 @@
                                             <input type="email" class="form-control bdrs4" placeholder="Your email address">
                                             <button type="submit">Send</button>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="app-widget mb-4 mb-sm-5">
-                                    <h5 class="title text-white mb20">Apps</h5>
-                                    <div class="row mb-4 mb-lg-5">
-                                        <div class="col-lg-12">
-                                            Coming Soon
-                                            {{-- <a class="app-list d-flex align-items-center mb10" href="#">
-                                                <i class="fab fa-apple fz17 mr15"></i>
-                                                <h6 class="app-title fz15 fw400 mb-0">iOS App</h6>
-                                            </a>
-                                            <a class="app-list d-flex align-items-center" href="#">
-                                                <i class="fab fa-google-play fz15 mr15"></i>
-                                                <h6 class="app-title fz15 fw400 mb-0">Android App</h6>
-                                            </a> --}}
-                                        </div>
+                                        <p class="text-white mt20">Get the latest news and updates!</p>
                                     </div>
                                 </div>
                             </div>

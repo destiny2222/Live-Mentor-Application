@@ -50,14 +50,13 @@
     <section class="our-about pb0 pt60-lg">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6 col-xl-6">
+                <div class="col-md-6 col-xl-6 mb-lg-0 mb-4">
                     <div class="about-img mb30-sm wow fadeInRight" data-wow-delay="300ms">
                         <img class="w100" src="images/about/about-1.jpg" alt="">
                     </div>
                 </div>
-                <div class="col-md-6 col-xl-5 offset-xl-1">
+                <div class="col-md-6 col-xl-5 mb-lg-0 mb-4 offset-xl-1">
                     <div class="position-relative wow fadeInLeft" data-wow-delay="300ms">
-                        <h2 class="mb25">About </h2>
                         <p class="text mb25">
                           Welcome to MENTOR, an initiative of GritinAI to connect you with the best mentors and tutors in your field of interest. Whether you're a student looking for guidance or a professional seeking to enhance your skills, our platform is designed to help you find the perfect mentor or tutor who meets your unique needs.
                         </p>
@@ -85,7 +84,7 @@
         <div class="cta-banner mx-auto maxw1600 pt120 pt60-lg pb90 pb60-lg position-relative overflow-hidden mx20-lg">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-6 col-xl-5 pl30-md pl15-xs wow fadeInRight" data-wow-delay="500ms">
+                    <div class="col-md-6 mb-lg-0 mb-4 col-xl-5 pl30-md pl15-xs wow fadeInRight" data-wow-delay="500ms">
                         <div class="mb30">
                             <div class="main-title">
                                 <h2 class="title">Making learning as easy as <br class="d-none d-md-block" /> it should be </h2>
@@ -119,7 +118,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-xl-6 offset-xl-1 wow fadeInLeft" data-wow-delay="500ms">
+                    <div class="col-md-6 mb-lg-0 mb-4 col-xl-6 offset-xl-1 wow fadeInLeft" data-wow-delay="500ms">
                         <div class="about-img"><img class="w100" src="images/about/about-5.jpg" alt=""></div>
                     </div>
                 </div>
