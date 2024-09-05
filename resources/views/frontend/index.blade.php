@@ -7,7 +7,7 @@
         <div class="row align-items-center justify-content-between">
             <div class="col-md-12 col-xl-7">
                 <div class="home14-hero-content wow fadeInRight">
-                    <h1 class="title animate-up-1 mb25" style="text-tramsform:uppercase;">A Unified Front For <br class="d-none d-xl-block"> Mentor and Scholars</h1>
+                    <h1 class="title animate-up-1 mb25">A unified front For <br class="d-none d-xl-block"> mentor and scholars</h1>
                     <p class="text animate-up-2">Join the mentor community: learn, lead and thrive<br class="d-none d-lg-block"> 
                         in your career path</p>
                     <div class="d-sm-flex align-items-center mt30 animate-up-3">
@@ -106,7 +106,7 @@
             <div class="col-md-6 col-xl-4 mb-lg-0 mb-4 offset-xl-2">
                 <div class="cta-style3 wow fadeInLeft">
                     <h2 class="cta-title">Empower the next generation on Mentor</h2>
-                    <p class="cta-text">focuses on guiding and inspiring young minds through mentorship. By sharing knowledge, skills, and experiences, mentors help mentees develop confidence, achieve goals, and navigate challenges. </p>
+                    <p class="cta-text">Focus on guiding and inspiring young minds through mentorship.</p>
                     
                     <a href="{{ route('register') }}" class="ud-btn btn-thm-border bdrs12">Get Started <i class="fal fa-arrow-right-long"></i></a>
                 </div>

@@ -11,7 +11,6 @@
                     <div class="col-xl-5">
                         <div class="position-relative wow fadeInUp" data-wow-delay="300ms">
                             <h2 class="text-white">Contact us</h2>
-                            <p class="text mb0 text-white">We'd love to talk about how we can help you.</p>
                         </div>
                     </div>
                 </div>
@@ -26,27 +25,26 @@
                     <div class="position-relative mt40">
                         <div class="main-title">
                             <h4 class="form-title mb25">Keep In Touch With Us.</h4>
-                            <p class="text">Neque convallis a cras semper auctor. Libero id faucibus nisl tincidunt egetnvallis.</p>
                         </div>
-                        <div class="iconbox-style1 contact-style d-flex align-items-start mb30">
+                        {{-- <div class="iconbox-style1 contact-style d-flex align-items-start mb30">
                             <div class="icon flex-shrink-0"><span class="flaticon-tracking"></span></div>
                             <div class="details">
                                 <h5 class="title">Address</h5>
                                 <p class="mb-0 text">328 Queensberry Street, North <br> Melbourne VIC 3051, Australia.</p>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="iconbox-style1 contact-style d-flex align-items-start mb30">
                             <div class="icon flex-shrink-0"><span class="flaticon-call"></span></div>
                             <div class="details">
                                 <h5 class="title">Phone</h5>
-                                <p class="mb-0 text">+(0) 392 94 03 01</p>
+                                <p class="mb-0 text">+2348076899750</p>
                             </div>
                         </div>
                         <div class="iconbox-style1 contact-style d-flex align-items-start mb30">
                             <div class="icon flex-shrink-0"><span class="flaticon-mail"></span></div>
                             <div class="details">
                                 <h5 class="title">Email</h5>
-                                <p class="mb-0 text">hello@freeio.com</p>
+                                <p class="mb-0 text">info@gritinai.com</p>
                             </div>
                         </div>
                     </div>

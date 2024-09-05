@@ -113,7 +113,11 @@
                         <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
                             <a class="mobile_logo" href="/"><img src="/logo.png" width="100" alt=""></a>
                             <div class="right-side text-end">
-                                <a class="#" href="/login">Join Now</a>
+                                @auth
+                                    <a class="#" href="{{ route('dashboard') }}">Dashboard</a>
+                                    @else
+                                    <a class="#" href="/register">Join Now</a>
+                                @endauth
                                 <a class="menubar ml30" href="#menu"><img src="/images/mobile-dark-nav-icon.svg" alt=""></a>
                             </div>
                         </div>
@@ -143,9 +147,9 @@
                     <div class="row">
                         <div class="col-12 col-sm-6 col-lg-5">
                             <div class="link-style1 mb-4 mb-sm-5">
-                                <img src="/logo.png" class="img-fluid" alt="">
+                                <img src="/fotor_logo.png" class="img-fluid" alt="">
                                 <p class="text " style="color: #fff">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in feugiat eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec auctor, nunc id aliquam tincidunt, nisl metus scelerisque libero, a lacinia odio ligula at erat.
+                                    Get a personalized live mentor on our Smart Mentor system that offers a rich feature set, including the ability to set goals and milestones against which progress can be measured.
                                 </p>
                             </div>
                         </div>

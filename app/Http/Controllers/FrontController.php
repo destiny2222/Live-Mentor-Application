@@ -10,6 +10,7 @@ use App\Models\MentorApplication;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FrontController extends Controller
 {
@@ -83,8 +84,14 @@ public function CategoryCourses($slug) {
     }
 
 
-    // public function tutor(){
-    //     return view('frontend.cart');
-    // }
+    public function contactStore(Request $request){
+       $request->validate([ 
+           'name'=> 'required|string',
+           'email'=> 'required|string',
+           'message'=> 'required',
+        ]);
+
+        
+    }
 }
 
