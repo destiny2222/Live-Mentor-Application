@@ -27,22 +27,20 @@ class Autocreatemeeting extends Command
             $bookSessions = BookSession::where('user_id', $user->id)->where('status', 1)->get();
     
             foreach ($bookSessions as $book) {
-                // Check if the meeting ID already exists
                 if (!$book->zoom_meeting_id) {
-                    // Case 1: Meeting ID does not exist, create a new meeting
+                    // Meeting ID does not exist, create a new one
                     $sessionDateTime = Carbon::parse($book->book_session_date . ' ' . $book->book_session_time, $book->book_session_time_zone)
                         ->setTimezone('UTC')
                         ->format('Y-m-d\TH:i:s\Z');
     
-                    // Debugging: Log the sessionDateTime before creating the meeting
                     Log::info('Session DateTime (before Zoom): ' . $sessionDateTime);
     
                     try {
                         $meeting = Zoom::createMeeting([
                             "topic" => $book->book_session,
-                            "type" => 2, 
+                            "type" => 2,
                             "duration" => $book->minutes,
-                            "timezone" => 'UTC', // Ensure the timezone is set to UTC
+                            "timezone" => 'UTC', // Set timezone
                             "password" => $random,
                             "start_time" => $sessionDateTime,
                             "settings" => [
@@ -63,7 +61,7 @@ class Autocreatemeeting extends Command
                             Log::info('Meeting is waiting to start.');
                         }
     
-                        // Save the meeting details to the database
+                        // Save the meeting details
                         $book->update([
                             'zoom_meeting_id' => $meetingDetails['data']['id'],
                             'zoom_meeting_password' => $random,
@@ -80,27 +78,36 @@ class Autocreatemeeting extends Command
                         Log::error('Error creating meeting: ' . $e->getMessage());
                     }
                 } else {
-                    // Case 2: Meeting ID exists, update the status if necessary
+                    // Meeting ID exists, check and update status
                     try {
                         $meetingDetails = Zoom::getMeeting($book->zoom_meeting_id);
     
-                        if ($meetingDetails['data']['status'] === 'waiting') {
-                            Log::info('Meeting is waiting to start.');
-                        } elseif ($meetingDetails['data']['status'] === 'started') {
-                            Log::info('Meeting is in progress.');
-                        } elseif ($meetingDetails['data']['status'] === 'ended') {
-                            Log::info('Meeting has ended.');
+                        switch ($meetingDetails['data']['status']) {
+                            case 'waiting':
+                                Log::info('Meeting is waiting to start.');
+                                break;
+                            case 'started':
+                                Log::info('Meeting is in progress.');
+                                break;
+                            case 'ended':
+                                Log::info('Meeting has ended.');
+                                // Fetch past meeting details
+                                try {
+                                    $pastMeetingDetails = Zoom::getPreviousMeetings($book->zoom_meeting_id);
+                                    Log::info('Past Meeting Details: ' . json_encode($pastMeetingDetails));
     
-                            // Fetch past meeting details if necessary
-                            $pastMeetingDetails = Zoom::getPreviousMeetings($book->zoom_meeting_id);
-                            Log::info('Past Meeting Details: ' . json_encode($pastMeetingDetails));
-    
-                            // Update the meeting details with past meeting info
-                            $book->update([
-                                'zoom_meeting_start_time' => Carbon::parse($pastMeetingDetails['data']['start_time'])->format('Y-m-d H:i:s'),
-                                'zoom_meeting_url' => $pastMeetingDetails['data']['join_url'],
-                            ]);
+                                    // Update book session with past meeting details
+                                    $book->update([
+                                        'zoom_meeting_start_time' => Carbon::parse($pastMeetingDetails['data']['start_time'])->format('Y-m-d H:i:s'),
+                                        'zoom_meeting_url' => $pastMeetingDetails['data']['join_url'],
+                                        'status' => 0, // Mark the session as completed or handled
+                                    ]);
+                                } catch (\Exception $e) {
+                                    Log::error('Error fetching past meeting details: ' . $e->getMessage());
+                                }
+                                break;
                         }
+    
                     } catch (\Exception $e) {
                         Log::error('Error updating meeting: ' . $e->getMessage());
                     }
@@ -108,5 +115,6 @@ class Autocreatemeeting extends Command
             }
         }
     }
+    
     
 }
