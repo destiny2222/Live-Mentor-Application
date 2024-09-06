@@ -5,7 +5,7 @@
 <section class="hero-home16">
     <div class="container">
         <div class="row align-items-center justify-content-between">
-            <div class="col-md-12 col-xl-7">
+            <div class="col-xl-7">
                 <div class="home14-hero-content wow fadeInRight">
                     <h1 class="title animate-up-1 mb25">A unified front For <br class="d-none d-xl-block"> mentor and scholars</h1>
                     <p class="text animate-up-2">Join the mentor community: learn, lead and thrive<br class="d-none d-lg-block"> 

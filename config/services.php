@@ -43,6 +43,15 @@ return [
         'ZOOM_CLIENT_ID'=>env('ZOOM_CLIENT_ID'),
         'ZOOM_CLIENT_SECRET'=>env('ZOOM_CLIENT_SECRET'),
         'ZOOM_ACCOUNT_ID'=>env('ZOOM_ACCOUNT_ID'),
+    ],
+
+    
+    // PAYSTACK
+    'paystack'=>[
+        'PUBLIC_KEY'=>env('PAYSTACK_PUBLIC_KEY'),
+        'SECRET_KEY'=>env('PAYSTACK_SECRET_KEY'),
+        'PAYSTACK_PAYMENT_URL'=>env('PAYSTACK_PAYMENT_URL'),
+        'MERCHANT_EMAIL'=>env('MERCHANT_EMAIL'),
     ]
 
 ];

@@ -407,7 +407,7 @@ class HomeController extends Controller
         
             Mail::to($tutor->email)->send(new TutorMailRequest($proposal));
         
-            return back()->with('success', 'Request sent successfully!');
+            return redirect()->route('dashboard')->with('success', 'Request sent successfully!');
         }catch(\Exception $e){
             Log::error($e->getMessage());
             return back()->with('error', 'Something went wrong, please try again later.');
