@@ -52,7 +52,7 @@ class PaymentSuccessfulNotification extends Notification
         }
 
         return (new MailMessage)
-                    ->view('emails.payment_successful', [
+                    ->view('mail.payment_successful', [
                         'amount' => $amount,
                         'status' => $status,
                         'dashboardUrl' => url('/dashboard'),

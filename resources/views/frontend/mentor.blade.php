@@ -38,25 +38,6 @@
                 <div class="col-xl-7 mb-lg-0 mb-4">
                     <div class="position-relative">
                         <h2>Mentor List</h2>
-                        <div class="advance-search-tab at-home6 bgc-white bdrs12 p10 position-relative border-0">
-                            <div class="row">
-                                <div class="col-md-9 col-lg-8 col-xl-9">
-                                    <div class="advance-search-field mb10-sm">
-                                        <form class="form-search position-relative">
-                                            <div class="box-search">
-                                                <span class="icon far fa-magnifying-glass"></span>
-                                                <input class="form-control" type="text" name="search" placeholder="Keyword or freelancer name">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-lg-4 col-xl-3">
-                                    <div class="text-center">
-                                        <button class="ud-btn btn-thm4 bdrs12 w-100 border-0" type="button">Search</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

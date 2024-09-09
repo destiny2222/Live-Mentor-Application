@@ -7,9 +7,8 @@
             <div class="col-sm-8 col-lg-10">
                 <div class="breadcumb-style1 mb10-xs">
                     <div class="breadcumb-list">
-                        <a href="#">Home</a>
-                        <a href="#">Services</a>
-                        <a href="#">Design & Creative</a>
+                        <a href="/">Home</a>
+                        <a href="#">Preference</a>
                     </div>
                 </div>
             </div>
@@ -57,25 +56,26 @@
                         <form class="form2" id="coupon_form" action="{{ route('preference.store') }}" name="contact_form" method="post">
                             @csrf
                             <div class="row py-5">
-                                <div class="col-sm-12 mb-5">
+                                <div class="col-sm-12 mb-1">
                                     <h4>I prefer</h4>
-                                    <div class="d-flex gap-3">
-                                        <div class="form-check d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" name="prefer" value="human" id="flexRadioDefault4">
-                                            <label class="form-check-label ps-3" for="flexRadioDefault4">Human mentor</label>
-                                        </div>
-                                        <div class="form-check d-flex align-items-center">
-                                            <input class="form-check-input" type="radio"  name="prefer" value="group" id="flexRadioDefault5">
-                                            <label class="form-check-label ps-3" for="flexRadioDefault5">Group</label>
-                                        </div>
-                                        <div class="form-check d-flex align-items-center">
-                                            <input class="form-check-input" type="radio"  name="prefer" value="personal" id="flexRadioDefault5">
-                                            <label class="form-check-label ps-3" for="flexRadioDefault5">Personal</label>
-                                        </div>
-                                        <div class="form-check d-flex align-items-center">
-                                            <input class="form-check-input" type="radio" onclick="AI()" name="prefer" value="ai" id="flexRadioDefault5">
-                                            <label class="form-check-label ps-3" for="flexRadioDefault5">AI Mentor</label>
-                                        </div>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="radio" name="prefer" value="human" id="flexRadioDefault4">
+                                        <label class="form-check-label ps-3" for="flexRadioDefault4">Human mentor</label>
+                                    </div>
+                                    
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="radio" onclick="AI()" name="prefer" value="ai" id="flexRadioDefault5">
+                                        <label class="form-check-label ps-3" for="flexRadioDefault5">AI Mentor</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 mb-5">
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="radio"  name="prefer" value="group" id="flexRadioDefault5">
+                                        <label class="form-check-label ps-3" for="flexRadioDefault5">Group</label>
+                                    </div>
+                                    <div class="form-check d-flex align-items-center">
+                                        <input class="form-check-input" type="radio"  name="prefer" value="personal" id="flexRadioDefault5">
+                                        <label class="form-check-label ps-3" for="flexRadioDefault5">Personal</label>
                                     </div>
                                 </div>
                                 

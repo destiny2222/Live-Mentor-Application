@@ -27,5 +27,7 @@ class SearchController extends Controller
     
         return view('frontend.course', compact('courses'));
     }
+
+
     
 }
