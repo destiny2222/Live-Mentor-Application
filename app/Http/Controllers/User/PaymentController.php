@@ -111,7 +111,6 @@ class PaymentController extends Controller
     {
         $paymentDetails = Paystack::getPaymentData();
         // dd($paymentDetails);
-        
         try {
             if ($paymentDetails['status'] === true) {
                 return redirect()->route('dashboard')->with('status', 'Payment is being processed. You will be notified once it is complete.');
