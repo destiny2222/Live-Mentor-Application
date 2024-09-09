@@ -541,7 +541,7 @@
                     <div class="sidebar-widget skills-container mb30 pb20 bdrs8">
                         <h4 class="widget-title">My Skills</h4>
                         <div class="tag-list mt30">
-                            @foreach ($users->mentor->Skills as $skills)
+                            @foreach ($users->mentor->Skills ?? [] as $skills)
                              <a href="#">{{ $skills }}</a>
                             @endforeach
                         </div>

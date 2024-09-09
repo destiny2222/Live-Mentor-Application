@@ -94,9 +94,9 @@
                         <p class="text">{{ \Str::limit($user->mentor->about ?? 'N/A', 100) }}</p>
                         <div class="skill-tags d-flex align-items-center justify-content-start mb30 mt20">
                             @php $count = 0; @endphp
-                            @foreach( $user->mentor->Skills as $skill)
+                            @foreach( $user->mentor->Skills ?? [] as $skill)
                                 @if ($count < 3)
-                                    <span class="tag bgc-thm3 mx10">{{ $skill ?? '' }}</span>
+                                    <span class="tag bgc-thm3 mx10">{{ $skill  }}</span>
                                     @php $count++; @endphp
                                 @endif
                             @endforeach
