@@ -60,7 +60,7 @@ Route::prefix('dashboard')->group(function (){
 
         // payment
         Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
-        // Route::get('/payment/course/callback', [PaymentController::class, 'handleGatewayCallback'])->name('callback.payment');
+        Route::get('/payment/course/callback', [PaymentController::class, 'handleGatewayCallback'])->name('callback.payment');
         Route::post('/payment/webhook', [PaymentController::class, 'WebhookGatewayCallback'])->name('paystack.webhook');
         
         // Create Meeting

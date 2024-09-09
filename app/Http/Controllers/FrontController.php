@@ -71,9 +71,11 @@ public function CategoryCourses($slug) {
 
     
     public function mentor(){
-        $users  = User::where('role', 'mentor')->orderBy('id', 'asc')->paginate(16);
+        $users = User::where('role', 'mentor')->whereNotNull('id')->paginate(16);
+        // dd($users); 
         return view('frontend.mentor', compact('users'));
     }
+    
 
     public function showMentor($id){
         $users = User::findOrFail($id);

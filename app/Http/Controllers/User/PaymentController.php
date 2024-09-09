@@ -38,7 +38,6 @@ class PaymentController extends Controller
                 ],
             ];
            return Paystack::getAuthorizationUrl($paymentData)->redirectNow();
-           return redirect()->route('dashboard')->with('status', 'Payment is being processed. You will be notified once it is complete.');
         }catch(\Exception $e) {
             Log::error($e->getMessage());
             return redirect()->back()->withMessage(['error'=>'The paystack token has expired. Please refresh the page and try again.', 'type'=>'error']);
@@ -108,33 +107,21 @@ class PaymentController extends Controller
     }
 
 
-    // public function handleGatewayCallback()
-    // {
-    //     $paymentDetails = Paystack::getPaymentData();
-    //     // dd($paymentDetails);
+    public function handleGatewayCallback()
+    {
+        $paymentDetails = Paystack::getPaymentData();
+        // dd($paymentDetails);
         
-    //     try {
-    //         if ($paymentDetails['status'] === true) {
-    //             if ($paymentDetails['data']['metadata']['type'] === 'Course') {
-    //                 $proposal = Proposal::find($paymentDetails['data']['metadata']['order_id']);
-    //                 $proposal->update(['status' => 4]);
-    //                 return redirect()->route('dashboard')->with(['success' => 'Payment was successful. You can now access the course', 'type' => 'success']);
-    //             } elseif ($paymentDetails['data']['metadata']['type'] === 'Session') {
-    //                 $session = BookSession::find($paymentDetails['data']['metadata']['order_id']);
-    //                 $session->update(['status' => 4, 'book_session_payment_status'=> 1]);
-    //                 return redirect()->route('dashboard')->with(['success' => 'Payment was successful. You can now access the course', 'type' => 'success']);
-    //             } else {
-    //                 return redirect()->route('dashboard')->with(['error' => 'Payment failed. Please try again.', 'type' => 'error']);
-    //             }
-                
-                
-    //         } else {
-    //             return redirect()->route('dashboard')->with(['error' => 'Payment failed. Please try again.', 'type' => 'error']);
-    //         }
-    //     } catch (\Exception $exception) {
-    //         Log::error('Payment callback error: ' . $exception->getMessage());
-    //         return back()->with(['error' => 'The Paystack token has expired. Please refresh the page and try again.', 'type' => 'error']);
-    //     }
-    // }
+        try {
+            if ($paymentDetails['status'] === true) {
+                return redirect()->route('dashboard')->with('status', 'Payment is being processed. You will be notified once it is complete.');
+            } else {
+                return redirect()->route('dashboard')->with(['error' => 'Payment failed. Please try again.', 'type' => 'error']);
+            }
+        } catch (\Exception $exception) {
+            Log::error('Payment callback error: ' . $exception->getMessage());
+            return back()->with(['error' => 'The Paystack token has expired. Please refresh the page and try again.', 'type' => 'error']);
+        }
+    }
 
 }
