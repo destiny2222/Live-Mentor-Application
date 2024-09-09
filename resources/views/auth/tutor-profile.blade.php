@@ -120,7 +120,7 @@
                     @endforeach
 
                     <hr class="opacity-100 mb60">
-                    <h4 class="mb30">Awards adn Certificates</h4>
+                    <h4 class="mb30">Awards and certificates</h4>
                     @foreach($certifications as $certification)
                     <div class="educational-quality ps-0">
                         <div class="wrapper mb40">
@@ -230,15 +230,11 @@
                 <div class="blog-sidebar ms-lg-auto">
                     <div class="price-widget pt25 widget-mt-minus bdrs8">
                         <div class="category-list mt20">
-                            <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
-                                <span class="text"><i class="flaticon-place text-thm2 pe-2 vam"></i>Location</span> <span class="">{{ $tutor->user->conutry }}</span>
-                            </a>
+                           
                             <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                                 <span class="text"><i class="flaticon-30-days text-thm2 pe-2 vam"></i>Member since</span> <span class="">{{ $tutor->user->created_at->format('F j') }}</span>
                             </a>
-                            <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
-                                <span class="text"><i class="flaticon-mars text-thm2 pe-2 vam"></i>Gender</span> <span class="">{{ $tutor->user->gender }}</span>
-                            </a>
+                           
                             <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                                 <span class="text"><i class="flaticon-translator text-thm2 pe-2 vam"></i>Languages</span> <span class="">English</span>
                             </a>

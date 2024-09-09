@@ -1,5 +1,29 @@
 @extends('layouts.main')
 @section('title', 'Home')
+<style>
+
+    /* Large devices (desktops,  less than 1200px) */
+    @media (max-width:1399.98px) { 
+        .animate-up-1{
+            inline-size:500px;
+        }
+        .home16-hero-fltimg {
+         max-width:670px !important;
+        }
+    }
+
+    
+
+    /* X-Small devices (portrait phones, less than 576px) */
+    @media (min-width:576px) { 
+        .animate-up-1{
+            inline-size: 750px;
+         }
+       
+    }
+    
+
+</style>
 @section('content')
 <!-- Home Banner Style V1 -->
 <section class="hero-home16">
@@ -7,7 +31,7 @@
         <div class="row align-items-center justify-content-between">
             <div class="col-xl-7">
                 <div class="home14-hero-content wow fadeInRight">
-                    <h1 class="title animate-up-1 mb25">A unified front For <br class="d-none d-xl-block"> mentor and scholars</h1>
+                    <h1 class="title animate-up-1 mb25">A unified front For <br class="d-none d-xl-block"> mentors and scholars</h1>
                     <p class="text animate-up-2">Join the mentor community: learn, lead and thrive<br class="d-none d-lg-block"> 
                         in your career path</p>
                     <div class="d-sm-flex align-items-center mt30 animate-up-3">
@@ -17,7 +41,7 @@
             </div>
         </div>
     </div>
-    <img class="home16-hero-fltimg d-none d-xl-block wow fadeInLeft" src="images/about/home16-hero-img-1.jpg" alt="">
+    <img class="home16-hero-fltimg  d-none d-xl-block wow fadeInLeft" src="images/about/home16-hero-img-1.jpg" alt="">
 </section>
 
 <section class="pb40-md pb90 pt-80">
@@ -100,10 +124,10 @@
 <section class="our-cta position-relative">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-md-6 col-xl-5 mb-lg-0 mb-4">
+            <div class="col-md-6 col-xl-5 mb-lg-0 mb-4 order-lg-1 order-2">
                 <img class="home16-ctaimg-v1 w-100 wow fadeInRight" src="images/about/about-17.jpeg" alt="">
             </div>
-            <div class="col-md-6 col-xl-4 mb-lg-0 mb-4 offset-xl-2">
+            <div class="col-md-6 col-xl-4 mb-lg-0 mb-4 order-lg-2 order-1 offset-xl-2">
                 <div class="cta-style3 wow fadeInLeft">
                     <h2 class="cta-title">Empower the next generation on Mentor</h2>
                     <p class="cta-text">Focus on guiding and inspiring young minds through mentorship.</p>

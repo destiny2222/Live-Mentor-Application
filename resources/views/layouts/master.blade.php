@@ -217,19 +217,29 @@
   <!-- Mobile Nav  -->
   <div id="page" class="mobilie_header_nav stylehome1">
     <div class="mobile-menu">
-      <div class="header bdrb1">
+      <div class="header dashboard-navbar bdrb1">
         <div class="menu_and_widgets">
           <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
             <a class="mobile_logo" href="/"><img width="100" src="/logo.png" alt=""></a>
             <div class="right-side text-end">
               {{-- <a class="" href="/login">Join</a> --}}
-              {{-- <a class="menubar ml30" href="#menu"><img src="images/mobile-dark-nav-icon.svg" alt=""></a> --}}
+              <a class="menubar ml30" href="#menu"><img src="/images/mobile-dark-nav-icon.svg" alt=""></a>
             </div>
           </div>
         </div>
         <div class="posr"><div class="mobile_menu_close_btn"><span class="far fa-times"></span></div></div>
       </div>
     </div>
+     <!-- /.mobile-menu -->
+     <nav id="menu" class="">
+      <ul>
+        <li> <a href="/"><span>Home</span></a></li>
+        <li> <a href="/about"><span>About Us</span></a></li>
+        <li> <a href="/course"><span>Course</span></a></li>
+        <li> <a href="/contact">Contact</a></li>
+        <!-- Only for Mobile View -->
+      </ul>
+    </nav>
   </div>
 
   <div class="dashboard_content_wrapper">

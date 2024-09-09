@@ -76,11 +76,7 @@
                     <div class="blog-sidebar ms-lg-auto">
                         <div class="price-widget">
                             <div class="navtab-style1">
-                                <nav>
-                                    <div class="nav nav-tabs mb20" id="nav-tab2p" role="tablist">
-                                      <button class="nav-link active fw500" id="nav-item2p-tab" data-bs-toggle="tab" data-bs-target="#nav-item2p" type="button" role="tab" aria-controls="nav-item2p" aria-selected="false">Standart</button>
-                                    </div>
-                                </nav>
+                                
                                 <div class="tab-content" id="nav-tabContent">
                                     <div class="tab-pane fade show active" id="nav-item2p" role="tabpanel" aria-labelledby="nav-item2p-tab">
                                         <div class="price-content">

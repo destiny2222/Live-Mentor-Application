@@ -80,7 +80,7 @@
                             </a>
                             <div class="">
                                 <h5 class="title mb-1">{{ $users->name }}</h5>
-                                <p class="mb-0">{{ $users->mentor->title }}</p>
+                                <p class="mb-0">{{ $users->mentor->title ?? '' }}</p>
                                 <p class="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm"><i class="fas fa-star vam fz10 review-color me-2"></i> {{ number_format($users->averageRating(), 1) }} reviews</p>
                                 <p class="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i class="flaticon-place vam fz20 me-2"></i> {{ $users->conutry }}</p>
                                 <p class="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i class="flaticon-30-days vam fz20 me-2"></i> Member since {{ $users->created_at->format("F j, Y") }}</p>
@@ -145,15 +145,11 @@
                 <div class="blog-sidebar ms-lg-auto">
                     <div class="price-widget pt25 widget-mt-minus bdrs8">
                         <div class="category-list mt20">
-                            <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
-                                <span class="text"><i class="flaticon-place text-thm2 pe-2 vam"></i>Location</span> <span class="">{{ $users->conutry }}</span>
-                            </a>
+                           
                             <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                                 <span class="text"><i class="flaticon-30-days text-thm2 pe-2 vam"></i>Member since</span> <span class="">{{ $users->created_at->format('F j, Y') }}</span>
                             </a>
-                            <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
-                                <span class="text"><i class="flaticon-mars text-thm2 pe-2 vam"></i>Gender</span> <span class="">{{ $users->gender }}</span>
-                            </a>
+                            
                             <a class="d-flex align-items-center justify-content-between bdrb1 pb-2" href="#">
                                 <span class="text"><i class="flaticon-translator text-thm2 pe-2 vam"></i>Languages</span> <span class="">English</span>
                             </a>

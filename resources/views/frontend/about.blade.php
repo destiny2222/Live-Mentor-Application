@@ -58,7 +58,7 @@
                 <div class="col-md-6 col-xl-5 mb-lg-0 mb-4 offset-xl-1">
                     <div class="position-relative wow fadeInLeft" data-wow-delay="300ms">
                         <p class="text mb25">
-                          Welcome to MENTOR, an initiative of GritinAI to connect you with the best mentors and tutors in your field of interest. Whether you're a student looking for guidance or a professional seeking to enhance your skills, our platform is designed to help you find the perfect mentor or tutor who meets your unique needs.
+                          Welcome to MENTOR, an initiative of GritinAI to connect you with the best mentors and tutors in your field of interest. Whether you are a student looking for guidance or a professional seeking to enhance your skills, our platform is designed to help you find the perfect mentor or tutor who meets your unique needs.
                         </p>
                         <p class="text mb25">
                           We know that education and personal growth are not one-size-fits-all. That's why we've created a safe space where learners can explore a diverse range of mentors and tutors, each with their own specialties and teaching styles. 
@@ -136,7 +136,7 @@
                     <div class="cta-style6 mb30-sm">
                         <h2 class="cta-title mb25">Start your journey</h2>
                         <p class="text-thm2 fz15 mb25">
-                          Start your journey towards knowledge, growth, and success. Whether you're preparing for exams, advancing your career, or simply expanding your horizons, we're here to help you every step of the way.
+                          Start your journey towards knowledge, growth, and success. Whether you're preparing for exams, advancing your career, or simply expanding your horizons, we are here to help you every step of the way.
                         </p>
                         <a href="/login" class="ud-btn btn-thm">Get Started <i class="fal fa-arrow-right-long"></i></a>
                     </div>

@@ -11,12 +11,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row align-items-center justify-content-between pb40">
             <div class="col-lg-12">
-              <div class="dashboard_title_area">
-                <h2>My Class</h2>
-              </div>
+                <div class="dashboard_title_area">
+                  <h2>My Class</h2>
+                </div>
             </div>
         </div>
         <div class="row">

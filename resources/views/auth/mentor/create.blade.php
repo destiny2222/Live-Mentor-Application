@@ -5,7 +5,14 @@
     <div class="dashboard__content hover-bgc-color">
         <!-- Your existing content here -->
 
-        <div class="row">
+        <div class="row pb40">
+            <div class="col-lg-12">
+                <div class="dashboard_navigationbar d-block d-lg-none">
+                    <div class="dropdown">
+                        @include('layouts.navbar')
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-12 mb20">
                 <div class="dashboard_title_area">
                   <h2>More Information</h2>

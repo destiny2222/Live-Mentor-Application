@@ -1,87 +1,4 @@
 @extends('layouts.master')
-<style>
-    /* General button styles */
-    .btn {
-        display: inline-block;
-        font-weight: 400;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        user-select: none;
-        border: 1px solid transparent;
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        border-radius: 0.25rem;
-        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-
-    /* Outline button styles */
-
-    .btn-outline-warning {
-        color: #ffc107;
-        border-color: #ffc107;
-    }
-
-    .btn-outline-warning:hover {
-        color: #fff;
-        background-color: #ffc107;
-        border-color: #ffc107;
-    }
-
-
-    .btn-outline-primary {
-        color: #007bff;
-        border-color: #007bff;
-    }
-
-    .btn-outline-primary:hover {
-        color: #fff;
-        background-color: #007bff;
-        border-color: #007bff;
-    }
-
-    .btn-outline-danger {
-        color: #dc3545;
-        border-color: #dc3545;
-    }
-
-    .btn-outline-danger:hover {
-        color: #fff;
-        background-color: #dc3545;
-        border-color: #dc3545;
-    }
-
-    .btn-outline-info {
-        color: #17a2b8;
-        border-color: #17a2b8;
-    }
-
-    .btn-outline-info:hover {
-        color: #fff;
-        background-color: #17a2b8;
-        border-color: #17a2b8;
-    }
-
-    /* Small button styles */
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.875rem;
-        line-height: 1.5;
-        border-radius: 0.2rem;
-    }
-
-    /* Margin end (right) */
-    .me-2 {
-        margin-right: 0.5rem;
-    }
-
-    /* Text primary color */
-    .text-primary {
-        color: #007bff !important;
-    }
-
-</style>
 @section('content')
 
 <div class="dashboard__main pl0-md">
@@ -245,7 +162,7 @@
 
         <div class="row">
             <div class="col-xl-12">
-                <div class="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative">
+                <div class="ps-widget bgc-white bdrs4 p30 mb30 overflow-hidden position-relative d-none d-xl-block">
                     <div class="navtab-style1">
                         <div class="chartjs-size-monitor">
                             <div class="chartjs-size-monitor-expand">
@@ -258,11 +175,13 @@
                         <div class="d-sm-flex align-items-center justify-content-between">
                             <h4 class="title fz17 mb20">Profile Views</h4>
                             <div class="page_control_shorting dark-color pr10 text-center text-md-end">
-                                <div class="dropdown bootstrap-select show-tick"><select class="selectpicker show-tick">
+                                <div class="dropdown bootstrap-select show-tick">
+                                    <select class="selectpicker show-tick">
                                         <option>This Week</option>
                                         <option>This Month</option>
                                         <option>This Year</option>
-                                    </select><button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-bs-toggle="dropdown" role="combobox" aria-owns="bs-select-1" aria-haspopup="listbox" aria-expanded="false" title="This Week">
+                                    </select>
+                                    <button type="button" tabindex="-1" class="btn dropdown-toggle btn-light" data-bs-toggle="dropdown" role="combobox" aria-owns="bs-select-1" aria-haspopup="listbox" aria-expanded="false" title="This Week">
                                         <div class="filter-option">
                                             <div class="filter-option-inner">
                                                 <div class="filter-option-inner-inner">This Week</div>

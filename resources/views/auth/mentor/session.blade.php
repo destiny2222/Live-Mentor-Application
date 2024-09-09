@@ -2,6 +2,15 @@
 @section('content')
 <div class="dashboard__main pl0-md">
     <div class="dashboard__content hover-bgc-color">
+        <div class="row pb40">
+            <div class="col-lg-12">
+                <div class="dashboard_navigationbar d-block d-lg-none">
+                    <div class="dropdown">
+                        @include('layouts.navbar')
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xl-12">
                 <!-- resources/views/livewire/syllabus.blade.php -->

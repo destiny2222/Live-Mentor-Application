@@ -145,15 +145,15 @@
             <section class="footer-style1  pt50 pb-0">
                 <div class="container ">
                     <div class="row">
-                        <div class="col-12 col-sm-6 col-lg-5">
+                        <div class="col-12 col-sm-6 col-lg-5 mb-lg-0 mb-5">
                             <div class="link-style1 mb-4 mb-sm-5">
-                                <img src="/fotor_logo.png" class="img-fluid" alt="">
+                                <img src="/fotor_logo.png" width="150" class="img-fluid" alt="">
                                 <p class="text " style="color: #fff">
                                     Get a personalized live mentor on our Smart Mentor system that offers a rich feature set, including the ability to set goals and milestones against which progress can be measured.
                                 </p>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-6 col-lg-4">
+                        <div class="col-12 col-sm-6 col-lg-4 mb-lg-0 mb-5">
                             <h5 class="text-white mb15">Support</h5>
                             <div class="row">
                                 <div class="col-12 col-lg-6">
@@ -178,7 +178,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-6 col-lg-3">
+                        <div class="col-12 col-sm-6 col-lg-3 mb-lg-0 mb-5">
                             <div class="footer-widget">
                                 <div class="footer-widget mb-4 mb-sm-5">
                                     <div class="mailchimp-widget">
