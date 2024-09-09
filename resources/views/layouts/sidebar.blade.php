@@ -36,7 +36,7 @@
              <a href="{{ route('tutor.proposal') }}" class="items-center {{ Request::routeIs('tutor.proposal') ? '-is-active' : '' }}"><i class="flaticon-document mr15"></i>My Proposals</a>
             </div>
             <div class="sidebar_list_item">
-             <a href="" class="items-center "><i class="flaticon-document mr15"></i>Classes</a>
+             <a href="{{ route('tutor.class') }}" class="items-center  {{ Request::routeIs('tutor.class') ? '-is-active' : '' }}"><i class="flaticon-document mr15"></i>Classes</a>
             </div>
         @endif
         <p class="fz15 fw400 ff-heading pl30 mt30">Account</p>

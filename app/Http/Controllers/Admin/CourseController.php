@@ -21,8 +21,8 @@ class CourseController extends Controller
 
 
     public function create(){
-        $category = Category::orderBy('id', 'desc')->get();
-        return view('admin.course.create', compact('category'));
+        $categories  = Category::orderBy('id', 'desc')->get();
+        return view('admin.course.create', compact('categories'));
     }
 
     public function store(Request $request){

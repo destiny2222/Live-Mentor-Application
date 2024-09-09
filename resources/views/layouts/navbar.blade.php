@@ -11,7 +11,7 @@
     <li><a href="{{ route('show.history') }}" {{ Request::routeIs('show.history') ? 'active' : '' }}><i class="flaticon-receipt mr10"></i>Payment History</a></li>
     @else
     <li class="{{ Request::routeIs('tutor.proposal') ? 'active' : '' }}"><a href="{{ route('tutor.proposal') }}"><i class="flaticon-document mr10"></i>My Proposals</a></li>
-    <li><a href="page-dashboard-save.html"><i class="flaticon-like mr10"></i>Classes</a></li>
+    <li><a href="{{ route('tutor.class') }}"><i class="flaticon-like mr10"></i>Classes</a></li>
     @endif
     <li class="{{ Request::routeIs('profile.index') ? 'active' : '' }}"><a href="{{ route('profile.index') }}"><i class="flaticon-photo mr10"></i>My Profile</a></li>
     <li><a href="{{  route('logout') }}" id="form-logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="flaticon-logout mr10"></i>Logout</a></li>

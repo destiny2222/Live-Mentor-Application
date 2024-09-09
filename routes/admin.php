@@ -25,6 +25,7 @@ Route::prefix('admin')->name('admin.')->group(function (){
     Route::middleware('admin.logged_in')->group(function () { 
         Route::get('/', [ HomeController::class,'home' ])->name('home');
         Route::get('/course', [CourseController::class, 'index'])->name('course.index');
+        Route::get('/course/create', [CourseController::class, 'create'])->name('course.create');
         Route::post('/course/store', [CourseController::class, 'store'])->name('course.store');
         Route::get('/course/{id}/edit', [CourseController::class, 'edit'])->name('course.edit');
         Route::put('/course/{id}/update', [CourseController::class, 'update'])->name('course.update');

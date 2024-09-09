@@ -24,14 +24,14 @@ class MentorController extends Controller
 {
     public function index(){
         $bookings = BookSession::where('mentor_id', Auth::user()->id)->get();
-        return view('auth.mentor.index', compact('bookings'));
+        return view('user.mentor.index', compact('bookings'));
     }
     
    
     
     public function create(){
         $category = Category::orderBy('id', 'desc')->get();
-        return view('auth.mentor.create', compact('category'));
+        return view('user.mentor.create', compact('category'));
     }
     public function store(Request $request) {
         $rules = [
@@ -169,11 +169,11 @@ class MentorController extends Controller
     public function edit(){
         $user = Auth::user();
         $mentor = Mentor::where('user_id', $user->id)->first();
-        return view('auth.mentor.edit', compact('mentor'));
+        return view('user.mentor.edit', compact('mentor'));
     }
 
     public function SessionPage(){
-        return view('auth.mentor.session');
+        return view('user.mentor.session');
     }
 
     public function storeSession(Request $request){
@@ -327,5 +327,8 @@ class MentorController extends Controller
         $sessions = BookSession::where('mentor_id', Auth::user()->mentor->user_id)->where('status', 1)->get();
         return view('auth.mentor.myClass', compact('sessions'));
     }
+
+
+
 
 }

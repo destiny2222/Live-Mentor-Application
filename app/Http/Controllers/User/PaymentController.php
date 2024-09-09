@@ -57,7 +57,7 @@ class PaymentController extends Controller
         
         try {
             if ($paymentDetails['status'] === true) {
-                return redirect()->route('dashboard')->with('status', 'Payment is being processed. You will be notified once it is complete.');
+                return redirect()->route('dashboard')->with('success', 'Payment is being processed. You will be notified once it is complete.');
             } else {
                 return redirect()->route('dashboard')->with(['error' => 'Payment failed. Please try again.', 'type' => 'error']);
             }
@@ -68,51 +68,47 @@ class PaymentController extends Controller
     }
 
     public function WebhookGatewayCallback(Request $request)
-{
-    try {
-        if ($request->isMethod('POST') && $request->header('HTTP_X_PAYSTACK_SIGNATURE')) {
-            $input = @file_get_contents("php://input");
-            $secretKey = config('services.paystack.secret');
+    {
+        try {
+            if ($request->isMethod('POST') && $request->header('HTTP_X_PAYSTACK_SIGNATURE')) {
+                $input = @file_get_contents("php://input");
+                $secretKey = config('services.paystack.secret');
 
-            if ($request->header('HTTP_X_PAYSTACK_SIGNATURE') === hash_hmac('sha512', $input, $secretKey)) {
-                $event = json_decode($input, true);
+                if ($request->header('HTTP_X_PAYSTACK_SIGNATURE') === hash_hmac('sha512', $input, $secretKey)) {
+                    $event = json_decode($input, true);
 
-                $metadata = $event['data']['metadata'];
-                $user = User::find($metadata['user_id']);
-                if ($event['event'] === 'charge.success') {
+                    $metadata = $event['data']['metadata'];
+                    $user = User::find($metadata['user_id']);
+                    if ($event['event'] === 'charge.success') {
 
-                    if ($metadata['type'] === 'proposal') {
-                        $proposal = Proposal::find($metadata['order_id']);
-                        $proposal->update(['status' => 4]);
-                        
-                        // Notify the user
-                        $user->notify(new PaymentSuccessfulNotification($proposal));
-                        
-                    } elseif ($metadata['type'] === 'session') {
-                        $session = BookSession::find($metadata['order_id']);
-                        $session->update(['status' => 4, 'book_session_payment_status' => 1]);
-                        
-                        // Notify the user
-                        $user->notify(new PaymentSuccessfulNotification($session));
+                        if ($metadata['type'] === 'proposal') {
+                            $proposal = Proposal::find($metadata['order_id']);
+                            $proposal->update(['status' => 4]);
+                            // Notify the user
+                            $user->notify(new PaymentSuccessfulNotification($proposal));
+                        } elseif ($metadata['type'] === 'session') {
+                            $session = BookSession::find($metadata['order_id']);
+                            $session->update(['status' => 4, 'book_session_payment_status' => 1]);
+                            // Notify the user
+                            $user->notify(new PaymentSuccessfulNotification($session));
+                        }
+                        $this->savePayment($event);
+                        return response()->json(['status' => 'success'], 200);
+                    } else {
+                        $user->notify(new PaymentFailedNotification('The payment could not be processed.'));
+                        return response()->json(['error' => 'Payment failed'], 400);
                     }
-                    $this->savePayment($event);
-                   
-                    return response()->json(['status' => 'success'], 200);
                 } else {
-                    $user->notify(new PaymentFailedNotification('The payment could not be processed.'));
-                    return response()->json(['error' => 'Payment failed'], 400);
+                    return response()->json(['error' => 'Invalid signature'], 400);
                 }
-            } else {
-                return response()->json(['error' => 'Invalid signature'], 400);
             }
-        }
 
-        return response()->json(['error' => 'Invalid request'], 400);
-    } catch (\Exception $exception) {
-        Log::error('Payment callback error: ' . $exception->getMessage());
-        return response()->json(['error' => 'Internal server error'], 500);
+            return response()->json(['error' => 'Invalid request'], 400);
+        } catch (\Exception $exception) {
+            Log::error('Payment callback error: ' . $exception->getMessage());
+            return response()->json(['error' => 'Internal server error'], 500);
+        }
     }
-}
 
 
     // Helper function to save payment details

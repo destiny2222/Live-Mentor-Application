@@ -61,7 +61,7 @@ class HomeController extends Controller
                 }
             }
         
-            return view('auth.dashboard', compact(
+            return view('user.dashboard', compact(
                 'enrolledCourses','TotalReview',
                 'user','proposal',
                 'PendingCountEnroll', 'countEnroll', 'SessionPendingCount'));
@@ -74,146 +74,15 @@ class HomeController extends Controller
     
     
 
-    public function tutor() {
-        try{
-            $category = Category::all();
-            $user = Auth::user();
-            $tutor = Tutor::orderBY('id', 'asc')->first();
-            // dd($tutor);
-            // $count = ;
-            return view('auth.create-tutor', compact('category', 'user','tutor'));
-        }catch(\Exception $e){
-            Log::error($e->getMessage());
-            return back()->with('error', 'Something went wrong. Please try again later.');
-        }
-    }
-    
-    public function storeTutor(Request $request){
-        try{
-            $request->validate([
-                'language' => ['required', 'string'],
-                'title' => ['required', 'string'],
-                'resume' => ['required', 'file'], 
-            ]);
-
-            // check if the user is a tutor
-            if ($request->user()->tutor) {
-                return redirect()->back()->with('error', 'You are already a tutor');
-            }
-            
-    
-            $uploadedFileUrl = $request->file('resume')->storeOnCloudinary('tutor/resume');
-            $url = $uploadedFileUrl->getSecurePath();
-            $public_id = $uploadedFileUrl->getPublicId();
-    
-           $skills = $request->input('skills', []);
-            $categories = $request->input('category_id', []); 
-
-            $tutor = new Tutor;
-            $tutor->skill = $skills;
-            $tutor->language = $request->input('language');
-            $tutor->description = $request->input('description');
-            $tutor->price = $request->input('price');
-            // $tutor->category_id = $categories;
-            $tutor->resume = $url;
-            $tutor->resume_public_id = $public_id;
-            $tutor->title = $request->input('title');
-            $tutor->user_id = Auth::user()->id;
-
-            // dd($request->all());
-            $tutor->save();
-            $tutor->categories()->attach($categories);
-
-
-            // Save education records
-            $education = new Education;
-            $education->school = $request->input('school');
-            $education->degree = $request->input('degree');
-            $education->field_of_study = $request->input('field_of_study');
-            $education->start_date = $request->input('start_date');
-            $education->end_date = $request->input('end_date');
-            $education->description = $request->input('description');
-            $education->user_id = Auth::user()->id;
-            $education->save();
-
-            // Save award records
-            $award = new Awards;
-            $award->user_id = Auth::user()->id;
-            $award->title = $request->title;
-            $award->company = $request->company;
-            $award->date = $request->date;
-            $award->date_end = $request->date_end;
-            $award->description = $request->description;
-            $award->save();
-
-            // Save experience records
-            $experience = new Experience;
-            $experience->user_id = Auth::user()->id;
-            $experience->title = $request->title;
-            $experience->company = $request->company;
-            $experience->start_date = $request->start_date;
-            $experience->end_date = $request->end_date;
-            $experience->description = $request->description;
-            $experience->save();
-            
-            return redirect(route('syllabus.index'))->with('success', 'Tutor profile created successfully');
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-            return back()->with('error', 'Oops something went wrong!');
-        }
-    }
-    
-
-
-
-
-
-
-    public function syllabus(Request $request){
-        try{
-            $tutor = Tutor::where('user_id', Auth::user()->id)->with('categories')->first();
-            $categories = $tutor ? $tutor->categories : [];
-            return view('auth.syllabus', compact('categories'));
-        }catch(\Exception $exception){
-            Log::error($exception->getMessage());
-            return back()->with('error', $exception->getMessage());
-        }
-        
-    }
-
 
     
-
-    public function syllabusStore(Request $request){
-        try {
-            $tutor = Tutor::where('user_id', Auth::user()->id)->first();
-
-            // Check if the category already exists for the tutor
-            $existingSyllabus = Syllabus::where('category_id', $request->category_id)
-                ->where('tutor_id', $request->tutor_id)
-                ->first();
-
-            if ($existingSyllabus) {
-              return back()->with('error', 'This category already exists for the tutor.');
-            }
-
-            $syllabus = new syllabus;
-            $syllabus->tutor_id = $tutor->id;
-            $syllabus->category_id = $request->category_id;
-            $syllabus->description = $request->description;
-            $tutor->save();
-            return back()->with('success', 'Save Successfully');
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-            return back()->with('error', $exception->getMessage());
-        }
-    }
+  
 
     public function proposal(){
         try {
             // Get the latest proposal for the authenticated user
             $proposal = Proposal::where('user_id', Auth::user()->id)->latest()->first();    
-            return view('auth.proposal', compact('proposal'));
+            return view('user.proposal', compact('proposal'));
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('error', $exception->getMessage());
@@ -368,7 +237,7 @@ class HomeController extends Controller
             $educations = Education::where('user_id', $tutor->user->id)->get();
             $experiences = Experience::where('user_id',  $tutor->user->id)->get();
             $certifications = Awards::where('user_id',  $tutor->user->id)->get();
-            return view('auth.tutor-profile', compact('tutor', 'user', 'educations', 'certifications', 'experiences'));
+            return view('user.tutor-profile', compact('tutor', 'user', 'educations', 'certifications', 'experiences'));
         }catch(\Exception $exception) {
             log::error($exception->getMessage());
             return redirect()->back()->with('error', 'Tutor not found');
@@ -451,7 +320,7 @@ class HomeController extends Controller
             ->linkedin()
             ->whatsapp();
             // dd($shareButtons);
-        return view('auth.profile', compact('profile', 'shareButtons'));
+        return view('user.profile.profile', compact('profile', 'shareButtons'));
     }
     
 
@@ -572,7 +441,7 @@ class HomeController extends Controller
                 }
             }
             
-            return view('auth.course', compact('enrolledCourses', 'user', 'proposals'));
+            return view('user.course', compact('enrolledCourses', 'user', 'proposals'));
         } catch(\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('error', 'Oops something went wrong');
@@ -580,74 +449,6 @@ class HomeController extends Controller
     }
     
     
-    
-
-    public function  getTutorProposal(){
-        try{
-            $user = Auth::user();
-            $proposal = Proposal::where('tutor_id', $user->id)->get();                                                                                                                                    
-            // dd($proposal);
-            return view('auth.pro', compact('proposal'));
-        }catch(\Exception $e){
-            Log::error($e->getMessage());
-            return back()->with('error', 'Something went wrong, please try again later.');
-        }
-    }
-
-    public function viewProposal($id){
-        try{
-            $proposal = Proposal::find($id);
-            $user = User::where('id', Auth::user()->id)->first();
-            // dd($user);
-            return view('auth.viewProposal', compact('proposal'));
-        }catch(\Exception $e){
-            Log::error($e->getMessage());
-            return back()->with('error', 'Something went wrong, please try again later.');
-        }
-    }
-
-
-
-
-    public function acceptRequest(Request $request)
-    {
-        try{
-            $proposal = Proposal::find($request->id);
-
-            if ($proposal->tutor_id != Auth::user()->tutor->user_id) {
-                return back()->with('error', 'Request not found or you are not authorized to accept this request.');
-            }
-
-            $proposal->update([
-                'status' => 1,
-            ]);
-            // Send email notification to the user
-            $userTutor = User::where('id', $proposal->tutor_id)->first();
-            Mail::to($proposal->user->email)->send(new RequestAccepted($proposal, $userTutor));
-            return back()->with('success', 'Request accepted successfully!');
-        }catch(\Exception $e){
-            Log::error($e->getMessage());
-            return back()->with('error', 'Something went wrong, please try again later.');
-        }
-    }
-
-    public function cancelTutorRequest(Request $request)
-    {
-        try{
-            $proposal = Proposal::find($request->id);
-            if (!$proposal || $proposal->tutor_id != Auth::user()->tutor->user_id) {
-                return back()->with('error', 'Request not found or you are not authorized to cancel this request.');
-            }
-            $proposal->update([
-                'status' => 2,
-            ]);
-            return back()->with('success', 'Request cancelled successfully!');
-        }catch(\Exception $exception){
-            Log::error($exception->getMessage());
-            return back()->with('error', 'Something went wrong, please try again later.');
-        }
-    }
-
 
     public function paymentHistory($id)
     {
@@ -656,7 +457,7 @@ class HomeController extends Controller
             if (!$history) {
                 return back()->with('error', 'Record not found.');
             }
-            return view('auth.history', compact('history'));
+            return view('user.history', compact('history'));
         }catch(\Exception $e){
             Log::error($e->getMessage());
             return back()->with('error', 'Something went wrong, please try again later.');
@@ -703,7 +504,7 @@ class HomeController extends Controller
             });
 
             // Pass the transactions to the view
-            return view('auth.history', compact('transactions'));
+            return view('user.history', compact('transactions'));
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return back()->with('error', 'Something went wrong, please try again later.');
@@ -758,7 +559,7 @@ class HomeController extends Controller
 
             // Pass the transactions to the view
 
-            return view('auth.show-proposal', compact('proposalDetails', 'transactions'));
+            return view('user.show-proposal', compact('proposalDetails', 'transactions'));
         }catch(\Exception $e){
             Log::error($e->getMessage());
             return back()->with('error', 'Something went wrong, please try again later.');

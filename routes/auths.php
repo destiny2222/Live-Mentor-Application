@@ -7,6 +7,7 @@ use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\MentorController;
 use App\Http\Controllers\User\MettingController;
 use App\Http\Controllers\User\PaymentController;
+use App\Http\Controllers\User\TutorController;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,11 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('dashboard')->group(function (){
     Route::middleware(['auth','verified','last.activity.user'])->group(function (){
         Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-        Route::get('/tutor/upload', [HomeController::class, 'tutor'])->name('tutor.create');
-        Route::post('/tutor/store', [HomeController::class, 'storeTutor'])->name('tutor.store');
-        // Route::get('/tutor/show/{id}', [HomeController::class, 'show'])->name('tutor.show');
-        Route::get('/tutor/syllabus', [HomeController::class, 'syllabus'])->name('syllabus.index');
-        Route::post('/tutor/syllabus/store', [HomeController::class, 'syllabusStore'])->name('syllabus.store');
+       
         Route::get('/proposal', [HomeController::class, 'proposal'])->name('proposal.index');
         Route::post('/proposal/store', [HomeController::class, 'proposalStore'])->name('proposal.store');
         Route::post('/preference/store', [HomeController::class, 'savePreference'])->name('preference.store');
@@ -35,14 +32,10 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/tutors/{tutor_id}/reviews', [HomeController::class, 'storeReview'])->name('review.store');
         // send tutor request
         Route::post('/tutor/request', [HomeController::class, 'sendTutorRequest'])->name('tutor.request');
-        Route::get('/tutor/proposal', [HomeController::class, 'getTutorProposal'])->name('tutor.proposal');
+        
 
-        // tutor request
-        Route::get('/proposal/{id}/details', [HomeController::class, 'viewProposal'])->name('proposal.details');
-        Route::post('/tutor/request/cancel', [HomeController::class, 'cancelTutorRequest'])->name('tutor.request.cancel');
-        Route::post('/tutor/request/accept', [HomeController::class, 'acceptRequest'])->name('tutor.request.accept');
-        // Route::get('/tutor/request/{id}/reject', [HomeController::class, 'rejectTutorRequest'])->name('tutor.request.reject');
-
+       
+  
         // edit profile
         Route::get('/profile', [HomeController::class, 'profile'])->name('profile.index');
         Route::put('/profile/{id}/update', [HomeController::class, 'updateProfile'])->name('profile.update');
@@ -63,8 +56,6 @@ Route::prefix('dashboard')->group(function (){
         Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback'])->name('callback.payment');
         Route::post('/payment/webhook', [PaymentController::class, 'WebhookGatewayCallback'])->name('paystack.webhook');
         
-        // Create Meeting
-        // Route::post('/create/meeting',[MettingController::class, 'createMeeting'])->name('createMeeting');
 
         //mentor
         Route::get('/mentor',[MentorController::class, 'index'])->name('user.mentor.index');
@@ -85,6 +76,21 @@ Route::prefix('dashboard')->group(function (){
         // Classes
         Route::get('/mentor/classes', [MentorController::class, 'myClass'])->name('mentor.classes');
         Route::post('/classes/store', [MentorController::class, 'storeClasses'])->name('store.classes');
+
+        // Tutor route
+        Route::get('/tutor/classes', [TutorController::class, 'tutorClass'])->name('tutor.class');
+        Route::get('/tutor/upload', [TutorController::class, 'tutor'])->name('tutor.create');
+        Route::post('/tutor/store', [TutorController::class, 'storeTutor'])->name('tutor.store');
+        // Route::get('/tutor/show/{id}', [HomeController::class, 'show'])->name('tutor.show');
+        Route::get('/tutor/syllabus', [TutorController::class, 'syllabus'])->name('syllabus.index');
+        Route::post('/tutor/syllabus/store', [TutorController::class, 'syllabusStore'])->name('syllabus.store');
+        // tutor request
+        Route::get('/proposal/{id}/details', [TutorController::class, 'viewProposal'])->name('proposal.details');
+        Route::post('/tutor/request/cancel', [TutorController::class, 'cancelTutorRequest'])->name('tutor.request.cancel');
+        Route::post('/tutor/request/accept', [TutorController::class, 'acceptRequest'])->name('tutor.request.accept');
+        Route::delete('/tutor/request/{id}/delete', [TutorController::class, 'deleteRequest'])->name('tutor.request.delete');
+        Route::get('/tutor/proposal', [TutorController::class, 'getTutorProposal'])->name('tutor.proposal');
+
 
         // Add Bank
         Route::post('/add-bank',[BankController::class, 'addBank'])->name('add.bank');

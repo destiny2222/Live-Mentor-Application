@@ -101,7 +101,7 @@
                     <div class="navtab-style1">
                         <nav>
                             <div class="nav nav-tabs mb30" id="nav-tab2" role="tablist">
-                                <button class="nav-link active fw500 ps-0" id="nav-item1-tab" data-bs-toggle="tab" data-bs-target="#nav-item1" type="button" role="tab" aria-controls="nav-item1" aria-selected="true">Enroll Courses</button>
+                                <button class="nav-link active fw500 ps-0" id="nav-item1-tab" data-bs-toggle="tab" data-bs-target="#nav-item1" type="button" role="tab" aria-controls="nav-item1" aria-selected="true">Enrolled Courses</button>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">

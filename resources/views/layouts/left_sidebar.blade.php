@@ -42,7 +42,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('admin.course.create') }}">
                         <span data-key="t-chat">Create Course</span>
                     </a>
                 </li>

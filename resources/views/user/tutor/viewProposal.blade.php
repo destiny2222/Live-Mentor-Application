@@ -36,7 +36,7 @@
                                                 <img src="{{ asset('profile/'.$proposal->user->image) }}" class="mr-3 proposal_img" alt="comments-2.png">
                                                 <div class="ml20 ml0-xs mt20-xs">
                                                     <div class="del-edit"><span class="flaticon-flag"></span></div>
-                                                    <h6 class="mt-0 mb-1">{{  $proposal->user->name }}</h6>
+                                                    <h6 class="mt-0 mb-1">{{ $proposal->user->name }}</h6>
                                                     <div class="d-flex align-items-center">
                                                         <div>
                                                             <i class="fas fa-clock vam fz10 review-color me-2"></i>
@@ -47,60 +47,63 @@
                                                         <div class="ms-3"><span class="fz14 text">Published {{ $proposal->created_at->format('d M, Y') }}</span></div>
                                                     </div>
                                                     <div>
-                                                        <strong>Days:</strong> 
+                                                        <strong>Days:</strong>
                                                         @foreach($proposal->day as $day)
-                                                            <span class="badge bg-primary">{{ $day }}</span>
+                                                        <span class="badge bg-primary">{{ $day }}</span>
                                                         @endforeach
                                                     </div>
                                                     <div>
                                                         <strong>Prefer:</strong>
                                                         <span class="badge bg-primary">{{ $proposal->prefer }}</span>
                                                     </div>
-                                                    
+
                                                     <h3 class="pt30">{{ $proposal->course->title }}</h3>
                                                     <p class="text mt20 mb20">{{ $proposal->additional_information }}</p>
-                                                    
+
                                                     <!-- Respond Button -->
-                                                    @if ($proposal->status != '2')
-                                                        <button class="ud-btn bgc-thm4 text-thm" onclick="event.preventDefault(); document.getElementById('accept-{{ $proposal->id }}').submit();">Respond</button>
-                                                    @else
-                                                        <button class="ud-btn bgc-thm4 text-thm" disabled>Respond</button>
+                                                    @if ($proposal->status == '2')
+                                                     <button class="ud-btn bgc-thm4 text-thm" onclick="event.preventDefault(); document.getElementById('accept-{{ $proposal->id }}').submit();">Respond</button>
                                                     @endif
-                                                    
                                                     <!-- Reject Button -->
                                                     <button class="ud-btn bgc-thm4 text-thm" onclick="event.preventDefault(); document.getElementById('reject-{{ $proposal->id }}').submit();" type="button">Reject</button>
-                                                    
+
+
+                                                    <!-- delete -->
+                                                    <form class="d-none" action="{{ route('tutor.request.delete', $proposal->id) }}" id="delete-{{ $proposal->id }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
                                                     <!-- Accept Form -->
                                                     <form class="d-none" action="{{ route('tutor.request.accept', $proposal->id) }}" id="accept-{{ $proposal->id }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{ $proposal->id }}">
                                                     </form>
-                                                    
+
                                                     <!-- Reject Form -->
                                                     <form class="d-none" action="{{ route('tutor.request.cancel', $proposal->id) }}" id="reject-{{ $proposal->id }}" method="POST">
                                                         @csrf
                                                         <input type="hidden" name="id" value="{{ $proposal->id }}">
                                                     </form>
-                                                    
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <footer class="dashboard_footer pt30 pb30">
-        <div class="container">
-            <div class="row align-items-center justify-content-center justify-content-md-between">
-                <div class="col-auto">
-                    <div class="copyright-widget">
-                        <p class="mb-md-0">© {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
+                <footer class="dashboard_footer pt30 pb30">
+                    <div class="container">
+                        <div class="row align-items-center justify-content-center justify-content-md-between">
+                            <div class="col-auto">
+                                <div class="copyright-widget">
+                                    <p class="mb-md-0">© {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </footer>
             </div>
-        </div>
-    </footer>
-</div>
-@endsection
+            @endsection
