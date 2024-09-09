@@ -82,7 +82,7 @@
                         </div>
                         <div class="ml20">
                             <h5 class="title mb-1">{{ $user->name }}</h5>
-                            <p class="mb-0" style="font-size: 13px">{{ $user->mentor->title }}</p>
+                            <p class="mb-0" style="font-size: 13px">{{ $user->mentor->title ?? 'N/A' }}</p>
                         </div>
                     </div>
                     <div class="details">
