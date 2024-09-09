@@ -111,7 +111,7 @@
                 <div class="service-about">
                     <h4>About</h4>
                     <p class="text mb30">
-                        {{ $users->mentor->about }}    
+                        {{ $users->mentor->about ?? 'N/A' }}    
                     </p>
                     <hr class="opacity-100 mb60 mt60">
                     <h4 class="mb30">Education</h4>
@@ -120,9 +120,9 @@
                         <div class="m-circle text-thm">M</div>
                             <div class="wrapper mb40">
                                 <span class="tag">{{  Carbon\Carbon::parse($education->start_date)->format('F j, Y')}} - {{ Carbon\Carbon::parse($education->end_date)->format('F j, Y') }}</span>
-                                <h5 class="mt15">{{ $education->degree }}</h5>
-                                <h6 class="text-thm">{{ $education->school }}</h6>
-                                <p>{{ $education->description }}</p>
+                                <h5 class="mt15">{{ $education->degree ?? 'N/A'}}</h5>
+                                <h6 class="text-thm">{{ $education->school ?? 'N/A'}}</h6>
+                                <p>{{ $education->description ?? 'N/A' }}</p>
                             </div>
                         @endforeach
                     </div>
@@ -133,9 +133,9 @@
                          <div class="m-circle text-thm">M</div>
                          <div class="wrapper mb40">
                              <span class="tag">{{ Carbon\Carbon::parse($experience->start_date)->format('F j, Y') }} - {{ Carbon\Carbon::parse($experience->end_date)->format('F j, Y') }}</span>
-                             <h5 class="mt15">{{ $experience->title }}</h5>
-                             <h6 class="text-thm">{{ $experience->company }}</h6>
-                             <p>{{ $experience->description }}</p>
+                             <h5 class="mt15">{{ $experience->title ?? 'N/A'}}</h5>
+                             <h6 class="text-thm">{{ $experience->company ?? 'N/A'}}</h6>
+                             <p>{{ $experience->description ?? 'N/A' }}</p>
                          </div>
                      </div>
                     @endforeach
@@ -154,7 +154,7 @@
                                 <span class="text"><i class="flaticon-translator text-thm2 pe-2 vam"></i>Languages</span> <span class="">English</span>
                             </a>
                             <a class="d-flex align-items-center justify-content-between mb-3" href="#">
-                                <span class="text"><i class="flaticon-sliders text-thm2 pe-2 vam"></i>English Level</span> <span class="">{{ $users->language }}</span>
+                                <span class="text"><i class="flaticon-sliders text-thm2 pe-2 vam"></i>English Level</span> <span class="">{{ $users->language ?? 'N/A' }}</span>
                             </a>
                         </div>
                         <div class="d-grid">
@@ -170,12 +170,12 @@
                                     <label class="custom_checkbox fw500 text-start">
                                         <div class="row align-items-center">
                                             <div class="col-auto">
-                                                <p class="text-dark fw-500 mb-0 pt-1">{{ $session->session_title }}</p>
-                                                <small class="d-block text-muted"> <i class="fa fa-clock"></i> {{ $session->session_time }} minutes</small>
+                                                <p class="text-dark fw-500 mb-0 pt-1">{{ $session->session_title ?? 'N/A' }}</p>
+                                                <small class="d-block text-muted"> <i class="fa fa-clock"></i> {{ $session->session_time ?? 'N/A' }} minutes</small>
                                             </div>
                                             <div class="col-auto text-sm-right">
                                                 <span class="service-price badge badge-secondary-soft badge-pill">
-                                                    {{ number_format($session->session_price, 2) }}&#x20A6;
+                                                    {{ number_format($session->session_price ?? 'N/A', 2) }}&#x20A6;
                                                 </span>
                                             </div>
                                         </div>
