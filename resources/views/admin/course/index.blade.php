@@ -35,7 +35,11 @@
                             <small class="text-muted">Last updated 3 mins ago</small>
                         </p>
                         <a href="{{ route('admin.course.edit', $courses->id ) }}" class="btn btn-primary waves-effect waves-light">Edit</a>
-                        <a href="{{ route('admin.course.delete', $courses->id) }}" class="btn btn-primary waves-effect waves-light">Delete</a>
+                        <a href="{{ route('admin.course.delete', $courses->id) }}" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $courses->id }}').submit();" class="btn btn-primary waves-effect waves-light">Delete</a>
+                        <form action="{{ route('admin.course.delete', $courses->id) }}" id="delete-form-{{ $courses->id }}" style="display: none;" method="post">
+                            @csrf
+                            @method('delete')
+                        </form>
                     </div>
                 </div>
             </div><!-- end col -->

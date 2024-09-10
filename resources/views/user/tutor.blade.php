@@ -81,15 +81,6 @@
                                 ({{ $tutor->reviewCount() }} reviews)
                             </p>
                         </div>
-                        <div class="skill-tags d-flex align-items-center justify-content-center mb5">
-                            @php $count = 0; @endphp
-                            @foreach ($tutor->skill as $skills)
-                                @if ($count < 3)
-                                    <span class="tag ms-2">{{ $skills }}</span>
-                                    @php $count++; @endphp
-                                @endif
-                            @endforeach
-                        </div>
                         <div class="d-grid mt15">
                             <a href="{{ route('tutor.profile', $tutor->user->id)}}" class="ud-btn btn-light-thm">View Profile<i class="fal fa-arrow-right-long"></i></a>
                         </div>

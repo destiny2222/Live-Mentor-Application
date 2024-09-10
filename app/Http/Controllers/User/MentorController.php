@@ -325,7 +325,7 @@ class MentorController extends Controller
 
     public function myClass(){
         $sessions = BookSession::where('mentor_id', Auth::user()->mentor->user_id)->where('status', 1)->get();
-        return view('auth.mentor.myClass', compact('sessions'));
+        return view('user.mentor.myClass', compact('sessions'));
     }
 
 

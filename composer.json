@@ -8,6 +8,7 @@
         "php": "^8.2",
         "cloudinary-labs/cloudinary-laravel": "^2.2",
         "doctrine/dbal": "^4.1",
+        "google/apiclient": "^2.17",
         "guzzlehttp/guzzle": "^7.9",
         "intervention/image": "^3.7",
         "jorenvanhocht/laravel-share": "^4.2",
@@ -17,7 +18,9 @@
         "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
-        "unicodeveloper/laravel-paystack": "^1.2"
+        "tes/laravel-google-drive-storage": "^1.0",
+        "unicodeveloper/laravel-paystack": "^1.2",
+        "yaza/laravel-google-drive-storage": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

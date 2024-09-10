@@ -46,46 +46,52 @@
                                                         </div>
                                                         <div class="ms-3"><span class="fz14 text">Published {{ $proposal->created_at->format('d M, Y') }}</span></div>
                                                     </div>
-                                                    <div>
-                                                        <strong>Days:</strong>
-                                                        @foreach($proposal->day as $day)
-                                                        <span class="badge bg-primary">{{ $day }}</span>
-                                                        @endforeach
-                                                    </div>
-                                                    <div>
-                                                        <strong>Prefer:</strong>
-                                                        <span class="badge bg-primary">{{ $proposal->prefer }}</span>
-                                                    </div>
-
-                                                    <h3 class="pt30">{{ $proposal->course->title }}</h3>
-                                                    <p class="text mt20 mb20">{{ $proposal->additional_information }}</p>
-
-                                                    <!-- Respond Button -->
-                                                    @if ($proposal->status == '2')
-                                                     <button class="ud-btn bgc-thm4 text-thm" onclick="event.preventDefault(); document.getElementById('accept-{{ $proposal->id }}').submit();">Respond</button>
-                                                    @endif
-                                                    <!-- Reject Button -->
-                                                    <button class="ud-btn bgc-thm4 text-thm" onclick="event.preventDefault(); document.getElementById('reject-{{ $proposal->id }}').submit();" type="button">Reject</button>
-
-
-                                                    <!-- delete -->
-                                                    <form class="d-none" action="{{ route('tutor.request.delete', $proposal->id) }}" id="delete-{{ $proposal->id }}" method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                    <!-- Accept Form -->
-                                                    <form class="d-none" action="{{ route('tutor.request.accept', $proposal->id) }}" id="accept-{{ $proposal->id }}" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="id" value="{{ $proposal->id }}">
-                                                    </form>
-
-                                                    <!-- Reject Form -->
-                                                    <form class="d-none" action="{{ route('tutor.request.cancel', $proposal->id) }}" id="reject-{{ $proposal->id }}" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="id" value="{{ $proposal->id }}">
-                                                    </form>
-
                                                 </div>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <strong>Days:</strong>
+                                                    @foreach($proposal->day as $day)
+                                                    <span class="badge bg-primary">{{ $day }}</span>
+                                                    @endforeach
+                                                </div>
+                                                <div>
+                                                    <strong>Prefer:</strong>
+                                                    <span class="badge bg-primary">{{ $proposal->prefer }}</span>
+                                                </div>
+
+                                                <h3 class="pt30">{{ $proposal->course->title }}</h3>
+                                                <p class="text mt20 mb20">{{ $proposal->additional_information }}</p>
+
+                                                <!-- Respond Button -->
+                                                @if ($proposal->status == 0)   
+                                                  <button class="ud-btn bgc-thm4 text-thm" onclick="event.preventDefault(); document.getElementById('accept-{{ $proposal->id }}').submit();">Respond</button>
+                                                  <button id="reject-button-{{ $proposal->id }}" onclick="showRejectForm({{ $proposal->id }})" class="ud-btn bgc-thm4 text-thm">Reject</button>
+                                                 @else
+                                                @if ($proposal->status == '2')
+                                                    <button href="javascript:void(0)" class="ud-btn bgc-thm4 text-thm">This session was canceled by you</button>
+                                                    <button id="delete-{{ $proposal->id }}" onclick="event.preventDefault() document.getElementById('delete-{{ $proposal->id }}').submit();" class="ud-btn bgc-thm4 text-thm">Delete</button>
+                                                    @endif
+                                                @endif
+                                                <!-- delete -->
+                                                <form class="d-none" action="{{ route('tutor.request.delete', $proposal->id) }}" id="delete-{{ $proposal->id }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                                <!-- Accept Form -->
+                                                <form class="d-none" action="{{ route('tutor.request.accept', $proposal->id) }}" id="accept-{{ $proposal->id }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $proposal->id }}">
+                                                </form>
+
+                                                <!-- Reject Form -->
+                                                <form class="d-none" action="{{ route('tutor.request.cancel', $proposal->id) }}" id="reject-{{ $proposal->id }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $proposal->id }}">
+                                                    <h6 for="message" style="padding-top: 20px">Reason for decline</h6>
+                                                    <textarea name="message" id="message" cols="5" rows="5"></textarea>
+                                                    <button type="submit" class="ud-btn bgc-thm4 text-thm">Decline</button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -107,3 +113,12 @@
                 </footer>
             </div>
             @endsection
+            @push('scripts')
+            <script>
+            function showRejectForm(bookingId) {
+                document.getElementById('reject-button-' + bookingId).style.display = 'none';
+                document.getElementById('reject-' + bookingId).classList.remove('d-none');
+            }
+        </script>
+        @endpush
+    

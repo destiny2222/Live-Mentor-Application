@@ -227,7 +227,7 @@ class HomeController extends Controller
             Log::error($exception->getMessage());
             return back()->with('error', 'Oops something went wrong');
         }
-        return view('auth.tutor', compact('tutors'));
+        return view('user.tutor', compact('tutors'));
     }
 
     public function tutorProfile($id){

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -26,14 +27,21 @@ class CourseController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
+       
+        $validator = Validator::make($request->all(), [
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
             'duration' => ['required', 'string'],
             'category_id' => ['required', 'string'],
             'price' => ['required', 'string'],
-            // 'image' => ['nullable', ''],
+            'image' => ['nullable', 'image', 'max:2048'],
         ]);
+        
+        
+
+        if ($validator->fails()) {
+            return redirect()->back()->with('error', $validator->errors()->first())->withInput(); 
+        }
 
 
         if($request->hasFile('image')){

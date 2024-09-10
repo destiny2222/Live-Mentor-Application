@@ -158,7 +158,7 @@
                                         <div class="timer title mb15">{{ $countUser }}</div>
                                     </li>
                                 </ul>
-                                <p class="fz15 dark-color">Total number of usesrs</p>
+                                <p class="fz15 dark-color">Total number of users</p>
                             </div>
                         </div>
                         <div class="col-sm-6">

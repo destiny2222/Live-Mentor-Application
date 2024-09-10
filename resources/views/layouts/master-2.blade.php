@@ -353,7 +353,6 @@
                 });
             });
         </script>
-        
-
+        @include('partials.message')
     </body>
 </html>

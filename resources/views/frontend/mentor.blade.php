@@ -63,7 +63,6 @@
                         </div>
                         <div class="ml20">
                             <h5 class="title mb-1">{{ $user->name ?? 'N/A' }}</h5>
-                            <p class="mb-0" style="font-size: 13px">{{ $user->mentor->title ?? 'N/A' }}</p>
                         </div>
                     </div>
                     <div class="details">
@@ -73,15 +72,7 @@
                             <p class="list-inline-item"><i class="fa fa-award pr10"></i><span class="dark-color fw500">{{ $user->getExperiencesCountAttribute() }} Years Experience </span></p>
                         </div>
                         <p class="text">{{ \Str::limit($user->mentor->about ?? 'N/A', 100) }}</p>
-                        <div class="skill-tags d-flex align-items-center justify-content-start mb30 mt20">
-                            @php $count = 0; @endphp
-                            @foreach( $user->mentor->Skills ?? [] as $skill)
-                                @if ($count < 3)
-                                    <span class="tag bgc-thm3 mx10">{{ $skill  }}</span>
-                                    @php $count++; @endphp
-                                @endif
-                            @endforeach
-                        </div>
+                        
                         <div class="d-grid">
                             <a href="{{ route('mentor.show',$user->id) }}" class="ud-btn btn-thm-border bdrs12 hover-default-box-shadow1">View Profile<i class="fal fa-arrow-right-long"></i></a>
                         </div>

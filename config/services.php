@@ -52,6 +52,14 @@ return [
         'SECRET_KEY'=>env('PAYSTACK_SECRET_KEY'),
         'PAYSTACK_PAYMENT_URL'=>env('PAYSTACK_PAYMENT_URL'),
         'MERCHANT_EMAIL'=>env('MERCHANT_EMAIL'),
+    ],
+
+
+    // google drive
+    'google_drive' => [ 
+        'CLIENT_ID' => env('GOOGLE_DRIVE_CLIENT_ID'),
+        'CLIENT_SECRET' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+        'REFRESH_TOKEN' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
     ]
 
 ];

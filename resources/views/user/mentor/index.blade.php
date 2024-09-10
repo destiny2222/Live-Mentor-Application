@@ -101,10 +101,10 @@
     </div>
     @endsection
     @push('scripts')
-    <script>
-      function showRejectForm(bookingId) {
-          document.getElementById('reject-button-' + bookingId).style.display = 'none';
-          document.getElementById('reject-' + bookingId).classList.remove('d-none');
-      }
-  </script>
-@endpush
+        <script>
+        function showRejectForm(bookingId) {
+            document.getElementById('reject-button-' + bookingId).style.display = 'none';
+            document.getElementById('reject-' + bookingId).classList.remove('d-none');
+        }
+    </script>
+    @endpush
