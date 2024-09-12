@@ -28,7 +28,7 @@ class GoogleAuthController extends Controller
             // dd($user);
             if ($existingUser) {
                 Auth::login($existingUser);
-                return redirect()->intended('dashboard');
+                return redirect('/dashboard');
             } else {
     
              $new_user =  User::create([
@@ -42,7 +42,7 @@ class GoogleAuthController extends Controller
                 ]);
     
                 Auth::login($new_user);
-                return redirect()->intended('dashboard');
+                return redirect('/dashboard');
             }
         }catch(\Exception $exception){
             Log::error($exception->getMessage());

@@ -178,7 +178,7 @@
                         <div class="list-content">
                             <a href="{{ route('mentor.show',$mentor->id) }}">
                                 <p class="list-text body-color fz14 mb-1">{{ $mentor->name }}</p>
-                                <h5 class="list-title"><a href="{{ route('mentor.show',$mentor->id) }}">{{ \Str::limit($mentor->mentor->about, 50, '...') }}</a></h5>
+                                <h5 class="list-title"><a href="{{ route('mentor.show',$mentor->id) }}">{{ \Str::limit($mentor->mentor->about ?? '', 50, '...') }}</a></h5>
                                 <div class="review-meta d-flex align-items-center">
                                     <span><i class="fa fa-bells"></i> {{ $mentor->countMentorSession() ?? '0' }} sessions </span></p>
                                 </div>
