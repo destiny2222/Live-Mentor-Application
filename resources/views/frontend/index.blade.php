@@ -140,27 +140,70 @@
 </section>
 
 
-
-
-<!-- Our Funfact -->
-<section class="our-cta bgc-thm4 pt90 pb90 pt60-md pb60-md mt100 mt0-lg">
+ <!-- Popular Services -->
+ <section class="pb100 pt-0" style="">
     <div class="container">
-        <div class="row justify-content-between">
-            <div class="col-md-6 col-lg-7 col-xl-5 mb-lg-0 mb-4 wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
-                <div class="cta-style3">
-                    <h2 class="cta-title">Find the right Mentor</h2>
-                    <p class="cta-text">Engage with reliable and consistent mentor.</p>
-                    <a href="{{ route('mentor.index') }}" class="ud-btn btn-thm2">Get Started <i class="fal fa-arrow-right-long"></i></a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-5 col-xl-5 mb-lg-0 mb-4 position-relative wow zoomIn" style="visibility: visible; animation-name: zoomIn;">
-                <div class="cta-img">
-                    <img class="w-100" src="images/about/about-3.jpg" alt="">
-                </div>
+      <div class="row align-items-center wow fadeInUp">
+        <div class="col-xl-3">
+          <div class="main-title mb30-lg">
+            <h2 class="title">Find the right Mentor</h2>
+            <p class="paragraph">Engage with reliable and consistent mentor.</p>
+          </div>
+        </div>
+        <div class="col-xl-9">
+            <div class="text-start text-lg-end">
+                <a class="ud-btn btn-light-thm " href="{{ route('mentor.index') }}">Explore all<i class="fal fa-arrow-right-long"></i></a>
             </div>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 col-12">
+            <div class="slider-outer-dib vam_nav_style dots_none slider-5-grid owl-carousel owl-theme wow fadeInUp" data-wow-delay="300ms">
+                @foreach ($mentors as $mentor)
+                <div class="item">
+                    <div class="listing-style1 bdrs16">
+                        <div class="list-thumb">
+                          <a href="{{ route('mentor.show',$mentor->id) }}"> <img class="w-100" src="{{ asset('profile/'.$mentor->image) }}" alt=""> </a>
+                          {{-- <a href="" class="listing-fav fz12"><span class="far fa-heart"></span></a> --}}
+                          <p class="image-dimmer"> <i class="fa fa"></i>  </p>
+                            @if ($mentor->last_seen >= now()->subMinutes(5))
+                                <div class="available-asap position-absolute">
+                                    <i class="fa fa-bolt"></i>
+                                    <span class="ml-1 font-weight-600">Available ASAP</span>
+                                </div>
+                            @else
+                            
+                            @endif
+                        </div>
+                        <div class="list-content">
+                            <a href="{{ route('mentor.show',$mentor->id) }}">
+                                <p class="list-text body-color fz14 mb-1">{{ $mentor->name }}</p>
+                                <h5 class="list-title"><a href="{{ route('mentor.show',$mentor->id) }}">{{ \Str::limit($mentor->mentor->about, 50, '...') }}</a></h5>
+                                <div class="review-meta d-flex align-items-center">
+                                    <span><i class="fa fa-bells"></i> {{ $mentor->countMentorSession() ?? '0' }} sessions </span></p>
+                                </div>
+                            </a>    
+                          <hr class="my-2">
+                          <div class="list-meta d-flex justify-content-between align-items-center mt15">
+                            <a class="" href="{{ route('mentor.show',$mentor->id) }}">
+                                <div>Experience</div>
+                              <span class="fz14 " style="font-weight: 700; color: #000;">{{ $mentor->experience }} years </span>
+                            </a>
+                            <div class="budget">
+                                <p class="mb-0 body-color"><span class="fz17 fw500 dark-color ms-1">({{ $mentor->reviewCount() }} reviews)</span></p>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
+
+
 
 
 

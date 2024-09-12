@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\User\GoogleAuthController;
 use App\Http\Controllers\User\MeetingController;
 use App\Http\Controllers\User\MentorController;
 use App\Http\Controllers\User\ProfileController;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Jubaer\Zoom\Facades\Zoom;
+
 
 
 
@@ -39,6 +41,9 @@ Route::get('/meeting', function(){
 
 Route::get('/join-meeting/{meetingDetails}', [MeetingController::class, 'joinMeeting'])->name('zoom.join');
 
+// google authentication
+Route::get('/auth/google/redirect', [GoogleAuthController::class , 'redirect'])->name('auth.socialite.redirect');
+Route::get('/auth/google/callback', [GoogleAuthController::class , 'callback'])->name('auth.socialite.callback');
 
 // share profile
 Route::get('/share/profile', [ProfileController::class, 'show'])->name('profile.show');

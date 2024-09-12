@@ -12,14 +12,7 @@
         display: block;
         margin-bottom: 5px; /* Add space between skills if needed */
     }
-    .oni{
-        right: 20%;
-        top:17%;
-    }
 
-    .online.offline{
-        background-color: orange !important;
-    }
 </style>
 <!-- Breadcumb Sections -->
 <section class="breadcumb-section">
@@ -61,11 +54,7 @@
                         <div class="list-meta d-sm-flex align-items-center mt30">
                             <a class="position-relative freelancer-single-style" href="#">
                                 <img class="rounded-circle w-100 wa-sm mb15-sm" src="{{ asset('profile/'.$tutor->user->image) }}" alt="Freelancer Photo">
-                                @if ($tutor->user->last_seen >= now()->subMinutes(5))
-                                    <span class="online position-absolute oni"></span>
-                                @else
-                                    <span class="online offline position-absolute oni"></span>
-                                @endif
+                               
                             </a>
                             <div class="ml20 ml0-xs">
                                 <h5 class="title mb-1">{{ $tutor->user->name }}</h5>

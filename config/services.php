@@ -60,6 +60,18 @@ return [
         'CLIENT_ID' => env('GOOGLE_DRIVE_CLIENT_ID'),
         'CLIENT_SECRET' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
         'REFRESH_TOKEN' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
-    ]
+    ],
+
+    'google' => [    
+        'client_id' => env('GOOGLE_CLIENT_ID'),  
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),  
+        'redirect' => env('GOOGLE_REDIRECT'),
+    ],
+    'facebook' => [    
+        'client_id' => env('FACEBOOK_CLIENT_ID'),  
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),  
+        'redirect' => env('FACEBOOK_REDIRECT_URI') 
+    ],
+  
 
 ];

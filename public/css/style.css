@@ -12392,7 +12392,9 @@ hr {
   border-radius: 4px;
 }
 
-
+.pb100{
+  padding-bottom: 50%;
+}
 .custom_checkbox:hover {
   border: 2px solid #5BBB7B;
 
@@ -12421,7 +12423,43 @@ hr {
 }
 
 
+.image-dimmer {
+    bottom: 0px;
+    left: 0px;
+    opacity: 0;
+    width: 100%;
+    z-index: 9;
+    height: 100%;
+    position: absolute;
+    border-radius: 0.5rem;
+    transition-delay: 60ms;
+    transition-duration: 0.1s;
+    transition-property: opacity;
+    background: rgba(0, 0, 0, 0.4);
+}
 
+.ml-1{
+  margin-left: .25rem;
+}
+
+
+ .available-asap {
+    bottom: 0.75rem;
+    color: rgb(101, 255, 139);
+    padding: 0.5rem;
+    background: rgba(19, 19, 19, 0.8);
+}
+
+ .available-asap,  .top-rated,  .advanced {
+    display: flex;
+    left: 0.75rem;
+    line-height: 16px;
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+}
+.position-absolute {
+    position: absolute !important;
+}
 
 @media only screen and (max-width: 767.98px) {
   .pending-style {

@@ -2,13 +2,12 @@
 @section('title', 'Tutor')
 @section('content')
 <style>
-    .oni{
-        right: 36%;
+
+    .top-0{
+        top: 16px !important;
+        display: table !important;
     }
 
-    .online.offline{
-        background-color: orange !important;
-    }
 </style>
 <section class="breadcumb-section">
     <div class="container">
@@ -63,16 +62,20 @@
             @foreach ($tutors as $tutor)
             <div class="col-md-6 col-lg-4 col-xl-3">
                 <div class="freelancer-style1 text-center bdr1 hover-box-shadow">
+                    
                     <div class="thumb  mb25 mx-auto position-relative rounded-circle">
-                        <img class="rounded-circle mx-auto" width="100" src="{{ asset('profile/'.$tutor->user->image) }}" alt="" />
-                        @if ($tutor->user->last_seen >= now()->subMinutes(5))
-                          <span class="online position-absolute oni"></span>
-                        @else
-                          <span class="online offline position-absolute oni"></span>
-                        @endif
-                       
+                        <img class="rounded-circle mx-auto" width="100" height="100" src="{{ asset('profile/'.$tutor->user->image) }}" alt="" />
                     </div>
+                    
                     <div class="details">
+                        @if ($tutor->user->last_seen >= now()->subMinutes(5))
+                            <div class="available-asap position-absolute top-0">
+                                <i class="fa fa-bolt"></i>
+                                <span class="ml-1 font-weight-600">Available ASAP</span>
+                            </div>
+                        @else
+                         
+                        @endif
                         <h5 class="title mb-1">{{ $tutor->user->name }}</h5>
                         <p class="mb-0">{{ $tutor->title }}</p>
                         <div class="review">

@@ -15,15 +15,17 @@ use Illuminate\Support\Facades\Validator;
 class FrontController extends Controller
 {
 public function index(){
-    $tutor = User::orderBy('id', 'asc')->get();
+    $tutor = User::orderBy('id', 'desc')->get();
     $categories = Category::orderBy('id', 'asc')->get();
+    $mentors = User::where('role', 'mentor')->whereNotNull('id')->paginate(16);
+        // dd($users); 
     $counts = [];
 
     foreach ($categories as $category) {
         $counts[$category->id] = Course::where('category_id', $category->id)->count();
     }
 
-    return view('frontend.index', compact('counts', 'tutor', 'categories'));
+    return view('frontend.index', compact('counts', 'tutor', 'categories', 'mentors'));
 }
 
 

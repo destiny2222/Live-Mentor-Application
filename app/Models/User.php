@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -32,6 +33,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'role',
         'phone',
         'gender',
+        'provider_name',
+        'provider_id',
+        'provider_token',
         'city',
         'country',
         'language',
@@ -62,6 +66,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Bank::class);
     }
 
+    public function mentorSession(){
+        return $this->hasMany(MentorApplication::class);
+    }
+
+    public function countMentorSession(){
+        return $this->mentorSession()->count();
+    }
 
     public function averageRating()
     {
@@ -72,6 +83,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->reviews()->count();
     }
+
+    // calculates 
     
 
      public function proposals()
@@ -117,11 +130,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $username;
     }
 
-     // calculating the total number of experiences
-     public function getExperiencesCountAttribute()
-     {
-        return $this->experiences()->count();
-     }
 
     public function checkTutorStatus(){
         if($this->role == 'tutor'){
@@ -158,6 +166,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'provider_token',
     ];
 
     /**
@@ -171,5 +180,14 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function setProviderTokenAttribute($value){
+        return $this->attributes['provider_token'] = Crypt::encryptString($value);
+    }
+    
+    public function getProviderTokenAttribute($value)
+    {
+        return Crypt::decryptString($value);
     }
 }

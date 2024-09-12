@@ -16,7 +16,7 @@ class TutorController extends Controller
             foreach ($users as $key => $user) {
                 $tutor = Tutor::where('user_id', $user->id)->get();
             }
-            return view('admin.tutor.index', compact('tutor'));
+            return view('admin..user.tutor.index', compact('tutor'));
         }catch(\Exception $exception){
             Log::error($exception->getMessage());
             return back()->with('error', 'Something went wrong');
@@ -27,7 +27,7 @@ class TutorController extends Controller
     public function edit ($id){
         try{
             $tutor = Tutor::find($id);
-            return view('admin.tutor.edit', compact('tutor'));
+            return view('admin.user.tutor.edit', compact('tutor'));
         }catch(\Exception $e){
             Log::error($e->getMessage());
             return back()->with('error', 'Error occur while editing tutor');

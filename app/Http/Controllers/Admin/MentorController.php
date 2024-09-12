@@ -15,13 +15,13 @@ class MentorController extends Controller
         foreach($users as $user){
             $mentor = Mentor::where('user_id', $user->id)->get();
         }
-        return view('admin.mentor.index', compact('mentor'));
+        return view('admin.user.mentor.index', compact('mentor'));
     }
 
     public function edit($id){
         try{
             $mentor = Mentor::findOrFail($id);
-            return view('admin.mentor.edit', compact('mentor'));
+            return view('admin.user.mentor.edit', compact('mentor'));
         }catch(\Exception $exception){
             Log::error($exception->getMessage());
             return back()->with('error', 'Something went wrong');
