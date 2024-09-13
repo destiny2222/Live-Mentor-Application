@@ -84,11 +84,11 @@
                     </label>
                     <a class="fz14 ff-heading" href="#">Lost your password?</a>
                   </div>
-                  <div class="d-grid mb20">
+                  <div class="d-grid mb20 ">
                     <button class="ud-btn btn-thm" type="submit">Log In <i class="fal fa-arrow-right-long"></i></button>
                   </div>
                   <div class="hr_content mb20"><hr><span class="hr_top_text">OR</span></div>
-                  <div class="d-md-flex justify-content-center">
+                  <div class="d-md-flex justify-content-center text-center">
                     <a href="{{route('auth.socialite.redirect')}}" class="ud-btn btn-google fz14 fw400 mb-2 mb-md-0" type="button"><i class="fab fa-google"></i> Continue Google</a>
                   </div>
               </form>

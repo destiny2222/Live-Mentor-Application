@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Carbon;
+
 
 class GoogleAuthController extends Controller
 {
@@ -28,21 +31,30 @@ class GoogleAuthController extends Controller
             // dd($user);
             if ($existingUser) {
                 Auth::login($existingUser);
-                return redirect('/dashboard');
+                return redirect('dashboard');
             } else {
-    
-             $new_user =  User::create([
-                    'name'          => $google_user->get,
-                    'email'         => $google_user->email,
-                    'password'      => Hash::make(Str::random(8)),
-                    'provider_name' => 'google',
-                    'provider_id'   => $google_user->id,
-                    'provider_token' => $google_user->token,
-                    'email_verified_at'=> now(),
-                ]);
+                $new_user = new User();
+                $new_user->name = $google_user->name;
+                $new_user->email = $google_user->email;
+                $new_user->provider_name = 'google';
+                $new_user->provider_id   = $google_user->id;
+                $new_user->password = Hash::make(Str::random(8));
+                $new_user->provider_token = $google_user->token;
+                $new_user->email_verified_at = Carbon::now();
+                $new_user->save();
+                // $new_user =  User::updateOrCreate([
+                //     'name'          => $google_user->name,
+                //     ''         => $google_user->email,
+                //     'password'      => 
+                //     'provider_name' => 'google',
+                    
+                //     'provider_token' => $google_user->token,
+                //     ''=> ,
+                // ]);
     
                 Auth::login($new_user);
-                return redirect('/dashboard');
+                Log::info('Current time: ' . Carbon::now());
+                return redirect('dashboard');
             }
         }catch(\Exception $exception){
             Log::error($exception->getMessage());

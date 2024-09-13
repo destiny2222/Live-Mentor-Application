@@ -114,7 +114,10 @@
                                     <div class="d-grid mb20">
                                         <button class="ud-btn btn-thm default-box-shadow2" type="submit">Creat Account <i class="fal fa-arrow-right-long"></i></button>
                                     </div>
-
+                                    <div class="hr_content mb20"><hr><span class="hr_top_text">OR</span></div>
+                                    <div class="d-md-flex justify-content-center text-center">
+                                        <a href="{{route('auth.socialite.redirect')}}" class="ud-btn btn-google fz14 fw400 mb-2 mb-md-0" type="button"><i class="fab fa-google"></i> Continue Google</a>
+                                    </div>
                                 </div>
                             </form>
                         </div>
