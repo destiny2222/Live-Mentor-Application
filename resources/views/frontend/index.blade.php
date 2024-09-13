@@ -150,10 +150,10 @@
             <p class="paragraph">Engage with reliable and consistent mentor.</p>
           </div>
         </div>
-        <div class="col-xl-9">
-            <div class="text-start text-lg-end">
-                <a class="ud-btn btn-light-thm " href="{{ route('mentor.index') }}">Explore all<i class="fal fa-arrow-right-long"></i></a>
-            </div>
+        <div class="col-xl-9 mb-4 mb-lg-0">
+          <div class="text-start text-lg-end">
+              <a class="ud-btn btn-light-thm " href="{{ route('mentor.index') }}">Explore all<i class="fal fa-arrow-right-long"></i></a>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -187,7 +187,7 @@
                           <div class="list-meta d-flex justify-content-between align-items-center mt15">
                             <a class="" href="{{ route('mentor.show',$mentor->id) }}">
                                 <div>Experience</div>
-                              <span class="fz14 " style="font-weight: 700; color: #000;">{{ $mentor->experience }} years </span>
+                              <span class="fz14 " style="font-weight: 700; color: #000;">{{ $mentor->experience ?? 0 }} years </span>
                             </a>
                             <div class="budget">
                                 <p class="mb-0 body-color"><span class="fz17 fw500 dark-color ms-1">({{ $mentor->reviewCount() }} reviews)</span></p>

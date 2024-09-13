@@ -72,11 +72,7 @@
                         <div class="list-meta d-sm-flex align-items-center mt30">
                             <a class="position-relative freelancer-single-style" href="#">
                                 <img class="rounded-circle w-70 mb15-sm" src="{{ asset('profile/'.$users->image) }}" alt="Freelancer Photo">
-                                @if ($users->last_seen >= now()->subMinutes(5))
-                                    <span class="online position-absolute oni"></span>
-                                @else
-                                    <span class="online offline position-absolute oni"></span>
-                                @endif
+                            
                             </a>
                             <div class="">
                                 <h5 class="title mb-1">{{ $users->name }}</h5>
