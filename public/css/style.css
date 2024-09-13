@@ -3255,6 +3255,13 @@ h2 {
 .home14-hero-content .title {
   font-size: 55px;
 }
+
+@media screen and (min-width:1280px){
+  .home14-hero-content .title {
+      font-size: 46px;
+  }
+}
+
 .home14-hero-content .title span {
   position: relative;
 }
@@ -3271,6 +3278,7 @@ h2 {
 @media (max-width: 767.98px) {
   .home14-hero-content .title {
     font-size: 30px;
+    inline-size:330px;
   }
 }
 
