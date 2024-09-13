@@ -64,10 +64,7 @@
                                     <span class="ml-1 font-weight-600">Available ASAP</span>
                                 </div>
                             @else
-                            <div class="available-asap position-absolute top-30">
-                                <i class="fa fa-bolt"></i>
-                                <span class="ml-1 font-weight-600">Available ASAP</span>
-                            </div>
+                            
                             @endif
                         </div>
                     </div>
