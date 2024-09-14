@@ -42,7 +42,7 @@
     </style>
 </head>
 
-<body class="app sidebar-mini ltr login-img">
+<body class="app sidebar-mini ltr">
 
     <!-- BACKGROUND-IMAGE -->
     <div class="">
@@ -59,7 +59,8 @@
                 <!-- Theme-Layout -->
                 <div class="container-login100">
                     <div class="wrap-login100 p-6">
-                        <form class="login100-form validate-form">
+                        <form class="login100-form validate-form" action="{{ route('auth.role.post') }}" method="POST">
+                            @csrf
                             <div class="panel panel-primary">
                                 <div class="panel-body tabs-menu-body p-0 pt-5">
                                     <div class="tab-content">
@@ -78,7 +79,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>
