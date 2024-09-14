@@ -58,18 +58,6 @@ Route::post('/uploaded', function(Request $request){
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);
 
-    // Upload image to Google Drive
-    $image = $request->file('image');
-    $imageUrl = uploadImageToGoogleDrive($image);
-
-    dd($imageUrl);
-    // Save the URL in the database
-    // $imageModel = new Image();
-    // $imageModel->url = $imageUrl;
-
-    // dd($imageModel);
-    // $imageModel->save();
-
 
     return redirect()->back()->with('success', 'Image uploaded successfully!');
 });

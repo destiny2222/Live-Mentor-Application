@@ -11,11 +11,8 @@ use App\Http\Controllers\Controller;
 class MentorController extends Controller
 {
     public function index(){
-        $users = User::orderBy('id', 'desc')->get();
-        foreach($users as $user){
-            $mentor = Mentor::where('user_id', $user->id)->get();
-        }
-        return view('admin.user.mentor.index', compact('mentor'));
+        $mentors = Mentor::orderBy('id', 'desc')->get();
+        return view('admin.user.mentor.index', compact('mentors'));
     }
 
     public function edit($id){
@@ -31,7 +28,18 @@ class MentorController extends Controller
     public function update(Request $request, $id){
         try{
             $mentor = Mentor::findOrFail($id);
-            $mentor->update($request->all());
+            $mentor->update([
+                'category_id'=>$mentor->category_id,
+                'language'=>$mentor->language,
+                'about'=>$mentor->about,
+                'price'=>$mentor->price,
+                // 'image_public_id'=>$mentor->image_public_id,
+                'experience'=>$mentor->experience,
+                'status'=> $request->has('status') ? $request->status : $mentor->status,
+                'Skills'=>$mentor->Skills,
+                'title'=>$mentor->title,
+                'user_id'=>$mentor->user_id,
+            ]);
             return redirect()->route('admin.mentor.index')->with('success', 'Mentor updated successfully');
         }catch(\Exception $exception){
             Log::error($exception->getMessage());
@@ -39,7 +47,7 @@ class MentorController extends Controller
         }
     }
 
-    public function destory($id){
+    public function delete($id){
         try{
             $mentor = Mentor::findOrFail($id);
             $mentor->delete();

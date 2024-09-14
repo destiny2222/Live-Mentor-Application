@@ -16,18 +16,18 @@
             </a>
             <ul class="sub-menu" aria-expanded="false">
                 <li>
-                    <a href="{{ route('admin.course.index')   }}">
+                    <a href="{{ route('admin.user.index')   }}">
                         <span data-key="t-calendar">General user</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('admin.course.create') }}">
+                    <a href="{{ route('admin.tutor.index') }}">
                         <span data-key="t-chat">Tutor user</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.course.create') }}">
+                    <a href="{{ route('admin.mentor.index') }}">
                         <span data-key="t-chat">Mentor user</span>
                     </a>
                 </li>

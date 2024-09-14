@@ -42,20 +42,27 @@ class GoogleAuthController extends Controller
                 $new_user->provider_token = $google_user->token;
                 $new_user->email_verified_at = Carbon::now();
                 $new_user->save();
-                // $new_user =  User::updateOrCreate([
-                //     'name'          => $google_user->name,
-                //     ''         => $google_user->email,
-                //     'password'      => 
-                //     'provider_name' => 'google',
-                    
-                //     'provider_token' => $google_user->token,
-                //     ''=> ,
-                // ]);
-    
                 Auth::login($new_user);
                 Log::info('Current time: ' . Carbon::now());
-                return redirect('dashboard');
+                return redirect('dashboard/auth/role');
             }
+        }catch(\Exception $exception){
+            Log::error($exception->getMessage());
+            return back()->with('error','Something went wrong');
+        }
+    }
+
+    public function handleGoogle(){
+        return view('auth.google_callback');
+    }
+
+    public function handleGoogleCallback(Request $request){
+        try{
+            $auth = Auth::user();
+            $user = User::find($auth->id);
+            $user->role = $request->role;
+            $user->save();
+            return redirect('dashboard')->with('success','Successfully registered ');
         }catch(\Exception $exception){
             Log::error($exception->getMessage());
             return back()->with('error','Something went wrong');

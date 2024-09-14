@@ -12,11 +12,8 @@ class TutorController extends Controller
 {
     public function index(){
         try{
-            $users = User::orderBy('id', 'asc')->get();
-            foreach ($users as $key => $user) {
-                $tutor = Tutor::where('user_id', $user->id)->get();
-            }
-            return view('admin..user.tutor.index', compact('tutor'));
+            $tutors = Tutor::orderBy('id', 'desc')->get(); 
+            return view('admin..user.tutor.index', compact('tutors'));
         }catch(\Exception $exception){
             Log::error($exception->getMessage());
             return back()->with('error', 'Something went wrong');
@@ -39,7 +36,19 @@ class TutorController extends Controller
         // dd($request->all());
         try{
             $tutor = Tutor::find($id);
-            $tutor->update($request->all());
+            $tutor->update([
+                'category_id'=>$tutor->category_id,
+                'language'=>$tutor->language,
+                'description'=>$tutor->description,
+                'price'=>$tutor->price,
+                // 'image_public_id'=>$tutor->image_public_id,
+                'experience'=>$tutor->experience,
+                'status'=> $request->has('status') ? $request->status : $tutor->status,
+                'skill'=>$tutor->skill,
+                'title'=>$tutor->title,
+                'user_id'=>$tutor->user_id,
+            ]);
+            // $tutor->categories()->sync($request->category_id);
             return redirect()->route('admin.tutor.index')->with('success', 'Tutor updated successfully');
         }catch(\Exception $exception){
             Log::error($exception->getMessage());
@@ -48,7 +57,7 @@ class TutorController extends Controller
 
     }
 
-    public function destroy($id){
+    public function delete($id){
         try{
             $tutor = Tutor::find($id);
             $tutor->delete();

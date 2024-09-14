@@ -19,23 +19,7 @@
     </section>
 
     <!-- Breadcumb Sections -->
-    <section class="breadcumb-section pt-0">
-      <div class="cta-service-v1 cta-banner mx-auto maxw1700 pt120 pb120 bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
-        <img class="left-top-img wow zoomIn" src="images/vector-img/left-top.png" alt="">
-        <img class="right-bottom-img wow zoomIn" src="images/vector-img/right-bottom.png" alt="">
-        <img class="service-v1-vector bounce-y d-none d-lg-block" src="images/vector-img/vector-service-v1.png" alt="">
-        <div class="container">
-          <div class="row wow fadeInUp">
-            <div class="col-xl-5">
-              <div class="position-relative">
-                <h2>Courses</h2>
-                <p class="text mb30">Expoler a range of courses</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+
 
     <!-- Listings All Lists -->
     <section class="pt30 pb90">

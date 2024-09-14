@@ -23,8 +23,8 @@ class UserManagementController extends Controller
 
     public function edit($id){
         try{
-            $users = User::find($id);
-           return view('admin.user.edit', compact('users'));
+            $user = User::find($id);
+           return view('admin.user.edit', compact('user'));
         }catch(\Exception $exception){
             Log::error($exception->getMessage());
             return back()->with('error', 'Something went wrong');

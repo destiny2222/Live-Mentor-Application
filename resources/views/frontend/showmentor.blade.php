@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4 col-lg-2">
+            <div class="col-sm-4 col-lg-2 d-none d-lg-block">
                 <div class="d-flex align-items-center justify-content-sm-end">
                     <div class="share-save-widget d-flex align-items-center">
                         <span class="icon flaticon-share dark-color fz12 mr10"></span>
@@ -61,33 +61,7 @@
     </div>
 </section>
 <!-- Breadcumb Sections -->
-<section class="breadcumb-section pt-0">
-    <div class="cta-service-v1 freelancer-single-style mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
-        <img class="left-top-img wow zoomIn" src="images/vector-img/left-top.png" alt="">
-        <img class="right-bottom-img wow zoomIn" src="images/vector-img/right-bottom.png" alt="">
-        <div class="container">
-            <div class="row wow fadeInUp">
-                <div class="col-xl-7 ">
-                    <div class="position-relative">
-                        <div class="list-meta d-sm-flex align-items-center mt30">
-                            <a class="position-relative freelancer-single-style" href="#">
-                                <img class="rounded-circle w-70 mb15-sm" src="{{ asset('profile/'.$users->image) }}" alt="Freelancer Photo">
-                            
-                            </a>
-                            <div class="">
-                                <h5 class="title mb-1">{{ $users->name }}</h5>
-                                <p class="mb-0">{{ $users->mentor->title ?? '' }}</p>
-                                <p class="mb-0 dark-color fz15 fw500 list-inline-item mb5-sm"><i class="fas fa-star vam fz10 review-color me-2"></i> {{ number_format($users->averageRating(), 1) }} reviews</p>
-                                <p class="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i class="flaticon-place vam fz20 me-2"></i> {{ $users->conutry }}</p>
-                                <p class="mb-0 dark-color fz15 fw500 list-inline-item ml15 mb5-sm ml0-xs"><i class="flaticon-30-days vam fz20 me-2"></i> Member since {{ $users->created_at->format("F j, Y") }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <!-- Service Details -->
 <section class="pt10 pb90 pb30-md">

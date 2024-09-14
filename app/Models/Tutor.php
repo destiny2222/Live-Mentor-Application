@@ -43,6 +43,10 @@ class Tutor extends Model
         return $this->hasMany(Proposal::class);
     }
     
+    // count the number of experience
+    public function getExperienceAttribute($value){
+        return $value ? $value : 0;
+    }
 
     public function educations(){
         return $this->hasMany(Education::class);

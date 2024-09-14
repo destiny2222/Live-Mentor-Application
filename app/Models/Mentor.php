@@ -25,11 +25,14 @@ class Mentor extends Model
         return $this->belongsTo(User::class);
     }
 
-    
-
     // count the number of experience
     public function getExperienceAttribute($value){
         return $value ? $value : 0;
+    }
+
+    // expericence relationship
+    public function experience(){
+        return $this->hasMany(Experience::class);
     }
 
     protected $casts = [

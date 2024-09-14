@@ -13,7 +13,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 col-lg-2">
+                <div class="col-sm-4 col-lg-2 d-none d-lg-block">
                     <div class="d-flex align-items-center justify-content-sm-end">
                         <div class="share-save-widget d-flex align-items-center">
                             <span class="icon flaticon-share dark-color fz12 mr10"></span>
@@ -29,22 +29,6 @@
         </div>
     </section>
     <!-- Breadcumb Sections -->
-    <section class="breadcumb-section pt-0">
-        <div class="cta-service-single cta-banner mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
-            <img class="left-top-img wow zoomIn" src="/images/vector-img/left-top.png" alt="">
-            <img class="right-bottom-img wow zoomIn" src="/images/vector-img/right-bottom.png" alt="">
-            <img class="service-v1-vector bounce-y d-none d-xl-block" src="/images/vector-img/vector-service-v1.png" alt="">
-            <div class="container">
-                <div class="row wow fadeInUp">
-                    <div class="col-xl-7">
-                        <div class="position-relative">
-                            <h2>About us</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- About Section Area -->
     <section class="our-about pb0 pt60-lg">
