@@ -12,9 +12,10 @@ class Tutor extends Model
 {
     use HasFactory, Notifiable;
 
-    public $fillable = [ 'category_id', 'language', 'description', 'price','image_public_id', 'experience',  'status','skill','title' ,'user_id'];
+    public $fillable = ['category_id', 'language', 'description', 'availability', 'price', 'image_public_id', 'is_approved', 'experience', 'status', 'skill', 'title', 'user_id'];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
@@ -33,29 +34,33 @@ class Tutor extends Model
     {
         return $this->reviews()->avg('rating');
     }
-    
+
     public function reviewCount()
     {
         return $this->reviews()->count();
     }
 
-    public function proposal(){
+    public function proposal()
+    {
         return $this->hasMany(Proposal::class);
     }
-    
+
     // count the number of experience
-    public function getExperienceAttribute($value){
+    public function getExperienceAttribute($value)
+    {
         return $value ? $value : 0;
     }
 
-    public function educations(){
+    public function educations()
+    {
         return $this->hasMany(Education::class);
     }
 
     protected $casts = [
         'category_id' => 'array',
         'skill' => 'array',
+        'availability' => 'array',
     ];
 
-  
+
 }

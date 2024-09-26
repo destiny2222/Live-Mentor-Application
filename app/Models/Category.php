@@ -33,4 +33,9 @@ class Category extends Model
     }
     
 
+    public function mentors()
+    {
+        return $this->belongsToMany(Mentor::class);
+    }
+
 }

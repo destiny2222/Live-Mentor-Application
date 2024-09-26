@@ -82,9 +82,10 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.tutor.edit', $tutor->id) }}" class="btn btn-primary btn-sm mb-3">Edit</a>
-                                        <button type="button" class="btn btn-danger btn-sm mb-3" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $tutor->id }}').submit();">Delete</button>
+                                        <a href="{{ route('admin.tutor.delete', $tutor->id) }}" class="btn btn-danger btn-sm mb-3" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $tutor->id }}').submit();">Delete</a>
 
                                         <form action="{{ route('admin.tutor.delete', $tutor->id) }}" method="POST" id="delete-form-{{ $tutor->id }}">
+                                            @csrf
                                             @method('delete')
                                         </form>
                                     </td>

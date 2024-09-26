@@ -2,184 +2,128 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\User;
-use App\Models\Mentor;
+use App\Http\Controllers\Controller;
+use App\Mail\MentorAccepted;
+use App\Models\BookSession;
 use App\Models\Category;
 use App\Models\Education;
 use App\Models\Experience;
-use App\Models\BookSession;
-use App\Mail\MentorAccepted;
-use Illuminate\Http\Request;
+use App\Models\Mentor;
 use App\Models\MentorApplication;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use App\Notifications\MentorRejected;
+use App\Models\User;
 use App\Notifications\MentorNotification;
-use Illuminate\Support\Facades\Validator;
+use App\Notifications\MentorRejected;
+use App\Traits\FirebaseStorageTrait;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Validator;
 
 class MentorController extends Controller
 {
     public function index(){
-        $bookings = BookSession::where('mentor_id', Auth::user()->id)->get();
-        return view('user.mentor.index', compact('bookings'));
+        $Applications = MentorApplication::where('user_id', Auth::user()->id)->get();
+        return view('user.mentor.index', compact('Applications'));
     }
+
     
    
     
     public function create(){
-        $category = Category::orderBy('id', 'desc')->get();
-        return view('user.mentor.create', compact('category'));
+        $categories = Category::orderBy('id', 'desc')->get();
+        return view('user.mentor.create', compact('categories'));
     }
+
     public function store(Request $request) {
         $rules = [
             'title' => 'required|string',
-            // 'skills.*' => 'string',
             'about' => 'required|string',
-            // 'experiences.*.title' => 'required|string',
-            // 'experiences.*.company' => 'required|string',
-            // 'experiences.*.start_date' => 'required|date',
-            // 'experiences.*.end_date' => 'nullable|date|after_or_equal:experiences.*.start_date',    
-            // 'experiences.*.description' => 'required|string',
+            'categories' => 'required|array',
+            'categories.*' => 'exists:categories,id',
         ];
     
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            return back()->with('error', $validator);
+            return back()->withErrors($validator)->withInput();
         }
-        // dd($request->all());
+    
+        // Validate experience dates
+        $dateErrors = [];
+        foreach ($request->input('experiences', []) as $key => $experience) {
+            if (!empty($experience['start_date']) && !empty($experience['end_date'])) {
+                if (strtotime($experience['start_date']) > strtotime($experience['end_date'])) {
+                    $dateErrors[] = "Experience #" . ($key + 1) . ": Start date cannot be after end date.";
+                }
+            }
+        }
+    
+        if (!empty($dateErrors)) {
+            return back()->withErrors($dateErrors)->withInput();
+        }
+    
         try {
-            $education = $request->input('education', []);
-            $Skill = $request->input('skills', []);
-            
-            // if exists 
-            $mentor = Mentor::where('user_id', Auth::user()->id)->first();
-            if ($mentor) {
-                $mentor->update([
+            $mentor = Mentor::updateOrCreate(
+                ['user_id' => Auth::id()],
+                [
                     'about' => $request->about,
                     'title' => $request->title,
-                    'Skills' => $Skill,
-                    'category_id' => $request->category_id,
-                    'user_id' => Auth::user()->id,
-                ]);
-
-                // Save multiple experiences
-            foreach ($request->input('experiences') as $experience) {
-
-                if (strtotime($experience['start_date']) > strtotime($experience['end_date'])) {
-                    return back()->withErrors(['error' => 'Start date cannot be after end date.'])->withInput();
-                }
-
-
+                    'Skills' => $request->input('skills', []),
+                    'experience' => $request->experience,
+                ]
+            );
+    
+            // Sync categories
+            $mentor->categories()->sync($request->categories);
+            
+            // Save experiences
+            foreach ($request->input('experiences', []) as $experience) {
                 Experience::create([
                     'user_id' => Auth::user()->id,
                     'title' => $experience['title'],
                     'company' => $experience['company'],
                     'start_date' => date('Y-m-d', strtotime($experience['start_date'])),
-                   'end_date' => $experience['end_date'] ? date('Y-m-d', strtotime($experience['end_date'])) : null,
+                    'end_date' => !empty($experience['end_date']) ? date('Y-m-d', strtotime($experience['end_date'])) : null,
                     'description' => $experience['description'],
                 ]);
             }
-
-
-            
+    
             // Save education records
-            foreach ($request->education as $educationData) {
+            foreach ($request->input('education', []) as $educationData) {
                 $education = new Education;
                 $education->school = $educationData['school'];
                 $education->degree = $educationData['degree'];
                 $education->field_of_study = $educationData['field_of_study'];
                 $education->start_date = date('Y-m-d', strtotime($educationData['start_date']));
-                $education->end_date = $educationData['end_date'] ? date('Y-m-d', strtotime($educationData['end_date'])) : null;
+                $education->end_date = !empty($educationData['end_date']) ? date('Y-m-d', strtotime($educationData['end_date'])) : null;
                 $education->description = $educationData['description'];
                 $education->user_id = Auth::user()->id;
                 $education->save();
             }
     
             return redirect(route('dashboard'))->with('success', 'Mentor profile updated successfully');
-            } else {
-                Mentor::create([
-                    'about' => $request->about,
-                    'title' => $request->title,
-                    'Skills' => $Skill,
-                    'category_id' => $request->category_id,
-                    'user_id' => Auth::user()->id,
-                ]);
-               
-                // Save multiple experiences
-            foreach ($request->input('experiences') as $experience) {
-
-                if (strtotime($experience['start_date']) > strtotime($experience['end_date'])) {
-                    return back()->withErrors(['error' => 'Start date cannot be after end date.'])->withInput();
-                }
-
-
-                Experience::create([
-                    'user_id' => Auth::user()->id,
-                    'title' => $experience['title'],
-                    'company' => $experience['company'],
-                    'start_date' => date('Y-m-d', strtotime($experience['start_date'])),
-                   'end_date' => $experience['end_date'] ? date('Y-m-d', strtotime($experience['end_date'])) : null,
-                    'description' => $experience['description'],
-                ]);
-            }
-
-
-            
-            // Save education records
-            foreach ($request->education as $educationData) {
-                $education = new Education;
-                $education->school = $educationData['school'];
-                $education->degree = $educationData['degree'];
-                $education->field_of_study = $educationData['field_of_study'];
-                $education->start_date = date('Y-m-d', strtotime($educationData['start_date']));
-                $education->end_date = $educationData['end_date'] ? date('Y-m-d', strtotime($educationData['end_date'])) : null;
-                $education->description = $educationData['description'];
-                $education->user_id = Auth::user()->id;
-                $education->save();
-            }
-    
-            return redirect(route('dashboard'))->with('success', 'Mentor profile updated successfully');
-            }
-
-            
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return back()->with('error', 'Something went wrong, please try again later');
         }
     }
     
-    public function update(Request $request, $id){
-        Mentor::where('id', $id)->update([
-            'about'=>$request->about,
-            'experiences'=>$request->experiences,
-            'experience'=>$request->experience,
-            'education'=>$request->education,
-            'Skills'=>$request->Skills,
-            'year_experience'=>$request->year_experience,
-        ]);
-        
-        
-       
-        
-    }
 
-    public function edit(){
-        $user = Auth::user();
-        $mentor = Mentor::where('user_id', $user->id)->first();
-        return view('user.mentor.edit', compact('mentor'));
+    public function bookSession(){
+        $bookings = BookSession::where('mentor_id', Auth::user()->id)->get();
+        return view('user.mentor.show', compact('bookings'));
     }
+    
 
-    public function SessionPage(){
+    public function SessionCreate(){
         return view('user.mentor.session');
     }
 
     public function storeSession(Request $request){
         $request->validate([
-            'session_title' => 'required|string',
-            'session_price' => 'required|numeric',
+            'session_title' => ['required' ,'string'],
+            'session_price' => ['required', 'numeric'],
         ]);
         
 
@@ -202,10 +146,40 @@ class MentorController extends Controller
                 $session->user_id = Auth::user()->id;
                 $session->save();
             }
-            return back()->with('success','Session created successfully');
+            return redirect()->route('user.mentor.index')->with('success','Session created successfully');
         } catch (\Exception $e) {
             Log::error($e->getMessage());
             return back()->with('error', 'Something went wrong, please try again later');;
+        }
+    }
+
+
+    public function updateSession(Request $request, $id){
+
+        try{
+            $session = MentorApplication::findOrFail($id);
+            $session->update([
+                'session_title'=> $request->input('session_title'),
+                'session_time' => $request->input('session_time'),
+                'session_price' => $request->input('session_price'),
+                'user_id' => Auth::user()->id,
+            ]);
+            return back()->with('success', ' Updated Successfully');
+        }catch(\Exception $exception){
+            Log::error($exception->getMessage());
+            return back()->with('error', 'Something went wrong, please try again later');
+        }
+    }
+
+
+    public function deleteSessionApplication($id){
+        try{
+            $session = MentorApplication::findOrFail($id);
+            $session->delete();
+            return back()->with('success', 'Deleted Successfully');
+        }catch(\Exception $exception){
+            Log::error($exception->getMessage());
+            return back()->with('error', 'Something went wrong, please try again later');
         }
     }
 

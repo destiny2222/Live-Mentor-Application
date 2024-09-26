@@ -18,11 +18,22 @@ class Mentor extends Model
         'education',
         'category_id',
         'status',
+        'is_approved',
         'user_id',
     ];
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function getSkillsAttribute($value)
+    {
+        return json_decode($value, true) ?? [];
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 
     // count the number of experience

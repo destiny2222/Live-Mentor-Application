@@ -2,42 +2,42 @@
 @section('title', 'Tutor Profile')
 @section('content')
 <style>
-.skills-container {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 1px; 
- }
-
-   .oni{
-        left: 4%;
-        top:20%;
+    .skills-container {
+        display: flex;
+        flex-wrap: wrap; 
+        gap: 1px; 
     }
 
-    .w-70{
-        width:70%;
-    }
-
-    @media (max-width: 768px) {
-        .w-70 {
-            width: 100%;
+    .oni{
+            left: 4%;
+            top:20%;
         }
-        .oni{
-            right: 8%;
-        }
-        .freelancer-single-style .online {
-            top: -98px;
-        }
-    }
 
-    .online.offline{
-        background-color: orange !important;
-    }
+        .w-70{
+            width:70%;
+        }
+
+        @media (max-width: 768px) {
+            .w-70 {
+                width: 100%;
+            }
+            .oni{
+                right: 8%;
+            }
+            .freelancer-single-style .online {
+                top: -98px;
+            }
+        }
+
+        .online.offline{
+            background-color: orange !important;
+        }
 </style>
 <!-- Breadcumb Sections -->
-<section class="breadcumb-section">
+<section class="breadcumb-section" style="padding-bottom: 15%">
     <div class="container">
         <div class="row">
-            <div class="col-sm-8 col-lg-10">
+            <div class="col-12 col-sm-8 col-lg-10">
                 <div class="breadcumb-style1 mb10-xs">
                     <div class="breadcumb-list">
                         <a href="/">Home</a>

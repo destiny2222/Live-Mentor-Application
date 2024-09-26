@@ -12469,6 +12469,50 @@ hr {
     position: absolute !important;
 }
 
+.choose__prefer{
+  display:flex;
+  align-items: center;
+  gap:10px;
+}
+
+
+.session-item {
+  padding: 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+/* Hide the radio button */
+.session-label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Change the border color of the session-item when checked */
+.session-label input[type="radio"]:checked + .session-item {
+  border: 2px solid #a020f0; /* Change this to your desired active border color */
+}
+
+/* Optional: Change the text or other styling when active */
+.session-label input[type="radio"]:checked + .session-info h4 {
+  color: #a020f0; /* Optional: Change text color when checked */
+}
+
+/* Info section */
+
+
+.session-info h4 {
+  margin: 0;
+  font-size: 13px;
+}
+
+
+
+
 @media only screen and (max-width: 767.98px) {
   .pending-style {
 		padding: 10px 5px;

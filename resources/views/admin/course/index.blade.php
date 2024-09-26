@@ -25,7 +25,7 @@
         @foreach ($course as $courses)
             <div class="col-12 col-lg-4">
                 <div class="card">
-                    <img class="card-img-top img-fluid" src="{{ asset('upload/courses/'.$courses->image) }}" alt="Card image cap">
+                    <img src="{{ $courses->image }}" alt="{{ $courses->title }}" class="img-fluid" />
                     <div class="card-body">
                         <h4 class="card-title">{{ $courses->title }}</h4>
                         <p class="card-text">

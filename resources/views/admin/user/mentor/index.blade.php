@@ -54,15 +54,19 @@
                                     <td>{{ $mentor->title }}</td>
                                     <td>{{ $mentor->experience }}</td>
                                     <td>&#8358;{{ number_format($mentor->price, 2) }}</td>
-                                    <td>{{ $mentor->language }}</td>
+                                    <td>{{ $mentor->user->language }}</td>
                                     <td>
-                                        @foreach ($mentor->Skills as $skill)
-                                            <span class="badge bg-primary">{{ $skill }}</span>
-                                        @endforeach
+                                        @if($mentor->Skills)
+                                            @foreach ($mentor->Skills as $skill)
+                                                <span class="badge bg-primary">{{ $skill }}</span>
+                                            @endforeach
+                                        @else
+                                            <span>No skills listed</span>
+                                        @endif
                                     </td>
                                     <td>{{ $mentor->about }}</td>
                                     <td>
-                                        @switch($mentor->status)
+                                        @switch($mentor->is_approved)
                                             @case(1)
                                                 <span class="badge bg-success">Active</span>
                                                 @break
@@ -75,8 +79,9 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.mentor.edit', $mentor->id) }}" class="btn btn-primary btn-sm mb-3">Edit</a>
-                                        <button type="button" class="btn btn-danger btn-sm mb-3" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $mentor->id }}').submit();">Delete</button>
+                                        <a href="{{ route('admin.mentor.delete', $mentor->id) }}" type="button" class="btn btn-danger btn-sm mb-3" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $mentor->id }}').submit();">Delete</a>
                                         <form action="{{ route('admin.mentor.delete', $mentor->id) }}" method="POST" id="delete-form-{{ $mentor->id }}">
+                                            @csrf
                                             @method('delete')
                                         </form>
                                     </td>

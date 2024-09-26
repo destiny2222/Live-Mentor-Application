@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Course;
+use App\Traits\FirebaseStorageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +15,8 @@ use Intervention\Image\ImageManager;
 
 class CourseController extends Controller
 {
-
+    use FirebaseStorageTrait;
+    
     public function index(){
         $course = Course::orderBy('id', 'desc')->get();
         return view('admin.course.index', compact('course'));
@@ -43,16 +45,11 @@ class CourseController extends Controller
             return redirect()->back()->with('error', $validator->errors()->first())->withInput(); 
         }
 
-
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $manager = new ImageManager(new Driver());
-            $filename = time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $file = $manager->read($image);
-            $img =  $file->resize(1200, 800);
-            $img->toJpeg(80)->save(public_path('upload/courses/' . $filename));
-            $request->merge(['image' => $filename]);
+        $imageUrl = null;
+        if ($request->hasFile('image')) {
+            $imageUrl = $this->uploadFileToFirebase($request->file('image'), 'images/courses/');
         }
+
         try{
             Course::create([
                 'title' => $request->input('title'),
@@ -64,6 +61,7 @@ class CourseController extends Controller
                 'level' => $request->level,
                 'price' => $request->price,
                 'category_id'=> $request->category_id,
+                'image'=>$imageUrl,
             ]);
             return redirect()->route('admin.course.index')->with('success', 'Course created successfully');
         }catch(\Exception $exception){

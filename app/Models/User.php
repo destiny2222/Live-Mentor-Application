@@ -137,23 +137,8 @@ class User extends Authenticatable implements MustVerifyEmail
             return true;
         }
     }
-    public function checkMentorStatus(){
-        if($this->role == 'mentor'){
-            if ($this->mentor    && $this->mentor->status == null) return false;
-            return true;
-        }
-    }
 
-
-    public function checkMentorActiveStatus()
-    {
-        if($this->role == 'mentor'){
-            if ($this->mentor) return $this->mentor->status === 0;
-            return false;
-        }
-    }
-
-
+    
     public function checkTutorActiveStatus()
     {
         if($this->role == 'tutor'){
@@ -161,6 +146,35 @@ class User extends Authenticatable implements MustVerifyEmail
             return false;
         }
     }
+
+public function checkMentorStatus()
+{
+    if ($this->role == 'mentor') {
+        if ($this->mentor) return  $this->mentor->is_approved === null;
+        return true;
+    }
+}
+
+public function checkMentorActiveStatus()
+{
+    if ($this->role == 'mentor' && $this->mentor) {
+        return $this->mentor->is_approved === 0;
+    }
+    return false;
+}
+
+public function isMentorApproved()
+{
+    if ($this->role == 'mentor' && $this->mentor && $this->mentor->is_approved === 1) {
+        if (!session('mentor_approval_shown')) {
+            session(['mentor_approval_shown' => true]);
+            return true;
+        }
+    }
+    return false;
+}
+
+
 
 
     protected $hidden = [

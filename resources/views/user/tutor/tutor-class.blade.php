@@ -1,66 +1,55 @@
 @extends('layouts.master')
 @section('content')
 
-<div class="dashboard__main pl0-md">
-    <div class="dashboard__content hover-bgc-color">
-        <div class="row pb40">
-            <div class="col-lg-12">
-                <div class="dashboard_navigationbar d-block d-lg-none">
-                    <div class="dropdown">
-                        @include('layouts.navbar')
-                    </div>
-                </div>
+
+<!-- PAGE-HEADER -->
+  <div class="page-header">
+    <h1 class="page-title">My Class</h1>
+    <div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">My Class</li>
+        </ol>
+    </div>
+
+</div>
+<!-- PAGE-HEADER END -->
+
+<div class="row row-sm">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">My Class</h3>
             </div>
-            <div class="col-lg-12">
-                <div class="dashboard_title_area">
-                  <h2>My Class</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="ps-widget bgc-white bdrs4 p30 mb60 overflow-hidden position-relative">
-                    <div class="packages_table table-responsive">
-                      <table class="table-style3 table at-savesearch">
-                        <thead class="t-head">
-                          <tr>
-                            <th scope="col">S/N</th>
-                            <th scope="col">Topic</th>
-                            <th scope="col">Meeting Password</th>
-                            <th scope="col">Meeting Date</th>
-                            <th scope="col">Meeting Url</th>
-                            {{-- <th scope="col">Meeting Status</th> --}}
-                          </tr>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-nowrap border-bottom" id="responsive-datatable">
+                        <thead>
+                            <tr>
+                                <th class="wd-15p border-bottom-0" scope="col">S/N</th>
+                                <!-- <th class="wd-15p border-bottom-0">Topic</th> -->
+                                <th class="wd-15p border-bottom-0">Type</th>
+                                <th class="wd-15p border-bottom-0">Meeting Password</th>
+                                <th class="wd-15p border-bottom-0">Meeting Date</th>
+                                <th class="wd-15p border-bottom-0">Meeting Url</th>
+                            </tr>
                         </thead>
-                        <tbody class="t-body">
+                        <tbody>
                             @foreach($sessions as $session)
-                                <tr>
-                                    <th scope="row">{{ $loop->index + 1 }}</th>
-                                    <td class="vam">{{ $session->book_session }}</td>
-                                    <td class="vam">{{ $session->zoom_meeting_password }}</td>
-                                    <td class="vam">{{ $session->zoom_meeting_start_time }}</td>
-                                    <td class="vam"><a href="{{ $session->zoom_meeting_url }}"  class="pending-style style2">Join url</a></td>
-                                    {{-- <td class="vam">{{ $session->zoom_meeting_status }}</td> --}}
-                                </tr>
+                            <tr>
+                                <th scope="row">{{ $loop->index + 1 }}</th>
+                                <td class="vam">{{ $session->book_session }}</td>
+                                <td class="vam">{{ $session->zoom_meeting_password }}</td>
+                                <td class="vam">{{ $session->zoom_meeting_start_time }}</td>
+                                <td class="vam"><a href="{{ $session->zoom_meeting_url }}"  class="pending-style style2">Join url</a></td>
+                            </tr>
                             @endforeach
                         </tbody>
-                      </table>
-                    </div>
+                    </table>
                 </div>
-              
             </div>
         </div>
     </div>
-    <footer class="dashboard_footer pt30 pb30">
-        <div class="container">
-            <div class="row align-items-center justify-content-center justify-content-md-between">
-                <div class="col-auto">
-                    <div class="copyright-widget">
-                        <p class="mb-md-0">© {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>
+<!-- End Row -->
 @endsection

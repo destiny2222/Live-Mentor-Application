@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-auto pe-0 pe-xl-3">
                             <div class="d-flex align-items-center">
-                                <a class="login-info pr30" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><span class="flaticon-loupe"></span></a>
+                                {{-- <a class="login-info pr30" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><span class="flaticon-loupe"></span></a> --}}
                                 @auth
                                 <a class="login-info mr15-xl mr10 ud-btn btn-dark add-joining bdrs12 dark-color bg-transparent" href="{{ route('dashboard') }}">Dashboard</a>
                                 <a class="ud-btn btn-dark add-joining bdrs12 text-white" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout').submit();">Logout</a>
@@ -71,6 +71,7 @@
                                     @csrf
                                 </form>
                                 @else
+                                <a class="login-info mx15-xl mx30" href="{{ route('become.mentor') }}"><span class="d-none d-xl-inline-block">Become a</span> Mentor</a>
                                 <a class="login-info mr15-xl mr10 ud-btn btn-dark add-joining bdrs12 dark-color bg-transparent" href="/login">Sign in</a>
                                 <a class="ud-btn btn-dark add-joining bdrs12 text-white" href="/register">Join Now</a>
                                 @endauth

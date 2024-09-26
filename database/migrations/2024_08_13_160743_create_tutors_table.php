@@ -22,7 +22,7 @@ return new class extends Migration
             $table->longText('description');
             $table->decimal('price', 10, 2);
             $table->boolean('status')->default(false);
-            $table->foreignId('user_id')->constrained('users')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreignId('user_id')->constrained('users')->onDelete(action: 'CASCADE')->onUpdate('CASCADE');
             $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->timestamps();
         });

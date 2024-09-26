@@ -40,6 +40,7 @@ Route::prefix('dashboard')->group(function (){
   
         // edit profile
         Route::get('/profile', [HomeController::class, 'profile'])->name('profile.index');
+        Route::get('/profile/edit', [HomeController::class, 'editProfile'])->name('edit.profile.index');
         Route::put('/profile/{id}/update', [HomeController::class, 'updateProfile'])->name('profile.update');
         Route::post('/profile/update/password', [HomeController::class, 'changePassword'])->name('profile.update.password');
         Route::delete('/user/delete', [HomeController::class, 'destroyUser'])->name('user.destroy');
@@ -61,13 +62,13 @@ Route::prefix('dashboard')->group(function (){
 
         //mentor
         Route::get('/mentor',[MentorController::class, 'index'])->name('user.mentor.index');
+        Route::get('/mentor/session',[MentorController::class, 'bookSession'])->name('mentor.session.index');
         Route::get('/mentor/create', [MentorController::class, 'create'])->name('mentor.create');
         Route::post('/mentor/store', [MentorController::class, 'store'])->name('mentor.store');
-        Route::get('/mentor/session', [MentorController::class, 'SessionPage'])->name('mentor.session');
+        Route::get('/mentor/session/create', [MentorController::class, 'SessionCreate'])->name('mentor.session');
         Route::post('/mentor/session/store', [MentorController::class, 'storeSession'])->name('mentor.session.store');
-        
-        // Route::get('/mentor/{id}/edit', [MentorController::class, 'edit'])->name('mentor.edit');
-        // Route::put('/mentor/{id}/update', [MentorController::class, 'update'])->name('mentor.update');
+        Route::put('/session/{id}/update', [MentorController::class, 'updateSession'])->name('update.session');
+        Route::delete('/session/application/{id}/delete', [MentorController::class, 'deleteSessionApplication'])->name('delete.session');
 
         // Session
         Route::post('/session/store', [MentorController::class, 'processSession'])->name('process.session.store');

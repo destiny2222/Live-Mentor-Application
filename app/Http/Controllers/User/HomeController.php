@@ -12,7 +12,6 @@ use App\Models\Category;
 use App\Models\Course;
 use App\Models\Education; 
 use App\Models\Experience;
-// use App\Livewire\Syllabus;
 use App\Models\Payment;
 use App\Models\Proposal;
 use App\Models\Review;
@@ -20,7 +19,7 @@ use App\Models\syllabus;
 use App\Models\Tutor;
 use App\Models\User;
 use App\Notifications\RequestNotification;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use App\Traits\FirebaseStorageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -31,6 +30,10 @@ use Share;
 
 class HomeController extends Controller
 {
+
+    use FirebaseStorageTrait;
+
+    
     public function index() {
         try{
             $user = Auth::user();
@@ -206,12 +209,6 @@ class HomeController extends Controller
         }
     }
 
-    // if ($request->input('action') == "update") {
-    //     // update here
-    // } else if ($request->input('action') == "delete") {
-    //     // delete here
-    // }
-
 
     // public 
 
@@ -304,6 +301,13 @@ class HomeController extends Controller
         return back()->with('success', 'Thank you for your review!');
     }
 
+    public function editProfile(){
+        $profile = Auth::user();
+        if (!$profile) {
+            return redirect()->route('login');
+        }
+        return view('user.profile.edit', compact('profile'));
+    }
 
     
     public function profile(){
@@ -343,8 +347,7 @@ class HomeController extends Controller
             
             // dd($request->all());
             if($request->hasFile('image')) {
-                $image_file = time().'.'.$request->image->extension();
-                $request->image->move(public_path('profile'),$image_file);
+                $image_file = $this->uploadFileToFirebase($request->file('image'), 'profile/');
             }
             
             // Update other profile fields

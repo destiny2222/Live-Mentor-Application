@@ -51,37 +51,39 @@
                 aria-labelledby="nav-item1-tab">
                 <div class="row">
                     @foreach($users as $user)
-                    <div class="col-sm-6 col-xl-3">
-                        <div class="blog-style1">
-                          <div class="blog-img">
-                                <a class="position-relative" href="{{ route('mentor.show',$user->id) }}">
-                                    <img class="w-100" src="{{ asset('profile/'.$user->image) }}" alt="">
-                                    @if ($user->last_seen >= now()->subMinutes(5))
-                                      <div class="available-asap position-absolute top-30">
-                                          <i class="fa fa-bolt"></i>
-                                          <span class="ml-1 font-weight-600">Available ASAP</span>
-                                      </div>
-                                    @else
+                      @if ($user->mentor->is_approved == 1)
+                        <div class="col-sm-6 col-xl-3">
+                          <div class="blog-style1">
+                            <div class="blog-img">
+                                  <a class="position-relative" href="{{ route('mentor.show',$user->id) }}">
+                                      <img class="w-100" src="{{ asset('profile/'.$user->image) }}" alt="">
+                                      @if ($user->last_seen >= now()->subMinutes(5))
+                                        <div class="available-asap position-absolute top-30">
+                                            <i class="fa fa-bolt"></i>
+                                            <span class="ml-1 font-weight-600">Available ASAP</span>
+                                        </div>
+                                      @else
 
-                                    @endif
-                                </a>
-                            </div>
-                            <div class="blog-content">
-                                <h4 class="title mt-1"><a href="{{ route('mentor.show',$user->id) }}">{{ $user->name ?? 'N/A' }}</a></h4>
-                                <a href="{{ route('mentor.show',$user->id) }}"><p class="list-inline-item"><i class="flaticon-place fz16 dark-color pr10"></i><span class="dark-color fw500">{{ $user->country }}</span></p></a>
-                                <a href="{{ route('mentor.show',$user->id) }}"><p class="text mb-0">{{ \Str::limit($user->mentor->about ?? 'N/A', 100) }}</p></a>
-                                <div class="d-flex justify-content-between align-items-center">
-                                  <a  href="{{ route('mentor.show',$user->id) }}">
-                                    <h6 style="padding-top:20px; font-weight:700"> Experience </h6>
-                                    <p class="list-inline-item">
-                                        <span class="dark-color fw500">{{ $user->menotr->experience ?? 0 }} Years  </span>
-                                    </p>
+                                      @endif
                                   </a>
-                                  <p class="mb-0 body-color"><span class="fz17 fw500 dark-color ms-1">({{ $user->reviewCount() }} reviews)</span></p>
-                                </div>
-                            </div>
+                              </div>
+                              <div class="blog-content">
+                                  <h4 class="title mt-1"><a href="{{ route('mentor.show',$user->id) }}">{{ $user->name ?? 'N/A' }}</a></h4>
+                                  <a href="{{ route('mentor.show',$user->id) }}"><p class="list-inline-item"><i class="flaticon-place fz16 dark-color pr10"></i><span class="dark-color fw500">{{ $user->country }}</span></p></a>
+                                  <a href="{{ route('mentor.show',$user->id) }}"><p class="text mb-0">{{ \Str::limit($user->mentor->about ?? 'N/A', 100) }}</p></a>
+                                  <div class="d-flex justify-content-between align-items-center">
+                                    <a  href="{{ route('mentor.show',$user->id) }}">
+                                      <h6 style="padding-top:20px; font-weight:700"> Experience </h6>
+                                      <p class="list-inline-item">
+                                          <span class="dark-color fw500">{{ $user->menotr->experience ?? 0 }} Years  </span>
+                                      </p>
+                                    </a>
+                                    <p class="mb-0 body-color"><span class="fz17 fw500 dark-color ms-1">({{ $user->reviewCount() }} reviews)</span></p>
+                                  </div>
+                              </div>
+                          </div>
                         </div>
-                    </div>
+                      @endif  
                     @endforeach
                 </div>
               </div>

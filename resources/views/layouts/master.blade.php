@@ -1,288 +1,225 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="en">
+
+
+
+
+<!doctype html>
+<html lang="en" dir="ltr">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="" content="">
-<!-- css file -->
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/ace-responsive-menu.css">
-<link rel="stylesheet" href="/css/menu.css">
-<link rel="stylesheet" href="/css/fontawesome.css">
-<link rel="stylesheet" href="/css/flaticon.css">
-<link rel="stylesheet" href="/css/bootstrap-select.min.css">
-<link rel="stylesheet" href="/css/animate.css">
-<link rel="stylesheet" href="/css/slider.css">
-<link rel="stylesheet" href="/css/jquery-ui.min.css">
-<link rel="stylesheet" href="/css/magnific-popup.css">
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/ud-custom-spacing.css">
-<link rel="stylesheet" href="/css/dashbord_navitaion.css">
-<!-- Responsive stylesheet -->
-<link rel="stylesheet" href="/css/responsive.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<!-- Title -->
-<title>{{ config('app.name', 'Laravel')}}</title>
-<!-- Favicon -->
-{{-- <link href="images/favicon.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
-<link href="images/favicon.ico" sizes="128x128" rel="shortcut icon" /> --}}
-<!-- Apple Touch Icon -->
-{{-- <link href="images/apple-touch-icon-60x60.png" sizes="60x60" rel="apple-touch-icon">
-<link href="images/apple-touch-icon-72x72.png" sizes="72x72" rel="apple-touch-icon">
-<link href="images/apple-touch-icon-114x114.png" sizes="114x114" rel="apple-touch-icon">
-<link href="images/apple-touch-icon-180x180.png" sizes="180x180" rel="apple-touch-icon"> --}}
 
-@livewireStyles
+    <!-- META DATA -->
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="Dexnovate">
+    <meta name="keywords" content="">
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" type="image/x-icon" href="">
+
+    <!-- TITLE -->
+    <title> {{ config('app.name', 'Laravel') }} </title>
+
+    <!-- BOOTSTRAP CSS -->
+    <link id="style" href="/backend/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- STYLE CSS -->
+     <link href="/backend/css/style.css" rel="stylesheet">
+
+	<!-- Plugins CSS -->
+    <link href="/backend/css/plugins.css" rel="stylesheet">
+
+    <!--- FONT-ICONS CSS -->
+    <link href="/backend/css/icons.css" rel="stylesheet">
+
+    <!-- INTERNAL Switcher css -->
+    <link href="/backend/switcher/demo.css" rel="stylesheet">
+
 </head>
-<body>
-<div class="wrapper">
-  <div class="preloader"></div>
-  
-  <!-- Main Header Nav -->
-  <header class="header-nav nav-innerpage-style menu-home4 dashboard_header main-menu">
-    <!-- Ace Responsive Menu -->
-    <nav class="posr"> 
-      <div class="container-fluid pr30 pr15-xs pl30 posr menu_bdrt1">
-        <div class="row align-items-center justify-content-between">
-          <div class="col-6 col-lg-auto">
-            <div class="text-center text-lg-start d-flex align-items-center">
-              <div class="dashboard_header_logo position-relative me-2 me-xl-5">
-                <a href="/" class="logo"><img width="100" src="/logo.png" alt=""></a>
-              </div>
-              <div class="fz20 ml90">
-                <a href="#" class="dashboard_sidebar_toggle_icon vam"><img src="images/dashboard-navicon.svg" alt=""></a>
-              </div>
-              <a class="login-info d-block d-xl-none ml40 vam" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><span class="flaticon-loupe"></span></a>
-              <div class="ml40 d-none d-xl-block">
-                <div class="search_area dashboard-style">
-                  <form action="{{ route('search') }}" method="get" id="Searchform">
-                    <input type="text" name="search" class="form-control border-0" placeholder="What service are you looking for today?">
-                    <label id="searchButton"><span  class="flaticon-loupe"></span></label>
-                  </form>
+
+
+<body class="app sidebar-mini ltr light-mode">
+
+
+    <!-- GLOBAL-LOADER -->
+    {{-- <div id="global-loader">
+        <img src="/backend/images/loader.svg" class="loader-img" alt="Loader">
+    </div> --}}
+    <!-- /GLOBAL-LOADER -->
+
+
+<!-- PAGE -->
+<div class="page">
+    <div class="page-main">
+
+        <!-- app-Header -->
+        @include('layouts.app-header')
+        <!-- /app-Header -->
+
+        <!--APP-SIDEBAR-->
+        @include('layouts.app_sidebar')
+        <!--/APP-SIDEBAR-->
+
+        <!--app-content open-->
+        <div class="main-content app-content mt-0">
+            <div class="side-app">
+
+                <!-- CONTAINER -->
+                <div class="main-container container-fluid">
+
+                    <!-- PAGE-HEADER -->
+                     @yield('page-header')
+                    <!-- PAGE-HEADER END -->
+
+                    @yield('content')
                 </div>
-              </div>
+                <!-- CONTAINER END -->
             </div>
-          </div>
-          <div class="col-6 col-lg-auto">
-            <div class="text-center text-lg-end header_right_widgets">
-              <ul class="dashboard_dd_menu_list d-flex align-items-center justify-content-center justify-content-sm-end mb-0 p-0">
-                {{-- <li class="d-none d-sm-block">
-                  <a class="text-center mr5 text-thm2 dropdown-toggle fz20" type="button" data-bs-toggle="dropdown" href="#"><span class="flaticon-notification"></span></a>
-                  <div class="dropdown-menu">
-                    <div class="dboard_notific_dd px30 pt10 pb15">
-                      <div class="notif_list d-flex align-items-center bdrb1 pb15 mb10">
-                        <img src="images/resource/notif-1.png" alt="">
-                        <div class="details ml10">
-                          <p class="text mb-0">Your resume</p>
-                          <p class="text mb-0">updated!</p>
-                        </div>
-                      </div>
-                      <div class="notif_list d-flex align-items-center bdrb1 pb15 mb10">
-                        <img src="images/resource/notif-2.png" alt="">
-                        <div class="details ml10">
-                          <p class="text mb-0">You changed</p>
-                          <p class="text mb-0">password</p>
-                        </div>
-                      </div>
-                      <div class="notif_list d-flex align-items-center bdrb1 pb15 mb10">
-                        <img src="images/resource/notif-3.png" alt="">
-                        <div class="details ml10">
-                          <p class="text mb-0">Your account has been</p>
-                          <p class="text mb-0">created successfully</p>
-                        </div>
-                      </div>
-                      <div class="notif_list d-flex align-items-center bdrb1 pb15 mb10">
-                        <img src="images/resource/notif-4.png" alt="">
-                        <div class="details ml10">
-                          <p class="text mb-0">You applied for a job </p>
-                          <p class="text mb-0">Front-end Developer</p>
-                        </div>
-                      </div>
-                      <div class="notif_list d-flex align-items-center">
-                        <img src="images/resource/notif-5.png" alt="">
-                        <div class="details ml10">
-                          <p class="text mb-0">Your course uploaded</p>
-                          <p class="text mb-0">successfully</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="d-none d-sm-block">
-                  <a class="text-center mr5 text-thm2 dropdown-toggle fz20" type="button" data-bs-toggle="dropdown" href="#"><span class="flaticon-mail"></span></a>
-                  <div class="dropdown-menu">
-                    <div class="dboard_notific_dd px30 pt20 pb15">
-                      <div class="notif_list d-flex align-items-start bdrb1 pb25 mb10">
-                        <img class="img-2" src="images/testimonials/testi-1.png" alt="">
-                        <div class="details ml15">
-                          <p class="dark-color fw500 mb-2">Ali Tufan</p>
-                          <p class="text mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                          <p class="mb-0 text-thm">4 hours ago</p>
-                        </div>
-                      </div>
-                      <div class="notif_list d-flex align-items-start mb25">
-                        <img class="img-2" src="images/testimonials/testi-2.png" alt="">
-                        <div class="details ml15">
-                          <p class="dark-color fw500 mb-2">Ali Tufan</p>
-                          <p class="text mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
-                          <p class="mb-0 text-thm">4 hours ago</p>
-                        </div>
-                      </div>
-                      <div class="d-grid">
-                        <a href="page-dashboard-message.html" class="ud-btn btn-thm w-100">View All Messages<i class="fal fa-arrow-right-long"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="d-none d-sm-block">
-                  <a class="text-center mr5 text-thm2 dropdown-toggle fz20" type="button" data-bs-toggle="dropdown" href="#"><span class="flaticon-like"></span></a>
-                  <div class="dropdown-menu">
-                    <div class="dboard_notific_dd px30 pt10 pb15">
-                      <div class="notif_list d-flex align-items-center bdrb1 pb15 mb10">
-                        <img src="images/resource/notif-1.png" alt="">
-                        <div class="details ml10">
-                          <p class="text mb-0">Your resume</p>
-                          <p class="text mb-0">updated!</p>
-                        </div>
-                      </div>
-                      <div class="notif_list d-flex align-items-center bdrb1 pb15 mb10">
-                        <img src="images/resource/notif-2.png" alt="">
-                        <div class="details ml10">
-                          <p class="text mb-0">You changed</p>
-                          <p class="text mb-0">password</p>
-                        </div>
-                      </div>
-                      <div class="notif_list d-flex align-items-center bdrb1 pb15 mb10">
-                        <img src="images/resource/notif-3.png" alt="">
-                        <div class="details ml10">
-                          <p class="text mb-0">Your account has been</p>
-                          <p class="text mb-0">created successfully</p>
-                        </div>
-                      </div>
-                      <div class="notif_list d-flex align-items-center bdrb1 pb15 mb10">
-                        <img src="images/resource/notif-4.png" alt="">
-                        <div class="details ml10">
-                          <p class="text mb-0">You applied for a job </p>
-                          <p class="text mb-0">Front-end Developer</p>
-                        </div>
-                      </div>
-                      <div class="notif_list d-flex align-items-center">
-                        <img src="images/resource/notif-5.png" alt="">
-                        <div class="details ml10">
-                          <p class="text mb-0">Your course uploaded</p>
-                          <p class="text mb-0">successfully</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li> --}}
-                <li class="user_setting">
-                  <div class="dropdown">
-                    <a class="btn" href="#" data-bs-toggle="dropdown">
-                      <img width="50px" height="50px" style="border-radius:50%"   src="{{ asset('profile/'.Auth::user()->image) }}" alt="user.png"> 
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </div>
-    </nav>
-  </header>
-  <!-- Search Modal -->
-  <div class="search-modal">
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalToggleLabel"></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fal fa-xmark"></i></button>
-          </div>
-          <div class="modal-body">
-            <div class="popup-search-field search_area">
-              <input type="text" class="form-control border-0" placeholder="What service are you looking for today?">
-              <label><span class="far fa-magnifying-glass"></span></label>
-              <button class="ud-btn btn-thm" type="submit">Search</button>
+        <!--app-content close-->
+
+    </div>
+
+    <!-- Sidebar-right -->
+    @include('layouts.sidebar_right')
+    <!--/Sidebar-right-->
+
+    
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-md-12 col-sm-12 text-center">
+                    Copyright © <span id="year"></span> {{ config('app.name') }}. All rights reserved.
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </footer>
+    <!-- FOOTER END -->
 
-  <!-- Mobile Nav  -->
-  <div id="page" class="mobilie_header_nav stylehome1">
-    <div class="mobile-menu">
-      <div class="header dashboard-navbar bdrb1">
-        <div class="menu_and_widgets">
-          <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
-            <a class="mobile_logo" href="/"><img width="100" src="/logo.png" alt=""></a>
-            <div class="right-side text-end">
-              {{-- <a class="" href="/login">Join</a> --}}
-              <a class="menubar ml30" href="#menu"><img src="/images/mobile-dark-nav-icon.svg" alt=""></a>
-            </div>
-          </div>
-        </div>
-        <div class="posr"><div class="mobile_menu_close_btn"><span class="far fa-times"></span></div></div>
-      </div>
-    </div>
-     <!-- /.mobile-menu -->
-     <nav id="menu" class="">
-      <ul>
-        <li> <a href="/"><span>Home</span></a></li>
-        <li> <a href="/about"><span>About Us</span></a></li>
-        <li> <a href="/course"><span>Course</span></a></li>
-        <li> <a href="/contact">Contact</a></li>
-        <!-- Only for Mobile View -->
-      </ul>
-    </nav>
-  </div>
 
-  <div class="dashboard_content_wrapper">
-    <div class="dashboard dashboard_wrapper pr30 pr0-xl">
-        @include('layouts.sidebar')
-        @yield('content')
-    </div>
-  </div>
-  <a class="scrollToHome" href="#"><i class="fas fa-angle-up"></i></a>
-</div>
-<!-- Wrapper End -->
-@livewireScripts
-<script src="/js/jquery-3.6.4.min.js"></script> 
-<script src="/js/jquery-migrate-3.0.0.min.js"></script> 
-<script src="/js/popper.min.js"></script> 
-<script src="/js/bootstrap.min.js"></script> 
-<script src="/js/bootstrap-select.min.js"></script> 
-<script src="/js/jquery.mmenu.all.js"></script> 
-<script src="/js/ace-responsive-menu.js"></script> 
-<script src="/js/chart.min.js"></script>
 
-<script src="/js/jquery-scrolltofixed-min.js"></script>
-<script src="/js/dashboard-script.js"></script>
-<!-- Custom script for all pages --> 
-<script src="/js/script.js"></script>
 
-@include('partials.message')
-<script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
-<script>
-  ClassicEditor.create( document.querySelector( '#content' ) )
-      .catch( error => {
-          console.error( error );
-      } );
-</script>
-<script>
-    let SumbitButton = document.querySelector('#searchButton');
-    let Form = document.querySelector('#Searchform');
-    Form.addEventListener('submit', function(e){
-        e.preventDefault();
-        this.submit();
-    });
-</script>
-@stack('scripts')
-@include('partials.notify')
+    <!-- BACK-TO-TOP -->
+    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+    <!-- JQUERY JS -->
+    <script src="/backend/js/jquery.min.js"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="/backend/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="/backend/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- SPARKLINE JS-->
+    <script src="/backend/js/jquery.sparkline.min.js"></script>
+
+    <!-- Sticky js -->
+    <script src="/backend/js/sticky.js"></script>
+
+    <!-- CHART-CIRCLE JS-->
+    <script src="/backend/js/circle-progress.min.js"></script>
+
+    <!-- PIETY CHART JS-->
+    <script src="/backend/plugins/peitychart/jquery.peity.min.js"></script>
+    <script src="/backend/plugins/peitychart/peitychart.init.js"></script>
+
+    <!-- SIDEBAR JS -->
+    <script src="/backend/plugins/sidebar/sidebar.js"></script>
+
+    <!-- Perfect SCROLLBAR JS-->
+    <script src="/backend/plugins/p-scroll/perfect-scrollbar.js"></script>
+    <script src="/backend/plugins/p-scroll/pscroll.js"></script>
+    <script src="/backend/plugins/p-scroll/pscroll-1.js"></script>
+
+    <!-- INTERNAL CHARTJS CHART JS-->
+    <script src="/backend/plugins/chart/Chart.bundle.js"></script>
+    <script src="/backend/plugins/chart/utils.js"></script>
+
+    <!-- DATA TABLE JS-->
+    <script src="/backend/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="/backend/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+    <script src="/backend/plugins/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="/backend/plugins/datatable/js/buttons.bootstrap5.min.js"></script>
+    <script src="/backend/plugins/datatable/js/jszip.min.js"></script>
+    <script src="/backend/plugins/datatable/pdfmake/pdfmake.min.js"></script>
+    <script src="/backend/plugins/datatable/pdfmake/vfs_fonts.js"></script>
+    <script src="/backend/plugins/datatable/js/buttons.html5.min.js"></script>
+    <script src="/backend/plugins/datatable/js/buttons.print.min.js"></script>
+    <script src="/backend/plugins/datatable/js/buttons.colVis.min.js"></script>
+    <script src="/backend/plugins/datatable/dataTables.responsive.min.js"></script>
+    <script src="/backend/plugins/datatable/responsive.bootstrap5.min.js"></script>
+    <script src="/backend/js/table-data.js"></script>
+
+    <!-- INTERNAL SELECT2 JS -->
+    <script src="/backend/plugins/select2/select2.full.min.js"></script>
+
+    <!-- INTERNAL Data tables js-->
+    <script src="/backend/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="/backend/plugins/datatable/js/dataTables.bootstrap5.js"></script>
+    <script src="/backend/plugins/datatable/dataTables.responsive.min.js"></script>
+
+    <!-- INTERNAL APEXCHART JS -->
+    <script src="/backend/js/apexcharts.js"></script>
+    <script src="/backend/plugins/apexchart/irregular-data-series.js"></script>
+
+    <!-- INTERNAL Flot JS -->
+    <script src="/backend/plugins/flot/jquery.flot.js"></script>
+    <script src="/backend/plugins/flot/jquery.flot.fillbetween.js"></script>
+    <script src="/backend/plugins/flot/chart.flot.sampledata.js"></script>
+    <script src="/backend/plugins/flot/dashboard.sampledata.js"></script>
+
+    <!-- INTERNAL Vector js -->
+    <script src="/backend/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="/backend/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+
+    <!-- SIDE-MENU JS-->
+    <script src="/backend/plugins/sidemenu/sidemenu.js"></script>
+
+    <!-- SELECT2 JS -->
+    <script src="/backend/plugins/select2/select2.full.min.js"></script>
+    <script src="/backend/js/select2.js"></script>
+
+	<!-- TypeHead js -->
+	<script src="/backend/plugins/bootstrap5-typehead/autocomplete.js"></script>
+    <script src="/backend/js/typehead.js"></script>
+
+    <!-- INTERNAL INDEX JS -->
+    <script src="/backend/js/index1.js"></script>
+
+    <!-- Color Theme js -->
+    <script src="/backend/js/themeColors.js"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="/backend/js/custom.js"></script>
+
+    <!-- Custom-switcher -->
+    <script src="/backend/js/custom-swicher.js"></script>
+
+        <!-- FILE UPLOADES JS -->
+        <script src="/backend/plugins/fileuploads/js/fileupload.js"></script>
+        <script src="/backend/plugins/fileuploads/js/file-upload.js"></script>
+    
+
+    @include('partials.message')
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+    <script>
+    ClassicEditor.create( document.querySelector( '#content' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    </script>
+    <script>
+        let SumbitButton = document.querySelector('#searchButton');
+        let Form = document.querySelector('#Searchform');
+        Form.addEventListener('submit', function(e){
+            e.preventDefault();
+            this.submit();
+        });
+    </script>
+    @stack('scripts')
+    @include('partials.notify')
 </body>
+
 </html>

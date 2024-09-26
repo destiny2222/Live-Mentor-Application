@@ -160,7 +160,8 @@
         <div class="col-lg-12 col-12">
             <div class="slider-outer-dib vam_nav_style dots_none slider-5-grid owl-carousel owl-theme wow fadeInUp" data-wow-delay="300ms">
                 @foreach ($mentors as $mentor)
-                <div class="item">
+                 @if ($mentor->mentor->is_approved == 1)
+                  <div class="item">
                     <div class="listing-style1 bdrs16">
                         <div class="list-thumb">
                           <a href="{{ route('mentor.show',$mentor->id) }}"> <img class="w-100" src="{{ asset('profile/'.$mentor->image) }}" alt=""> </a>
@@ -187,7 +188,7 @@
                           <div class="list-meta d-flex justify-content-between align-items-center mt15">
                             <a class="" href="{{ route('mentor.show',$mentor->id) }}">
                                 <div>Experience</div>
-                              <span class="fz14 " style="font-weight: 700; color: #000;">{{ $mentor->experience ?? 0 }} years </span>
+                              <span class="fz14 " style="font-weight: 700; color: #000;">{{ $mentor->mentor->experience ?? 0 }} years </span>
                             </a>
                             <div class="budget">
                                 <p class="mb-0 body-color"><span class="fz17 fw500 dark-color ms-1">({{ $mentor->reviewCount() }} reviews)</span></p>
@@ -195,7 +196,8 @@
                           </div>
                         </div>
                     </div>
-                </div>
+                  </div>
+                 @endif
                 @endforeach
             </div>
         </div>

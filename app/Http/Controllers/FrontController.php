@@ -17,8 +17,9 @@ class FrontController extends Controller
 public function index(){
     $tutor = User::orderBy('id', 'desc')->get();
     $categories = Category::orderBy('id', 'asc')->get();
-    $mentors = User::where('role', 'mentor')->whereNotNull('id')->paginate(16);
-        // dd($users); 
+    $mentors = User::where('role', 'mentor')->get();
+
+        // dd(vars: $mentors); 
     $counts = [];
 
     foreach ($categories as $category) {
@@ -34,6 +35,11 @@ public function index(){
 //     $courses = Course::where('category_id', request('id'))->paginate(12);
 //     return view('frontend.course', compact('courses', 'categories'));
 // }
+
+
+public function becomeMentor(){
+    return view('frontend.page-become-mentor');
+}
 
 
 public function CategoryCourses($slug) {

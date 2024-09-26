@@ -56,19 +56,8 @@
                         <form class="form2" id="coupon_form" action="{{ route('preference.store') }}" name="contact_form" method="post">
                             @csrf
                             <div class="row py-5">
-                                <div class="col-sm-12 mb-1">
-                                    <h4>I prefer</h4>
-                                    <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="radio" name="prefer" value="human" id="flexRadioDefault4">
-                                        <label class="form-check-label ps-3" for="flexRadioDefault4">Human mentor</label>
-                                    </div>
-                                    
-                                    <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="radio" onclick="AI()" name="prefer" value="ai" id="flexRadioDefault5">
-                                        <label class="form-check-label ps-3" for="flexRadioDefault5">AI Mentor</label>
-                                    </div>
-                                </div>
                                 <div class="col-sm-12 mb-5">
+                                    <h4>Choose </h4>
                                     <div class="form-check d-flex align-items-center">
                                         <input class="form-check-input" type="radio"  name="prefer" value="group" id="flexRadioDefault5">
                                         <label class="form-check-label ps-3" for="flexRadioDefault5">Group</label>
@@ -243,11 +232,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    function AI(){
-        alert("UNAVAILABLE! Please choose another prefer?");
-        return false;
-    }
-</script>
+
 
 

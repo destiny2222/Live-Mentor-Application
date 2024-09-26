@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
+use App\Http\Controllers\Controller;
 use App\Models\Mentor;
+use App\Models\User;
+use App\Notifications\MentorApproved;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
 
 class MentorController extends Controller
 {
@@ -29,17 +30,21 @@ class MentorController extends Controller
         try{
             $mentor = Mentor::findOrFail($id);
             $mentor->update([
-                'category_id'=>$mentor->category_id,
                 'language'=>$mentor->language,
                 'about'=>$mentor->about,
                 'price'=>$mentor->price,
                 // 'image_public_id'=>$mentor->image_public_id,
                 'experience'=>$mentor->experience,
-                'status'=> $request->has('status') ? $request->status : $mentor->status,
+                'is_approved'=> $request->has('is_approved') ? $request->is_approved : $mentor->is_approved,
                 'Skills'=>$mentor->Skills,
                 'title'=>$mentor->title,
                 'user_id'=>$mentor->user_id,
             ]);
+            // send notification to user email when is_approved equal to 1
+            if($mentor->is_approved == 1){
+                $user = User::find($mentor->user_id);
+                $user->notify(new MentorApproved($user));
+            }
             return redirect()->route('admin.mentor.index')->with('success', 'Mentor updated successfully');
         }catch(\Exception $exception){
             Log::error($exception->getMessage());
@@ -51,6 +56,7 @@ class MentorController extends Controller
         try{
             $mentor = Mentor::findOrFail($id);
             $mentor->delete();
+            return back()->with('error', 'Deleted successfully');
         }catch(\Exception $exception){
             Log::error($exception->getMessage());
             return back()->with('error', 'Something went worry');

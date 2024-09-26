@@ -69,18 +69,39 @@
                                             <p class="text fz14">
                                                 {{ $course->description }}
                                             </p>
-                                            <hr class="opacity-100 mb20">
                                             <ul class="p-0 mb15 d-sm-flex align-items-center">
                                                 <li class="fz14 fw500 dark-color"><i class="flaticon-sandclock fz20 text-thm2 me-2 vam"></i>
                                                     {{ $course->duration }} Weeks
                                                 </li>
-                                                
+                                                <li class="fz14 fw500 dark-color"><i class="flaticon-people fz20 text-thm2 me-2 vam"></i>
+                                                    
+                                                </li>
                                             </ul>
+                                            <hr class="opacity-100 mb20">
                                             <div class="d-grid">
-                                                <a href="{{ route('proposal.store') }}" onclick="event.preventDefault(); document.getElementById('proposal-btn{{ $course->id }}').submit();" class="ud-btn btn-thm">Enroll Now<i class="fal fa-arrow-right-long"></i></a>
-                                                <form action="{{ route('proposal.store') }}" id="proposal-btn{{ $course->id }}" style="display: none" method="post">
+                                                <h3>Prefer</h3>
+                                                <form action="{{ route('proposal.store') }}" method="post" class="session-list">
                                                     @csrf
+                                                    <div class="choose__prefer ">
+                                                        <div class="py-2">
+                                                            <label class="session-label">
+                                                                <input type="radio" name="session" value="Human Tutor">
+                                                                <div class="session-info session-item">
+                                                                    <h4>Human Tutor</h4>
+                                                                </div>
+                                                            </label>
+                                                        </div>
+                                                        <div class="py-2">
+                                                            <label class="session-label ">
+                                                                <input type="radio" name="session" value="AI Tutor" onclick="AI()">
+                                                                <div class="session-info session-item">
+                                                                    <h4>AI Tutor</h4>
+                                                                </div>
+                                                            </label>                                                        
+                                                        </div>
+                                                    </div>
                                                     <input type="hidden" name="id" value="{{ $course->id }}">
+                                                    <button type="submit" class="ud-btn btn-thm w-100">Enroll Now<i class="fal fa-arrow-right-long"></i></button>
                                                 </form>
                                             </div>
                                         </div>
@@ -133,3 +154,9 @@
     </div>
 </section>
 @endsection
+<script>
+    function AI(){
+        alert("UNAVAILABLE! Please choose another prefer?");
+        return false;
+    }
+</script>

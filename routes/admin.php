@@ -4,10 +4,12 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\HomeController;
-use App\Http\Controllers\Admin\TutorController;
 use App\Http\Controllers\Admin\MentorController;
+use App\Http\Controllers\Admin\PluginController;
+use App\Http\Controllers\Admin\TutorController;
 use App\Http\Controllers\Admin\UserManagementController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -63,6 +65,11 @@ Route::prefix('admin')->name('admin.')->group(function (){
         Route::get('/user/mentor/{id}/edit', [MentorController::class, 'edit'])->name('mentor.edit');
         Route::put('/user/mentor/{id}/update', [MentorController::class, 'update'])->name('mentor.update');
         Route::delete('/user/mentor/{id}/delete', [MentorController::class, 'delete'])->name('mentor.delete');
+
+
+        // plugin
+        Route::get('/plugin', [PluginController::class, 'index'])->name('plugin.index');
+        Route::post('/plugin/store', [PluginController::class, 'store'])->name('plugin.firebase.store');
 
 
     });

@@ -2,23 +2,29 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\User;
-use App\Models\Tutor;
+use App\Http\Controllers\Controller;
+// use App\Livewire\Syllabus;
+use App\Http\Requests\StoreTutorRequest;
+use App\Mail\RequestAccepted;
 use App\Models\Awards;
 use App\Models\Category;
-use App\Models\Proposal;
 use App\Models\Education;
-use App\Livewire\Syllabus;
 use App\Models\Experience;
+use App\Models\Proposal;
+use App\Models\Syllabus;
+use App\Models\Tutor;
+use App\Models\User;
+use App\Traits\FirebaseStorageTrait;
 use Illuminate\Http\Request;
-use App\Mail\RequestAccepted;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class TutorController extends Controller
 {
+    use FirebaseStorageTrait;
+    
     public function tutorClass(){
         try{
             $sessions = Proposal::where('user_id', Auth::user()->id)->get();
@@ -108,79 +114,76 @@ class TutorController extends Controller
     }
 
 
-    public function storeTutor(Request $request){
-        try{
-            $request->validate([
-                'language' => ['required', 'string'],
-                'title' => ['required', 'string'],
-                'resume' => ['required', 'file'], 
-            ]);
-
-            // check if the user is a tutor
+    public function storeTutor(StoreTutorRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            // Check if the user is already a tutor
             if ($request->user()->tutor) {
-                return redirect()->back()->with('error', 'You are already a tutor');
+                return redirect()->back()->with('error', 'You have already submitted your details');
             }
-            
-    
-            $uploadedFileUrl = $request->file('resume')->storeOnCloudinary('tutor/resume');
-            $url = $uploadedFileUrl->getSecurePath();
-            $public_id = $uploadedFileUrl->getPublicId();
-    
-           $skills = $request->input('skills', []);
-            $categories = $request->input('category_id', []); 
 
-            $tutor = new Tutor;
-            $tutor->skill = $skills;
-            $tutor->language = $request->input('language');
-            $tutor->description = $request->input('description');
-            $tutor->price = $request->input('price');
-            // $tutor->category_id = $categories;
-            $tutor->resume = $url;
-            $tutor->resume_public_id = $public_id;
-            $tutor->title = $request->input('title');
-            $tutor->user_id = Auth::user()->id;
+            // Handle file upload
+            $resumeFile = $request->hasFile('resume') 
+                ? $this->uploadFileToFirebase($request->file('resume'), '/tutor/resume/')
+                : null;
 
-            // dd($request->all());
+            // Process availability
+            $availability = $this->processAvailability($request->input('days', []));
+
+            // Create Tutor
+            $tutor = new Tutor($request->safe()->only([
+                'language', 'experience', 'description', 'price', 'title'
+            ]));
+            $tutor->skill = $request->input('skills', []);
+            $tutor->resume = $resumeFile;
+            $tutor->availability = $availability;
+            $tutor->resume_public_id = $resumeFile;
+            $tutor->user_id = Auth::id();
             $tutor->save();
-            $tutor->categories()->attach($categories);
 
+            // Attach categories
+            $tutor->categories()->attach($request->input('category_id', []));
 
-            // Save education records
-            $education = new Education;
-            $education->school = $request->input('school');
-            $education->degree = $request->input('degree');
-            $education->field_of_study = $request->input('field_of_study');
-            $education->start_date = $request->input('start_date');
-            $education->end_date = $request->input('end_date');
-            $education->description = $request->input('description');
-            $education->user_id = Auth::user()->id;
-            $education->save();
+            // Create Education
+            Education::create($request->safe()->only([
+                'school', 'degree', 'field_of_study', 'start_date', 'end_date', 'description'
+            ]) + ['user_id' => Auth::id()]);
 
-            // Save award records
-            $award = new Awards;
-            $award->user_id = Auth::user()->id;
-            $award->title = $request->title;
-            $award->company = $request->company;
-            $award->date = $request->date;
-            $award->date_end = $request->date_end;
-            $award->description = $request->description;
-            $award->save();
+            // Create Award
+            Awards::create($request->safe()->only([
+                'award_title', 'company', 'date', 'date_end', 'description'
+            ]) + ['user_id' => Auth::id(), 'title' => $request->input('award_title')]);
 
-            // Save experience records
-            $experience = new Experience;
-            $experience->user_id = Auth::user()->id;
-            $experience->title = $request->title;
-            $experience->company = $request->company;
-            $experience->start_date = $request->start_date;
-            $experience->end_date = $request->end_date;
-            $experience->description = $request->description;
-            $experience->save();
-            
+            // Create Experience
+            Experience::create($request->safe()->only([
+                'experience_title', 'company', 'start_date', 'end_date', 'description'
+            ]) + ['user_id' => Auth::id(), 'title' => $request->input('experience_title')]);
+
+            DB::commit();
             return redirect(route('syllabus.index'))->with('success', 'Tutor profile created successfully');
         } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-            return back()->with('error', 'Oops something went wrong!');
+            DB::rollBack();
+            Log::error('Error creating tutor profile', [
+                'user_id' => Auth::id(),
+                'exception' => $exception->getMessage(),
+                'trace' => $exception->getTraceAsString()
+            ]);
+            return back()->with('error', 'An error occurred while creating your tutor profile. Please try again.');
         }
+    }
+
+    private function processAvailability(array $days): array
+    {
+        $availability = [];
+        foreach ($days as $day => $schedule) {
+            $availability[$day] = [
+                'available' => isset($schedule['available']),
+                'start_time' => $schedule['start_time'] ?? null,
+                'end_time' => $schedule['end_time'] ?? null,
+            ];
+        }
+        return $availability;
     }
     
 

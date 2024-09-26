@@ -1,79 +1,66 @@
 @extends('layouts.master')
 @section('content')
-<div class="dashboard__main pl0-md">
-  <div class="dashboard__content hover-bgc-color">
-      <div class="row pb40">
-          <div class="col-lg-12">
-              <div class="dashboard_navigationbar d-block d-lg-none">
-                  <div class="dropdown">
-                    @include('layouts.navbar')
-                  </div>
-              </div>
-          </div>
-          <div class="col-lg-12">
-            <div class="dashboard_title_area">
-                <h2>Proposal</h2>
-                <!-- <p class="text">Lorem ipsum dolor sit amet, consectetur.</p> -->
+
+  <!-- PAGE-HEADER -->
+  <div class="page-header">
+    <h1 class="page-title">Proposal</h1>
+    <div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Proposal</li>
+        </ol>
+    </div>
+
+</div>
+<!-- PAGE-HEADER END -->
+
+  <!-- Row -->
+  <div class="row row-sm">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Proposal</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered text-nowrap border-bottom" id="responsive-datatable">
+                        <thead>
+                            <tr>
+                                <th class="wd-15p border-bottom-0" scope="col">S/N</th>
+                                <th class="wd-15p border-bottom-0">Topic</th>
+                                <th class="wd-15p border-bottom-0">Type</th>
+                                <th class="wd-15p border-bottom-0">Meeting Password</th>
+                                <th class="wd-15p border-bottom-0">Meeting Date</th>
+                                <th class="wd-15p border-bottom-0">Meeting Url</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($transactions as $transaction)
+                            <tr>
+                                <th scope="row">{{ $loop->index + 1 }}</th>
+                                <td >{{ $transaction['title'] }}</td>
+                                <td >{{ $transaction['type']   }}</td>
+                                <td >{{ $transaction['meeting_password'] ?? 'N/A'   }}</td>
+                                <td >{{ $transaction['meeting_date']  ?? 'N/A' }}</td>
+                                <td >
+                                    @if ($transaction['status'] == '4')
+                                    <a class="btn btn-primary-gradient" href="{{ $transaction['meeting_url']   }}">Join Link</a>
+                                    @elseif ($transaction['status'] == '2')
+                                    <a class="btn btn-danger-gradient" href="javascript:void(0)">Rejected</a>
+                                    @else
+                                    <a class="btn btn-info-gradient" href="javascript:void(0)">Pending</a>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-      </div>
-      <div class="row">
-          <div class="col-xl-12">
-              <div class="ps-widget bgc-white bdrs4 p30 mb60 overflow-hidden position-relative">
-                  <div class="packages_table table-responsive">
-                      <table class="table-style3 table at-savesearch">
-                          <thead class="t-head">
-                              <tr>
-                                  <th scope="col">S/N</th>
-                                  <th>Topic</th>
-                                  <th>Type</th>
-                                  <th>Meeting Password</th>
-                                  <th>Meeting Date</th>
-                                  <th>Meeting Url</th>
-                              </tr>
-                          </thead>
-                          <tbody class="t-body">
-                              @foreach ($transactions as $transaction)
-                              <tr>
-                                  <th scope="row">{{ $loop->index + 1 }}</th>
-                                  <td class="vam">{{ $transaction['title'] }}</td>
-                                  <td class="vam">{{ $transaction['type']   }}</td>
-                                  <td class="vam">{{ $transaction['meeting_password'] ?? 'N/A'   }}</td>
-                                  <td class="vam">{{ $transaction['meeting_date']  ?? 'N/A' }}</td>
-                                  <td class="vam">
-                                      @if ($transaction['status'] == '4')
-                                      <a class="pending-style style2" href="{{ $transaction['meeting_url']   }}">Join Link</a>
-                                      @elseif ($transaction['status'] == '2')
-                                      <a class="pending-style style2" href="javascript:void(0)">Rejected</a>
-                                      @else
-                                      <a class="pending-style style2" href="javascript:void(0)">Pending</a>
-                                      @endif
-                                  </td>
-                              </tr>
-                              @endforeach
-                          </tbody>
-                      </table>
-                      <div class="mbp_pagination text-center mt30">
-                          <ul class="page_navigation">
-
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-
-          </div>
-      </div>
-  </div>
-  <footer class="dashboard_footer pt30 pb30">
-      <div class="container">
-          <div class="row align-items-center justify-content-center justify-content-md-between">
-              <div class="col-auto">
-                  <div class="copyright-widget">
-                      <p class="mb-md-0">© {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </footer>
+    </div>
 </div>
+<!-- End Row -->
+
+
 @endsection

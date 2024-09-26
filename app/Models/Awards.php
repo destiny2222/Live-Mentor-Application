@@ -30,5 +30,10 @@ class Awards extends Model
         return $this->belongsTo(Tutor::class);
     }
 
+    protected $casts = [
+        'date'=> 'datetime',
+        'date_end'=>'datetime',
+    ];
+
 
 }

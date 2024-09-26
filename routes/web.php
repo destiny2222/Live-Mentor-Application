@@ -48,20 +48,7 @@ Route::get('/auth/google/callback', [GoogleAuthController::class , 'callback'])-
 // share profile
 Route::get('/share/profile', [ProfileController::class, 'show'])->name('profile.show');
 
-Route::get('/upload/google', function() {
-   return view('google');
-});
-
-Route::post('/uploaded', function(Request $request){
-    // Validate the image
-    $request->validate([
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
-
-
-    return redirect()->back()->with('success', 'Image uploaded successfully!');
-});
-
+Route::get('/start-mentoring', [FrontController::class, 'becomeMentor'])->name('become.mentor');
 
 require __DIR__.'/auths.php'; 
 require __DIR__.'/admin.php'; 

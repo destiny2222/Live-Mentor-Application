@@ -1,6 +1,9 @@
 @extends('layouts.master-2')
 @section('content')
 <div class="container-fluid">
+    @php
+    use Carbon\Carbon;
+@endphp
 
     <!-- start page title -->
     <div class="row">
@@ -52,9 +55,13 @@
         
                             <div class="mb-3">
                                 <label class="form-label"><strong>Skills:</strong></label>
-                                @foreach ($mentor->Skills as $skill)
-                                 <span class="badge bg-primary">{{ $skill }}</span>
-                                @endforeach
+                                @if($mentor->Skills)
+                                    @foreach ($mentor->Skills as $skill)
+                                        <span class="badge bg-primary">{{ $skill }}</span>
+                                    @endforeach
+                                @else
+                                    <span>No skills listed</span>
+                                @endif
                             </div>
         
                             <div class="mb-3">
@@ -63,12 +70,19 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
+                            <h3 class="text-info">Experience</h3>
                             <div class="mb-3">
                                 @foreach($mentor->user->experiences as $experience)
-                                   dksds
+                                    <div>
+                                        <h4>{{ $experience->title }}</h4>
+                                        <p><strong>Company:</strong> {{ $experience->company }}</p>
+                                        <p><strong>Start Date:</strong> {{ Carbon::parse($experience->start_date)->format('F j, Y') }}</p>
+                                        <p><strong>End Date:</strong> {{ Carbon::parse($experience->end_date)->format('F j, Y') }}</p>
+                                        <p><strong>Description:</strong> {{ $experience->description }}</p>
+                                    </div>
                                 @endforeach
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                     
                     <!-- Only status in input field -->
@@ -77,13 +91,14 @@
                         @method('PUT')
                         <div class="mb-3">
                             <label class="form-label" id="status">Select</label>
-                            <select name="status" class="form-control" id="status" class="form-select">
-                                <option value="1" {{ $mentor->status == 1 ? 'selected' : '' }}>Active</option>
-                                <option value="0" {{ $mentor->status == 0 ? 'selected' : '' }}>Inactive</option>
+                            <select name="is_approved" class="form-control" id="status" class="form-select">
+                                <option value="1" {{ $mentor->is_approved == 1 ? 'selected' : '' }}>Approve</option>
+                                <option value="0" {{ $mentor->is_approved == 0 ? 'selected' : '' }}>Decline</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Update Status</button>
                     </form>
+                    
                 </div>
             </div>
         </div> <!-- end col -->
