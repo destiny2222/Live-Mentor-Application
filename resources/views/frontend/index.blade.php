@@ -160,7 +160,7 @@
         <div class="col-lg-12 col-12">
             <div class="slider-outer-dib vam_nav_style dots_none slider-5-grid owl-carousel owl-theme wow fadeInUp" data-wow-delay="300ms">
                 @foreach ($mentors as $mentor)
-                 @if ($mentor->mentor->is_approved == 1)
+                @if ($mentor->mentor && $mentor->mentor->is_approved == 1)
                   <div class="item">
                     <div class="listing-style1 bdrs16">
                         <div class="list-thumb">

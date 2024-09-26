@@ -51,7 +51,7 @@
                 aria-labelledby="nav-item1-tab">
                 <div class="row">
                     @foreach($users as $user)
-                      @if ($user->mentor->is_approved == 1)
+                    @if ($user->mentor && $user->mentor->is_approved == 1)
                         <div class="col-sm-6 col-xl-3">
                           <div class="blog-style1">
                             <div class="blog-img">
