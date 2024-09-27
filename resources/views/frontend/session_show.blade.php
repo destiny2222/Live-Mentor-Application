@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Session')
 @section('content')
 
 
@@ -14,6 +15,7 @@
               <div class="col-xl-5">
                 <div class="position-relative wow fadeInUp" data-wow-delay="300ms">
                   <h2 class="text-white">Session</h2>
+                  <p style="color: white">{{ $groupSession->title }}</p>
                 </div>
               </div>
             </div>

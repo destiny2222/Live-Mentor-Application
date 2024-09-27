@@ -20,8 +20,11 @@ use App\Models\Tutor;
 use App\Models\User;
 use App\Notifications\RequestNotification;
 use App\Traits\FirebaseStorageTrait;
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -50,6 +53,19 @@ class HomeController extends Controller
             $SessionAcceptedCount = BookSession::where('user_id', $user->id)->where('status', '1')->count();
             $SessionRejectedCount = BookSession::where('user_id', $user->id)->where('status', '2')->count();
             
+
+            $lastMonth = CarbonPeriod::create(Carbon::now()->subDays(29), Carbon::now());
+            $lastMonthOrders = [];
+            foreach ($lastMonth as $date) {
+            $lastMonthOrders['days'][] = $date->format("l");
+            
+            // Here is the count part that you need
+            $lastMonthOrders['orders'][] = DB::table('book_sessions')->whereDate('created_at', '=', $date)->count(); 
+            }
+            $dashboard_infos['lastMonthOrders'] = $lastMonthOrders;
+
+            // dd($dashboard_infos);
+
 
             // fetch all totalReview send to tutor
            $TotalReview  = Review::where('user_id', $user->id)->count();
