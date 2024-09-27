@@ -81,7 +81,7 @@ public function CategoryCourses($slug) {
     
     public function mentor(){
         $users = User::where('role', 'mentor')->whereNotNull('id')->paginate(16);
-        $groupSessions = GroupSession::orderBy('id', 'DESC')->where('is_approved', '1')->paginate(9);
+        $groupSessions = GroupSession::orderBy('id', 'DESC')->paginate(9);
         return view('frontend.mentor', compact('users', 'groupSessions'));
     }
     

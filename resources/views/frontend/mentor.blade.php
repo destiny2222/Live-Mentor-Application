@@ -92,6 +92,7 @@
               <div class="tab-pane fade fz15 text" id="nav-item2" role="tabpanel" aria-labelledby="nav-item2-tab">
                 <div class="row">
                   @foreach($groupSessions as $groupSession)
+                    @if ($groupSession->is_approved == 1)
                     <div class="col-sm-6 col-xl-3">
                       <div class="blog-style1">
                         <div class="blog-img"><img class="w-100" src="{{ $groupSession->image }}" alt=""></div>
@@ -104,6 +105,7 @@
                         </div>
                       </div>
                     </div>
+                    @endif
                   @endforeach
                 </div>
               </div>
