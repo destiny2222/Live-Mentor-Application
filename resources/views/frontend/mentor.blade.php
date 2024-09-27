@@ -12,21 +12,23 @@
 @section('content')
 
 <!-- Breadcumb Sections -->
-<section class="breadcumb-section">
+<section class="breadcumb-section wow fadeInUp mt40">
+  <div class="cta-commmon-v1 cta-banner bgc-thm2 mx-auto maxw1700 pt120 pb120 bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg">
+    <img class="left-top-img wow zoomIn" src="/images/vector-img/left-top.png" alt="">
+    <img class="right-bottom-img wow zoomIn" src="/images/vector-img/right-bottom.png" alt="">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12">
-          <div class="breadcumb-style1">
-            <div class="breadcumb-list">
-              <a href="/app">Home</a>
-              <a href="#">Mentors</a>
-            </div>
+        <div class="col-xl-5">
+          <div class="position-relative wow fadeInUp" data-wow-delay="300ms">
+            <h2 class="text-white">Mentors</h2>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 <!-- Breadcumb Sections -->
+
 
  <!-- Blog Section Area -->
  <section class="our-blog pt-0">
@@ -89,138 +91,20 @@
               </div>
               <div class="tab-pane fade fz15 text" id="nav-item2" role="tabpanel" aria-labelledby="nav-item2-tab">
                 <div class="row">
-                  <div class="col-sm-6 col-xl-3">
-                    <div class="blog-style1">
-                      <div class="blog-img"><img class="w-100" src="images/blog/blog-1.jpg" alt=""></div>
-                      <div class="blog-content">
-                        <a class="date" href="#">December 2, 2022</a>
-                        <h4 class="title mt-1"><a href="page-blog-single.html">Start an online business and work
-                            from home</a></h4>
-                        <p class="text mb-0">A complete guide to starting a small business online</p>
+                  @foreach($groupSessions as $groupSession)
+                    <div class="col-sm-6 col-xl-3">
+                      <div class="blog-style1">
+                        <div class="blog-img"><img class="w-100" src="{{ $groupSession->image }}" alt=""></div>
+                        <div class="blog-content">
+                          <a class="date" href="{{ route('group.session', $groupSession->invitation_token ) }}">
+                            {{ \Carbon\Carbon::parse($groupSession->start_time)->format('d M, Y') }}
+                          </a>                        
+                          <h4 class="title mt-1"><a href="{{ route('group.session', $groupSession->invitation_token ) }}">{{ $groupSession->title }}</a></h4>
+                          <p class="text mb-0">{!! \Str::limit($groupSession->description , 100) !!}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                    <div class="blog-style1">
-                      <div class="blog-img"><img class="w-100" src="images/blog/blog-2.jpg" alt=""></div>
-                      <div class="blog-content">
-                        <a class="date" href="#">December 2, 2022</a>
-                        <h4 class="title mt-1"><a href="page-blog-single.html">Front becomes an official Instagram
-                            Marketing Partner</a></h4>
-                        <p class="text mb-0">A complete guide to starting a small business online</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                    <div class="blog-style1">
-                      <div class="blog-img"><img class="w-100" src="images/blog/blog-3.jpg" alt=""></div>
-                      <div class="blog-content">
-                        <a class="date" href="#">December 2, 2022</a>
-                        <h4 class="title mt-1"><a href="page-blog-single.html">Engendering a culture of professional
-                            development</a></h4>
-                        <p class="text mb-0">A complete guide to starting a small business online</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                    <div class="blog-style1">
-                      <div class="blog-img"><img class="w-100" src="images/blog/blog-4.jpg" alt=""></div>
-                      <div class="blog-content">
-                        <a class="date" href="#">December 2, 2022</a>
-                        <h4 class="title mt-1"><a href="page-blog-single.html">Increasing engagement with
-                            Instagram</a></h4>
-                        <p class="text mb-0">A complete guide to starting a small business online</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                    <div class="blog-style1">
-                      <div class="blog-img"><img class="w-100" src="images/blog/blog-5.jpg" alt=""></div>
-                      <div class="blog-content">
-                        <a class="date" href="#">December 2, 2022</a>
-                        <h4 class="title mt-1"><a href="page-blog-single.html">11 Tips to Help You Get New Clients
-                            Through Cold Calling</a></h4>
-                        <p class="text mb-0">A complete guide to starting a small business online</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                    <div class="blog-style1">
-                      <div class="blog-img"><img class="w-100" src="images/blog/blog-6.jpg" alt=""></div>
-                      <div class="blog-content">
-                        <a class="date" href="#">December 2, 2022</a>
-                        <h4 class="title mt-1"><a href="page-blog-single.html">How to “Woo” a Recruiter and Land
-                            Your Dream Job</a></h4>
-                        <p class="text mb-0">A complete guide to starting a small business online</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                    <div class="blog-style1">
-                      <div class="blog-img"><img class="w-100" src="images/blog/blog-7.jpg" alt=""></div>
-                      <div class="blog-content">
-                        <a class="date" href="#">December 2, 2022</a>
-                        <h4 class="title mt-1"><a href="page-blog-single.html">Hey Job Seeker, It’s Time To Get Up
-                            And Get Hired</a></h4>
-                        <p class="text mb-0">A complete guide to starting a small business online</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                    <div class="blog-style1">
-                      <div class="blog-img"><img class="w-100" src="images/blog/blog-8.jpg" alt=""></div>
-                      <div class="blog-content">
-                        <a class="date" href="#">December 2, 2022</a>
-                        <h4 class="title mt-1 line-clamp2"><a href="page-blog-single.html">4 Learning Management
-                            System Design Tips For Better eLearning</a></h4>
-                        <p class="text mb-0">A complete guide to starting a small business online</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                    <div class="blog-style1">
-                      <div class="blog-img"><img class="w-100" src="images/blog/blog-9.jpg" alt=""></div>
-                      <div class="blog-content">
-                        <a class="date" href="#">December 2, 2022</a>
-                        <h4 class="title mt-1"><a href="page-blog-single.html">A Better Alternative To Grading
-                            Student Writing</a></h4>
-                        <p class="text mb-0">A complete guide to starting a small business online</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                    <div class="blog-style1">
-                      <div class="blog-img"><img class="w-100" src="images/blog/blog-10.jpg" alt=""></div>
-                      <div class="blog-content">
-                        <a class="date" href="#">December 2, 2022</a>
-                        <h4 class="title mt-1"><a href="page-blog-single.html">Exactly How Technology Can Make
-                            Reading Better</a></h4>
-                        <p class="text mb-0">A complete guide to starting a small business online</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                    <div class="blog-style1">
-                      <div class="blog-img"><img class="w-100" src="images/blog/blog-11.jpg" alt=""></div>
-                      <div class="blog-content">
-                        <a class="date" href="#">December 2, 2022</a>
-                        <h4 class="title mt-1 line-clamp2"><a href="page-blog-single.html">Why Public Schools Should
-                            Continue To Use Remote Learning</a></h4>
-                        <p class="text mb-0">A complete guide to starting a small business online</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                    <div class="blog-style1">
-                      <div class="blog-img"><img class="w-100" src="images/blog/blog-12.jpg" alt=""></div>
-                      <div class="blog-content">
-                        <a class="date" href="#">December 2, 2022</a>
-                        <h4 class="title mt-1"><a href="page-blog-single.html">The Benefits Of Using Technology In
-                            Learning</a></h4>
-                        <p class="text mb-0">A complete guide to starting a small business online</p>
-                      </div>
-                    </div>
-                  </div>
+                  @endforeach
                 </div>
               </div>
             </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\MentorController;
 use App\Http\Controllers\Admin\PluginController;
 use App\Http\Controllers\Admin\TutorController;
 use App\Http\Controllers\Admin\UserManagementController;
+use App\Http\Controllers\Admin\GroupSessionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -65,6 +66,12 @@ Route::prefix('admin')->name('admin.')->group(function (){
         Route::get('/user/mentor/{id}/edit', [MentorController::class, 'edit'])->name('mentor.edit');
         Route::put('/user/mentor/{id}/update', [MentorController::class, 'update'])->name('mentor.update');
         Route::delete('/user/mentor/{id}/delete', [MentorController::class, 'delete'])->name('mentor.delete');
+
+
+        // group session
+        Route::get('/user/group-session', [GroupSessionController::class, 'index'])->name('group.session.index');
+        Route::get('/user/group-session/{id}/edit', [GroupSessionController::class, 'show'])->name('group.session.edit');
+        Route::put('/user/group-session/{id}/update', [GroupSessionController::class, 'update'])->name('group.session.update');
 
 
         // plugin

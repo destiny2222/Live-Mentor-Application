@@ -33,34 +33,25 @@
             background-color: orange !important;
         }
 </style>
+
 <!-- Breadcumb Sections -->
-<section class="breadcumb-section" style="padding-bottom: 15%">
-    <div class="container">
+<section class="breadcumb-section wow fadeInUp mt40">
+    <div class="cta-commmon-v1 cta-banner bgc-thm2 mx-auto maxw1700 pt120 pb120 bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg">
+      <img class="left-top-img wow zoomIn" src="/images/vector-img/left-top.png" alt="">
+      <img class="right-bottom-img wow zoomIn" src="/images/vector-img/right-bottom.png" alt="">
+      <div class="container">
         <div class="row">
-            <div class="col-12 col-sm-8 col-lg-10">
-                <div class="breadcumb-style1 mb10-xs">
-                    <div class="breadcumb-list">
-                        <a href="/">Home</a>
-                        <a href="#">Mentor Profile</a>
-                    </div>
-                </div>
+          <div class="col-xl-5">
+            <div class="position-relative wow fadeInUp" data-wow-delay="300ms">
+              <h2 class="text-white">Mentor Profile</h2>
             </div>
-            <div class="col-sm-4 col-lg-2 d-none d-lg-block">
-                <div class="d-flex align-items-center justify-content-sm-end">
-                    <div class="share-save-widget d-flex align-items-center">
-                        <span class="icon flaticon-share dark-color fz12 mr10"></span>
-                        <div class="h6 mb-0">Share</div>
-                    </div>
-                    <div class="share-save-widget d-flex align-items-center ml15">
-                        <span class="icon flaticon-like dark-color fz12 mr10"></span>
-                        <div class="h6 mb-0">Save</div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
-</section>
-<!-- Breadcumb Sections -->
+  </section>
+  <!-- Breadcumb Sections -->
+
 
 
 <!-- Service Details -->

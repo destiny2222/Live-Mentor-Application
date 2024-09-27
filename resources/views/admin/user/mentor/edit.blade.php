@@ -63,6 +63,12 @@
                                     <span>No skills listed</span>
                                 @endif
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label"><strong>Categories:</strong></label>
+                                @foreach ($tutor->categories as $category)
+                                    <span class="badge bg-primary">{{ $category->name }}</span>
+                                @endforeach
+                            </div>
         
                             <div class="mb-3">
                                 <label class="form-label"><strong>Description:</strong></label>

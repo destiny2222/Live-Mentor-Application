@@ -32,11 +32,12 @@
                                         <div class="profile-img-content text-dark text-start">
                                             <div class="text-dark">
                                                 <h3 class="h3 mb-2">{{ $profile->name }}</h3>
-                                                @if ($profile->role == 'tutor')
-                                                  <h5 class="text-muted">{{ $profile->tutor->title }}</h5>
-                                                @elseif($profile->role == 'mentor')
-                                                   <h5 class="text-muted">{{ $profile->mentor->title }}</h5>
+                                                @if ($profile->role == 'tutor' && $profile->tutor)
+                                                    <h5 class="text-muted">{{ $profile->tutor->title }}</h5>
+                                                @elseif($profile->role == 'mentor' && $profile->mentor)
+                                                    <h5 class="text-muted">{{ $profile->mentor->title }}</h5>
                                                 @endif
+
                                             </div>
                                         </div>
                                     </div>
@@ -87,13 +88,14 @@
                     <div class="card-body">
                         <div>
                             <p>
-                                @if ($profile->role == 'mentor')
-                                  {{ $profile->mentor->about }}
-                                @elseif($profile->role == 'tutor')
-                                  {{ $profile->tutor->description }}
+                                @if ($profile->role == 'mentor' && $profile->mentor)
+                                    {{ $profile->mentor->about }}
+                                @elseif($profile->role == 'tutor' && $profile->tutor)
+                                    {{ $profile->tutor->description }}
                                 @else
-
+                                    <!-- You can display a default message or leave it empty if none apply -->
                                 @endif
+
                             </p>
                         </div>
                         <hr>

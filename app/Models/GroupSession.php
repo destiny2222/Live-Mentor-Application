@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class GroupSession extends Model
 {
@@ -18,13 +19,32 @@ class GroupSession extends Model
         'topic_expertise',
         'interest_areas',
         'max_participants',
-        'price',
+        'invitation_token',
         'status',
+        'zoom_meeting_link',
         'image',
         'user_id',
+        'is_approved'
     ];
 
     public function user(){
-        return $this->belongTo(User::class);
+        return $this->belongsTo(User::class);
     }
+
+
+    public function getRouteKeyName()
+    {
+        return 'invitation_token';
+    }
+
+    public function getInvitationTokenAttribute(): string
+    {
+        return Str::slug($this->title);
+    }
+
+
+    protected $casts = [
+        'interest_areas' => 'array'
+    ];
+
 }

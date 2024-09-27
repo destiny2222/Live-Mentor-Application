@@ -2,9 +2,9 @@
     <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
     <div class="app-sidebar">
         <div class="side-header">
-            <a class="header-brand1" href="{{ route('dashboard') }}">
-                <img src="/logo.png" style="width: 100px !important;" class="header-brand-img desktop-logo" alt="logo">
-                <img src="/logo.png" style="width: 100px !important;" class="header-brand-img toggle-logo"
+            <a class="header-brand1" href="/">
+                <img src="/fotor_logo.png" style="width: 100px !important;" class="header-brand-img desktop-logo" alt="logo">
+                <img src="/fotor_logo.png" style="width: 100px !important;" class="header-brand-img toggle-logo"
                     alt="logo">
                 <img src="/logo.png" style="width: 100px !important;" class="header-brand-img light-logo" alt="logo">
                 <img src="/logo.png" style="width: 100px !important;" class="header-brand-img light-logo1"
@@ -87,9 +87,35 @@
                     </a>
                 </li>
                 @endif
+                @php
+                    $user = Auth::user();
+                @endphp
+               @if ($user->role == 'mentor' || $user->role == 'tutor')
+               <li class="sub-category">
+                    <h3>Cohort</h3>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                            class="side-menu__icon fe fe-layers"></i><span
+                            class="side-menu__label">Cohort</span><i
+                            class="angle fe fe-chevron-right"></i>
+                    </a>
+
+                    <ul class="slide-menu">
+                        <li class="panel sidetab-menu">
+                            <ul class="sidemenu-list">
+                                <li><a href="{{ route('cohort.index') }}" class="slide-item"> My Cohort</a></li>
+                                <li><a href="editprofile.html" class="slide-item"> Create Cohort</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+               @endif
+
                 <li class="sub-category">
                     <h3>General</h3>
                 </li>
+                
                 <li>
                     <a class="side-menu__item has-link" href="{{ route('profile.index') }}" {{ Request::routeIs('profile.index') ? 'active' : '' }}>
                         <i class="side-menu__icon fe fe-settings "></i>

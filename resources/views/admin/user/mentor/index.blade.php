@@ -64,7 +64,7 @@
                                             <span>No skills listed</span>
                                         @endif
                                     </td>
-                                    <td>{{ $mentor->about }}</td>
+                                    <td>{{ \Str::limit($mentor->about,   100) }}</td>
                                     <td>
                                         @switch($mentor->is_approved)
                                             @case(1)

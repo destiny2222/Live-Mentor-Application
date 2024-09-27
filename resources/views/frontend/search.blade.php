@@ -2,23 +2,23 @@
 @section('title', 'Course')
 @section('content')
 
-    <!-- Breadcumb Sections -->
-    <section class="breadcumb-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="breadcumb-style1">
-              <div class="breadcumb-list">
-                <a href="/">Home</a>
-                <a href="#">Course</a>
-              </div>
-            </div>
+<!-- Breadcumb Sections -->
+<section class="breadcumb-section wow fadeInUp mt40">
+  <div class="cta-commmon-v1 cta-banner bgc-thm2 mx-auto maxw1700 pt120 pb120 bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg">
+    <img class="left-top-img wow zoomIn" src="/images/vector-img/left-top.png" alt="">
+    <img class="right-bottom-img wow zoomIn" src="/images/vector-img/right-bottom.png" alt="">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-5">
+          <div class="position-relative wow fadeInUp" data-wow-delay="300ms">
+            <h2 class="text-white">Course</h2>
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- Breadcumb Sections -->
+    </div>
+  </div>
+</section>
+<!-- Breadcumb Sections -->
 
 
     <!-- Listings All Lists -->

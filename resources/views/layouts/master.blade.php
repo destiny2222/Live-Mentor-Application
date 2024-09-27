@@ -134,8 +134,8 @@
     <script src="/backend/plugins/p-scroll/pscroll-1.js"></script>
 
     <!-- INTERNAL CHARTJS CHART JS-->
-    <script src="/backend/plugins/chart/Chart.bundle.js"></script>
-    <script src="/backend/plugins/chart/utils.js"></script>
+    {{-- <script src="/backend/plugins/chart/Chart.bundle.js"></script> --}}
+    {{-- <script src="/backend/plugins/chart/utils.js"></script> --}}
 
     <!-- DATA TABLE JS-->
     <script src="/backend/plugins/datatable/js/jquery.dataTables.min.js"></script>
@@ -161,14 +161,14 @@
     <script src="/backend/plugins/datatable/dataTables.responsive.min.js"></script>
 
     <!-- INTERNAL APEXCHART JS -->
-    <script src="/backend/js/apexcharts.js"></script>
-    <script src="/backend/plugins/apexchart/irregular-data-series.js"></script>
+    {{-- <script src="/backend/js/apexcharts.js"></script> --}}
+    {{-- <script src="/backend/plugins/apexchart/irregular-data-series.js"></script> --}}
 
     <!-- INTERNAL Flot JS -->
-    <script src="/backend/plugins/flot/jquery.flot.js"></script>
-    <script src="/backend/plugins/flot/jquery.flot.fillbetween.js"></script>
-    <script src="/backend/plugins/flot/chart.flot.sampledata.js"></script>
-    <script src="/backend/plugins/flot/dashboard.sampledata.js"></script>
+    {{-- <script src="/backend/plugins/flot/jquery.flot.js"></script> --}}
+    {{-- <script src="/backend/plugins/flot/jquery.flot.fillbetween.js"></script> --}}
+    {{-- <script src="/backend/plugins/flot/chart.flot.sampledata.js"></script> --}}
+    {{-- <script src="/backend/plugins/flot/dashboard.sampledata.js"></script> --}}
 
     <!-- INTERNAL Vector js -->
     <script src="/backend/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>

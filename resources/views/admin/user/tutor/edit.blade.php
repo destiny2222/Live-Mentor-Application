@@ -73,9 +73,9 @@
                         @method('PUT')
                         <div class="mb-3">
                             <label class="form-label" id="status">Select</label>
-                            <select name="status" class="form-control" id="status" class="form-select">
-                                <option value="1" {{ $tutor->status == 1 ? 'selected' : '' }}>Active</option>
-                                <option value="0" {{ $tutor->status == 0 ? 'selected' : '' }}>Inactive</option>
+                            <select name="is_approved" class="form-control" id="status" class="form-select">
+                                <option value="1" {{ $tutor->is_approved == 1 ? 'selected' : '' }}>Approved</option>
+                                <option value="0" {{ $tutor->is_approved == 0 ? 'selected' : '' }}>Decline</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Update Status</button>

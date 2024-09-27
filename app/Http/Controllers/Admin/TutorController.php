@@ -43,7 +43,7 @@ class TutorController extends Controller
                 'price'=>$tutor->price,
                 // 'image_public_id'=>$tutor->image_public_id,
                 'experience'=>$tutor->experience,
-                'status'=> $request->has('status') ? $request->status : $tutor->status,
+                'is_approved'=> $request->has('is_approved') ? $request->is_approved : $tutor->is_approved,
                 'skill'=>$tutor->skill,
                 'title'=>$tutor->title,
                 'user_id'=>$tutor->user_id,

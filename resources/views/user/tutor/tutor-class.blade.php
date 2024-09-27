@@ -42,6 +42,11 @@
                                 <td class="vam">{{ $session->zoom_meeting_password }}</td>
                                 <td class="vam">{{ $session->zoom_meeting_start_time }}</td>
                                 <td class="vam"><a href="{{ $session->zoom_meeting_url }}"  class="pending-style style2">Join url</a></td>
+                                <td>
+                                    @if(!Session::has('zoom_access_token'))
+                                        <a href="{{ route('zoom.redirect') }}" class="btn btn-primary">Connect Zoom</a>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

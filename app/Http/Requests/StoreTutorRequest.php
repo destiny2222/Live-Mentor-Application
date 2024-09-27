@@ -23,7 +23,7 @@ class StoreTutorRequest extends FormRequest
     {
         return [
             'language' => ['required', 'string'],
-            'service_title' => ['required', 'string'],
+            // 'service_title' => ['required', 'string'],
             'resume' => ['required', 'file'],
             'skills' => ['array'],
             'category_id' => ['array'],
@@ -42,9 +42,9 @@ class StoreTutorRequest extends FormRequest
             'date_end' => ['required', 'date', 'after:date'],
             'experience_title' => ['required', 'string'],
             'days' => ['array'],
-            'days.*.available' => ['boolean'],
-            'days.*.start_time' => ['required_if:days.*.available,true', 'date_format:H:i'],
-            'days.*.end_time' => ['required_if:days.*.available,true', 'date_format:H:i', 'after:days.*.start_time'],
+            'days.*.available' => ['string'],
+            // 'days.*.start_time' => ['required_if:days.*.available,true', 'date_format:H:i'],
+            // 'days.*.end_time' => ['required_if:days.*.available,true', 'date_format:H:i', 'after:days.*.start_time'],
         ];
     }
 }

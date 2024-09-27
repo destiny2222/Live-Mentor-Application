@@ -38,9 +38,14 @@ class HomeController extends Controller
         try{
             $user = Auth::user();
             $proposals = Proposal::where('user_id', $user->id)->where('status', '3')->get();
+
             $countEnroll = Proposal::where('user_id', $user->id)->where('status', '4')->count();
+
             $PendingCountEnroll = Proposal::where('user_id', $user->id)->where('status', '3')->count();
+
             $SessionCount = BookSession::where('user_id', $user->id)->where('status', null)->count();
+
+            
             $SessionPendingCount = BookSession::where('user_id', $user->id)->where('status', '0')->count();
             $SessionAcceptedCount = BookSession::where('user_id', $user->id)->where('status', '1')->count();
             $SessionRejectedCount = BookSession::where('user_id', $user->id)->where('status', '2')->count();

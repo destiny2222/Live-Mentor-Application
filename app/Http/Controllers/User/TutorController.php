@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 // use App\Livewire\Syllabus;
 use App\Http\Requests\StoreTutorRequest;
+use App\Http\Requests\SyllabusStoreRequest;
 use App\Mail\RequestAccepted;
 use App\Models\Awards;
 use App\Models\Category;
@@ -125,7 +126,7 @@ class TutorController extends Controller
 
             // Handle file upload
             $resumeFile = $request->hasFile('resume') 
-                ? $this->uploadFileToFirebase($request->file('resume'), '/tutor/resume/')
+                ? $this->uploadFileToFirebase($request->file('resume'), 'images/tutor/resume/')
                 : null;
 
             // Process availability
@@ -207,26 +208,28 @@ class TutorController extends Controller
 
     
 
-    public function syllabusStore(Request $request){
-        try {
-            $tutor = Tutor::where('user_id', Auth::user()->id)->first();
+    public function syllabusStore(SyllabusStoreRequest $request){
+
+        
+        try{
 
             // Check if the category already exists for the tutor
             $existingSyllabus = Syllabus::where('category_id', $request->category_id)
-                ->where('tutor_id', $request->tutor_id)
+                ->where('tutor_id', Auth::user()->id)
                 ->first();
+                if($existingSyllabus){
+                    return back()->with('error', 'Syllabus already exists for this category');
+                }
+            
+            Syllabus::updateOrCreate([
+                'category_id' => $request->category_id,
+                'description' => $request->description,
+                'user_id'=> Auth::user()->id,
+                'tutor_id'=> Auth::user()->id,
+            ]);
 
-            if ($existingSyllabus) {
-              return back()->with('error', 'This category already exists for the tutor.');
-            }
-
-            $syllabus = new syllabus;
-            $syllabus->tutor_id = $tutor->id;
-            $syllabus->category_id = $request->category_id;
-            $syllabus->description = $request->description;
-            $tutor->save();
-            return back()->with('success', 'Save Successfully');
-        } catch (\Exception $exception) {
+            return back()->with('success', 'Syllabus added successfully');
+        }catch(\Exception $exception){
             Log::error($exception->getMessage());
             return back()->with('error', $exception->getMessage());
         }

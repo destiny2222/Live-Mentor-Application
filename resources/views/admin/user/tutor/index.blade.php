@@ -67,9 +67,9 @@
                                             <span class="btn btn-primary waves-effect waves-light mb-3" style="font-size: 10px;">{{ $category->name }}</span>
                                         @endforeach
                                     </td>
-                                    <td>{{ $tutor->description }}</td>
+                                    <td>{{ \Str::limit($tutor->description, 100) }}</td>
                                     <td>
-                                        @switch($tutor->status)
+                                        @switch($tutor->is_approved)
                                             @case(1)
                                                 <span class="badge bg-success">Active</span>
                                                 @break

@@ -4,7 +4,7 @@
         <li class="menu-title" data-key="t-menu">Menu</li>
 
         <li>
-            <a href="index.html">
+            <a href="{{ route('admin.home') }}">
                 <i data-feather="home"></i>
                 <span data-key="t-dashboard">Dashboard</span>
             </a>
@@ -70,6 +70,12 @@
                     </a>
                 </li>
             </ul>
+        </li>
+        <li>
+            <a href="{{ route('admin.group.session.index') }}">
+                <i data-feather="grid"></i>
+                <span data-key="t-dashboard">Group Session</span>
+            </a>
         </li>
         <li>
             <a href="javascript: void(0);" class="has-arrow">

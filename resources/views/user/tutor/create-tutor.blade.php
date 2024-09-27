@@ -58,7 +58,7 @@
                         <div class="row">
                             <div class="col-sm-12 py-4">
                                 <label for="resume">Resume</label>
-                                <input type="file" class="dropify" data-bs-height="180">
+                                <input type="file" class="dropify" name="resume" data-bs-height="180">
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="mb20">

@@ -14,4 +14,8 @@ class syllabus extends Model
     public function tutors(){
         return $this->belongsTo(Tutor::class);
     }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 }

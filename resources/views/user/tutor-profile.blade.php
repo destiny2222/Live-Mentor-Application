@@ -14,34 +14,24 @@
     }
 
 </style>
-<!-- Breadcumb Sections -->
-<section class="breadcumb-section">
-    <div class="container">
+  <!-- Breadcumb Sections -->
+  <section class="breadcumb-section wow fadeInUp mt40">
+    <div class="cta-commmon-v1 cta-banner bgc-thm2 mx-auto maxw1700 pt120 pb120 bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg">
+      <img class="left-top-img wow zoomIn" src="/images/vector-img/left-top.png" alt="">
+      <img class="right-bottom-img wow zoomIn" src="/images/vector-img/right-bottom.png" alt="">
+      <div class="container">
         <div class="row">
-            <div class="col-sm-8 col-lg-10">
-                <div class="breadcumb-style1 mb10-xs">
-                    <div class="breadcumb-list">
-                        <a href="#">Home</a>
-                        <a href="#">Services</a>
-                        <a href="#">Tutor Profile</a>
-                    </div>
-                </div>
+          <div class="col-xl-5">
+            <div class="position-relative wow fadeInUp" data-wow-delay="300ms">
+              <h2 class="text-white">Tutor Profile</h2>
             </div>
-            <div class="col-sm-4 col-lg-2">
-                <div class="d-flex align-items-center justify-content-sm-end">
-                    <div class="share-save-widget d-flex align-items-center">
-                        <span class="icon flaticon-share dark-color fz12 mr10"></span>
-                        <div class="h6 mb-0">Share</div>
-                    </div>
-                    <div class="share-save-widget d-flex align-items-center ml15">
-                        <span class="icon flaticon-like dark-color fz12 mr10"></span>
-                        <div class="h6 mb-0">Save</div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
-</section>
+  </section>
+
+
 <!-- Breadcumb Sections -->
 <section class="breadcumb-section pt-0">
     <div class="cta-service-v1 freelancer-single-style mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
@@ -194,7 +184,7 @@
                                 <div class="col-md-12">
                                     <div class="mb-4">
                                         <label class="fw500 fz16 ff-heading dark-color mb-2">Comment</label>
-                                        <textarea name="comment" class="pt15" rows="6" placeholder="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."></textarea>
+                                        <textarea name="comment" class="pt15" rows="6" placeholder=""></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

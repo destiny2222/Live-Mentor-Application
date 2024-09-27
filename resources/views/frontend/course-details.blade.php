@@ -2,33 +2,26 @@
 @section('title', 'Course Details')
 @section('content')
 
-<section class="breadcumb-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8 col-lg-10">
-                <div class="breadcumb-style1 mb10-xs">
-                    <div class="breadcumb-list">
-                        <a href="/">Home</a>
-                        <a href="#">Courses</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-lg-2 d-none d-lg-block">
-                <div class="d-flex align-items-center justify-content-sm-end">
-                    <div class="share-save-widget d-flex align-items-center">
-                        <span class="icon flaticon-share dark-color fz12 mr10"></span>
-                        <div class="h6 mb-0">Share</div>
-                    </div>
-                    <div class="share-save-widget d-flex align-items-center ml15">
-                        <span class="icon flaticon-like dark-color fz12 mr10"></span>
-                        <div class="h6 mb-0">Save</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 <!-- Breadcumb Sections -->
+<section class="breadcumb-section wow fadeInUp mt40">
+    <div class="cta-commmon-v1 cta-banner bgc-thm2 mx-auto maxw1700 pt120 pb120 bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg">
+      <img class="left-top-img wow zoomIn" src="/images/vector-img/left-top.png" alt="">
+      <img class="right-bottom-img wow zoomIn" src="/images/vector-img/right-bottom.png" alt="">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-5">
+            <div class="position-relative wow fadeInUp" data-wow-delay="300ms">
+              <h2 class="text-white">Courses</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- Breadcumb Sections -->
+
+
 
 <!-- Service Details -->
 <section class="pt10 pb90 pb30-md">
@@ -64,7 +57,6 @@
                                 <div class="tab-content" id="nav-tabContent">
                                     <div class="tab-pane fade show active" id="nav-item2p" role="tabpanel" aria-labelledby="nav-item2p-tab">
                                         <div class="price-content">
-                                            <div class="price">&#x20A6;{{ number_format($course->price, 2) }}</div>
                                             <div class="h5 mb-2">{{ $course->title }}</div>
                                             <p class="text fz14">
                                                 {{ $course->description }}

@@ -4,6 +4,7 @@
 use App\Http\Controllers\User\BankController;
 use App\Http\Controllers\User\CourseController;
 use App\Http\Controllers\User\GoogleAuthController;
+use App\Http\Controllers\User\GroupController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\MentorController;
 use App\Http\Controllers\User\MettingController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\User\TutorController;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -97,6 +99,14 @@ Route::prefix('dashboard')->group(function (){
 
         // Add Bank
         Route::post('/add-bank',[BankController::class, 'addBank'])->name('add.bank');
+
+        // cohort
+        Route::get('/cohort', [GroupController::class, 'index'])->name('cohort.index');
+        Route::get('/cohort/create', [GroupController::class, 'create'])->name('cohort.create');
+        Route::post('/cohort/store', [GroupController::class, 'store'])->name('cohort.store');
+        Route::get('/cohort/{id}/edit', [GroupController::class, 'edit'])->name('cohort.edit');
+        Route::put('/cohort/{id}/update', [GroupController::class, 'update'])->name('cohort.update');
+        // Route::delete('/cohort/{id}/delete', [GroupController::class, 'destroy'])->name('cohort.delete');
 
         // google login
         Route::get('/auth/role', [GoogleAuthController::class, 'handleGoogle'])->name('auth.redirect.google');

@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Course;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\GroupSession;
 use App\Models\MentorApplication;
 use App\Models\Review;
 use App\Models\User;
@@ -80,10 +81,14 @@ public function CategoryCourses($slug) {
     
     public function mentor(){
         $users = User::where('role', 'mentor')->whereNotNull('id')->paginate(16);
-        // dd($users); 
-        return view('frontend.mentor', compact('users'));
+        $groupSessions = GroupSession::orderBy('id', 'DESC')->where('is_approved', '1')->paginate(9);
+        return view('frontend.mentor', compact('users', 'groupSessions'));
     }
     
+
+    public function  groupSession(GroupSession $groupSession){
+        return view('frontend.session_show', compact('groupSession'));
+    }
 
     public function showMentor($id){
         $users = User::findOrFail($id);

@@ -31,9 +31,10 @@
         <div class="row align-items-center justify-content-between">
             <div class="col-xl-7">
                 <div class="home14-hero-content wow fadeInRight">
-                    <h1 class="title animate-up-1 mb25">A unified front for <br class="d-none d-xl-block"> mentors and scholars</h1>
-                    <p class="text animate-up-2">Join the mentor community: learn, lead and thrive<br class="d-none d-lg-block"> 
-                        in your career path</p>
+                    <h1 class="title animate-up-1 mb25">The right place for  <br class="d-none d-xl-block"> scholars</h1>
+                    <p class="text animate-up-2">
+                      Join our learning community where mentors, tutors, students, <br class="d-none d-xl-block"> and mentees connect to share knowledge and grow together. <br class="d-none d-xl-block"> Whether you're here to teach or learn, our platform empowers you to thrive.
+                    </p>
                     <div class="d-sm-flex align-items-center mt30 animate-up-3">
                         <a href="{{ route('register') }}" class="ud-btn btn-thm4 me-3 bdrs120 btn-1">Get Started</a>
                     </div>
@@ -49,8 +50,7 @@
         <div class="row align-items-center wow fadeInUp" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms; animation-name: fadeInUp;">
             <div class="col-lg-9">
                 <div class="main-title2">
-                    <h2 class="title">Explore our extensive range Of courses</h2>
-                    <p class="paragraph">JOIN TO CHANGE YOUR LIFE</p>
+                    <h2 class="title">Browse through available categories and courses</h2>
                 </div>
             </div>
             <div class="col-lg-3">
@@ -129,8 +129,8 @@
             </div>
             <div class="col-md-6 col-xl-4 mb-lg-0 mb-4 order-lg-2 order-1 offset-xl-2">
                 <div class="cta-style3 wow fadeInLeft">
-                    <h2 class="cta-title">Empower the next generation on Mentor</h2>
-                    <p class="cta-text">Focus on guiding and inspiring young minds through mentorship.</p>
+                    <h2 class="cta-title">Become a mentor</h2>
+                    <p class="cta-text">Register and build your profile as a mentor/tutor. Highlight your areas of expertise to find the perfect match.</p>
                     
                     <a href="{{ route('register') }}" class="ud-btn btn-thm-border bdrs12">Get Started <i class="fal fa-arrow-right-long"></i></a>
                 </div>
@@ -147,7 +147,7 @@
         <div class="col-xl-3">
           <div class="main-title mb30-lg">
             <h2 class="title">Find the right Mentor</h2>
-            <p class="paragraph">Engage with reliable and consistent mentor.</p>
+            <p class="paragraph">Book sessions, ask questions, or engage in discussions. Our platform facilitates everything from one-on-one mentorship to group learning.</p>
           </div>
         </div>
         <div class="col-xl-9 mb-4 mb-lg-0">

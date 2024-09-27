@@ -52,7 +52,7 @@ trait FirebaseStorageTrait
 
             if (str_starts_with($fileMimeType, 'image/')) {
                 // It's an image, resize it using Intervention Image
-                $manager = new ImageManager();
+                $manager = new ImageManager(new Driver());
                 $image = $manager->read($file->getRealPath());
                 $image->resize(800, 600, function ($constraint) {
                     $constraint->aspectRatio();
