@@ -54,17 +54,9 @@ class HomeController extends Controller
             $SessionRejectedCount = BookSession::where('user_id', $user->id)->where('status', '2')->count();
             
 
-            $lastMonth = CarbonPeriod::create(Carbon::now()->subDays(29), Carbon::now());
-            $lastMonthOrders = [];
-            foreach ($lastMonth as $date) {
-            $lastMonthOrders['days'][] = $date->format("l");
-            
-            // Here is the count part that you need
-            $lastMonthOrders['orders'][] = DB::table('book_sessions')->whereDate('created_at', '=', $date)->count(); 
-            }
-            $dashboard_infos['lastMonthOrders'] = $lastMonthOrders;
+            // $dashboard_info = Proposal::ofLastWeek();
 
-            // dd($dashboard_infos);
+            // dd($dashboard_info);
 
 
             // fetch all totalReview send to tutor

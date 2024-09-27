@@ -100,17 +100,22 @@
                                     </div>
                                     <div class="mb15">
                                         <label class="form-label fw500 dark-color">Password</label>
-                                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="*******">
+                                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="*******"
+                                               pattern="(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}" 
+                                               title="Password must be at least 8 characters long, contain an uppercase letter, and a symbol.">
+                                               <span style="color: red;font-size:13px;">Password must be at least 8 characters long, contain an uppercase letter,number and a symbol.</span>
                                     </div>
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                    
                                     <div class="mb15">
                                         <label for="" class="form-label fw500 dark-color">Confirm Password</label>
                                         <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" placeholder="*******">
                                     </div>
+                                    
                                     <div class="d-grid mb20">
                                         <button class="ud-btn btn-thm default-box-shadow2" type="submit">Creat Account <i class="fal fa-arrow-right-long"></i></button>
                                     </div>

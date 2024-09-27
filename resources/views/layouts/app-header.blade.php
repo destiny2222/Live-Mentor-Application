@@ -3,7 +3,7 @@
         <div class="d-flex">
             <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
             <!-- sidebar-toggle-->
-            <a class="logo-horizontal " href="{{ route('dashboard') }}">
+            <a class="logo-horizontal " href="/">
                 <img src="/fotor_logo.png" class="header-brand-img desktop-logo" style="width: 100px !important;" alt="logo">
                 <img src="/logo.png" class="header-brand-img light-logo1"  style="width: 100px !important;" alt="logo">
             </a>

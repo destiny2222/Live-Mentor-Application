@@ -82,7 +82,7 @@
                       <input type="checkbox" checked="checked">
                       <span class="checkmark"></span>
                     </label>
-                    <a class="fz14 ff-heading" href="#">Lost your password?</a>
+                    <a class="fz14 ff-heading" href="{{ route('password.request') }}">Lost your password?</a>
                   </div>
                   <div class="d-grid mb20 ">
                     <button class="ud-btn btn-thm" type="submit">Log In <i class="fal fa-arrow-right-long"></i></button>
