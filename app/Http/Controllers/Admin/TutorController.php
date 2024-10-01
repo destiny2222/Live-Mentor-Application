@@ -7,6 +7,8 @@ use App\Models\Tutor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Notifications\TutorApproved;
+use App\Notifications\TutorRejected;
 
 class TutorController extends Controller
 {
@@ -48,7 +50,14 @@ class TutorController extends Controller
                 'title'=>$tutor->title,
                 'user_id'=>$tutor->user_id,
             ]);
-            // $tutor->categories()->sync($request->category_id);
+             // send notification to user email when is_approved equal to 1
+             if($tutor->is_approved == 1){
+                $user = User::find($tutor->user_id);
+                $user->notify(new TutorApproved($user));
+            }elseif($tutor->is_approved == 0){
+                $user = User::find($tutor->user_id);
+                $user->notify(new TutorRejected($user));
+            }
             return redirect()->route('admin.tutor.index')->with('success', 'Tutor updated successfully');
         }catch(\Exception $exception){
             Log::error($exception->getMessage());

@@ -18,5 +18,13 @@ class Review extends Model
         'email',
     ];
 
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+
+    public function tutor(){
+        return $this->belongsTo(Tutor::class, 'tutor_id');
+    }
     
 }

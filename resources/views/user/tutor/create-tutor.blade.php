@@ -102,7 +102,7 @@
                             </div>
                             <div class="col-sm-12 mb-4">
                                 <div class="mb20">
-                                    <label class="form-label">Price</label>
+                                    <label class="form-label">Price (Full training period )</label>
                                     <input type="text" class="form-control" name="price" placeholder="" >
                                 </div>
                             </div>

@@ -36,6 +36,7 @@
                         <span class="side-menu__label">My Course</span>
                     </a>
                 </li>
+                
                 <li >
                     <a href="{{ route('course.class') }}" class="side-menu__item has-link" href="{{ Request::routeIs('course.class') ? 'active' : '' }}">
                         <i class="side-menu__icon fe fe-book-open"></i>
@@ -61,6 +62,7 @@
                         <span class="side-menu__label">Book Session</span>
                     </a>
                 </li>
+                
                 <li>
                     <a class="side-menu__item has-link" href="{{ route('mentor.classes') }}" {{ Request::routeIs('mentor.classes') ? 'active' : '' }}>
                         <i class="side-menu__icon fe fe-book-open"></i>
@@ -78,6 +80,12 @@
                     <a class="side-menu__item has-link" href="{{ route('tutor.proposal') }}" {{ Request::routeIs('tutor.proposal') ? 'active' : '' }}>
                         <i class="side-menu__icon fe fe-bookmark"></i>
                         <span class="side-menu__label">My Proposal</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('syllabus.index') }}" {{ Request::routeIs('syllabus.index') ? 'active' : '' }} class="side-menu__item has-link">
+                        <i class="side-menu__icon fe fe-book"></i>
+                        <span class="side-menu__label">Syllabus</span>
                     </a>
                 </li>
                 <li>
@@ -105,7 +113,7 @@
                         <li class="panel sidetab-menu">
                             <ul class="sidemenu-list">
                                 <li><a href="{{ route('cohort.index') }}" class="slide-item"> My Cohort</a></li>
-                                <li><a href="editprofile.html" class="slide-item"> Create Cohort</a></li>
+                                <li><a href="{{ route('cohort.create') }}" class="slide-item"> Create Cohort</a></li>
                             </ul>
                         </li>
                     </ul>

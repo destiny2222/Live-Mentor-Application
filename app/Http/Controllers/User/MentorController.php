@@ -64,12 +64,18 @@ class MentorController extends Controller
         }
     
         try {
+
+            // Process availability
+            $availability = $this->processAvailability($request->input('days', []));
+
+
             $mentor = Mentor::updateOrCreate(
                 ['user_id' => Auth::id()],
                 [
                     'about' => $request->about,
                     'title' => $request->title,
                     'Skills' => $request->input('skills', []),
+                    'availability' => $availability,
                     'experience' => $request->experience,
                 ]
             );
@@ -109,6 +115,20 @@ class MentorController extends Controller
         }
     }
     
+
+    
+    private function processAvailability(array $days): array
+    {
+        $availability = [];
+        foreach ($days as $day => $schedule) {
+            $availability[$day] = [
+                'available' => isset($schedule['available']),
+                'start_time' => $schedule['start_time'] ?? null,
+                'end_time' => $schedule['end_time'] ?? null,
+            ];
+        }
+        return $availability;
+    }
 
     public function bookSession(){
         $bookings = BookSession::where('mentor_id', Auth::user()->id)->get();

@@ -3,11 +3,11 @@
 
 <!-- PAGE-HEADER -->
 <div class="page-header">
-    <h1 class="page-title">Sessions</h1>
+    <h1 class="page-title">Mentor Registration Form</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Sessions</li>
+            <li class="breadcrumb-item active" aria-current="page">Mentor Registration Form</li>
         </ol>
     </div>
 
@@ -53,7 +53,17 @@
                                 <button type="button" class="btn btn-primary mt-2 mb-2" id="add-skill">Add More Skill</button>
                             </div>
                         </div>
-                        
+                        <div class="col-sm-12 mb-4">
+                            <label for="" class="form-label">Availability</label>
+                            @foreach(['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] as $day)
+                                <div>
+                                    <label class="form-label" for="{{ $day }}">{{ ucfirst($day) }}</label>
+                                    <input type="checkbox" class="form-control mb-4" name="days[{{ $day }}][available]" id="{{ $day }}">
+                                    <input type="time" class="form-control mb-4" name="days[{{ $day }}][start_time]">
+                                    <input type="time" class="form-control mb-4" name="days[{{ $day }}][end_time]">
+                                </div>
+                            @endforeach
+                        </div>
                         <div class="col-md-12 mb-4">
                             <div class="form-group">
                                 <label class="form-label">About </label>

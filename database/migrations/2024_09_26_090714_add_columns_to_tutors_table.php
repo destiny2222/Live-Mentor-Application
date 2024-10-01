@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('tutors', function (Blueprint $table) {
             $table->boolean('is_approved')->default(false)->after('status');
-            $table->string('availability')->nullable()->after('is_approved');
+            $table->text('availability')->nullable()->after('is_approved');
         });
     }
 

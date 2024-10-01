@@ -11,12 +11,10 @@
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="">
-    <meta name="author" content="Dexnovate">
-    <meta name="keywords" content="">
-
-    <!-- FAVICON -->
-    <link rel="shortcut icon" type="image/x-icon" href="">
+    <meta name="keywords" content="Smart Mentor, mentor,tutor,learning , training,teaching,online coach,Coaching Course Online,online course">
+    <meta name="description" content="Get a personalized live mentor on our Smart Mentor system that offers a rich feature set, including the ability to set goals and milestones against which progress can be measured.">
+    <link rel="shortcut icon" href="/logo.png">
+    <meta name="og:image" content="https://livementor.gritinai.com/logo.png">
 
     <!-- TITLE -->
     <title> {{ config('app.name', 'Laravel') }} </title>
@@ -84,7 +82,6 @@
     <!-- Sidebar-right -->
     @include('layouts.sidebar_right')
     <!--/Sidebar-right-->
-
     
 
     <!-- FOOTER -->
@@ -206,6 +203,12 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
     <script>
     ClassicEditor.create( document.querySelector( '#content' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+    </script>
+    <script>
+    ClassicEditor.create( document.querySelector( '#body' ) )
         .catch( error => {
             console.error( error );
         } );

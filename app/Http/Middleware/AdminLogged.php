@@ -17,7 +17,7 @@ class AdminLogged
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::guard('admin')->check()){
-            return redirect()->route('/admin');
+            return redirect()->route('admin.home');
         }else{
             return $next($request);
         }

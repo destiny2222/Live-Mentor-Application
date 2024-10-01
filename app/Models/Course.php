@@ -26,8 +26,10 @@ class Course extends Model
         return $this->belongsTo(Category::class);
     }
 
-    // public function getCourseImageAttribute($value)
-    // {
-    //     return asset('storage/' . $value);
-    // }
+    public function syllabus()
+    {
+        return $this->hasMany(Syllabus::class);
+    }
+
+    
 }

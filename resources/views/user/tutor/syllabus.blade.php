@@ -1,5 +1,16 @@
 @extends('layouts.master')
 @section('content')
+<style>
+    .description-container {
+        position: relative;
+    }
+    .show-more-link {
+        color: #007bff;
+        cursor: pointer;
+        display: inline-block;
+        margin-top: 5px;
+    }
+</style>
 <!-- PAGE-HEADER -->
 <div class="page-header">
     <h1 class="page-title">Syllabus</h1>
@@ -13,45 +24,65 @@
 </div>
 <!-- PAGE-HEADER END -->
 
-<div class="row">
+<div class="row mb-4">
     <div class="col-xl-12">
+        <a href="#modaldemo8" class="modal-effect btn btn-primary" data-bs-effect="effect-scale" data-bs-toggle="modal">Add Syllabus</a>
+    </div>
+</div>
+
+<div class="row">
+    @foreach ($syllabus as $syllabu)
+    <div class="col-xl-4 col-md-6">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Upload Syllabus</h3>
+                <div class="card-title">{{ $syllabu->course->title }}</div>
             </div>
             <div class="card-body">
-                <form  action="{{ route('syllabus.store') }}" id="syllabusForm" method="POST">
+                <a href="javascript:void(0)" class="card-link"><strong class="text-black">Duration</strong> {{ $syllabu->duration }}</a>
+                <a href="javascript:void(0)" class="card-link"><strong class="text-black">Price</strong> &#8358;{{ $syllabu->price }}</a>
+                
+                <div class="description-container">
+                    <p class="description-text" data-full-text="{!! $syllabu->description !!}">
+                        {!! \Illuminate\Support\Str::limit($syllabu->description, 100, '...') !!}
+                    </p>
+                    <a href="javascript:void(0)" class="show-more-link mb-3">Show More</a>
+                </div>
+
+                <a href="#modaldemo9-{{ $syllabu->id }}" class="modal-effect btn btn-primary-light" data-bs-effect="effect-scale" data-bs-toggle="modal">Edit</a>
+                <a href="{{ route('syllabus.delete', $syllabu->id) }}" class="modal-effect btn btn-primary-light" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $syllabu->id }}').submit();" data-bs-effect="effect-scale" data-bs-toggle="modal">Delete</a>
+                <form action="{{ route('syllabus.delete', $syllabu->id) }}" id="delete-form-{{ $syllabu->id }}" style="display: none;" method="POST">
                     @csrf
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <label class="label-form">Category</label>
-                                <select name="category_id" class="form-control select2">
-                                    <option value="">Select</option>
-                                    @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('category_id') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <input type="hidden" name="tutor_id">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="label-form">Syllabus Detail</label>
-                                <textarea cols="50" rows="50" name="description" class="form-control" id="content" placeholder="Description"></textarea>
-                                @error('description') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="text-center">
-                                <button class="btn btn-primary w-100" type="submit">Save<i class="fal fa-arrow-right-long"></i></button>
-                            </div>
-                        </div>
-                    </div>
+                    @method('DELETE')
                 </form>
             </div>
         </div>
     </div>
+    @include('user.tutor.edit_syllabus')
+    @endforeach
 </div>
+@include('user.tutor.create_syllabus')
 @endsection
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const containers = document.querySelectorAll('.description-container');
+        
+        containers.forEach(container => {
+            const textElement = container.querySelector('.description-text');
+            const link = container.querySelector('.show-more-link');
+            const fullText = textElement.getAttribute('data-full-text');
+            const shortText = textElement.innerHTML;
+    
+            link.addEventListener('click', function() {
+                if (link.textContent === 'Show More') {
+                    textElement.innerHTML = fullText;
+                    link.textContent = 'Show Less';
+                } else {
+                    textElement.innerHTML = shortText;
+                    link.textContent = 'Show More';
+                }
+            });
+        });
+    });
+    </script>
+@endpush

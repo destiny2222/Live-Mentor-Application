@@ -10,7 +10,6 @@ use App\Http\Controllers\User\MentorController;
 use App\Http\Controllers\User\MettingController;
 use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\TutorController;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +32,7 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/preference/store', [HomeController::class, 'savePreference'])->name('preference.store');
         Route::get('/preference/tutor', [HomeController::class, 'listTutor'])->name('preference.listTutor');
         Route::get('/tutor/{id}/profile', [HomeController::class, 'tutorProfile'])->name('tutor.profile');
-        Route::post('/tutors/{tutor_id}/reviews', [HomeController::class, 'storeReview'])->name('review.store');
+        Route::post('/tutors/reviews', [HomeController::class, 'storeReview'])->name('review.store');
         // send tutor request
         Route::post('/tutor/request', [HomeController::class, 'sendTutorRequest'])->name('tutor.request');
         
@@ -51,6 +50,8 @@ Route::prefix('dashboard')->group(function (){
         Route::get('/course', [HomeController::class, 'EnrollCourse'])->name('enroll-course');
         Route::get('/course/classes', [HomeController::class, 'Classes'])->name('course.class');
         Route::get('/course/{id}/classes', [HomeController::class, 'History'])->name('show.proposal');
+
+    
         
 
         // history
@@ -60,7 +61,9 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
         Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback'])->name('callback.payment');
         Route::post('/payment/webhook', [PaymentController::class, 'WebhookGatewayCallback'])->name('paystack.webhook');
-        
+        ///
+        Route::post('/payment/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
+        Route::get('/payment/initiate/callback', [PaymentController::class, 'handlePaymentCallback'])->name('payment.callback');
 
         //mentor
         Route::get('/mentor',[MentorController::class, 'index'])->name('user.mentor.index');
@@ -89,6 +92,8 @@ Route::prefix('dashboard')->group(function (){
         // Route::get('/tutor/show/{id}', [HomeController::class, 'show'])->name('tutor.show');
         Route::get('/tutor/syllabus', [TutorController::class, 'syllabus'])->name('syllabus.index');
         Route::post('/tutor/syllabus/store', [TutorController::class, 'syllabusStore'])->name('syllabus.store');
+        Route::put('/tutor/{id}syllabus', [TutorController::class, 'syllabusEdit'])->name('syllabus.edit');
+        Route::delete('/tutor/{id}syllabus/delete', [TutorController::class, 'deleteSyllabus'])->name('syllabus.delete');
         // tutor request
         Route::get('/proposal/{id}/details', [TutorController::class, 'viewProposal'])->name('proposal.details');
         Route::post('/tutor/request/cancel', [TutorController::class, 'cancelTutorRequest'])->name('tutor.request.cancel');
@@ -96,7 +101,7 @@ Route::prefix('dashboard')->group(function (){
         Route::delete('/tutor/request/{id}/delete', [TutorController::class, 'deleteRequest'])->name('tutor.request.delete');
         Route::get('/tutor/proposal', [TutorController::class, 'getTutorProposal'])->name('tutor.proposal');
 
-
+        
         // Add Bank
         Route::post('/add-bank',[BankController::class, 'addBank'])->name('add.bank');
 
@@ -107,6 +112,8 @@ Route::prefix('dashboard')->group(function (){
         Route::get('/cohort/{id}/edit', [GroupController::class, 'edit'])->name('cohort.edit');
         Route::put('/cohort/{id}/update', [GroupController::class, 'update'])->name('cohort.update');
         // Route::delete('/cohort/{id}/delete', [GroupController::class, 'destroy'])->name('cohort.delete');
+        Route::post('/cohort/invite/store', [GroupController::class, 'inviteStore'])->name('cohort.invite.store');
+        Route::delete('/cohort/{id}/leave', [GroupController::class, 'cancelInvite'])->name('cohort.leave');
 
         // google login
         Route::get('/auth/role', [GoogleAuthController::class, 'handleGoogle'])->name('auth.redirect.google');

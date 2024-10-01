@@ -5,10 +5,12 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 // use App\Livewire\Syllabus;
 use App\Http\Requests\StoreTutorRequest;
+use App\Http\Requests\SyllabusRequest;
 use App\Http\Requests\SyllabusStoreRequest;
 use App\Mail\RequestAccepted;
 use App\Models\Awards;
 use App\Models\Category;
+use App\Models\Course;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Proposal;
@@ -40,8 +42,7 @@ class TutorController extends Controller
     public function  getTutorProposal(){
         try{
             $user = Auth::user();
-            $proposal = Proposal::where('tutor_id', $user->id)->get();                                                                                                                                    
-            // dd($proposal);
+            $proposal = Proposal::where('tutor_id', $user->id)->get();   
             return view('user.tutor.pro', compact('proposal'));
         }catch(\Exception $e){
             Log::error($e->getMessage());
@@ -93,6 +94,7 @@ class TutorController extends Controller
 
             $proposal->update([
                 'status' => 1,
+                'is_approved' => true,
             ]);
             // Send email notification to the user
             $userTutor = User::where('id', $proposal->tutor_id)->first();
@@ -131,7 +133,7 @@ class TutorController extends Controller
 
             // Process availability
             $availability = $this->processAvailability($request->input('days', []));
-
+            
             // Create Tutor
             $tutor = new Tutor($request->safe()->only([
                 'language', 'experience', 'description', 'price', 'title'
@@ -174,6 +176,8 @@ class TutorController extends Controller
         }
     }
 
+
+
     private function processAvailability(array $days): array
     {
         $availability = [];
@@ -193,39 +197,49 @@ class TutorController extends Controller
 
 
 
-    public function syllabus(Request $request){
-        try{
-            $tutor = Tutor::where('user_id', Auth::user()->id)->with('categories')->first();
-            $categories = $tutor ? $tutor->categories : [];
-            return view('user.tutor.syllabus', compact('categories'));
-        }catch(\Exception $exception){
+    public function syllabus()
+    {
+        try {
+            if (!Auth::check()) {
+                return redirect()->route('login')->with('error', 'Please log in to view the syllabus.');
+            }
+    
+            $tutor = Tutor::where('user_id', Auth::id())->firstOrFail();
+            
+            // Get all categories associated with the tutor
+            $categories = $tutor->categories;
+            
+            // Get all courses associated with the tutor's categories
+            $tutorCourses = Course::whereIn('category_id', $categories->pluck('id'))->get();
+            // dd($tutorCourses);
+            
+            $syllabus = Syllabus::where('user_id', Auth::id())->get();
+            
+            return view('user.tutor.syllabus', compact('tutorCourses', 'syllabus'));
+        } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('error', $exception->getMessage());
+            return back()->with('error', 'An error occurred while loading the syllabus. Please try again later.');
         }
-        
     }
-
-
     
 
-    public function syllabusStore(SyllabusStoreRequest $request){
+    public function syllabusStore(SyllabusRequest $request){
 
         
         try{
 
             // Check if the category already exists for the tutor
-            $existingSyllabus = Syllabus::where('category_id', $request->category_id)
-                ->where('tutor_id', Auth::user()->id)
-                ->first();
+            $existingSyllabus = Syllabus::where('course_id', $request->course_id)->first();
                 if($existingSyllabus){
                     return back()->with('error', 'Syllabus already exists for this category');
                 }
             
-            Syllabus::updateOrCreate([
-                'category_id' => $request->category_id,
+            Syllabus::updateOrCreate( [
+                'course_id' => $request->course_id,
                 'description' => $request->description,
+                'price' => $request->price,
+                'duration' => $request->duration,
                 'user_id'=> Auth::user()->id,
-                'tutor_id'=> Auth::user()->id,
             ]);
 
             return back()->with('success', 'Syllabus added successfully');
@@ -234,6 +248,39 @@ class TutorController extends Controller
             return back()->with('error', $exception->getMessage());
         }
     }
+
+
+    public function syllabusEdit(SyllabusRequest $request, $id){
+        try{
+
+            $syllabus = Syllabus::findOrFail($id);
+            $syllabus->update([ 
+                'course_id' => $request->input('course_id'),
+                'description' => $request->input('description'),
+                'price'=>$request->input('price'),
+                'duration' => $request->input('duration'),
+                'user_id'=> Auth::user()->id,
+            ]);
+
+            return back()->with('success', 'Syllabus updated successfully');
+        }catch(\Exception $exception){
+            Log::error($exception->getMessage());
+            return back()->with('error', $exception->getMessage());
+        }
+    }
+
+
+    public function deleteSyllabus($id){
+        try{
+            $syllabus = Syllabus::findOrFail($id);
+            $syllabus->delete();
+            return back()->with('success', 'Syllabus deleted successfully');    
+        }catch(\Exception $exception){
+            Log::error($exception->getMessage());
+            return back()->with('error', $exception->getMessage());
+        }
+    }
+
 
     public function tutor() {
         try{

@@ -30,6 +30,11 @@ class Tutor extends Model
     }
 
 
+    public function syllabus(){
+        return $this->hasMany(Syllabus::class, 'user_id');
+    }
+
+
     public function averageRating()
     {
         return $this->reviews()->avg('rating');

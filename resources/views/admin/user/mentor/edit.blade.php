@@ -43,15 +43,52 @@
                                 <p>{{ $mentor->experience }} years</p>
                             </div>
         
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label class="form-label"><strong>Price:</strong></label>
                                 <p>&#8358;{{ number_format($mentor->price, 2) }}</p>
+                            </div> --}}
+
+                            <div class="mb-3">
+                                <label for="form-label"><strong>Availability</strong></label>
+                                @if ($mentor->availability)
+                                    @foreach ($mentor->availability as $day => $times)
+                                        <div>
+                                            <strong>{{ ucfirst($day) }}:</strong>
+                                            @if (is_array($times) && count($times) > 0)
+                                                @foreach ($times as $time)
+                                                    @php
+                                                        // Check if the time is in "HH:MM-HH:MM" format
+                                                        if (strpos($time, '-') !== false) {
+                                                            list($start, $end) = explode('-', $time);
+                                                            if (isset($start) && isset($end)) {
+                                                                $startFormatted = date('g:i A', strtotime($start));
+                                                                $endFormatted = date('g:i A', strtotime($end));
+                                                                echo '<span class="badge bg-primary">' . htmlspecialchars("$startFormatted - $endFormatted", ENT_QUOTES, 'UTF-8') . '</span>';
+                                                            }
+                                                        } elseif (preg_match('/^\d{1,2}:\d{2}$/', $time)) {
+                                                            // Check if the time is in "HH:MM" format
+                                                            $timeFormatted = date('g:i A', strtotime($time));
+                                                            echo '<span class="badge bg-primary">' . htmlspecialchars($timeFormatted, ENT_QUOTES, 'UTF-8') . '</span>';
+                                                        }
+                                                    @endphp
+                                                @endforeach
+                                            @else
+                                                <span>No availability</span>
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <span>No availability</span>
+                                @endif
                             </div>
+                            
+
         
                             <div class="mb-3">
                                 <label class="form-label"><strong>Language:</strong></label>
-                                <p>{{ $mentor->language }}</p>
+                                <p>{{ $mentor->user->language }}</p>
                             </div>
+
         
                             <div class="mb-3">
                                 <label class="form-label"><strong>Skills:</strong></label>
@@ -65,7 +102,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label"><strong>Categories:</strong></label>
-                                @foreach ($tutor->categories as $category)
+                                @foreach ($mentor->categories as $category)
                                     <span class="badge bg-primary">{{ $category->name }}</span>
                                 @endforeach
                             </div>

@@ -43,6 +43,19 @@
                             <span class="badge bg-primary">{{ $interest_area }}</span>
                         @endforeach
 
+                        <h5>Session Type</h5>
+                        @if ($group->is_paid == '1')
+                            <p class="badge bg-success">Paid</p>
+                        @else
+                            <p class="badge bg-info">Free</p>
+                        @endif
+
+                        <h5>Price</h5>
+                        @if ($group->is_paid == '1')
+                        <p>&#8358;{{ number_format($group->price, 2) }}</p>
+                        @else
+                        <p>Free</p>
+                        @endif
 
                         <div class="mt-4 mb-4">
                             <form action="{{ route('admin.group.session.update', $group->id) }}" method="POST">

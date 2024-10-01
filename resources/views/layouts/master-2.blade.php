@@ -5,10 +5,11 @@
         <meta charset="utf-8" />
         <title>Admin Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="" name="description" />
-        <meta content="" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="/assets/images/favicon.ico">
+        <meta name="keywords" content="Smart Mentor, mentor,tutor,learning , training,teaching,online coach,Coaching Course Online,online course">
+        <meta name="description" content="Get a personalized live mentor on our Smart Mentor system that offers a rich feature set, including the ability to set goals and milestones against which progress can be measured.">
+        <link rel="shortcut icon" href="/logo.png">
+        <meta name="author" content="Dexnovate">
+        <meta name="og:image" content="https://livementor.gritinai.com/logo.png">
 
         <!-- plugin css -->
         <link href="/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />

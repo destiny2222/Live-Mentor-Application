@@ -1,4 +1,9 @@
 @extends('layouts.master')
+<style>
+    .pagination{
+        justify-content: center;
+    }
+</style>
 @section('content')
 <!-- PAGE-HEADER -->
 <div class="page-header">
@@ -42,6 +47,14 @@
             </div>
         </div>
     @endforeach
+</div>
+
+<div class="row mb-4">
+    <div class="col-12 text-center">
+        @if ($groups->hasPages())
+            {{ $groups->links() }}
+        @endif
+    </div>
 </div>
 
 

@@ -92,6 +92,7 @@
                                                             </label>                                                        
                                                         </div>
                                                     </div>
+                                                    <hr class="opacity-100 mt20 mb15">
                                                     <input type="hidden" name="id" value="{{ $course->id }}">
                                                     <button type="submit" class="ud-btn btn-thm w-100">Enroll Now<i class="fal fa-arrow-right-long"></i></button>
                                                 </form>

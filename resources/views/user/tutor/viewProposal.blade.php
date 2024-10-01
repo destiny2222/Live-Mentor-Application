@@ -42,15 +42,14 @@
                             </div>
                             <div class="btn-list mt-4">
                                 <!-- Respond Button -->
-                                @if ($proposal->status == 0)   
-                                <button class="btn ripple btn-primary me-2" onclick="event.preventDefault(); document.getElementById('accept-{{ $proposal->id }}').submit();">Respond</button>
-                                <button id="reject-button-{{ $proposal->id }}" onclick="showRejectForm({{ $proposal->id }})" class="btn ripple btn-danger me-2">Reject</button>
-                               @else
-                              @if ($proposal->status == '2')
-                                  <button href="javascript:void(0)" class="btn ripple btn-primary me-2">This session was canceled by you</button>
-                                  <button id="delete-{{ $proposal->id }}" onclick="event.preventDefault() document.getElementById('delete-{{ $proposal->id }}').submit();" class="btn ripple btn-dnager me-2">Delete</button>
-                                  @endif
-                              @endif
+                                @if ($proposal->status === 3)  <!-- Checking if status is false (0) -->
+                                 <button class="btn ripple btn-primary me-2" onclick="event.preventDefault(); document.getElementById('accept-{{ $proposal->id }}').submit();">Respond</button>
+                                 <button id="reject-button-{{ $proposal->id }}" onclick="showRejectForm({{ $proposal->id }})" class="btn ripple btn-danger me-2">Reject</button>
+                                @elseif ($proposal->status === true && $proposal->status == 2) <!-- Handling the true case for other status -->
+                                 <button class="btn ripple btn-primary me-2">This session was canceled by you</button>
+                                 <button id="delete-{{ $proposal->id }}" onclick="event.preventDefault(); document.getElementById('delete-{{ $proposal->id }}').submit();" class="btn ripple btn-danger me-2">Delete</button>
+                                @endif
+
                               <!-- delete -->
                               <form class="d-none" action="{{ route('tutor.request.delete', $proposal->id) }}" id="delete-{{ $proposal->id }}" method="POST">
                                   @csrf

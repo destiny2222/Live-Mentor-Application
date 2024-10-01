@@ -5,9 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="" content="">
+    <meta name="author" content="Dexnovate">
+    <meta name="keywords" content="Smart Mentor, mentor,tutor,learning , training,teaching,online coach,Coaching Course Online,online course">
+    <meta name="description" content="Get a personalized live mentor on our Smart Mentor system that offers a rich feature set, including the ability to set goals and milestones against which progress can be measured.">
+    <link rel="shortcut icon" href="/logo.png">
     <meta name="og:image" content="https://livementor.gritinai.com/logo.png">
     <!-- css file -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -207,7 +208,6 @@
             </section>
             <a class="scrollToHome at-home2" href="#"><i class="fas fa-angle-up"></i></a>
         </div>
-
 
     </div>
     <!-- Wrapper End -->

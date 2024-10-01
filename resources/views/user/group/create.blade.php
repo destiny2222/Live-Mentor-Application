@@ -70,6 +70,19 @@
                             @enderror
                             </div>
                         </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="is_paid">Session Type</label>
+                                <select name="is_paid" id="is_paid" class="form-control">
+                                    <option value="0">Free</option>
+                                    <option value="1">Paid</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="price-group" class="form-group" style="display: none;">
+                            <label for="price">Price</label>
+                            <input type="number" step="0.01" name="price" id="price" class="form-control" placeholder="Enter price">
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-label">Interest Areas <span class="text-red">*</span></label>
@@ -156,5 +169,18 @@
         }
     });
     </script>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const isPaidSelect = document.getElementById('is_paid');
+        const priceGroup = document.getElementById('price-group');
+    
+        isPaidSelect.addEventListener('change', function() {
+            if (this.value === '1') {
+                priceGroup.style.display = 'block';
+            } else {
+                priceGroup.style.display = 'none';
+            }
+        });
+    });
+    </script>
 @endpush

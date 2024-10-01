@@ -2,7 +2,14 @@
 @section('title', 'Tutor')
 @section('content')
 <style>
-
+.show-more-skills {
+        cursor: pointer;
+        background-color: #f0f0f0;
+        transition: background-color 0.3s;
+    }
+    .show-more-skills:hover {
+        background-color: #e0e0e0;
+    }
     .top-0{
         top: 16px !important;
         display: table !important;
@@ -59,14 +66,60 @@
                                 
                                 <h5 class="title mb-1">{{ $tutor->user->name ?? 'Unknown' }}</h5>
                                 <p class="mb-0">{{ $tutor->title ?? 'No title available' }}</p>
-                                
                                 <div class="review">
                                     <p>
+                                        <i class="fas fa-star fz10 review-color pr10"></i>
                                         <span class="dark-color fw500">{{ number_format($tutor->averageRating(), 1) }}</span>
                                         ({{ $tutor->reviewCount() }} reviews)
                                     </p>
                                 </div>
                                 
+                                <div class="skill-tags d-flex align-items-center gap-3 justify-content-center mb5">
+                                    @php 
+                                        $skillCount = count($tutor->skill);
+                                        $displayedSkills = array_slice($tutor->skill, 0, 3);
+                                        $remainingSkills = array_slice($tutor->skill, 3);
+                                    @endphp
+                                    
+                                    @foreach ($displayedSkills as $skill)
+                                        <span class="tag">{{ $skill }}</span> 
+                                    @endforeach
+                                </div>
+                                @if ($skillCount > 3)
+                                        <span class="ta" data-bs-toggle="modal" data-bs-target="#skillsModal-{{ $tutor->id }}">
+                                            +{{ $skillCount - 3 }} more
+                                        </span>
+                                    @endif
+                                <!-- Modal for remaining skills -->
+                                @if ($skillCount > 3)
+                                    <div class="modal fade" id="skillsModal-{{ $tutor->id }}" tabindex="-1" aria-labelledby="skillsModalLabel-{{ $tutor->id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="skillsModalLabel-{{ $tutor->id }}">All Skills</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="skill-tags d-flex flex-wrap gap-3">
+                                                        @foreach ($tutor->skill as $skill)
+                                                            <span class="tag">{{ $skill }}</span>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                                <hr class="opacity-100 mt20 mb15">
+                                 
+                                <div class="fl-meta d-flex align-items-center justify-content-between">
+                                    <a class="meta fw500 text-start">Duration<br><span class="fz14 fw400">{{ $syllabus->duration }} </span></a>
+                                    <a class="meta fw500 text-start">Price<br><span class="fz14 fw400">&#8358; {{ number_format($syllabus->price, 2) }}</span></a>
+                                </div>
+                                {{-- <div class="fl-meta d-flex align-items-center justify-content-between">
+                                    <a class="meta fw500 text-start">Duration<br><span class="fz14 fw400">{{ $tutor->syllabus->duration }} </span></a>
+                                    <a class="meta fw500 text-start">Price<br><span class="fz14 fw400">&#8358; {{  number_format($tutor->syllabus->price, 2) }}</span></a>
+                                </div> --}}
                                 <div class="d-grid mt15">
                                     <a href="{{ route('tutor.profile', $tutor->user->id ?? '#')}}" class="ud-btn btn-light-thm">
                                         View Profile<i class="fal fa-arrow-right-long"></i>

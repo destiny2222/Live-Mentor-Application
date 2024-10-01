@@ -35,11 +35,11 @@
                                     <h4>Choose class type</h4>
                                     <div class="form-check d-flex align-items-center">
                                         <input class="form-check-input" type="radio"  name="prefer" value="group" id="flexRadioDefault5">
-                                        <label class="form-check-label ps-3" for="flexRadioDefault5">Group</label>
+                                        <label class="form-check-label ps-3" for="flexRadioDefault5">Group (Max 2)</label>
                                     </div>
                                     <div class="form-check d-flex align-items-center">
-                                        <input class="form-check-input" type="radio"  name="prefer" value="personal" id="flexRadioDefault5">
-                                        <label class="form-check-label ps-3" for="flexRadioDefault5">Personal</label>
+                                        <input class="form-check-input" type="radio"  name="prefer" value="personal" id="flexRadioDefault6">
+                                        <label class="form-check-label ps-3" for="flexRadioDefault6">Personal </label>
                                     </div>
                                 </div>
                                 

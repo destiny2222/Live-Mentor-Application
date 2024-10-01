@@ -35,7 +35,7 @@
                                 <th>User name</th>
                                 <th>Ttile</th>
                                 <th>Experience</th>
-                                <th>Price</th>
+                                {{-- <th>Price</th> --}}
                                 <th>Language</th>
                                 <th>Skills</th>
                                 <th>Content</th>
@@ -53,7 +53,7 @@
                                     <td>{{ $mentor->user->name }}</td>
                                     <td>{{ $mentor->title }}</td>
                                     <td>{{ $mentor->experience }}</td>
-                                    <td>&#8358;{{ number_format($mentor->price, 2) }}</td>
+                                    {{-- <td>&#8358;{{ number_format($mentor->price, 2) }}</td> --}}
                                     <td>{{ $mentor->user->language }}</td>
                                     <td>
                                         @if($mentor->Skills)

@@ -15,6 +15,8 @@ class GroupSession extends Model
         'start_time',
         'end_time',
         'location',
+        'is_paid',
+        'price',
         'description',
         'topic_expertise',
         'interest_areas',
@@ -43,8 +45,15 @@ class GroupSession extends Model
     }
 
 
+    public function invite(){
+        return $this->hasMany(Invitation::class);
+    }
+
+
     protected $casts = [
-        'interest_areas' => 'array'
+        'interest_areas' => 'array',
+        'is_paid' => 'boolean',
+        'price' => 'decimal:2',
     ];
 
 }

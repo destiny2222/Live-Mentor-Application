@@ -21,7 +21,7 @@
     <!-- end page title -->
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 col-xl-6">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Tutor Details</h4>
@@ -41,6 +41,40 @@
                     <div class="mb-3">
                         <label class="form-label"><strong>Price:</strong></label>
                         <p>&#8358;{{ number_format($tutor->price, 2) }}</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="form-label"><strong>Availability</strong></label>
+                        @if ($tutor->availability)
+                            @foreach ($tutor->availability as $day => $times)
+                                <div>
+                                    <strong>{{ ucfirst($day) }}:</strong>
+                                    @if (is_array($times) && count($times) > 0)
+                                        @foreach ($times as $time)
+                                            @php
+                                                // Check if the time is in "HH:MM-HH:MM" format
+                                                if (strpos($time, '-') !== false) {
+                                                    list($start, $end) = explode('-', $time);
+                                                    if (isset($start) && isset($end)) {
+                                                        $startFormatted = date('g:i A', strtotime($start));
+                                                        $endFormatted = date('g:i A', strtotime($end));
+                                                        echo '<span class="badge bg-primary">' . htmlspecialchars("$startFormatted - $endFormatted", ENT_QUOTES, 'UTF-8') . '</span>';
+                                                    }
+                                                } elseif (preg_match('/^\d{1,2}:\d{2}$/', $time)) {
+                                                    // Check if the time is in "HH:MM" format
+                                                    $timeFormatted = date('g:i A', strtotime($time));
+                                                    echo '<span class="badge bg-primary">' . htmlspecialchars($timeFormatted, ENT_QUOTES, 'UTF-8') . '</span>';
+                                                }
+                                            @endphp
+                                        @endforeach
+                                    @else
+                                        <span>No availability</span>
+                                    @endif
+                                </div>
+                            @endforeach
+                        @else
+                            <span>No availability</span>
+                        @endif
                     </div>
 
                     <div class="mb-3">
@@ -83,6 +117,26 @@
                 </div>
             </div>
         </div> <!-- end col -->
+        <div class="col-12 col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Experience</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        @foreach($tutor->user->experiences as $experience)
+                            <div>
+                                <h4>{{ $experience->title }}</h4>
+                                <p><strong>Company:</strong> {{ $experience->company }}</p>
+                                <p><strong>Start Date:</strong> {{ \Carbon\Carbon::parse($experience->start_date)->format('F j, Y') }}</p>
+                                <p><strong>End Date:</strong> {{ \Carbon\Carbon::parse($experience->end_date)->format('F j, Y') }}</p>
+                                <p><strong>Description:</strong> {{ $experience->description }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
     </div> <!-- end row -->
 </div> <!-- container-fluid -->
 @endsection

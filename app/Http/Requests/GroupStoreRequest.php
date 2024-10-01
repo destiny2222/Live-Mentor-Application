@@ -27,6 +27,8 @@ class GroupStoreRequest extends FormRequest
             'description' => ['required', 'string'],
             'start_time' => ['required', 'date'],
             'end_time' => ['required', 'date'],
+            'is_paid' => 'required|boolean',
+            'price' => 'required_if:is_paid,1|nullable|numeric|min:0',
             'topic_expertise'=>['required','string'],
             'image'=>['required','image', 'mimes:jpeg,png,jpg,gif'],
         ];

@@ -9,13 +9,14 @@ class syllabus extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id','tutor_id', 'description', 'user_id'];
+    protected $fillable = ['course_id','duration', 'price', 'description', 'user_id'];
 
-    public function tutors(){
+    public function tutor()
+    {
         return $this->belongsTo(Tutor::class);
     }
-
-    public function category(){
-        return $this->belongsTo(Category::class);
+    
+    public function course(){
+        return $this->belongsTo(Course::class);
     }
 }

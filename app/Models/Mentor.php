@@ -16,6 +16,7 @@ class Mentor extends Model
         'year_experience',
         'experience',
         'education',
+        'availability',
         'category_id',
         'status',
         'is_approved',
@@ -28,6 +29,10 @@ class Mentor extends Model
 
     public function getSkillsAttribute($value)
     {
+        return json_decode($value, true) ?? [];
+    }
+
+    public function getAvailabilityAttribute($value){
         return json_decode($value, true) ?? [];
     }
 
@@ -49,6 +54,7 @@ class Mentor extends Model
     protected $casts = [
         // 'category_id' => 'array',
         'Skills' => 'array',
+        'availability'=> 'array',
     ];
 
 }

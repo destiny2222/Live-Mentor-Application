@@ -223,31 +223,41 @@ class HomeController extends Controller
     }
 
 
-    // public 
+   
 
     public function listTutor()
     {
-        try{
-            $proposal = Proposal::where('user_id', Auth::user()->id)->latest()->first();
-            $course = Course::find($proposal->course_id);
-            $category = Category::find($course->category_id);
-            // Find a tutor associated with this category
+        try {
+            $user = Auth::user();
+            $proposal = $user->proposals()->latest()->firstOrFail();
+            $course = $proposal->course;
+            $category = $course->category;
+            
             $tutors = $category->tutors;
-        }catch(\Exception $exception){
+
+            $syllabus = syllabus::where('category_id', $category->id)->first();
+
+            return view('user.tutor', compact('tutors', 'category', 'syllabus'));
+        } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            return back()->with('error', 'Oops something went wrong');
+            return back()->with('error', 'Oops, something went wrong');
         }
-        return view('user.tutor', compact('tutors'));
     }
+    
 
     public function tutorProfile($id){
         try{
             $user = User::findOrFail($id);
-            $tutor = Tutor::where('user_id', $user->id)->firstOrFail();
-            $educations = Education::where('user_id', $tutor->user->id)->get();
-            $experiences = Experience::where('user_id',  $tutor->user->id)->get();
-            $certifications = Awards::where('user_id',  $tutor->user->id)->get();
-            return view('user.tutor-profile', compact('tutor', 'user', 'educations', 'certifications', 'experiences'));
+            // dd($user);
+            // $tutor = Tutor::where('user_id', $user->id)->firstOrFail();
+            $proposal  = Proposal::where('user_id', Auth::user()->id)->first();
+            
+            // $educations = Education::where('user_id', $tutor->user->id)->get();
+            // $experiences = Experience::where('user_id',  $tutor->user->id)->get();
+            // $certifications = Awards::where('user_id',  $tutor->user->id)->get();
+            $syllabus = syllabus::where('category_id', $proposal->course->category_id)
+            ->first();
+            return view('user.tutor-profile', compact('user', 'syllabus'));
         }catch(\Exception $exception) {
             log::error($exception->getMessage());
             return redirect()->back()->with('error', 'Tutor not found');
@@ -295,7 +305,7 @@ class HomeController extends Controller
     
 
 
-    public function storeReview(Request $request, $tutor_id)
+    public function storeReview(Request $request)
     {
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
@@ -303,7 +313,7 @@ class HomeController extends Controller
         ]);
 
         $review = new Review;
-        $review->tutor_id = $tutor_id;
+        $review->tutor_id = $request->input('tutor_id');
         $review->user_id = Auth::user()->id;
         $review->rating = $request->input('rating');
         $review->comment = $request->input('comment');

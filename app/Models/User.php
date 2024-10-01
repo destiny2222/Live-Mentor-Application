@@ -84,7 +84,21 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->reviews()->count();
     }
 
-    // calculates 
+    public function invitations(){
+        return $this->hasMany(Invitation::class);
+    }
+
+    public function hasPaidFor($groupSessionId)
+    {
+        if (!$this->id) {
+            return false;
+        }
+        
+        return $this->invitations()
+            ->where('group_session_id', $groupSessionId)
+            ->where('payment_status', '1')
+            ->exists();
+    }
     
 
      public function proposals()
@@ -130,30 +144,35 @@ class User extends Authenticatable implements MustVerifyEmail
         return $username;
     }
 
+    public function syllabus(){
+        return $this->hasMany(syllabus::class);
+    }
 
-    public function checkTutorStatus(){
-        if($this->role == 'tutor'){
-            if ($this->tutor    && $this->tutor->status == null) return false;
+    public function checkTutorStatus()
+    {
+        if ($this->role == 'tutor' && $this->tutor) {
+            return $this->tutor->is_approved === null;
+        }
+        return false;
+    }
+    
+    public function checkTutorActiveStatus()
+    {
+        if ($this->role == 'tutor' && $this->tutor) {
+            return $this->tutor->is_approved === 0; // Assuming 1 means approved/active
+        }
+        return false;
+    }
+
+    public function checkMentorStatus()
+    {
+        if ($this->role == 'mentor') {
+            if ($this->mentor)   $this->mentor->is_approved === null;
             return true;
         }
     }
 
-    
-    public function checkTutorActiveStatus()
-    {
-        if($this->role == 'tutor'){
-            if ($this->tutor) return $this->tutor->status === 0;
-            return false;
-        }
-    }
 
-public function checkMentorStatus()
-{
-    if ($this->role == 'mentor') {
-        if ($this->mentor) return  $this->mentor->is_approved === null;
-        return true;
-    }
-}
 
 public function checkMentorActiveStatus()
 {

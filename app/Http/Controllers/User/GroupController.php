@@ -4,8 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GroupStoreRequest;
+use App\Http\Requests\InviteRequest;
 use App\Models\GroupSession;
-// use App\Models\Invitation;
+use App\Models\Invitation;
+use App\Notifications\GroupInvitation;
 use App\Traits\FirebaseStorageTrait;
 use DateTime;
 use Firebase\JWT\JWT;
@@ -25,13 +27,14 @@ class GroupController extends Controller
     
     public function index()
     {
-        $groups = GroupSession::where('user_id', Auth::user()->id)->get();
+        $groups = GroupSession::where('user_id', Auth::user()->id)->paginate(9);
         return view('user.group.index', compact('groups'));
     }
 
     public function create(){
         return view('user.group.create');
     }
+    
 
 
     public function edit($id){
@@ -61,12 +64,19 @@ class GroupController extends Controller
                 if ($request->has('image')) {
                     $imageUrl = $this->uploadFileToFirebase($request->file('image'), 'images/cohort/');
                 }
+
+                // If the session is not paid, ensure price is null
+                if (!$request['is_paid']) {
+                    $request['price'] = null;
+                }
     
                 $group = new GroupSession();
                 $group->title = $request->title;
                 $group->description = $request->description;
                 $group->end_time = $request->end_time;
                 $group->start_time = $request->start_time;
+                $group->price = $request->price;
+                $group->is_paid = $request->is_paid;
                 $group->image = $imageUrl;
                 $group->interest_areas = $request->input('interest_areas');
                 $group->topic_expertise = $request->topic_expertise;
@@ -167,5 +177,53 @@ class GroupController extends Controller
         $diff = $end->diff($start);
         return ($diff->h * 60) + $diff->i;
     }
+
+
+public function inviteStore(InviteRequest $request){
+    try{
+
+
+        // check if the user as already registered for the event
+        $isUserRegistered = Invitation::where('user_id', Auth::user()->id)
+                                    ->where('group_session_id', $request->group_session_id)
+                                    ->exists();
+
+        if($isUserRegistered){
+            return redirect()->back()->with('error', 'You have already registered for this RSVP.');
+        }
+
+        $invite = Invitation::updateOrCreate([
+            'user_id' => Auth::user()->id,
+            'group_session_id'=> $request->group_session_id,
+            'email'=>$request->email,
+            'invitation_code'=>$request->zoom_meeting_link,
+            'is_invited'=>true,
+            'invitation_count'=> $request->invitation_count,
+        ]);
+        // send message to user who has registered for the group
+        $invite->user->notify(new GroupInvitation($invite));
+        return redirect()->back()->with('success', 'You have successfully join RSVP.');
+    }catch(\Exception $e){
+        Log::error('Error sending invitation: '. $e->getMessage());
+         return redirect()->back()->with('error', 'Failed to send RSVP. Please try again later.');
+    }
+}
+
+public function cancelInvite($id){
+    try{
+        $invite = Invitation::where('user_id', Auth::user()->id)
+                            ->where('id', $id)
+                            ->where('is_invited', true)
+                            ->first();
+                            
+        if($invite){ 
+            $invite->delete();
+            return redirect()->back()->with('success', 'RSVP has been cancelled.');
+        }
+        return redirect()->back()->with('error', 'RSVP not found.');
+    }catch(\Exception $e){
+        Log::error('Error cancelling invitation: '. $e->getMessage());
+    }
+}
 
 }
