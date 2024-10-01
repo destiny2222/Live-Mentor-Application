@@ -29,7 +29,7 @@
             <div class="col-sm-6 col-xl-3 mb-lg-0 mb-4">
               <div class="listing-style1">
                 <div class="list-thumb">
-                  <img class="w-100" src="{{ asset('upload/courses/'.$course->image ) }}" alt="">
+                  <img class="w-100" src="{{  $course->image }}" alt="">
                   <a href="{{ route('course.details', $course->slug) }}" class="listing-fav fz12"><span class="far fa-heart"></span></a>
                 </div>
                 <div class="list-content">

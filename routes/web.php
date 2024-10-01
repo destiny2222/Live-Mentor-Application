@@ -58,5 +58,6 @@ Route::get('/analytics-data', [AnalyticsController::class, 'getAnalyticsData']);
 
 Route::get('/session/{groupSession}', [FrontController::class, 'groupSession'])->name('group.session');
 
+
 require __DIR__.'/auths.php'; 
 require __DIR__.'/admin.php'; 
