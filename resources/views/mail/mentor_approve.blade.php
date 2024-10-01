@@ -163,8 +163,9 @@
                 <tr>
                     <td class="layout">
                         <div>
-                            <h2>Hello! {{ $user->name }}</h2>
-                            <p>{{ $data }}</p>
+                            <h2>Congratulations! {{ $user->name }}</h2>
+                            <p>Your LiveMentor profile has been approved</p>
+                            <p>Now, let's grow together! Use LiveMentor to share your expertise, earn rewards, and inspire others to do the same.</p>
                         </div>
                     </td>
                 </tr>

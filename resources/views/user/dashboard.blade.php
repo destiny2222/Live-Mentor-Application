@@ -14,7 +14,7 @@
 
 </style>
 <div class="page-header">
-    <h1 class="page-title">Welcome Back {{ $user->name }}</h1>
+    <h1 class="page-title">Hi {{ $user->name }}</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>

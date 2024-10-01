@@ -57,48 +57,50 @@ class GroupController extends Controller
     }
     
     public function store(GroupStoreRequest $request)
-        {
-            try {
-                $imageUrl = null;
-                
-                if ($request->has('image')) {
-                    $imageUrl = $this->uploadFileToFirebase($request->file('image'), 'images/cohort/');
-                }
-
-                // If the session is not paid, ensure price is null
-                if (!$request['is_paid']) {
-                    $request['price'] = null;
-                }
-    
-                $group = new GroupSession();
-                $group->title = $request->title;
-                $group->description = $request->description;
-                $group->end_time = $request->end_time;
-                $group->start_time = $request->start_time;
-                $group->price = $request->price;
-                $group->is_paid = $request->is_paid;
-                $group->image = $imageUrl;
-                $group->interest_areas = $request->input('interest_areas');
-                $group->topic_expertise = $request->topic_expertise;
-                $group->status = $request->status;
-                $group->user_id = Auth::user()->id;
-                $group->invitation_token = Str::slug($request->title);
-                $group->save();
-    
-                // Generate zoom meeting link
-                $meetingLink = $this->generateMeetingLink($group);
-                
-                // Save the meeting link to the group
-                $group->zoom_meeting_link = $meetingLink;
-                $group->save();
-    
-                return redirect()->route('cohort.index')
-                    ->with('success', 'Group created successfully');
-                    // ->with('shareableLink', route('join.group', $group->invitation_token));
-            } catch (\Exception $e) {
-                Log::error($e->getMessage());
-                return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage());
+    {
+        try {
+            $imageUrl = null;
+            
+            if ($request->has('image')) {
+                $imageUrl = $this->uploadFileToFirebase($request->file('image'), 'images/cohort/');
             }
+    
+            // If the session is not paid, ensure price is null
+            if (!$request['is_paid']) {
+                $request['price'] = null;
+            }
+    
+            // Create a temporary GroupSession object
+            $tempGroup = new GroupSession([
+                'title' => $request->title,
+                'description' => $request->description,
+                'end_time' => $request->end_time,
+                'start_time' => $request->start_time,
+                'price' => $request->price,
+                'is_paid' => $request->is_paid,
+                'image' => $imageUrl,
+                'interest_areas' => $request->input('interest_areas'),
+                'topic_expertise' => $request->topic_expertise,
+                'status' => $request->status,
+                'user_id' => Auth::user()->id,
+                'invitation_token' => Str::slug($request->title),
+            ]);
+    
+            // Generate zoom meeting link
+            $meetingLink = $this->generateMeetingLink($tempGroup);
+            
+            // Now create and save the actual GroupSession with the Zoom link
+            $group = new GroupSession($tempGroup->toArray());
+            $group->zoom_meeting_link = $meetingLink;
+            $group->save();
+    
+            return redirect()->route('cohort.index')
+                ->with('success', 'Group created successfully');
+                // ->with('shareableLink', route('join.group', $group->invitation_token));
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage());
+        }
     }
     
 

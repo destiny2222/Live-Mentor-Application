@@ -166,10 +166,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function checkMentorStatus()
     {
-        if ($this->role == 'mentor') {
-            if ($this->mentor)   $this->mentor->is_approved === null;
-            return true;
+        if ($this->role == 'mentor' && $this->mentor) {
+            return  $this->mentor->is_approved === null;
         }
+        return false;
     }
 
 
