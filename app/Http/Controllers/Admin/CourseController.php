@@ -80,15 +80,12 @@ class CourseController extends Controller
 
     public function update(Request $request, $id){
         $course = Course::find($id);
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $manager = new ImageManager(new Driver());
-            $filename = time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $file = $manager->read($image);
-            $img =  $file->resize(1200, 800);
-            $img->toJpeg(80)->save(public_path('upload/courses/' . $filename));
-            $course->image = $filename;
+        $imageUrl = null;
+        if ($request->hasFile('image')) {
+            $imageUrl = $this->uploadFileToFirebase($request->file('image'), 'images/courses/');
+            $course->image = $imageUrl;
         }
+
 
         // dd($request->all());
 

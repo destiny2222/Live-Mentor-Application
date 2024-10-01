@@ -81,7 +81,7 @@
                                     @if($errors->has('image'))
                                         <span class="text-danger">{{ $errors->first('image') }}</span>
                                     @endif
-                                    <img src="{{ asset('upload/courses/'. $course->image) }}" alt="Course Image" width="100" height="100">
+                                    <img src="{{  $course->image }}" alt="Course Image" width="100" height="100">
                                     </div>
                                     <div class="text-right">
                                         <button type="submit" class="btn btn-primary">Save</button>
