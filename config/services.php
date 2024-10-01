@@ -45,6 +45,7 @@ return [
         'ZOOM_ACCOUNT_ID'=>env('ZOOM_ACCOUNT_ID'),
         // 'redirect_uri'=>env('ZOOM_REDIRECT_URI'),
     ],
+    
 
     
     // PAYSTACK

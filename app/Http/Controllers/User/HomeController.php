@@ -367,11 +367,15 @@ class HomeController extends Controller
 
         try{
             
+            if($request->hasFile('image')) {
+                $image_file = time().'.'.$request->image->extension();
+                $request->image->move(public_path('profile'),$image_file);
+            }
             
             // dd($request->all());
-            if($request->hasFile('image')) {
-                $image_file = $this->uploadFileToFirebase($request->file('image'), 'profile/');
-            }
+            // if($request->hasFile('image')) {
+            //     $image_file = $this->uploadFileToFirebase($request->file('image'), 'images/profile/');
+            // }
             
             // Update other profile fields
             $profile = User::findOrFail($id);

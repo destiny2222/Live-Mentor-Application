@@ -57,10 +57,8 @@
             </div>
         </div>
     </div>
-    @include('user.tutor.edit_syllabus')
     @endforeach
 </div>
-@include('user.tutor.create_syllabus')
 @endsection
 @push('scripts')
 <script>

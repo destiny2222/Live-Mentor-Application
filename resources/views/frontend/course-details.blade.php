@@ -31,13 +31,13 @@
                 <div class="column">
                     <div class="service-single-sldier vam_nav_style slider-1-grid owl-carousel owl- mb60">
                       <div class="item">
-                        <div class="thumb p50 p30-sm"><img src="{{ asset('upload/courses/'.$course->image) }}" alt="" class="w-100"></div>
+                        <div class="thumb p50 p30-sm"><img src="{{ $course->image }}" alt="" class="w-100"></div>
                       </div>
                       <div class="item">
-                        <div class="thumb p50 p30-sm"><img src="{{ asset('upload/courses/'.$course->image) }}" alt="" class="w-100"></div>
+                        <div class="thumb p50 p30-sm"><img src="{{ $course->image ) }}" alt="" class="w-100"></div>
                       </div>
                       <div class="item">
-                        <div class="thumb p50 p30-sm"><img src="{{ asset('upload/courses/'.$course->image) }}" alt="" class="w-100"></div>
+                        <div class="thumb p50 p30-sm"><img src="{{ $course->image ) }}" alt="" class="w-100"></div>
                       </div>
                     </div>
                     <div class="service-about">
@@ -124,7 +124,7 @@
             <div class="col-sm-6 col-lg-3">
                 <div class="listing-style1">
                     <div class="list-thumb">
-                        <img class="w-100" src="{{ asset('upload/courses/'.$recent->image) }}" alt="">
+                        <img class="w-100" src="{{  $course->image }}" alt="">
                         <!-- <a href="#" class="listing-fav fz12"><span class="far fa-heart"></span></a> -->
                     </div>
                     <div class="list-content">

@@ -170,24 +170,24 @@ class PaymentController extends Controller
                 $paymentDetails = Paystack::getPaymentData();
                 // dd($paymentDetails);
                 // $invitation = Invitation::where('reference', $paymentDetails['data']['reference'])->firstOrFail();
-                $invitation = Invitation::where('reference', $paymentDetails['data']['reference'])->first();
+                $invite = Invitation::where('reference', $paymentDetails['data']['reference'])->first();
                 // dd($invitation);
     
                 if ($paymentDetails['data']['status'] === 'success') {
-                    $invitation->update([
+                    $invite->update([
                         'payment_status' => true,
                         'is_invited' => true,
                     ]);
-                    
-                    return redirect()->route('group.session', $invitation->invitation_count)
+                    $invite->user->notify(new GroupInvitation($invite));
+                    return redirect()->route('group.session', $invite->invitation_count)
                         ->with('success', 'Payment successful. You are now RSVP\'d for the session.');
                 } else {
-                    $invitation->update([
+                    $invite->update([
                         'payment_status' => false,
                         'is_invited' => false,
                     ]);
     
-                    return redirect()->route('group.session', $invitation->invitation_count)
+                    return redirect()->route('group.session', $invite->invitation_count)
                         ->with('error', 'Payment failed. Please try again.');
                 }
             } catch (\Exception $e) {

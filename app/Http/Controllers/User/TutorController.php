@@ -200,25 +200,31 @@ class TutorController extends Controller
     public function syllabus()
     {
         try {
+            $syllabus = Syllabus::where('user_id', Auth::user()->id)->get();        
+            return view('user.tutor.syllabus', compact( 'syllabus'));
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return back()->with('error', 'An error occurred while loading the syllabus. Please try again later.');
+        }
+    }
+
+    public function createSyllabus(){
+        try{
             if (!Auth::check()) {
                 return redirect()->route('login')->with('error', 'Please log in to view the syllabus.');
             }
     
-            $tutor = Tutor::where('user_id', Auth::id())->firstOrFail();
+            $tutor = Tutor::where('user_id', Auth::user()->id)->first();
             
             // Get all categories associated with the tutor
-            $categories = $tutor->categories;
+            $categories = $tutor->categories ?? 'No categories found';
             
             // Get all courses associated with the tutor's categories
             $tutorCourses = Course::whereIn('category_id', $categories->pluck('id'))->get();
-            // dd($tutorCourses);
-            
-            $syllabus = Syllabus::where('user_id', Auth::id())->get();
-            
-            return view('user.tutor.syllabus', compact('tutorCourses', 'syllabus'));
-        } catch (\Exception $exception) {
+            return view('user.tutor.create_syllabus', compact('tutorCourses'));
+        }catch(\Exception $exception){
             Log::error($exception->getMessage());
-            return back()->with('error', 'An error occurred while loading the syllabus. Please try again later.');
+            return back()->with('error', 'An error occurred while creating the syllabus. Please try again later.');
         }
     }
     
