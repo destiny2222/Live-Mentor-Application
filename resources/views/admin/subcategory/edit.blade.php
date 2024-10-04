@@ -26,22 +26,30 @@
                 <div class="card-body p-4">
                     <div class="row justify-content-center">
                         <div class="col-lg-10 ">
-                            <form action="{{ route('admin.category.update', $category->id) }}" method="POST">
+                            <form action="{{ route('admin.subcategory.update', $subcategory->id) }}" method="POST">
                                 @method('PUT')
                                 @csrf
                                 <div>
                                     <div class="mb-3">
                                         <label for="example-text-input" class="form-label">Name</label>
-                                        <input class="form-control" name="name" type="text" value="{{ $category->name }}" id="example-text-input">
+                                        <input class="form-control" name="name" type="text" value="{{ $subcategory->name }}" id="example-text-input">
                                     </div>
-                                    {{-- <div class="mb-3">
+                                    <div class="mb-3">
+                                        <label for="exampleSelect" class="form-label">Parent Category</label>
+                                        <select class="form-select" name="category_id" id="exampleSelect">
+                                            @foreach($category as $categories)
+                                                <option value="{{ $categories->id }}"  {{ $subcategory->category_id == $categories->id ? 'selected' : ''}} >{{ $categories->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="example-search-input" class="form-label">Image(Icon)</label>
-                                        <input class="form-control" name='image' type="text" value="{{  $category->image }}" id="example-search-input">
+                                        <input class="form-control" name='image' type="text" value="{{  $subcategory->image }}" id="example-search-input">
                                     </div>
                                     <div class="mb-3">
                                         <label for="example-color-input" class="form-label">Color picker</label>
-                                        <input type="color" class="form-control form-control-color mw-100" id="example-color-input" name="color" value="{{ $category->color ?? '#5156be' }}" title="Choose your color">
-                                    </div>                                     --}}
+                                        <input type="color" class="form-control form-control-color mw-100" id="example-color-input" name="color" value="{{ $subcategory->color ?? '#5156be' }}" title="Choose your color">
+                                    </div>                                    
                                     <div class="mb-3">
                                         <input type="submit" value="Save Changes" class="btn btn-primary">
                                     </div>

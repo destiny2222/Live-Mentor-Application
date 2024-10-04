@@ -148,12 +148,25 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(syllabus::class);
     }
 
-    public function checkTutorStatus()
+    // public function checkTutorStatus()
+    // {
+    //     if ($this->role == 'tutor' && $this->tutor) {
+    //         return $this->tutor->is_approved == null;
+    //     }
+    //     return false;
+    // }
+
+    public function isTutorPendingApproval()
     {
-        if ($this->role == 'tutor' && $this->tutor) {
-            return $this->tutor->is_approved === null;
+        if ($this->role !== 'tutor') {
+            return false;
         }
-        return false;
+    
+        if ($this->tutor === null) {
+            return true; 
+        }
+    
+        return $this->tutor->is_approved === null;
     }
     
     public function checkTutorActiveStatus()
@@ -164,34 +177,41 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
-    public function checkMentorStatus()
+
+
+    public function isMentorPendingApproval()
+    {
+        if ($this->role !== 'mentor') {
+            return false;
+        }
+
+        if ($this->mentor === null) {
+            return true; 
+        }
+
+        return $this->mentor->is_approved === null;
+    }
+
+
+
+    public function checkMentorActiveStatus()
     {
         if ($this->role == 'mentor' && $this->mentor) {
-            return  $this->mentor->is_approved === null;
+            return $this->mentor->is_approved === 0;
         }
         return false;
     }
 
-
-
-public function checkMentorActiveStatus()
-{
-    if ($this->role == 'mentor' && $this->mentor) {
-        return $this->mentor->is_approved === 0;
-    }
-    return false;
-}
-
-public function isMentorApproved()
-{
-    if ($this->role == 'mentor' && $this->mentor && $this->mentor->is_approved === 1) {
-        if (!session('mentor_approval_shown')) {
-            session(['mentor_approval_shown' => true]);
-            return true;
+    public function isMentorApproved()
+    {
+        if ($this->role == 'mentor' && $this->mentor && $this->mentor->is_approved === 1) {
+            if (!session('mentor_approval_shown')) {
+                session(['mentor_approval_shown' => true]);
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-}
 
 
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PluginController;
 use App\Http\Controllers\Admin\TutorController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Admin\GroupSessionController;
+use App\Http\Controllers\Admin\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -46,6 +47,14 @@ Route::prefix('admin')->name('admin.')->group(function (){
         Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
         Route::put('/category/{id}/update', [CategoryController::class, 'update'])->name('category.update');
         Route::delete('/category/{id}/delete', [CategoryController::class, 'delete'])->name('category.delete');
+
+        // subCategory
+        Route::get('/subcategory', [SubCategoryController::class,'index'])->name('subcategory.index');
+        Route::get('/subcategory/create', [SubCategoryController::class,'create'])->name('subcategory.create');
+        Route::post('/subcategory/store', [SubCategoryController::class,'store'])->name('subcategory.store');
+        Route::get('/subcategory/{id}/edit', [SubCategoryController::class,'edit'])->name('subcategory.edit');
+        Route::put('/subcategory/{id}/update', [SubCategoryController::class,'update'])->name('subcategory.update');
+        Route::delete('/subcategory/{id}/delete', [SubCategoryController::class,'delete'])->name('subcategory.delete');
 
         // user
         Route::get('/user', [UserManagementController::class, 'index'])->name('user.index');

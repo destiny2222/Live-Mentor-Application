@@ -23,24 +23,28 @@
     </div>
 </div>
 
-<div class="row mb-4">
-    @if ($user->checkTutorStatus())
+@if ($user->isTutorPendingApproval())
+    <div class="row mb-4">
         <div class="col-lg-12 ">
             <div class="" role="alert">
                 Complete your profile
                 <a href="{{ route('tutor.create') }}" class="btn btn-primary text-white btn-sm text-lg-end ms-2">Click Here</a>
             </div>
         </div>
+    </div>
     @elseif ($user->checkTutorActiveStatus())
+   <div class="row mb-4">
         <div class="col-12">
             <div class="alert alert-info" role="alert">
                 <i class="fa fa-check-circle-o me-2" aria-hidden="true"></i>
                 Your account is not active yet. Undergoing verification as a tutor.
             </div>
         </div>
-    @endif
-</div>
-@if ($user->checkMentorStatus())
+   </div>
+@endif
+    
+
+@if ($user->isMentorPendingApproval())
     <div class="row mb-4">
         <div class="col-12">
             <div class="" role="alert">

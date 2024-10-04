@@ -38,10 +38,7 @@
                         <p>{{ $tutor->experience }} years</p>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label"><strong>Price:</strong></label>
-                        <p>&#8358;{{ number_format($tutor->price, 2) }}</p>
-                    </div>
+                    
 
                     <div class="mb-3">
                         <label for="form-label"><strong>Availability</strong></label>

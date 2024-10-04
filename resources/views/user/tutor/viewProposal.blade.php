@@ -30,7 +30,7 @@
                             <div class=" mt-4 mb-5"><span class="fw-bold me-2">End Time:</span><span class="fw-bold text-primary">{{ \Carbon\Carbon::parse($proposal->end_time)->format('H:i A') }} </span><div>
                             <div class=" mt-4 mb-5"><span class="fw-bold me-2">Published :</span><span class="fw-bold text-primary"> {{ $proposal->created_at->format('d M, Y') }} </span><div>
                             <div class=" mt-4 mb-5"><span class="fw-bold me-2">User :</span class="me-2 fw-bold fs-25 d-inline-flex"> {{ $proposal->user->name }} </div>
-                            <div class="colors d-flex me-3 mt-4 mb-5">
+                            <div class="colors d-flex me-3 mt-3 mb-3">
                                 <span class="mt-2 fw-bold">Days:</span>
                                 <div class="row gutters-xs ms-4">
                                     @foreach($proposal->day as $day)
@@ -38,6 +38,12 @@
                                         <span class="badge bg-primary-gradient badge-sm">{{ $day }}</span>
                                     </div>
                                     @endforeach
+                                </div>
+                            </div>
+                            <div class="colors d-flex me-3 mt-3 mb-3">
+                                <span class="mt-2 fw-bold">Prefer:</span>
+                                <div class="row gutters-xs ms-4">
+                                    <p class="mt-2 badge bg-primary-gradient badge-sm">{{ $proposal->prefer }}</p>
                                 </div>
                             </div>
                             <div class="btn-list mt-4">

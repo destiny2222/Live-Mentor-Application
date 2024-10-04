@@ -113,8 +113,8 @@
                                 <hr class="opacity-100 mt20 mb15">
                                  
                                 <div class="fl-meta d-flex align-items-center justify-content-between">
-                                    <a class="meta fw500 text-start">Duration<br><span class="fz14 fw400">{{ $syllabus->duration }} </span></a>
-                                    <a class="meta fw500 text-start">Price<br><span class="fz14 fw400">&#8358; {{ number_format($syllabus->price, 2) }}</span></a>
+                                    <a class="meta fw500 text-start">Duration<br><span class="fz14 fw400">{{ $syllabi->duration ?? 'N/A' }}</span></a>
+                                    <a class="meta fw500 text-start">Price<br><span class="fz14 fw400">&#8358; {{ number_format($syllabi->price ?? 0, 2) }}</span></a>
                                 </div>
                                 {{-- <div class="fl-meta d-flex align-items-center justify-content-between">
                                     <a class="meta fw500 text-start">Duration<br><span class="fz14 fw400">{{ $tutor->syllabus->duration }} </span></a>

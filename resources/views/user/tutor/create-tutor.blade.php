@@ -100,12 +100,6 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <div class="col-sm-12 mb-4">
-                                <div class="mb20">
-                                    <label class="form-label">Price (Full training period )</label>
-                                    <input type="text" class="form-control" name="price" placeholder="" >
-                                </div>
-                            </div>
                             <div class="col-sm-12 text-center">
                                 <button type="button" class="btn btn-primary w25 w40 next-step">Next</button>
                             </div>

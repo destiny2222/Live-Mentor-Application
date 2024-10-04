@@ -29,7 +29,6 @@ class StoreTutorRequest extends FormRequest
             'category_id' => ['array'],
             'experience' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'price' => ['required', 'numeric'],
             'title' => ['required', 'string'],
             'school' => ['required', 'string'],
             'degree' => ['required', 'string'],

@@ -3,11 +3,11 @@
 
   <!-- PAGE-HEADER -->
   <div class="page-header">
-    <h1 class="page-title">Proposal</h1>
+    <h1 class="page-title">My Class</h1>
     <div>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Proposal</li>
+            <li class="breadcrumb-item active" aria-current="page">My Class</li>
         </ol>
     </div>
 
@@ -19,7 +19,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Proposal</h3>
+                <h3 class="card-title">My Class</h3>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

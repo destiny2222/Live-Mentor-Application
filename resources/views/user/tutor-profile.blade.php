@@ -13,6 +13,10 @@
         margin-bottom: 5px; /* Add space between skills if needed */
     }
 
+    .syllabus_ul li{
+        list-style-type: square;
+    }
+
 </style>
   <!-- Breadcumb Sections -->
   <section class="breadcumb-section">
@@ -44,16 +48,16 @@
 
 <!-- Breadcumb Sections -->
 <section class="breadcumb-section pt-0">
-    <div class="cta-service-v1 freelancer-single-style mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center mx20-lg px30-lg">
+    <div class="cta-service-v1 freelancer-single-style mx-auto maxw1700 pt120 pt60-sm pb120 pb60-sm bdrs16 position-relative overflow-hidden d-flex align-items-center ">
         <img class="left-top-img wow zoomIn" src="images/vector-img/left-top.png" alt="">
         <img class="right-bottom-img wow zoomIn" src="images/vector-img/right-bottom.png" alt="">
         <div class="container">
             <div class="row wow fadeInUp">
-                <div class="col-xl-7">
+                <div class="col-12 col-xl-7">
                     <div class="position-relative">
                         <div class="list-meta d-sm-flex align-items-center mt30">
                             <a class="position-relative freelancer-single-style" href="#">
-                                <img class="rounded-circle w-100 wa-sm mb15-sm" src="{{ asset('profile/'.$user->image) }}" alt="Freelancer Photo">
+                                <img class="rounded-circle " width="100" height="100" src="{{ asset('profile/'.$user->image) }}" alt="Freelancer Photo">
                                
                             </a>
                             <div class="ml20 ml0-xs">
@@ -81,9 +85,13 @@
                     <p class="text mb30">
                         {!! $user->tutor->description !!}    
                     </p>
-                    <!-- <h5>Course Syllabus</h5> -->
+                    <h5>Course Syllabus</h5> 
                     <p class="text mb30">
-                        {!! $syllabus->description !!}
+                        <ol class="syllabus_ul">
+                            @foreach ($syllabus->description as $item)
+                                <li>{{ $item }}</li>
+                            @endforeach
+                        </ol>
                     </p>
                     <hr class="opacity-100 mb60 mt60">
                     <h4 class="mb30">Education</h4>

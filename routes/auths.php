@@ -35,9 +35,7 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/tutors/reviews', [HomeController::class, 'storeReview'])->name('review.store');
         // send tutor request
         Route::post('/tutor/request', [HomeController::class, 'sendTutorRequest'])->name('tutor.request');
-        
 
-       
   
         // edit profile
         Route::get('/profile', [HomeController::class, 'profile'])->name('profile.index');
@@ -48,8 +46,8 @@ Route::prefix('dashboard')->group(function (){
 
         //course
         Route::get('/course', [HomeController::class, 'EnrollCourse'])->name('enroll-course');
-        Route::get('/course/classes', [HomeController::class, 'Classes'])->name('course.class');
-        Route::get('/course/{id}/classes', [HomeController::class, 'History'])->name('show.proposal');
+        Route::get('/course/classes', [HomeController::class, 'classLesion'])->name('course.class');
+        // Route::get('/course/{id}/classes', [HomeController::class, 'classLesion'])->name('show.proposal');
 
     
         
@@ -60,6 +58,7 @@ Route::prefix('dashboard')->group(function (){
         // payment
         Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
         Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback'])->name('callback.payment');
+
         Route::post('/payment/webhook', [PaymentController::class, 'WebhookGatewayCallback'])->name('paystack.webhook');
         ///
         Route::post('/payment/initiate', [PaymentController::class, 'initiatePayment'])->name('payment.initiate');
@@ -74,6 +73,14 @@ Route::prefix('dashboard')->group(function (){
         Route::post('/mentor/session/store', [MentorController::class, 'storeSession'])->name('mentor.session.store');
         Route::put('/session/{id}/update', [MentorController::class, 'updateSession'])->name('update.session');
         Route::delete('/session/application/{id}/delete', [MentorController::class, 'deleteSessionApplication'])->name('delete.session');
+
+        // syllabus
+        Route::get('/tutor/syllabus', [TutorController::class, 'syllabus'])->name('syllabus.index');
+        Route::get('/tutor/syllabus/create', [TutorController::class, 'createSyllabus'])->name('syllabus.create');
+        Route::post('/tutor/syllabus/store', [TutorController::class, 'syllabusStore'])->name('syllabus.store');
+        Route::get('/tutor/syllabus/{id}/edit', [TutorController::class, 'Editsyllabus'])->name('syllabus.edit.page');
+        Route::put('/tutor/{id}syllabus', [TutorController::class, 'UpdateSyllabus'])->name('syllabus.edit');
+        Route::delete('/tutor/{id}syllabus/delete', [TutorController::class, 'deleteSyllabus'])->name('syllabus.delete');
 
         // Session
         Route::post('/session/store', [MentorController::class, 'processSession'])->name('process.session.store');
@@ -90,10 +97,7 @@ Route::prefix('dashboard')->group(function (){
         Route::get('/tutor/upload', [TutorController::class, 'tutor'])->name('tutor.create');
         Route::post('/tutor/store', [TutorController::class, 'storeTutor'])->name('tutor.store');
         // Route::get('/tutor/show/{id}', [HomeController::class, 'show'])->name('tutor.show');
-        Route::get('/tutor/syllabus', [TutorController::class, 'syllabus'])->name('syllabus.index');
-        Route::post('/tutor/syllabus/store', [TutorController::class, 'syllabusStore'])->name('syllabus.store');
-        Route::put('/tutor/{id}syllabus', [TutorController::class, 'syllabusEdit'])->name('syllabus.edit');
-        Route::delete('/tutor/{id}syllabus/delete', [TutorController::class, 'deleteSyllabus'])->name('syllabus.delete');
+       
         // tutor request
         Route::get('/proposal/{id}/details', [TutorController::class, 'viewProposal'])->name('proposal.details');
         Route::post('/tutor/request/cancel', [TutorController::class, 'cancelTutorRequest'])->name('tutor.request.cancel');

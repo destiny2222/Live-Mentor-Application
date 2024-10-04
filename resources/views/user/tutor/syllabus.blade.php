@@ -26,7 +26,7 @@
 
 <div class="row mb-4">
     <div class="col-xl-12">
-        <a href="#modaldemo8" class="modal-effect btn btn-primary" data-bs-effect="effect-scale" data-bs-toggle="modal">Add Syllabus</a>
+        <a href="{{ route('syllabus.create') }}" class="btn btn-primary">Add Syllabus</a>
     </div>
 </div>
 
@@ -42,10 +42,14 @@
                 <a href="javascript:void(0)" class="card-link"><strong class="text-black">Price</strong> &#8358;{{ $syllabu->price }}</a>
                 
                 <div class="description-container">
-                    <p class="description-text" data-full-text="{!! $syllabu->description !!}">
-                        {!! \Illuminate\Support\Str::limit($syllabu->description, 100, '...') !!}
+                    <p class="description-text">
+                        <ol>
+                            @foreach ($syllabu->description as $item)
+                                <li>{{ $item }}</li>
+                            @endforeach
+                        </ol>
                     </p>
-                    <a href="javascript:void(0)" class="show-more-link mb-3">Show More</a>
+                    {{-- <a href="javascript:void(0)" class="show-more-link mb-3">Show More</a> --}}
                 </div>
 
                 <a href="#modaldemo9-{{ $syllabu->id }}" class="modal-effect btn btn-primary-light" data-bs-effect="effect-scale" data-bs-toggle="modal">Edit</a>
@@ -59,6 +63,8 @@
     </div>
     @endforeach
 </div>
+
+
 @endsection
 @push('scripts')
 <script>

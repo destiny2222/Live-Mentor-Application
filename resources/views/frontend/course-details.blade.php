@@ -34,10 +34,10 @@
                         <div class="thumb p50 p30-sm"><img src="{{ $course->image }}" alt="" class="w-100"></div>
                       </div>
                       <div class="item">
-                        <div class="thumb p50 p30-sm"><img src="{{ $course->image ) }}" alt="" class="w-100"></div>
+                        <div class="thumb p50 p30-sm"><img src="{{ $course->image  }}" alt="" class="w-100"></div>
                       </div>
                       <div class="item">
-                        <div class="thumb p50 p30-sm"><img src="{{ $course->image ) }}" alt="" class="w-100"></div>
+                        <div class="thumb p50 p30-sm"><img src="{{ $course->image  }}" alt="" class="w-100"></div>
                       </div>
                     </div>
                     <div class="service-about">

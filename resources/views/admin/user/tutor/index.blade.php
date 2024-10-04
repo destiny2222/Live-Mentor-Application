@@ -36,7 +36,6 @@
                                 <th>User name</th>
                                 <th>Ttile</th>
                                 <th>Experience</th>
-                                <th>Price</th>
                                 <th>Language</th>
                                 <th>Skills</th>
                                 <th>Category</th>
@@ -55,7 +54,6 @@
                                     <td>{{ $tutor->user->name }}</td>
                                     <td>{{ $tutor->title }}</td>
                                     <td>{{ $tutor->experience }}</td>
-                                    <td>&#8358;{{ number_format($tutor->price, 2) }}</td>
                                     <td>{{ $tutor->language }}</td>
                                     <td>
                                         @foreach ($tutor->skill as $skills)

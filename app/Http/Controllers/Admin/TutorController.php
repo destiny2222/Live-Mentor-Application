@@ -42,7 +42,6 @@ class TutorController extends Controller
                 'category_id'=>$tutor->category_id,
                 'language'=>$tutor->language,
                 'description'=>$tutor->description,
-                'price'=>$tutor->price,
                 // 'image_public_id'=>$tutor->image_public_id,
                 'experience'=>$tutor->experience,
                 'is_approved'=> $request->has('is_approved') ? $request->is_approved : $tutor->is_approved,

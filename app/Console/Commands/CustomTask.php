@@ -8,100 +8,109 @@ use App\Notifications\MeetingDetailsMail;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 use Jubaer\Zoom\Facades\Zoom;
 
 class CustomTask extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'custom:custom-task';
+    protected $signature = 'app:custom';
+    protected $description = 'Command to schedule Zoom meetings for proposals';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Command description';
-
-    /**
-     * Execute the console command.
-     */
     public function handle()
     {
-        $random = Str::random(10);
-        $users = User::orderBy('id', 'desc')->get();
+        $this->info('Starting Zoom meeting scheduler...');
+        
+        try {
+            $users = User::orderBy('id', 'desc')->get();
+            $this->info('Found ' . $users->count() . ' users');
+        
+            foreach($users as $user){
+                $this->info("Processing user: {$user->id}");
+                
+                $proposals = Proposal::where('user_id', $user->id)->where('status', '4')->get();
+                $this->info("Found " . $proposals->count() . " proposals for user {$user->id}");
 
-        foreach ($users as $user) {
-            $proposals = Proposal::where('user_id', $user->id)->where('prefer', 'group')->get();
+                foreach ($proposals as $proposal) {
+                    $this->info("Processing proposal: {$proposal->id}");
+                    
+                    $meetingTime = $proposal->time;
+                    $meetingDays = $proposal->day;
+                    $currentDay = Carbon::now()->dayOfWeekIso;
+                    $currentDateTime = Carbon::now();
 
-            foreach ($proposals as $proposal) {
-                // Check if meeting exists and if it's not already marked as "ended"
-                if (!$proposal->zoom_meeting_id) {
-                    // Case 1: Meeting ID does not exist, so create a new meeting
-                    foreach (json_decode($proposal->day) as $day) {  // Loop through each day
-                        $startTime = Carbon::now()->next(Carbon::parse($day)->dayOfWeek)
-                            ->setTimeFromTimeString($proposal->time)
-                            ->setTimezone($proposal->timezone ?? 'UTC')
-                            ->format('Y-m-d\TH:i:s\Z');
+                    $this->info("Current day: {$currentDay}, Meeting days: " . json_encode($meetingDays));
 
-                        $meeting = Zoom::createMeeting([ 
-                            'topic' => $proposal->title,
-                            'type' => 2,
-                            'duration' => 60,
-                            'timezone' => 'UTC',
-                            'start_time' => $startTime,
-                            'password' => $random, 
-                            'settings' => [
-                                'join_before_host' => true, 
-                                'host_video' => true,
-                                'participant_video' => true,
-                                'mute_upon_entry' => false, 
-                                'waiting_room' => false,
-                                'audio' => 'both', 
-                                'auto_recording' => 'none', 
-                                'approval_type' => 0, 
-                            ],
-                        ]);
+                    if (in_array($currentDay, $meetingDays)) {
+                        $scheduledDateTime = Carbon::parse($currentDateTime->format('Y-m-d') . ' ' . $meetingTime);
+                        $this->info("Scheduled date time: {$scheduledDateTime}");
 
-                        $meetingDetails = Zoom::getMeeting($meeting['data']['id']);
+                        if ($scheduledDateTime->isFuture()) {
+                            $this->info("Attempting to create Zoom meeting...");
+                            
+                            try {
+                                $meeting = Zoom::create([ 
+                                    "agenda" => $proposal->title,
+                                    'topic' => $proposal->title,
+                                    'duration'   => 60,
+                                    'start_time' => $scheduledDateTime->format('Y-m-d\TH:i:s'),
+                                    "timezone" => 'Asia/Dhaka',
+                                    "password" => 'your_password',
+                                    "recurrence" => [
+                                        "type" => 1,
+                                        "repeat_interval" => 1,
+                                        "weekly_days" => $currentDay,
+                                        "end_times" => 1,
+                                    ],
+                                    "settings" => [
+                                        'join_before_host' => true, 
+                                        'host_video' => true,
+                                        'participant_video' => true,
+                                        'mute_upon_entry' => false, 
+                                        'waiting_room' => false,
+                                        'audio' => 'both', 
+                                        'auto_recording' => 'none', 
+                                        'approval_type' => 0, 
+                                    ],
+                                ]);
+                                
+                                $this->info("Zoom meeting created successfully. Meeting ID: " . $meeting['data']['id']);
 
-                        if ($meetingDetails['data']['status'] == 'waiting') {
-                            // Save meeting details to the proposal
-                            $proposal->zoom_meeting_id = $meetingDetails['data']['id'];
-                            $proposal->zoom_meeting_password = $meetingDetails['data']['password'];
-                            $proposal->zoom_meeting_url = $meetingDetails['data']['join_url'];
-                            $proposal->zoom_meeting_status = $meetingDetails['data']['status'];
-                            $proposal->zoom_meeting_start_time = Carbon::parse($meetingDetails['data']['start_time'])->format('Y-m-d H:i:s');
-                            $proposal->save();
+                                $meetingDetails = Zoom::getMeeting($meeting['data']['id']);
+                        
+                                if ($meetingDetails['data']['status'] == 'waiting') {
+                                    $proposal->zoom_meeting_id = $meetingDetails['data']['id'];
+                                    $proposal->zoom_meeting_password = $meetingDetails['data']['password'];
+                                    $proposal->zoom_meeting_url = $meetingDetails['data']['join_url'];
+                                    $proposal->zoom_meeting_status = $meetingDetails['data']['status'];
+                                    $proposal->zoom_meeting_start_time = Carbon::parse($meetingDetails['data']['start_time'])->format('Y-m-d H:i:s');
+                                    $proposal->save();
+
+                                    $this->info("Meeting details saved to proposal");
+
+                                    $tutor = User::find($proposal->tutor_id);
+                                    $user->notify(new MeetingDetailsMail($meetingDetails));
+                                    $tutor->notify(new MeetingDetailsMail($meetingDetails));
+
+                                    $this->info("Notifications sent to user and tutor");
+                                } else {
+                                    $this->error("Meeting status is not 'waiting'. Status: " . $meetingDetails['data']['status']);
+                                }
+                            } catch (\Exception $e) {
+                                $this->error("Error creating Zoom meeting: " . $e->getMessage());
+                                Log::error("Error creating Zoom meeting for proposal {$proposal->id}: " . $e->getMessage());
+                            }
+                        } else {
+                            $this->info("Meeting time has passed for proposal {$proposal->id}. Current time: {$currentDateTime}, Scheduled time: {$scheduledDateTime}");
                         }
-
-                        // Notify user and tutor
-                        $tutor = User::find($proposal->tutor_id);
-                        $user->notify(new MeetingDetailsMail($meetingDetails));
-                        $tutor->notify(new MeetingDetailsMail($meetingDetails));
-                    }
-                } else {
-                    // Case 2: Meeting ID exists, so update the status if necessary
-                    $meetings = Zoom::getMeeting($proposal->zoom_meeting_id);
-
-                    if ($meetings['data']['status'] != $proposal->zoom_meeting_status) {
-                        $proposal->zoom_meeting_status = $meetings['data']['status'];
-
-                        // If the meeting has ended, log the update and skip further actions
-                        if ($meetings['data']['status'] === 'ended') {
-                            Log::info('Meeting has ended. No further action required.');
-                            continue; // Skip to the next proposal
-                        }
-
-                        $proposal->save();
+                    } else {
+                        $this->info("No meeting scheduled today for proposal {$proposal->id}");
                     }
                 }
             }
+        } catch (\Exception $e) {
+            $this->error("An error occurred: " . $e->getMessage());
+            Log::error("Error in Zoom meeting scheduler: " . $e->getMessage());
         }
-        info('Custom task completed.');
+
+        $this->info('Zoom meeting scheduler completed.');
     }
 }

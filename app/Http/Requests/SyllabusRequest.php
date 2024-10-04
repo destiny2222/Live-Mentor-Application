@@ -19,13 +19,15 @@ class SyllabusRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'course_id' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'price'=> ['required', 'numeric'],
-            'duration' => ['required', 'string'],
+            'course_id' => 'required|exists:courses,id',
+            'syllabus' => 'required_without:description|array',
+            'syllabus.*' => 'string|max:255',
+            'description' => 'required_without:syllabus|string',
+            'price' => 'required|numeric|min:0',
+            'duration' => 'required|string',
         ];
     }
 }

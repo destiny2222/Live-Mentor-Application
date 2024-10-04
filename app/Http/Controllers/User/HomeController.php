@@ -234,10 +234,17 @@ class HomeController extends Controller
             $category = $course->category;
             
             $tutors = $category->tutors;
+    
+            // Fetch syllabi related to the courses in the same category
+            $syllabi = Syllabus::whereIn('course_id', function ($query) use ($category) {
+                $query->select('id')
+                      ->from('courses')
+                      ->where('category_id', $category->id);
+            })->first();
 
-            $syllabus = syllabus::where('category_id', $category->id)->first();
-
-            return view('user.tutor', compact('tutors', 'category', 'syllabus'));
+            // dd($syllabi);
+    
+            return view('user.tutor', compact('tutors', 'category', 'syllabi'));
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             return back()->with('error', 'Oops, something went wrong');
@@ -251,12 +258,15 @@ class HomeController extends Controller
             // dd($user);
             // $tutor = Tutor::where('user_id', $user->id)->firstOrFail();
             $proposal  = Proposal::where('user_id', Auth::user()->id)->first();
-            
-            // $educations = Education::where('user_id', $tutor->user->id)->get();
-            // $experiences = Experience::where('user_id',  $tutor->user->id)->get();
-            // $certifications = Awards::where('user_id',  $tutor->user->id)->get();
-            $syllabus = syllabus::where('category_id', $proposal->course->category_id)
-            ->first();
+            $category = $proposal->course->category;
+             // Fetch syllabi related to the courses in the same category
+             $syllabus = Syllabus::whereIn('course_id', function ($query) use ($category) {
+                $query->select('id')
+                      ->from('courses')
+                      ->where('category_id', $category->id);
+            })->first();
+            // $syllabus = syllabus::where('category_id', $proposal->course->category_id)
+            // ->first();
             return view('user.tutor-profile', compact('user', 'syllabus'));
         }catch(\Exception $exception) {
             log::error($exception->getMessage());
@@ -496,9 +506,19 @@ class HomeController extends Controller
 
     public function History(){
         try {
-            $history = Proposal::where('user_id', Auth::user()->id)->where('status', '1')->get();
+            $history = Proposal::where('user_id', Auth::user()->id)->where('status', '1')
+            ->orWhereIn('status', ['2', '3','4'])->get();
             $sessionHistory = BookSession::where('user_id', Auth::user()->id)->where('status', '1')->get();
-            // dd($sessionHistory);
+            foreach ($history as $key => $proposal) {
+                $category = $proposal->course->category;
+            }
+            // dd($category);
+            $proposalPrice =  $syllabus = Syllabus::whereIn('course_id', function ($query) use ($category) {
+                $query->select('id')
+                      ->from('courses')
+                      ->where('category_id', $category->id);
+            })->first();
+            // dd($proposalPrice);
 
             $transactions = [];
 
@@ -508,7 +528,7 @@ class HomeController extends Controller
                     'id' => $proposal->id, 
                     'date' => $proposal->created_at->format('Y:m:d H:i:s'),
                     'type' => 'proposal',
-                    'amount' => $proposal->price, 
+                    'amount' => $proposalPrice->price, 
                     'status' => $proposal->status,
                     'course_title' => $proposal->course->title ?? 'N/A', 
                 ];
@@ -542,9 +562,20 @@ class HomeController extends Controller
     }
     
 
-    public function Classes(){
+    public function classLesion(){
         try{
-            $proposalDetails = Proposal::where('user_id', Auth::user()->id)->where('status', '1')->get();
+            $proposalDetails = Proposal::where('user_id', Auth::user()->id)->where('status', '1')
+            ->orWhereIn('status', ['2', '3','4'])->get();
+            foreach ($proposalDetails as $key => $proposal) {
+                $category = $proposal->course->category;
+            }
+            // dd($category);
+            $proposalPrice =  $syllabus = Syllabus::whereIn('course_id', function ($query) use ($category) {
+                $query->select('id')
+                      ->from('courses')
+                      ->where('category_id', $category->id);
+            })->first();
+            // dd($proposalPrice);
             $sessions = BookSession::where('user_id', Auth::user()->id)->where('status', '1')->get();
 
             $transactions = [];
@@ -572,7 +603,7 @@ class HomeController extends Controller
                     'meeting_date' => $proposal->zoom_meeting_start_time, 
                     'meeting_url' => $proposal->zoom_meeting_url,
                     'type'=> 'Course',
-                    'price'=> $proposal->price,
+                    'price'=> $proposalPrice->price,
                     'status'=> $proposal->status,
                     'meeting_password' => $proposal->zoom_meeting_password,
                     'title' => $proposal->course->title ?? 'N/A', 

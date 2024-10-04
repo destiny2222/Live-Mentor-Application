@@ -19,4 +19,9 @@ class syllabus extends Model
     public function course(){
         return $this->belongsTo(Course::class);
     }
+
+
+    public $casts = [ 
+        'description'=> 'array'
+    ];
 }

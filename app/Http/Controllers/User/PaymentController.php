@@ -22,111 +22,120 @@ use Paystack;
 
 class PaymentController extends Controller
 {
-    public function redirectToGateway(Request $request){
-        $request->validate([
-            'email' => 'required|email',
-            'name' => 'required|string',
-            'price' => 'required|numeric',
-            'reference' => 'required|string',
-        ]);
-        try{
-            
-            $paymentData = [
-                'email' => $request->input('email'),
+    public function redirectToGateway(Request $request)
+{
+    Log::info('redirectToGateway method called', ['request' => $request->all()]);
+    
+    $request->validate([
+        'email' => 'required|email',
+        'name' => 'required|string',
+        'price' => 'required|numeric',
+        'reference' => 'required|string',
+    ]);
+    
+    try {
+        $paymentData = [
+            'email' => $request->input('email'),
+            'first_name' => $request->input('name'),
+            'amount' => $request->input('price') * 100,
+            'reference' => $request->input('reference'),
+            'currency' => 'NGN',
+            'callback_url' => route('callback.payment'),
+            'metadata' => [
+                'order_id' => $request->input('id'),
+                'user_id' => Auth::user()->id,
+                'course_id'=>$request->input('course_id'),
+                'type'=>$request->input('type'),
+            ],
+            'customer' => [
                 'first_name' => $request->input('name'),
-                'amount' => $request->input('price') * 100,
-                'reference' => $request->input('reference'),
-                'currency' => 'NGN',
-                'metadata' => [
-                    'order_id' => $request->input('id'),
-                    'user_id' => Auth::user()->id,
-                    'course_id'=>$request->input('course_id'),
-                    'type'=>$request->input('type'),
-                ],
-                'customer' => [
-                    'first_name' => $request->input('name'),
-                ],
-            ];
-           return Paystack::getAuthorizationUrl($paymentData)->redirectNow();
-        }catch(\Exception $e) {
-            Log::error($e->getMessage());
-            return redirect()->back()->withMessage(['error'=>'The paystack token has expired. Please refresh the page and try again.', 'type'=>'error']);
-        } 
-    }
+            ],
+        ];
+        // $paymentData['webhook_url'] = route('paystack.webhook');
+        
+        Log::info('Payment data prepared', ['paymentData' => $paymentData]);
+        
+        $authorizationUrl = Paystack::getAuthorizationUrl($paymentData)->url;
+        Log::info('Authorization URL generated', ['url' => $authorizationUrl]);
+        
+        return redirect($authorizationUrl);
+    } catch(\Exception $e) {
+        Log::error('Error in redirectToGateway', [
+            'error' => $e->getMessage(),
+            'trace' => $e->getTraceAsString(),
+            'paystack_error' => method_exists($e, 'getResponseBody') ? $e->getResponseBody() : null
+        ]);
+        return redirect()->back()->withMessage(['error'=>'Unable to initiate payment. Please try again later.', 'type'=>'error']);
+    } 
+}
 
     public function handleGatewayCallback()
     {
-        $paymentDetails = Paystack::getPaymentData();
+        Log::info('handleGatewayCallback method called');
         
         try {
+            $paymentDetails = Paystack::getPaymentData();
+            // dd($paymentDetails);
+            
+            Log::info('Payment details retrieved', ['details' => $paymentDetails]);
+            
             if ($paymentDetails['status'] === true) {
-                return redirect()->route('dashboard')->with('success', 'Payment is being processed. You will be notified once it is complete.');
+                Log::info('Payment successful, redirecting to history page');
+                $metadata = $paymentDetails['data']['metadata'];
+                $user = User::find($metadata['user_id']);
+
+                if ($metadata['type'] === 'proposal') {
+                    $this->handleProposalPayment($metadata, $user);
+                } elseif ($metadata['type'] === 'session') {
+                    $this->handleSessionPayment($metadata, $user);
+                } else {
+                    Log::warning('Unknown payment type', ['type' => $metadata['type']]);
+                    return response()->json(['error' => 'Unknown payment type'], 400);
+                }
+                $this->savePayment($paymentDetails);
+                return redirect()->route('show.history')->with('success', 'Payment is being processed. You will be notified once it is complete.');
             } else {
-                return redirect()->route('dashboard')->with(['error' => 'Payment failed. Please try again.', 'type' => 'error']);
+                Log::warning('Payment failed', ['details' => $paymentDetails]);
+                return redirect()->route('show.history')->with(['error' => 'Payment failed. Please try again.', 'type' => 'error']);
             }
         } catch (\Exception $exception) {
-            Log::error('Payment callback error: ' . $exception->getMessage());
+            Log::error('Payment callback error', ['message' => $exception->getMessage(), 'trace' => $exception->getTraceAsString()]);
             return back()->with(['error' => 'The Paystack token has expired. Please refresh the page and try again.', 'type' => 'error']);
         }
     }
-
-    public function WebhookGatewayCallback(Request $request)
+    
+    protected function handleProposalPayment($metadata, $user)
     {
-        try {
-            if ($request->isMethod('POST') && $request->header('HTTP_X_PAYSTACK_SIGNATURE')) {
-                $input = @file_get_contents("php://input");
-                $secretKey = config('services.paystack.secret');
+        $proposal = Proposal::find($metadata['order_id']);
+        Log::info('Updating proposal', ['before' => $proposal->toArray()]);
+        $proposal->update(['status' => 4]);
+        Log::info('Proposal updated', ['after' => $proposal->fresh()->toArray()]);
+        $user->notify(new PaymentSuccessfulNotification($proposal));
+    }
+    
 
-                if ($request->header('HTTP_X_PAYSTACK_SIGNATURE') === hash_hmac('sha512', $input, $secretKey)) {
-                    $event = json_decode($input, true);
-
-                    $metadata = $event['data']['metadata'];
-                    $user = User::find($metadata['user_id']);
-                    if ($event['event'] === 'charge.success') {
-
-                        if ($metadata['type'] === 'proposal') {
-                            $proposal = Proposal::find($metadata['order_id']);
-                            $proposal->update(['status' => 4]);
-                            // Notify the user
-                            $user->notify(new PaymentSuccessfulNotification($proposal));
-                        } elseif ($metadata['type'] === 'session') {
-                            $session = BookSession::find($metadata['order_id']);
-                            $session->update(['status' => 4, 'book_session_payment_status' => 1]);
-                            // Notify the user
-                            $user->notify(new PaymentSuccessfulNotification($session));
-                        }
-                        $this->savePayment($event);
-                        return response()->json(['status' => 'success'], 200);
-                    } else {
-                        $user->notify(new PaymentFailedNotification('The payment could not be processed.'));
-                        return response()->json(['error' => 'Payment failed'], 400);
-                    }
-                } else {
-                    return response()->json(['error' => 'Invalid signature'], 400);
-                }
-            }
-
-            return response()->json(['error' => 'Invalid request'], 400);
-        } catch (\Exception $exception) {
-            Log::error('Payment callback error: ' . $exception->getMessage());
-            return response()->json(['error' => 'Internal server error'], 500);
-        }
+    
+    protected function savePayment($paymentDetails)
+    {
+        $payment = Payment::create([
+            'user_id' => $paymentDetails['data']['metadata']['user_id'],
+            'course_id' => $paymentDetails['data']['metadata']['order_id'],
+            'amount' => $paymentDetails['data']['amount'],
+            'payment_date' => now(),
+            'payment_method' => $paymentDetails['data']['channel'],
+            'payment_status' => 'Paid',
+        ]);
+        Log::info('Payment saved', ['payment' => $payment->toArray()]);
     }
 
-
-    // Helper function to save payment details
-    protected function savePayment($event)
+    protected function handleSessionPayment($metadata, $user)
     {
-        $payment = new Payment;
-        $payment->user_id = $event['data']['metadata']['user_id'];
-        $payment->course_id = $event['data']['metadata']['order_id'];
-        $payment->amount = $event['data']['amount'];
-        $payment->payment_date = Carbon::now();
-        $payment->payment_method = $event['data']['channel'];
-        $payment->payment_status = 'Paid';
-        $payment->save();
+        $session = BookSession::find($metadata['order_id']);
+        Log::info('Updating session', ['before' => $session->toArray()]);
+        $session->update(['status' => 4, 'book_session_payment_status' => 1]);
+        Log::info('Session updated', ['after' => $session->fresh()->toArray()]);
+        $user->notify(new PaymentSuccessfulNotification($session));
     }
-
 
     public function initiatePayment(Request $request)
         {

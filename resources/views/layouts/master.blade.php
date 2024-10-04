@@ -15,7 +15,7 @@
     <meta name="description" content="Get a personalized live mentor on our Smart Mentor system that offers a rich feature set, including the ability to set goals and milestones against which progress can be measured.">
     <link rel="shortcut icon" href="/logo.png">
     <meta name="og:image" content="https://livementor.gritinai.com/logo.png">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- TITLE -->
     <title> {{ config('app.name', 'Laravel') }} </title>
 

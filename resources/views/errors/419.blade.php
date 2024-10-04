@@ -120,7 +120,7 @@
         <div class="notfound">
             <div class="notfound-404">
                 <h1>419</h1>
-                <h2>Page not found</h2>
+                <h2>Page Expired</h2>
             </div>
             <a href="/">Homepage</a>
         </div>
