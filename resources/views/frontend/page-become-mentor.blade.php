@@ -32,7 +32,7 @@
       </div>
       <div class="row wow fadeInUp" data-wow-delay="300ms">
         <div class="col-sm-6 col-lg-3">
-          <div class="iconbox-style1 border-less p-0">
+          <div class="iconbox-style1 border-less p-3 shadow">
             <div class="icon before-none"><span class="flaticon-cv"></span></div>
             <div class="details">
               <h4 class="title mt10 mb-3">Sign up for free as a mentor/tutor</h4>
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="col-sm-6 col-lg-3">
-          <div class="iconbox-style1 border-less p-0">
+          <div class="iconbox-style1 border-less p-3 shadow">
             <div class="icon before-none"><span class="flaticon-web-design"></span></div>
             <div class="details">
               <h4 class="title mt10 mb-3">Complete your profile</h4>
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="col-sm-6 col-lg-3">
-          <div class="iconbox-style1 border-less p-0">
+          <div class="iconbox-style1 border-less p-3 shadow">
             <div class="icon before-none"><span class="flaticon-secure"></span></div>
             <div class="details">
               <h4 class="title mt10 mb-3">Deliver custom sessions</h4>
@@ -59,11 +59,77 @@
           </div>
         </div>
         <div class="col-sm-6 col-lg-3">
-          <div class="iconbox-style1 border-less p-0">
+          <div class="iconbox-style1 border-less p-3 shadow">
             <div class="icon before-none"><span class="flaticon-customer-service"></span></div>
             <div class="details">
               <h4 class="title mt10 mb-3">Get paid</h4>
               <p class="text">Payment is available for withdrawal as soon as the session is completed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- CTA Banner -->
+
+  <section class="p-0 pb50 ">
+    <div class="cta-banner3 bgc-thm4 mx-auto maxw1600 pt120 pt60-lg pb90 pb60-lg position-relative overflow-hidden">
+      <div class="container">
+        <div class="row wow fadeInUp">
+          <div class="col-12 ol-xl-12 mb-4">
+            <div class="mb30">
+              <div class="main-title">
+                <h1 class="title" style="text-align: center">Why choose us </h1>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 mb-4">
+            <div class="why-chose-list shadow pt-5 pb-4 pe-4 ps-4 h-100">
+              <div class="list-one d-flex align-items-start mb30">
+                <span class="list-icon flex-shrink-0 flaticon-badge"></span>
+                <div class="list-content flex-grow-1 ml20">
+                  <h4 class="mb-1">Learn from the best</h4>
+                  <p class="text mb-0 fz15">Access industry experts with years of experience in their fields. 
+                    <br
+                      class="d-none d-lg-block"> Our verified Mentors/tutors are passionate about teaching and dedicated to helping you achieve your goals.</p>
+                </div>
+              </div>
+            </div>    
+          </div>  
+          <div class="col-12 col-lg-4 mb-4">
+            <div class="why-chose-list shadow pt-5 pb-4 pe-4 ps-4 h-100">
+              <div class="list-one d-flex align-items-start mb30">
+                <span class="list-icon flex-shrink-0 flaticon-calendar"></span>
+                <div class="list-content flex-grow-1 ml20">
+                  <h4 class="mb-1">Schedule classes</h4>
+                  <p class="text mb-0 fz15">Choose from a variety of class times and dates to fit your needs.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 mb-4">
+            <div class="why-chose-list shadow pt-5 pb-4 pe-4 ps-4 h-100">
+              <div class="list-one d-flex align-items-start mb30">
+                <span class="list-icon flex-shrink-0 flaticon-chat"></span>
+                <div class="list-content flex-grow-1 ml20">
+                  <h4 class="mb-1">Seamless conversations:</h4>
+                  <p class="text mb-0 fz15">
+                    Our platform is designed to facilitate smooth and effortless communication between you and your instructor.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 offset-lg-4 mb-4">
+            <div class="why-chose-list shadow pt-5 pb-4 pe-4 ps-4 h-100">
+              <div class="list-one d-flex align-items-start mb30">
+                <span class="list-icon flex-shrink-0 flaticon-security"></span>
+                <div class="list-content flex-grow-1 ml20">
+                  <h4 class="mb-1">Secure payment:</h4>
+                  <p class="text mb-0 fz15">
+                    We prioritize your financial security and use trusted payment gateways to ensure that your transactions are safe and confidential.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
