@@ -44,7 +44,7 @@ class GoogleAuthController extends Controller
                 $new_user->save();
                 Auth::login($new_user);
                 Log::info('Current time: ' . Carbon::now());
-                return redirect('dashboard/auth/role');
+                return redirect('auth/role');
             }
         }catch(\Exception $exception){
             Log::error($exception->getMessage());

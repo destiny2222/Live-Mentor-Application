@@ -120,8 +120,7 @@ Route::prefix('dashboard')->group(function (){
         Route::delete('/cohort/{id}/leave', [GroupController::class, 'cancelInvite'])->name('cohort.leave');
 
         // google login
-        Route::get('/auth/role', [GoogleAuthController::class, 'handleGoogle'])->name('auth.redirect.google');
-        Route::post('/auth/role/store', [GoogleAuthController::class, 'handleGoogleCallback'])->name('auth.role.post');
+        
 
     });
 });

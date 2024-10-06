@@ -62,6 +62,7 @@
                                         <a href="{{ route('admin.user.delete', $user->id) }}" class="btn btn-danger btn-sm" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $user->id }}').submit();">Delete</a>
 
                                         <form action="{{ route('admin.user.delete', $user->id) }}" method="POST" id="delete-form-{{ $user->id }}">
+                                            @csrf
                                             @method('delete')
                                         </form>
                                     </td>

@@ -47,6 +47,8 @@ Route::post('/create/meeting',[MeetingController::class, 'createMeeting'])->name
 // google authentication
 Route::get('/auth/google/redirect', [GoogleAuthController::class , 'redirect'])->name('auth.socialite.redirect');
 Route::get('/auth/google/callback', [GoogleAuthController::class , 'callback'])->name('auth.socialite.callback');
+Route::get('/auth/role', [GoogleAuthController::class, 'handleGoogle'])->name('auth.redirect.google');
+        Route::post('/auth/role/store', [GoogleAuthController::class, 'handleGoogleCallback'])->name('auth.role.post');
 
 // share profile
 Route::get('/share/profile', [ProfileController::class, 'show'])->name('profile.show');
